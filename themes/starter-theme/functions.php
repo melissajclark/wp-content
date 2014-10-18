@@ -69,14 +69,22 @@ add_action( 'after_setup_theme', 'starter_theme_setup' );
  * Register sidebars and widgetized areas
  */
 function starter_theme_widgets_init() {
-	register_sidebar( array(
-		'name' => __( 'Sidebar', 'starter-theme' ),
-		'id' => 'sidebar-1',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
+    register_sidebar( array(
+        'name' => __( 'Sidebar', 'starter-theme' ),
+        'id' => 'sidebar-1',
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget' => '</aside>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
+    ) );
+    register_sidebar( array(
+        'name' => __( 'Footer Widget Area', 'starter-theme' ),
+        'id' => 'footer-area',
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget' => '</aside>',
+        'before_title' => '<span style="display:none;">',
+        'after_title' => '</span>',
+    ) );
 }
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
