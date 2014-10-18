@@ -1,0 +1,45 @@
+/*!
+Theme Name: themeName
+Theme URI: themeURI
+Author: themeAuthor
+AuthorURI: themeAuthorURI
+Description: themeDescription
+Version: 1.2
+License: The MIT License (MIT)
+License URI: http://opensource.org/licenses/MIT
+Text Domain: themeTextDomain
+*/
+
+
+/* RESET & BASE
+------------------ */
+@import "reset";
+@import "mixins";
+@import "variables";
+
+/* =LAYOUTS
+------------------ */
+@import "layout";
+@import "header";
+@import "nav";
+@import "footer";
+
+/* =CONTENT
+------------------ */
+@import "typography";
+@import "forms";
+
+/* =COMPONENTS
+------------------ */
+/* Includes password protection for pages and posts, 404 page */
+@import "components";
+
+
+/* =PROJECT PAGES SPECIFIC
+------------------ */
+@import "content";
+@import "pages/all";
+
+/* =BLOG SPECIFIC
+------------------ */
+@import "blog/all";

@@ -1,0 +1,856 @@
+/*
+Theme Name: themeName
+Theme URI: themeURI
+Author: themeAuthor
+AuthorURI: themeAuthorURI
+Description: themeDescription
+Version: 1.2
+License: The MIT License (MIT)
+License URI: http://opensource.org/licenses/MIT
+Text Domain: themeTextDomain
+*/
+/* RESET & BASE
+------------------ */
+/* DEFAULT & RESET CSS*/
+/* Table of Contents
+==================================================
+  1 Generic Styles
+  2 Resets
+    A Global
+    B Media
+    C Forms
+  3 Typography
+  
+  
+  
+/* 1 GENERIC STYLES
+================================================== */
+/*Mash up based on
+  (A) the Bootstrap toolkit from Twitter http://twitter.github.com/bootstrap
+  (B) http://csswizardry.com/web-design+/#css
+  (C) WordPress image styles */
+html, body {
+  height: 100%;
+}
+
+div {
+  position: relative;
+}
+
+.clear {
+  clear: both;
+}
+
+.aligncenter {
+  display: block;
+  margin: 0 auto;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+img.alignleft {
+  margin-right: 1em;
+  margin-bottom: 1.8em;
+}
+img.alignright {
+  margin-left: 1em;
+  margin-bottom: 1.8em;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.half {
+  width: 45%;
+  /* Not exactly half to account for paddings, margins etc. */
+}
+
+ul.unstyled {
+  list-style-type: none;
+}
+
+.hide {
+  /* Hide stuff without resorting to display:none; */
+  visibility: hidden;
+  width: 0!important;
+  height: 0!important;
+  line-height: 0!important;
+  padding: 0!important;
+  margin: 0!important;
+}
+
+/* 2 RESETS
+================================================== */
+/* 2A GLOBAL RESET
+Based on 'reset.css' in the Yahoo! User Interface Library: http://developer.yahoo.com/yui */
+*, html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, label, fieldset, input, p, blockquote, th, td, address, caption, cite, code, dfn, em, strong, th, var {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: inherit;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset {
+  border: 0;
+}
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  /* Read more > http://bit.ly/qh1V0T */
+}
+
+caption, th {
+  text-align: center;
+}
+
+q:before, q:after {
+  content: '';
+}
+
+html {
+  overflow-y: scroll;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* The below restores some sensible defaults */
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+a img {
+  border: none;
+}
+
+/* Gets rid of IE's blue borders */
+/* 2B MEDIA
+Based on the Bootstrap toolkit from Twitter http://twitter.github.com/bootstrap */
+audio, canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+audio:not([controls]) {
+  display: none;
+}
+
+/* 2C FORMS
+Based on the Bootstrap toolkit from Twitter http://twitter.github.com/bootstrap */
+button, input, select, textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+
+button, input {
+  line-height: normal;
+  *overflow: visible;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+
+input[type="button"], input[type="reset"], input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+/* 3 TYPOGRAPHY
+================================================== */
+.alert {
+  background: red;
+  color: white;
+}
+
+/* 'alert' has a basic style, since it's useful to have it standing out for testing purposes. */
+/************************************************************************
+ Borrowed from Bourbon: http://bourbon.io/docs/#html5-input-types
+
+ Generate a variable ($all-text-inputs) with a list of all html5 input types that have a text-based input, excluding textarea.
+ http://diveintohtml5.org/forms.html
+************************************************************************/
+/* BASE VARIABLES
+ *******************/
+/* Sizes */
+/* Colors */
+/* Fonts */
+/* Borders */
+/* =LAYOUTS
+------------------ */
+body {
+  background: white;
+  margin: 0;
+  padding: 0;
+  max-width: 90em;
+}
+
+#page {
+  width: 80em;
+  padding: 0 15px;
+}
+
+#main {
+  clear: both;
+}
+
+#primary {
+  float: left;
+  margin: 0;
+  width: 80%;
+  max-width: 100%;
+}
+
+#content {
+  margin: 0;
+  width: 100%;
+  float: left;
+}
+
+#primary.full-width,
+#primary.full-width #content {
+  width: 100%;
+  float: none;
+}
+
+#secondary {
+  float: right;
+  padding: 0;
+  width: 250px;
+}
+
+#colophon {
+  clear: both;
+  overflow: hidden;
+}
+
+/* Sticky footer */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#page {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -50px;
+}
+#page #main {
+  padding: 0 0 50px 0;
+}
+
+#colophon {
+  height: 50px;
+}
+
+#site-header {
+  margin-bottom: 45px;
+  position: relative;
+  z-index: 250;
+}
+#site-header img {
+  height: auto;
+}
+
+#access {
+  margin: 0;
+}
+#access div {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+#access ul {
+  clear: left;
+  float: left;
+  position: relative;
+  left: 50%;
+  padding-left: 0;
+  margin: 0 !important;
+  list-style: none;
+}
+#access ul li {
+  position: relative;
+  display: block;
+  float: left;
+  position: relative;
+  right: 50%;
+}
+#access ul li a {
+  letter-spacing: 0.15em;
+  display: block;
+  padding: 3px 0 3px 10px;
+  margin: 2px 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+#access ul li a:after {
+  content: '/';
+  color: #555555;
+}
+#access ul li a :hover {
+  color: red;
+}
+#access ul li:last-of-type a:after {
+  content: none;
+}
+
+/* =CONTENT
+------------------ */
+/* Web fonts integration*/
+@font-face {
+  font-family: name1;
+  src: url("inc/fonts/filename.eot");
+  src: url("inc/fonts/filename.eot?#iefix") format("embedded-opentype"), url("inc/fonts/filename.woff") format("woff"), url("inc/fonts/filename.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: name2;
+  src: url("inc/fonts/filename.eot");
+  src: url("inc/fonts/filename.eot?#iefix") format("embedded-opentype"), url("inc/fonts/filename.woff") format("woff"), url("inc/fonts/filename.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Styling starts here */
+body, input, textarea {
+  color: #555555;
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 1.625;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  clear: both;
+}
+
+hr {
+  background-color: #ccc;
+  border: 0;
+  height: 1px;
+  margin-bottom: 1.5em;
+}
+
+/* Text elements */
+p {
+  margin-bottom: 1.5em;
+}
+
+ul, ol {
+  margin: 0 0 1.5em 2.5em;
+}
+
+ul {
+  list-style: square;
+}
+
+ol {
+  list-style-type: decimal;
+}
+ol ol {
+  list-style: upper-alpha;
+}
+ol ol ol {
+  list-style: lower-roman;
+}
+ol ol ol {
+  list-style: lower-alpha;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  margin: 0 1.5em;
+}
+
+dd {
+  margin-bottom: 1.5em;
+}
+
+em, i {
+  font-style: italic;
+}
+
+blockquote {
+  font-style: italic;
+  font-weight: normal;
+  margin: 0 3em;
+}
+
+blockquote em, blockquote i, blockquote cite {
+  font-style: normal;
+}
+
+cite {
+  color: #666;
+  letter-spacing: 0.05em;
+  padding-left: 60px;
+}
+
+pre {
+  background: #f4f4f4;
+  line-height: 1.5;
+  margin-bottom: 1.5em;
+  overflow: auto;
+  padding: 0.75em 1.5em;
+}
+
+code, kbd {
+  font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+abbr, acronym, dfn {
+  border-bottom: 1px solid black;
+  cursor: help;
+}
+
+address {
+  display: block;
+  margin: 0 0 1.5em;
+}
+
+ins {
+  background: #fff9c0;
+  text-decoration: none;
+}
+
+sup,
+sub {
+  font-size: 10px;
+  height: 0;
+  line-height: 1;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  bottom: 1ex;
+}
+
+sub {
+  top: .5ex;
+}
+
+/* Links */
+a {
+  color: blue;
+  text-decoration: none;
+}
+a:focus, a:active, a:hover {
+  color: red;
+}
+
+/* Assistive text */
+.assistive-text {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+#access a.assistive-text:active,
+#access a.assistive-text:focus {
+  clip: auto !important;
+  font-size: 12px;
+  position: absolute;
+  text-decoration: underline;
+  top: 0;
+  left: 7.6%;
+}
+
+/* See _mixins.scss for more on this method for handling HTML5 elements */
+/* Placeholders */
+::placeholder {
+  color: TEXTCOLOR;
+}
+
+/* Search form */
+/* =COMPONENTS
+------------------ */
+/* Includes password protection for pages and posts, 404 page */
+/* Password Protected Posts */
+.post-password-required .entry-header .comments-link {
+  margin: 1.5em 0 0;
+}
+.post-password-required input[type=password] {
+  margin: 0.8125em 0;
+}
+
+/* =error404
+----------------------------------------------- */
+.error404 #main #s {
+  width: 75%;
+}
+
+/* =PROJECT PAGES SPECIFIC
+------------------ */
+.hentry {
+  border-bottom: 1px solid black;
+  margin: 0 0 45px;
+  padding: 0 0 40px;
+  position: relative;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+}
+.page .hentry {
+  border-bottom: none;
+}
+
+.entry-content,
+.entry-summary {
+  padding: 20px 0 0;
+}
+
+.entry-content table {
+  border-bottom: 1px solid black;
+  margin: 0 0 1.5em;
+  width: 100%;
+}
+.entry-content table td {
+  border-top: 1px solid black;
+  padding: 6px 10px 6px 0;
+}
+.entry-content #s {
+  width: 75%;
+}
+
+.comment-content table {
+  border-bottom: 1px solid black;
+  margin: 0 0 1.5em;
+  width: 100%;
+}
+.comment-content table td {
+  border-top: 1px solid black;
+  padding: 6px 10px 6px 0;
+}
+.comment-content #s {
+  width: 75%;
+}
+
+dl.gallery-item {
+  margin: 0;
+}
+
+/* Images & Embeds */
+embed
+iframe,
+object {
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+img[class*="align"], img[class*="wp-image-"], img[class*="attachment-"] {
+  height: auto;
+}
+img.size-full, img.size-large {
+  width: auto;
+  /* Prevent stretching of full-size and large-size images with height and width attributes in IE8 */
+  height: auto;
+  /* Make sure images with WordPress-added height and width attributes are scaled correctly */
+}
+img.alignleft, img.alignright, img.aligncenter {
+  margin-bottom: 1.5em;
+}
+
+/* Captions */
+.wp-caption {
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+}
+.wp-caption img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+.wp-caption .wp-caption-text {
+  color: #555555;
+  font-size: 85%;
+  margin-bottom: 0.5em;
+  padding: 5px 0;
+  position: relative;
+}
+
+/* Galleries */
+.gallery-caption {
+  color: LINKCOLOR;
+  font-size: 10px;
+}
+
+#content .gallery {
+  margin: 0 auto 1.5em;
+}
+#content .gallery a img {
+  border: none;
+}
+
+#content .gallery-columns-4 .gallery-item {
+  width: 23%;
+  padding-right: 2%;
+}
+
+.page-link {
+  clear: both;
+  display: block;
+  margin: 0 0 1.5em;
+}
+.page-link span {
+  margin-right: 6px;
+}
+
+/* Uncomment if you have a custom home page
+@import "home";*/
+/* =BLOG SPECIFIC
+------------------ */
+/* Blog Styles */
+/* =Pager Navigation
+-------------------------------------------------------------- */
+#content nav {
+  clear: both;
+  overflow: hidden;
+  padding: 0 0 1.5em;
+}
+
+.nav-previous {
+  float: left;
+  width: 50%;
+}
+
+.nav-next {
+  float: right;
+  text-align: right;
+  width: 50%;
+}
+
+/* Singular navigation */
+#nav-single {
+  float: right;
+  position: relative;
+  top: -0.3em;
+  text-align: right;
+  z-index: 1;
+}
+#nav-single .nav-previous,
+#nav-single .nav-next {
+  float: none;
+  width: auto;
+}
+#nav-single .nav-next {
+  padding-left: .5em;
+}
+
+.widget {
+  clear: both;
+  margin: 0;
+  padding: 0 0 20px;
+}
+
+.widget-title {
+  color: #555555;
+  text-align: left;
+}
+
+.widget ul {
+  margin: 0;
+}
+.widget ul ul {
+  margin-left: 1.5em;
+}
+
+/* Special Classes */
+.no-border {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+/* Search Widget */
+.widget_search form {
+  margin: 0 0 10px;
+}
+.widget_search #s {
+  width: 95%;
+  display: inline-block;
+}
+
+#comments-title {
+  padding: 0 0 2.6em;
+}
+
+.nopassword,
+.nocomments {
+  color: #555555;
+  font-size: 24px;
+  margin: 26px 0;
+}
+
+.commentlist {
+  list-style: none;
+  margin: 0 auto;
+  width: 100%;
+}
+.commentlist > li.comment {
+  position: relative;
+}
+.commentlist pingback {
+  margin: 0 0 10px;
+  padding: 10px;
+}
+.commentlist .children {
+  list-style: none;
+  margin: 0 0 10px 20px;
+}
+.commentlist .children .children {
+  margin: 10px 0 10px 10px;
+}
+.commentlist .children li.comment {
+  position: relative;
+}
+
+article.comment {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+}
+
+.comment-meta {
+  margin-bottom: 12px;
+}
+.comment-meta .fn,
+.comment-meta time {
+  font-style: normal;
+  display: block;
+  clear: right;
+  color: #555555;
+}
+
+.avatar {
+  float: left;
+  padding-right: 10px;
+  vertical-align: bottom;
+}
+
+.comment-content p {
+  margin-bottom: 1em;
+}
+.comment-content p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Post author highlighting */
+.commentlist > li.bypostauthor,
+.commentlist .children > li.bypostauthor {
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.entry-title,
+.entry-title a {
+  clear: both;
+  color: blue;
+  line-height: 1em;
+  padding-bottom: 0.5em;
+}
+
+.entry-meta {
+  clear: both;
+}
+
+.entry-date {
+  color: LINKCOLOR;
+  font-size: 11px;
+  padding-bottom: 2px;
+}
+
+/* Handle sticky posts */
+/* Set to whatever width your actual thumbs are */
+.grid-item {
+  display: inline-block;
+  vertical-align: top;
+  width: 150px;
+  margin: 0 10px 10px 0;
+}
+.grid-item:nth-of-type(5) {
+  margin-right: 0;
+  /* Removes the margin on every third item (end of the row) */
+}
+.grid-item .caption {
+  padding: 5px 0;
+}
+.grid-item a:hover {
+  opacity: 0.5;
+  /* This gives the whole thing a fade on hover */
+}
