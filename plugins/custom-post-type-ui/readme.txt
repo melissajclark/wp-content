@@ -2,9 +2,9 @@
 Contributors: williamsba1, tw2113, webdevstudios
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3084056
 Tags: custom post types, CPT, CMS, post, types, post type, cck, taxonomy, tax, custom
-Requires at least: 3.1
-Tested up to: 3.6
-Stable tag: 0.8.2
+Requires at least: 3.5
+Tested up to: 3.9.1
+Stable tag: 0.8.4
 License: GPLv2
 
 Admin UI for creating custom post types and custom taxonomies in WordPress
@@ -26,6 +26,12 @@ All official development on this plugin is on GitHub. Version bumps will still b
 5. Custom taxonomies are automatically added to your content type screens
 
 == Changelog ==
+
+= 0.8.4 =
+* Fix issue with get code and post types/taxonomies that use a dash instead of underscore. Props Evan Mullins/circlecube.
+
+= 0.8.3 =
+* Dashicon support
 
 = 0.8.2 =
 * Fix with_front logic issue.
@@ -144,6 +150,12 @@ All official development on this plugin is on GitHub. Version bumps will still b
 * First beta release
 
 == Upgrade Notice ==
+
+= 0.8.4 =
+* Fix issue with get code and post types/taxonomies that use a dash instead of underscore. Props Evan Mullins/circlecube.
+
+= 0.8.3 =
+* Dashicon support. FINALLY. REJOICE!
 
 = 0.8.2 =
 * Fixes with_front logic issue that was defaulting to true.

@@ -79,7 +79,7 @@ class CPAC_Column {
 	/**
 	 * Determine whether this column type should be available
 	 *
-	 * @since 2.3
+	 * @since 2.2
 	 *
 	 * @return bool Whether the column type should be available
 	 */
@@ -139,8 +139,10 @@ class CPAC_Column {
 
 		// Default options
 		$default_options = array(
-			'width'	=> null, // Width for this column.
-			'state'	=> 'off' // Active state for this column.
+			'before'	=> '', // Before field
+			'after'		=> '', // After field
+			'width'		=> null, // Width for this column.
+			'state'		=> 'off' // Active state for this column.
 		);
 
 		/**
@@ -308,7 +310,10 @@ class CPAC_Column {
 
 			// Label can not contains the character ':', because
 			// CPAC_Column::get_sanitized_label() will return an empty string
-			$options['label'] = str_replace( ':', '', $options['label'] );
+			// and make an exception for site_url()
+			if ( false === strpos( $options['label'], site_url() ) ) {
+				$options['label'] = str_replace( ':', '', $options['label'] );
+			}
 		}
 
 		// used by child classes for additional sanitizing
@@ -833,6 +838,26 @@ class CPAC_Column {
 	}
 
 	/**
+	 * Get before value
+	 *
+	 * @since 1.0
+	 */
+	public function get_before() {
+
+		return stripslashes( $this->options->before );
+	}
+
+	/**
+	 * Get after value
+	 *
+	 * @since 1.0
+	 */
+	public function get_after() {
+
+		return stripslashes( $this->options->after );
+	}
+
+	/**
 	 * @since 2.0
 	 * @param string $field_key
 	 * @return string Attribute Name
@@ -976,7 +1001,7 @@ class CPAC_Column {
 		asort( $_columns );
 
 		$list = "<optgroup label='{$label}'>";
-		foreach ( $_columns as $type => $label ){
+		foreach ( $_columns as $type => $label ) {
 			$selected = selected( $this->properties->type, $type, false );
 			$list .= "<option value='{$type}'{$selected}>{$label}</option>";
 		}

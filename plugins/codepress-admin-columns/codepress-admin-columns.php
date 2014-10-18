@@ -1,17 +1,16 @@
 <?php
 /*
-
-Plugin Name: 		Codepress Admin Columns
-Version: 			2.2.6.4
+Plugin Name: 		Admin Columns
+Version: 			2.2.8.1
 Description: 		Customize columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
-Author: 			Codepress
-Author URI: 		http://www.codepresshq.com
-Plugin URI: 		http://www.codepresshq.com/wordpress-plugins/admin-columns/
+Author: 			AdminColumns.com
+Author URI: 		http://www.admincolumns.com
+Plugin URI: 		http://www.admincolumns.com
 Text Domain: 		cpac
 Domain Path: 		/languages
 License:			GPLv2
 
-Copyright 2011-2014  Codepress  info@codepress.nl
+Copyright 2011-2014  AdminColumns.com  info@admincolumns.com
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License version 2 as published by
@@ -27,14 +26,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! defined( 'ABSPATH' ) )  {
-	// Exit if accessed directly
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Plugin information
-define( 'CPAC_VERSION', 	 	'2.2.6.4' ); // current plugin version
-define( 'CPAC_UPGRADE_VERSION', '2.0.0' ); // this is the latest version which requires an upgrade
+define( 'CPAC_VERSION', 	 	'2.2.8.1' ); // Current plugin version
+define( 'CPAC_UPGRADE_VERSION', '2.0.0' ); // Latest version which requires an upgrade
 define( 'CPAC_URL', 			plugin_dir_url( __FILE__ ) );
 define( 'CPAC_DIR', 			plugin_dir_path( __FILE__ ) );
 
@@ -54,7 +50,7 @@ require_once CPAC_DIR . 'includes/arrays.php';
 require_once CPAC_DIR . 'api.php';
 
 /**
- * The Codepress Admin Columns Class
+ * The Admin Columns Class
  *
  * @since 1.0
  */
@@ -62,7 +58,7 @@ class CPAC {
 
 	/**
 	 * Registered storage model class instances
-	 * Array of CPAC_Storage_Model instances
+	 * Array of CPAC_Storage_Model instances, with the storage model keys (e.g. post, page, wp-users) as keys
 	 *
 	 * @since 2.0
 	 * @var array
@@ -88,26 +84,27 @@ class CPAC {
 	private $_settings;
 
 	/**
+	 * Admin Columns plugin upgrade class instance
+	 *
+	 * @since 2.2.7
+	 * @access private
+	 * @var CPAC_Upgrade
+	 */
+	private $_upgrade;
+
+	/**
 	 * @since 1.0
 	 */
 	function __construct() {
 
 		register_activation_hook( __FILE__, array( $this, 'set_capabilities' ) );
 
-		// Localization
+		// Hooks
 		add_action( 'init', array( $this, 'localize' ) );
-
-		// Storage models
-		add_action( 'wp_loaded', array( $this, 'set_storage_models_on_cac_screen' ), 5 );
-
-		// Setup callback, important to load after set_storage_models
-		add_action( 'wp_loaded', array( $this, 'after_setup' ) );
-
-		// Add settings link
-		add_filter( 'plugin_action_links',  array( $this, 'add_settings_link' ), 1, 2 );
-
-		// Scripts
+		add_action( 'wp_loaded', array( $this, 'maybe_set_storage_models' ), 5 );
+		add_action( 'wp_loaded', array( $this, 'after_setup' ) ); // Setup callback, important to load after set_storage_models
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts' ) );
+		add_filter( 'plugin_action_links',  array( $this, 'add_settings_link' ), 1, 2 );
 
 		// Settings
 		include_once CPAC_DIR . 'classes/settings.php';
@@ -119,7 +116,7 @@ class CPAC {
 
 		// Upgrade
 		require_once CPAC_DIR . 'classes/upgrade.php';
-		new CPAC_Upgrade( $this );
+		$this->_upgrade = new CPAC_Upgrade( $this );
 	}
 
 	/**
@@ -149,7 +146,268 @@ class CPAC {
 	}
 
 	/**
-	 * Whether this request is an AJAX request and marked as admin-column-ajax request.
+	 * @since 2.2.4
+	 */
+	public function scripts() {
+
+		wp_register_script( 'cpac-admin-columns', CPAC_URL . 'assets/js/admin-columns.js', array( 'jquery', 'jquery-qtip2' ), CPAC_VERSION );
+		wp_register_script( 'jquery-qtip2', CPAC_URL . 'external/qtip2/jquery.qtip.min.js', array( 'jquery' ), CPAC_VERSION );
+		wp_register_style( 'jquery-qtip2', CPAC_URL . 'external/qtip2/jquery.qtip.min.css', array(), CPAC_VERSION, 'all' );
+		wp_register_style( 'cpac-columns', CPAC_URL . 'assets/css/column.css', array(), CPAC_VERSION, 'all' );
+
+		if ( $this->is_columns_screen() ) {
+			add_filter( 'admin_body_class', array( $this, 'admin_class' ) );
+			add_action( 'admin_head', array( $this, 'admin_scripts') );
+
+			wp_enqueue_script( 'cpac-admin-columns' );
+			wp_enqueue_script( 'jquery-qtip2' );
+			wp_enqueue_style( 'jquery-qtip2' );
+			wp_enqueue_style( 'cpac-columns' );
+
+			$data = array();
+
+			/*if ( $storage_model = $this->get_current_storage_model() ) {
+				$data['storage_model'] = array(
+					'is_table_header_fixed' => $storage_model->is_table_header_fixed()
+				);
+			}*/
+
+			wp_localize_script( 'cpac-admin-columns', 'CPAC', $data );
+		}
+	}
+
+	/**
+	 * Add capabilty to administrator to manage admin columns.
+	 * You can use the capability 'manage_admin_columns' to grant other roles this privilidge as well.
+	 *
+	 * @since 2.0.4
+	 */
+	public function set_capabilities() {
+		if ( $role = get_role( 'administrator' ) ) {
+   			$role->add_cap( 'manage_admin_columns' );
+   		}
+	}
+
+	/**
+	 * Load the storage models if the current screen is a columns screen
+	 *
+	 * @since 2.2.7
+	 */
+	public function maybe_set_storage_models() {
+
+		if ( ! $this->is_cac_screen() ) {
+			return;
+		}
+
+		$this->set_storage_models();
+	}
+
+	/**
+	 * Load the storage models, storing them in the storage_models property of this object
+	 *
+	 * @since 2.0
+	 */
+	public function set_storage_models() {
+
+		$storage_models = array();
+
+		// Load storage model class files and column base class files
+		require_once CPAC_DIR . 'classes/column.php';
+		require_once CPAC_DIR . 'classes/column/default.php';
+		require_once CPAC_DIR . 'classes/column/actions.php';
+		require_once CPAC_DIR . 'classes/storage_model.php';
+		require_once CPAC_DIR . 'classes/storage_model/post.php';
+		require_once CPAC_DIR . 'classes/storage_model/user.php';
+		require_once CPAC_DIR . 'classes/storage_model/media.php';
+		require_once CPAC_DIR . 'classes/storage_model/comment.php';
+		require_once CPAC_DIR . 'classes/storage_model/link.php';
+
+		// Create a storage model per post type
+		foreach ( $this->get_post_types() as $post_type ) {
+			$storage_model = new CPAC_Storage_Model_Post( $post_type );
+			$storage_models[ $storage_model->key ] = $storage_model;
+		}
+
+		// Create other storage models
+		$storage_model = new CPAC_Storage_Model_User();
+		$storage_models[ $storage_model->key ] = $storage_model;
+
+		$storage_model = new CPAC_Storage_Model_Media();
+		$storage_models[ $storage_model->key ] = $storage_model;
+
+		$storage_model = new CPAC_Storage_Model_Comment();
+		$storage_models[ $storage_model->key ] = $storage_model;
+
+		if ( apply_filters( 'pre_option_link_manager_enabled', false ) ) { // as of 3.5 link manager is removed
+			$storage_model = new CPAC_Storage_Model_Link();
+			$storage_models[ $storage_model->key ] = $storage_model;
+		}
+
+		/**
+		 * Filter the available storage models
+		 * Used by external plugins to add additional storage models
+		 *
+		 * @since 2.0
+		 * @param array $storage_models List of storage model class instances ( [key] => [CPAC_Storage_Model object], where [key] is the storage key, such as "user", "post" or "my_custom_post_type")
+		 */
+		$this->storage_models = apply_filters( 'cac/storage_models', $storage_models );
+	}
+
+	/**
+	 * Retrieve a storage model object based on its key
+	 *
+	 * @since 2.0
+	 *
+	 * @param string $key Storage model key (e.g. post, page, wp-users)
+	 * @return bool|CPAC_Storage_Model Storage Model object (or false, on failure)
+	 */
+	public function get_storage_model( $key ) {
+
+		if ( isset( $this->storage_models[ $key ] ) ) {
+			return $this->storage_models[ $key ];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get storage model object of currently active storage model
+	 * On the users overview page, for example, this returns the CPAC_Storage_Model_User object
+	 *
+	 * @since 2.2.4
+	 *
+	 * @return CPAC_Storage_Model
+	 */
+	public function get_current_storage_model() {
+
+		if ( $this->storage_models ) {
+			foreach ( $this->storage_models as $storage_model ) {
+				if ( $storage_model->is_columns_screen() ) {
+					return $storage_model;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get a list of post types for which Admin Columns is active
+	 *
+	 * @since 1.0
+	 *
+	 * @return array List of post type keys (e.g. post, page)
+	 */
+	public function get_post_types() {
+
+		$post_types = array();
+
+		if ( post_type_exists( 'post' ) ) {
+			$post_types['post'] = 'post';
+		}
+
+		if ( post_type_exists( 'page' ) ) {
+			$post_types['page'] = 'page';
+		}
+
+		$post_types = array_merge( $post_types, get_post_types( array(
+			'_builtin' 	=> false,
+			'show_ui'	=> true
+		) ) );
+
+		/**
+		 * Filter the post types for which Admin Columns is active
+		 *
+		 * @since 2.0
+		 * @param array $post_types List of active post type names
+		 */
+		return apply_filters( 'cac/post_types', $post_types );
+	}
+
+	/**
+	 * Add a settings link to the Admin Columns entry in the plugin overview screen
+	 *
+	 * @since 1.0
+	 * @see filter:plugin_action_links
+	 */
+	function add_settings_link( $links, $file ) {
+
+		if ( $file != plugin_basename( __FILE__ ) ) {
+			return $links;
+		}
+
+		array_unshift( $links, '<a href="' . esc_url( admin_url( "options-general.php?page=codepress-admin-columns" ) ) . '">' . __( 'Settings' ) . '</a>' );
+
+		return $links;
+	}
+
+	/**
+	 * Adds a body class which is used to set individual column widths
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param string $classes body classes
+	 * @return string
+	 */
+	function admin_class( $classes ) {
+
+		if ( $storage_model = $this->get_current_storage_model() ) {
+			$classes .= " cp-{$storage_model->key}";
+		}
+
+		return $classes;
+	}
+
+	/**
+	 * Admin CSS for Column width and Settings Icon
+	 *
+	 * @since 1.4.0
+	 */
+	function admin_scripts() {
+
+		$css_column_width 	= '';
+		$edit_link 			= '';
+
+		if ( $this->storage_models ) {
+			foreach ( $this->storage_models as $storage_model ) {
+
+				if ( ! $storage_model->is_columns_screen() )
+					continue;
+
+				// CSS: columns width
+				if ( $columns = $storage_model->get_stored_columns() ) {
+					foreach ( $columns as $name => $options ) {
+
+						if ( ! empty( $options['width'] ) && is_numeric( $options['width'] ) && $options['width'] > 0 ) {
+							$css_column_width .= ".cp-{$storage_model->key} .wrap table th.column-{$name} { width: {$options['width']}% !important; }";
+						}
+					}
+				}
+
+				// JS: edit button
+				$general_options = get_option( 'cpac_general_options' );
+				if ( current_user_can( 'manage_admin_columns' ) && ( ! isset( $general_options['show_edit_button'] ) || '1' === $general_options['show_edit_button'] ) ) {
+					$edit_link = $storage_model->get_edit_link();
+				}
+			}
+		}
+		?>
+		<?php if ( $css_column_width ) : ?>
+		<style type="text/css">
+			<?php echo $css_column_width; ?>
+		</style>
+		<?php endif; ?>
+		<?php if ( $edit_link ) : ?>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				jQuery('.tablenav.top .actions:last').append('<a href="<?php echo $edit_link; ?>" class="cpac-edit add-new-h2"><?php _e( 'Edit columns', 'cpac' ); ?></a>');
+			});
+		</script>
+		<?php endif; ?>
+
+		<?php
+	}
+
+	/**
+	 * Whether this request is an AJAX request and marked as admin-column-ajax or inline-save request.
 	 *
 	 * @since 2.2
      * @return bool Returns true if in an AJAX request, false otherwise
@@ -158,6 +416,10 @@ class CPAC {
 
 		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
 			return false;
+		}
+
+		if ( ( isset( $_POST['action'] ) && 'inline-save' === $_POST['action'] ) ) {
+			return true;
 		}
 
 		if ( ( isset( $_POST['plugin_id'] ) && 'cpac' == $_POST['plugin_id'] ) || ( isset( $_GET['plugin_id'] ) && 'cpac' == $_GET['plugin_id'] ) ) {
@@ -227,268 +489,6 @@ class CPAC {
 	}
 
 	/**
-	 * @since 2.2.4
-	 */
-	public function scripts() {
-
-		add_action( 'admin_head', array( $this, 'global_head_scripts') );
-
-		wp_register_script( 'cpac-admin-columns', CPAC_URL . 'assets/js/admin-columns.js', array( 'jquery', 'jquery-qtip2' ), CPAC_VERSION );
-
-		if ( $this->is_columns_screen() ) {
-			add_filter( 'admin_body_class', array( $this, 'admin_class' ) );
-			add_action( 'admin_head', array( $this, 'admin_scripts') );
-
-			wp_enqueue_script( 'cpac-admin-columns' );
-			wp_enqueue_script( 'jquery-floatthead' );
-
-			$data = array();
-
-			/*if ( $storage_model = $this->get_current_storage_model() ) {
-				$data['storage_model'] = array(
-					'is_table_header_fixed' => $storage_model->is_table_header_fixed()
-				);
-			}*/
-
-			wp_localize_script( 'cpac-admin-columns', 'CPAC', $data );
-
-			$this->column_styles();
-		}
-	}
-
-	/**
-	 * Add capabilty to administrator to manage admin columns.
-	 * You can use the capability 'manage_admin_columns' to grant other roles this privilidge as well.
-	 *
-	 * @since 2.0.4
-	 */
-	public function set_capabilities() {
-		if ( $role = get_role( 'administrator' ) ) {
-   			$role->add_cap( 'manage_admin_columns' );
-   		}
-	}
-
-		/**
-	 * @since 2.0
-	 */
-	public function set_storage_models_on_cac_screen() {
-
-		if ( ! $this->is_cac_screen() ) {
-			return;
-		}
-
-		$this->set_storage_models();
-	}
-
-	/**
-	 * @since 2.0
-	 */
-	public function set_storage_models() {
-
-		$storage_models = array();
-
-		// include parent and childs
-		require_once CPAC_DIR . 'classes/column.php';
-		require_once CPAC_DIR . 'classes/column/default.php';
-		require_once CPAC_DIR . 'classes/column/actions.php';
-		require_once CPAC_DIR . 'classes/storage_model.php';
-		require_once CPAC_DIR . 'classes/storage_model/post.php';
-		require_once CPAC_DIR . 'classes/storage_model/user.php';
-		require_once CPAC_DIR . 'classes/storage_model/media.php';
-		require_once CPAC_DIR . 'classes/storage_model/comment.php';
-		require_once CPAC_DIR . 'classes/storage_model/link.php';
-
-		foreach ( $this->get_post_types() as $post_type ) {
-			$storage_model = new CPAC_Storage_Model_Post( $post_type );
-			$storage_models[ $storage_model->key ] = $storage_model;
-		}
-
-		$storage_model = new CPAC_Storage_Model_User();
-		$storage_models[ $storage_model->key ] = $storage_model;
-
-		$storage_model = new CPAC_Storage_Model_Media();
-		$storage_models[ $storage_model->key ] = $storage_model;
-
-		$storage_model = new CPAC_Storage_Model_Comment();
-		$storage_models[ $storage_model->key ] = $storage_model;
-
-		if ( apply_filters( 'pre_option_link_manager_enabled', false ) ) { // as of 3.5 link manager is removed
-			$storage_model = new CPAC_Storage_Model_Link();
-			$storage_models[ $storage_model->key ] = $storage_model;
-		}
-
-		/**
-		 * Filter the available storage models
-		 * Used by external plugins to add additional storage models
-		 *
-		 * @since 2.0
-		 * @param array $storage_models List of storage model class instances ( [key] => [CPAC_Storage_Model object], where [key] is the storage key, such as "user", "post" or "my_custom_post_type")
-		 */
-		$this->storage_models = apply_filters( 'cac/storage_models', $storage_models );
-	}
-
-	/**
-	 * @since 2.0
-	 * @return array|false object Storage Model
-	 */
-	public function get_storage_model( $key ) {
-
-		if ( isset( $this->storage_models[ $key ] ) ) {
-			return $this->storage_models[ $key ];
-		}
-
-		return false;
-	}
-
-	/**
-	 * @since 2.2.4
-	 */
-	public function get_current_storage_model() {
-
-		if ( $this->storage_models ) {
-			foreach ( $this->storage_models as $storage_model ) {
-				if ( $storage_model->is_columns_screen() ) {
-					return $storage_model;
-				}
-			}
-		}
-	}
-
-	/**
-	 * @since 1.0
-	 * @return array Posttypes
-	 */
-	public function get_post_types() {
-
-		$post_types = array();
-
-		if ( post_type_exists( 'post' ) ) {
-			$post_types['post'] = 'post';
-		}
-
-		if ( post_type_exists( 'page' ) ) {
-			$post_types['page'] = 'page';
-		}
-
-		$post_types = array_merge( $post_types, get_post_types( array(
-			'_builtin' 	=> false,
-			'show_ui'	=> true
-		)));
-
-		/**
-		 * Filter the post types for which Admin Columns is active
-		 *
-		 * @since 2.0
-		 * @param array $post_types List of active post type names
-		 */
-		return apply_filters( 'cac/post_types', $post_types );
-	}
-
-	/**
-	 * @since 1.0
-	 */
-	function add_settings_link( $links, $file ) {
-
-		if ( $file != plugin_basename( __FILE__ ) ) {
-			return $links;
-		}
-
-		array_unshift( $links, '<a href="' . esc_url( admin_url( "options-general.php?page=codepress-admin-columns" ) ) . '">' . __( 'Settings' ) . '</a>' );
-		return $links;
-	}
-
-	/**
-	 * @since 1.0
-	 */
-	public function column_styles() {
-
-		wp_register_script( 'jquery-qtip2', CPAC_URL . 'external/qtip2/jquery.qtip.min.js', array( 'jquery' ), CPAC_VERSION );
-		wp_register_style( 'jquery-qtip2', CPAC_URL . 'external/qtip2/jquery.qtip.min.css', array(), CPAC_VERSION, 'all' );
-		wp_register_style( 'cpac-columns', CPAC_URL . 'assets/css/column.css', array(), CPAC_VERSION, 'all' );
-
-		wp_enqueue_script( 'jquery-qtip2' );
-		wp_enqueue_style( 'jquery-qtip2' );
-		wp_enqueue_style( 'cpac-columns' );
-	}
-
-	/**
-	 * Adds a body class which is used to set individual column widths
-	 *
-	 * @since 1.4.0
-	 * @param string $classes body classes
-	 * @return string
-	 */
-	function admin_class( $classes ) {
-		if ( $storage_model = $this->get_current_storage_model() ) {
-			$classes .= " cp-{$storage_model->key}";
-		}
-
-		return $classes;
-	}
-
-	/**
-	 * Admin CSS to hide upgrade menu and place icon
-	 *
-	 * @since 1.4.0
-	 */
-	function global_head_scripts() { ?>
-		<style type="text/css">
-			#menu-settings a[href="options-general.php?page=cpac-upgrade"] { display: none; }
-		</style>
-		<?php
-	}
-
-	/**
-	 * Admin CSS for Column width and Settings Icon
-	 *
-	 * @since 1.4.0
-	 */
-	function admin_scripts() {
-
-		$css_column_width 	= '';
-		$edit_link 			= '';
-
-		if ( $this->storage_models ) {
-			foreach ( $this->storage_models as $storage_model ) {
-
-				if ( ! $storage_model->is_columns_screen() )
-					continue;
-
-				// CSS: columns width
-				if ( $columns = $storage_model->get_stored_columns() ) {
-					foreach ( $columns as $name => $options ) {
-
-						if ( ! empty( $options['width'] ) && is_numeric( $options['width'] ) && $options['width'] > 0 ) {
-							$css_column_width .= ".cp-{$storage_model->key} .wrap table th.column-{$name} { width: {$options['width']}% !important; }";
-						}
-					}
-				}
-
-				// JS: edit button
-				$general_options = get_option( 'cpac_general_options' );
-				if ( current_user_can( 'manage_admin_columns' ) && ( ! isset( $general_options['show_edit_button'] ) || '1' === $general_options['show_edit_button'] ) ) {
-					$edit_link = $storage_model->get_edit_link();
-				}
-			}
-		}
-		?>
-		<?php if ( $css_column_width ) : ?>
-		<style type="text/css">
-			<?php echo $css_column_width; ?>
-		</style>
-		<?php endif; ?>
-		<?php if ( $edit_link ) : ?>
-		<script type="text/javascript">
-			jQuery(document).ready(function() {
-				jQuery('.tablenav.top .actions:last').append('<a href="<?php echo $edit_link; ?>" class="cpac-edit add-new-h2"><?php _e( 'Edit columns', 'cpac' ); ?></a>');
-			});
-		</script>
-		<?php endif; ?>
-
-		<?php
-	}
-
-	/**
 	 * Get admin columns settings class instance
 	 *
 	 * @since 2.2
@@ -509,12 +509,30 @@ class CPAC {
 
 		return $this->_addons;
 	}
+
+	/**
+	 * Get admin columns upgrade class instance
+	 *
+	 * @since 2.2.7
+	 * @return CPAC_Upgrade Upgrade class instance
+	 */
+	public function upgrade() {
+
+		return $this->_upgrade;
+	}
 }
 
 /**
- * Init Class Codepress_Admin_Columns ( sets Global for backwards compatibility. )
+ * Admin Columns class (global for backwards compatibility)
+ *
+ * @since 1.0
+ * @deprecated 2.2.7 Use filter cac/loaded instead.
+ */
+global $cpac;
+
+/**
+ * Initialize Admin Columns class
  *
  * @since 1.0
  */
-$GLOBALS['cpac'] = new CPAC();
-
+$cpac = new CPAC();

@@ -1,10 +1,10 @@
-=== Codepress Admin Columns ===
+=== Admin Columns ===
 Contributors: codepress, tschutter, davidmosterd, engelen
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.5
-Tested up to: 3.9.2
-Stable tag: 2.2.6.4
+Tested up to: 4.0
+Stable tag: 2.2.8.1
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -12,9 +12,12 @@ Customise columns on the administration screens for post(types), pages, media, c
 
 Manage and organize columns in the posts, users, comments and media lists in the WordPress admin panel. Transform the WordPress admin screens into beautiful, clear overviews.
 
+> #### Admin Columns Pro
 > The free version of Admin Columns does not support sorting, filtering and inline editing and has no priority support. [Admin Columns Pro](http://admincolumns.com/?utm_source=wordpressorg&utm_medium=readme&utm_content=blockquote&utm_campaign=cpac-pluginpage) offers these features, direct e-mail support and several add-ons.
 
+
 [vimeo http://vimeo.com/96885841]
+
 
 = Enhanced list tables =
 By default, WordPress provides list tables, giving you an overview of your content in the admin panel. These list tables are quite limited, however. For posts and custom post types, for example, not much more than the date and title of the post is displayed. Admin Columns allows you to take control over these list tables, managing the columns dislpayed in these overviews. Supporting custom fields, featured images, custom taxonomies, EXIF data for media and much, much more (Admin Columns features over 90 columns), you can create overviews that are perfectly suited for your content.
@@ -173,8 +176,8 @@ You can leave any requests or feedback on [admincolumns.com](http://admincolumns
 == Installation ==
 
 1. Upload codepress-admin-columns to the /wp-content/plugins/ directory
-2. Activate Codepress Admin Columns through the 'Plugins' menu in WordPress
-3. Configure the plugin by going to the Admin Column settings that appears under the Settings menu.
+2. Activate Admin Columns through the 'Plugins' menu in WordPress
+3. Configure the plugin by going to the Admin Columns settings that appears under the Settings menu.
 
 == Frequently Asked Questions ==
 
@@ -247,6 +250,18 @@ You can find a list of the available actions and filters (and examples on how to
 8. Posts Screen with custom fields.
 
 == Changelog ==
+
+= 2.2.8.1 =
+* [Fixed] Quick Edit will display columns correctly after saving
+
+= 2.2.8 =
+* [Fixed] support for WPML columns
+
+= 2.2.7 =
+* [Added] Added date format option for "Last modified" column
+* [Updated] Change references from Codepress Admin Columns to Admin Columns
+* [Updated] General code clean-up
+* [Improved] Documentation improvements
 
 = 2.2.6.4 =
 * [Updated] Portuguese (Brazil) language - thanks to André Mácola Machado

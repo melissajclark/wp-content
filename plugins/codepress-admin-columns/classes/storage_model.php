@@ -284,8 +284,9 @@ abstract class CPAC_Storage_Model {
 			$iterator = new DirectoryIterator( $columns_dir );
 			foreach( $iterator as $leaf ) {
 
-				if ( $leaf->isDot() || $leaf->isDir() )
+				if ( $leaf->isDot() || $leaf->isDir() ) {
 					continue;
+				}
 
 				// only allow php files, exclude .SVN .DS_STORE and such
 				if ( substr( $leaf->getFilename(), -4 ) !== '.php' ) {
@@ -375,8 +376,9 @@ abstract class CPAC_Storage_Model {
 		foreach ( $this->get_default_columns() as $column_name => $label ) {
 
 			// checkboxes are mandatory
-			if ( 'cb' == $column_name )
+			if ( 'cb' == $column_name ) {
 				continue;
+			}
 
 			$column = $this->create_column_instance( $column_name, $label );
 
@@ -427,8 +429,9 @@ abstract class CPAC_Storage_Model {
 	 */
 	public function get_default_stored_columns() {
 
-		if ( ! $columns = get_option( "cpac_options_{$this->key}_default" ) )
+		if ( ! $columns = get_option( "cpac_options_{$this->key}_default" ) ) {
 			return array();
+		}
 
 		return $columns;
 	}
@@ -484,6 +487,8 @@ abstract class CPAC_Storage_Model {
 	 */
 	public function set_columns() {
 
+		do_action( 'cac/set_columns', $this );
+
 		$this->custom_columns = $this->get_custom_registered_columns();
 		$this->default_columns = $this->get_default_registered_columns();
 		$this->column_types = $this->get_grouped_column_types();
@@ -523,7 +528,7 @@ abstract class CPAC_Storage_Model {
 		/**
 		 * Filter the available column type groups
 		 *
-		 * @since 2.3
+		 * @since 2.2
 		 *
 		 * @param array $groups Available groups ([groupid] => [label])
 		 * @param CPAC_Storage_Model $storage_model_instance Storage model class instance

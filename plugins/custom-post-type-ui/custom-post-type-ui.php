@@ -4,14 +4,14 @@ Plugin Name: Custom Post Type UI
 Plugin URI: http://webdevstudios.com/plugin/custom-post-type-ui/
 Description: Admin panel for creating custom post types and custom taxonomies in WordPress
 Author: WebDevStudios.com
-Version: 0.8.2
+Version: 0.8.4
 Author URI: http://webdevstudios.com/
 Text Domain: cpt-plugin
 License: GPLv2
 */
 
 // Define current version constant
-define( 'CPT_VERSION', '0.8.2' );
+define( 'CPT_VERSION', '0.8.4' );
 
 // Define current WordPress version constant
 define( 'CPTUI_WP_VERSION', get_bloginfo( 'version' ) );
@@ -99,7 +99,7 @@ function cpt_create_custom_post_types() {
 			$cpt_rewrite_slug       = ( !empty( $cpt_post_type["rewrite_slug"] ) ) ? esc_html( $cpt_post_type["rewrite_slug"] ) : esc_html( $cpt_post_type["name"] );
 			$cpt_rewrite_withfront  = ( !empty( $cpt_post_type["rewrite_withfront"] ) ) ? true : get_disp_boolean( $cpt_post_type["rewrite_withfront"] ); //reversed because false is empty
 			$cpt_menu_position      = ( !empty( $cpt_post_type["menu_position"] ) ) ? intval( $cpt_post_type["menu_position"] ) : null; //must be null
-			$cpt_menu_icon          = ( !empty( $cpt_post_type["menu_icon"] ) ) ? esc_url( $cpt_post_type["menu_icon"] ) : null; //must be null
+			$cpt_menu_icon          = ( !empty( $cpt_post_type["menu_icon"] ) ) ? esc_attr( $cpt_post_type["menu_icon"] ) : null; //must be null
 			$cpt_taxonomies         = ( !empty( $cpt_post_type[1] ) ) ? $cpt_post_type[1] : array();
 			$cpt_supports           = ( !empty( $cpt_post_type[0] ) ) ? $cpt_post_type[0] : array();
 
@@ -666,12 +666,13 @@ if ( isset($_GET['cpt_msg'] ) && $_GET['cpt_msg'] == 'del' ) { ?>
 						$custom_post_type   = '';
 						$cpt_support_array  = '';
 						$cpt_tax_array      = '';
+						$cpt_sanitized_name = str_replace( '-', '_', $cpt_post_type['name'] );
 
 						$cpt_label = ( empty( $cpt_post_type["label"] ) ) ? esc_html($cpt_post_type["name"]) : esc_html($cpt_post_type["label"]);
 						$cpt_singular = ( empty( $cpt_post_type["singular_label"] ) ) ? $cpt_label : esc_html($cpt_post_type["singular_label"]);
 						$cpt_rewrite_slug = ( empty( $cpt_post_type["rewrite_slug"] ) ) ? esc_html($cpt_post_type["name"]) : esc_html($cpt_post_type["rewrite_slug"]);
 						$cpt_menu_position = ( empty( $cpt_post_type["menu_position"] ) ) ? null : intval($cpt_post_type["menu_position"]);
-						$cpt_menu_icon = ( !empty( $cpt_post_type["menu_icon"] ) ) ? esc_url($cpt_post_type["menu_icon"]) : null;
+						$cpt_menu_icon = ( !empty( $cpt_post_type["menu_icon"] ) ) ? esc_attr($cpt_post_type["menu_icon"]) : null;
 
 						if ( true == $cpt_post_type["show_ui"] ) {
 							$cpt_show_in_menu = ( $cpt_post_type["show_in_menu"] == 1 ) ? 1 : 0;
@@ -719,8 +720,8 @@ if ( isset($_GET['cpt_msg'] ) && $_GET['cpt_msg'] == 'del' ) { ?>
 								$counter++;
 							}
 						}
-						$custom_post_type = "add_action('init', 'cptui_register_my_cpt_" . $cpt_post_type["name"] . "');\n";
-						$custom_post_type .= "function cptui_register_my_cpt_" . $cpt_post_type["name"] . "() {\n";
+						$custom_post_type = "add_action('init', 'cptui_register_my_cpt_" . $cpt_sanitized_name . "');\n";
+						$custom_post_type .= "function cptui_register_my_cpt_" . $cpt_sanitized_name . "() {\n";
 						$custom_post_type .= "register_post_type('" . $cpt_post_type["name"] . "', array(\n'label' => '" . $cpt_label . "',\n";
 						$custom_post_type .= "'description' => '" . $cpt_post_type["description"] . "',\n";
 						$custom_post_type .= "'public' => " . disp_boolean( $cpt_post_type["public"]) . ",\n";
@@ -944,10 +945,11 @@ if (isset($_GET['cpt_msg']) && $_GET['cpt_msg']=='del') { ?>
 				<td colspan="10">
 					<div style="display:none;" id="slidepanel<?php echo $thecounter; ?>">
 						<?php
+						$cpt_tax_sanitized_name = str_replace( '-', '_', $cpt_tax_type['name'] );
 						//display register_taxonomy code
 						$custom_tax = '';
-						$custom_tax = "add_action('init', 'cptui_register_my_taxes_" . $cpt_tax_type['name'] . "');\n";
-						$custom_tax .= "function cptui_register_my_taxes_" . $cpt_tax_type['name'] . "() {\n";
+						$custom_tax = "add_action('init', 'cptui_register_my_taxes_" . $cpt_tax_sanitized_name . "');\n";
+						$custom_tax .= "function cptui_register_my_taxes_" . $cpt_tax_sanitized_name . "() {\n";
 
 						if ( !$cpt_tax_type["label"] ) {
 							$cpt_label = esc_html( $cpt_tax_type["name"] );
