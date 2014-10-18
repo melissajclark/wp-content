@@ -120,11 +120,27 @@ function starter_theme_scripts_method() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
+	// below block of code - used for every JS / JQ file included, put all inside this function
+
+
+	// Optional: include conditional at beginning of function if script is only needed on a certain page:
+
+	// if ( is_front_page() ) : --> only include line if it is conditional
+
 	// wp_enqueue_script(
 	//	'theme',
 	//	get_template_directory_uri() . '/assets/theme.js',
 	//	array('jquery')
 	// );
+
+	// endif; --> only include line if it is conditional
+
+
+	wp_enqueue_script(
+		'bxslider',
+		get_template_directory_uri() . '/assets/vendor/jquery.bxslider.js',
+		array('jquery')
+	);
 }    
 add_action('wp_enqueue_scripts', 'starter_theme_scripts_method');
 
