@@ -16,6 +16,20 @@ if ( ! isset( $content_width ) ) :
 	$content_width = 800;
 endif;
 
+
+/**
+*
+* Includes content from functions in inc/ directory
+*
+**/
+
+// Comments & pingbacks display template
+include('inc/functions/comments.php');
+
+// include custom widget file
+include_once( 'inc/widget.php' );
+
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -150,10 +164,6 @@ if(function_exists('acf_add_options_page')) {
  
 }
 
-// Comments & pingbacks display template
-include('inc/functions/comments.php');
-
-
 // adjusts for paging on Grid Archive pages
 
 function starter_theme_custom_query( $query ) {
@@ -193,3 +203,5 @@ add_filter( 'pre_get_posts', 'starter_theme_custom_query' );
 //     return $query;
 // }
 // add_filter( 'pre_get_posts', 'starter_theme_custom_query' );
+
+
