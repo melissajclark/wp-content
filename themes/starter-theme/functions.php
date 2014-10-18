@@ -71,7 +71,7 @@ add_action( 'after_setup_theme', 'starter_theme_setup' );
 function starter_theme_widgets_init() {
     register_sidebar( array(
         'name' => __( 'Sidebar', 'starter-theme' ),
-        'id' => 'sidebar-1',
+        'id' => 'sidebar-1', // ID to use when including sidebar in other templates
         'before_widget' => '<aside id="%1$s" class="widget %2$s">',
         'after_widget' => '</aside>',
         'before_title' => '<h3 class="widget-title">',
