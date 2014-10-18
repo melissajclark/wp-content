@@ -15,7 +15,7 @@ class starter_theme_custom_widget extends WP_Widget {
 			'My Custom Widget', // Name
 			array( 'description' => __( 'This is a special custom widget', 'starter-theme' ), ) // Args
 		);
-	}
+	} // will need to update the 4 elements of this widget
 
 
 	// Front-end display of widget.
