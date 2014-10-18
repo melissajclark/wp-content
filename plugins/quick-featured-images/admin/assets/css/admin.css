@@ -1,0 +1,300 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+
+/*
+ * Layout
+ *
+ */
+.th_wrapper {
+	overflow: hidden;
+}
+#th_main {
+	float: left;
+	width: 66%;
+}
+#th_footer {
+	float: right;
+	width: 33%;
+}
+#th_main .th_content {
+	margin: 2em 1em 1em 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-bottom: 2em;
+}
+#th_footer .th_content {
+	margin: 2em 0 1em 1em;
+	background-color: #F5FBFD;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+}
+
+/* floating halfs */
+.th_w50percent {
+	width: 50%;
+	float: left;
+	display: block;
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+}
+
+/*
+ * Elements
+ *
+ */
+ 
+/* Footer */
+#th_footer .th_content h3 {
+	background: none;
+	margin: 0;
+}
+#th_footer .th_content dl {
+	padding: 0 8px;
+}
+#th_footer .th_content li, 
+#th_footer .th_content dd {
+	overflow: hidden; /* correct height if inner flowing elements */
+    margin-bottom: 10px;
+    margin-left: 0;
+}
+#th_main .widefat a {
+	text-decoration: underline;
+}
+
+/* Filter 'Replace' */
+#th_replace {
+	overflow: hidden;
+}
+#th_replace label {
+	display: block;
+	float: left;
+	overflow: hidden;
+	padding: 0 3em 3em 0;
+}
+#th_replace input[type="radio"]:checked:before,
+#th_replace input[type="radio"]:checked,
+#th_replace input[type="radio"],
+#th_replace input[type="checkbox"]:checked:before,
+#th_replace input[type="checkbox"]:checked,
+#th_replace input[type="checkbox"] {
+    position: relative;
+    top: 2.5em;
+    left: 1.5em;
+	padding: 9px !important;
+}
+
+/* Progress Bar */
+#progress {
+}
+#progress em {
+	font-weight: bold;
+	font-style: normal;
+}
+#progress #bar {
+	display: block;
+	overflow: hidden;
+	line-height: 1;
+	padding: 1em;
+    background: none repeat scroll 0 0 #e3e3e3;
+	color: #222;
+}
+#progress #bar span {
+	line-height: 1;
+	padding: 1em;
+}
+#progress #bar strong {
+	line-height: 1;
+	padding: 1em;
+}
+
+/* Other content elements */
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content table.widefat th:nth-of-type(1),
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content table.widefat td:nth-of-type(1),
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content table.widefat th:nth-of-type(4),
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content table.widefat td:nth-of-type(4) {
+	text-align: center;
+}
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content table.widefat td:nth-of-type(4) {
+	vertical-align: middle;
+}
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content table.form-table,
+body[class*=_page_quick-featured-images-settings] #th_main .th_content table.form-table {
+	width: auto;
+}
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content form select {
+	width: 100%;
+}
+body[class*=_page_quick-featured-images-defaults] #th_main .th_content table.form-table,
+body[class*=_page_quick-featured-images-settings] #th_main .th_content table.form-table,
+#th_main .th_content legend,
+#th_main .th_content h5,
+#th_main .th_content h4,
+#th_main .th_content ul,
+#th_main .th_content p {
+	margin-left: 8px;
+    margin-right: 8px;
+}
+#th_main .th_content h4 {
+	font-size: 1.12em;
+	line-height: 1.44;
+}
+#th_main .th_content h5 {
+	margin-bottom: 0;
+	font-size: 1em;
+}
+#th_main .th_content legend {
+	margin-bottom: .5em;
+	font-weight: bold;
+}
+#th_main .th_content ul {
+	list-style: disc outside none;
+	padding-left: 1em;
+}
+#th_main .th_content ul.selected_images {
+	padding-left: 0;
+}
+#th_main .th_content ul.selected_images li {
+    display: inline;
+    margin: 0 8px 0 0;
+    padding: 0;
+}
+#th_main .th_content ol {
+	margin-left: 3em;
+	margin-right: 8px;
+}
+#th_year {
+    width: 4em;
+}
+.wrap h3 {
+    background: none repeat scroll 0 0 #DDD;
+    color: #222222;
+    padding: 8px;
+}
+.wrap h3.nobottom {
+    margin-bottom: 0;
+}
+.th_content_inside .failure {
+	color: #000;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-top: 0.5em;
+    padding: 0 15px;
+}
+.th_content_inside .success {
+	color: #555;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-top: 0.5em;
+    padding: 0 15px;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li span.dashicons {
+	font-size: 15em;
+	width: auto;
+	height: auto;
+	line-height: 1;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: baseline;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(1) a {
+	color: #236ea3;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(1) a:focus,
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(1) a:hover {
+	color: #2e91d6;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(2) a {
+	color: #17826a;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(2) a:focus,
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(2) a:hover {
+	color: #20b594;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(3) a {
+	color: #a6321f;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(3) a:focus,
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li:nth-of-type(3) a:hover {
+	color: #d94128;
+}
+#th_main .th_content .failure {
+	font-weight: bold;
+}
+#template_row {
+	display: none;
+}
+.attachment-thumbnail {
+	border: 2px solid #444;
+	border-radius: 3px;
+	box-shadow: 3px 3px 3px 1px #999;
+	-webkit-box-shadow: 3px 3px 3px 1px #999;
+	margin-bottom: .5em;
+}
+#th_max_width,
+#th_max_height {
+	width: 4em;
+
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul {
+	list-style: none;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 0;
+	overflow: hidden;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content li {
+	display: block;
+	float: left;
+	width: 50%;
+	height: 310px;
+}
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li a:focus img,
+.toplevel_page_quick-featured-images-overview #th_main .th_content ul li a:hover img {
+	opacity: .6;
+}
+#qfi_header_image {
+	width: 100%;
+}
+#th_main .th_content img.alignleft,
+#th_footer .th_content img.avatar {
+	display: inline;
+	float: left;
+	margin: 3px .8em 5px 0;
+}
+#th_main .th_content img#paypal_button {
+	max-width: 195px;
+}
+/* If auto-folding of the admin menu */
+@media only screen and (max-width: 900px) {
+	/* dissolve floating */
+	#th_main,
+	#th_footer,
+	#th_main .th_content,
+	#th_footer .th_content {
+		float: none;
+		width: auto;
+		margin: 0;
+	}
+	#progress #bar span {
+		line-height: 4;
+	}
+}
+/* Smartphone */
+@media screen and (max-width: 600px) {
+	/* Progress Bar */
+	#progress #bar span.sep,
+	#progress #bar span.wp-ui-notification,
+	#progress #bar strong.wp-ui-highlight {
+		display: block;
+		line-height: 1;
+	}
+	#progress #bar span.sep {
+		padding: .5em 1em;
+	}
+	/* floating halfs */
+	.toplevel_page_quick-featured-images-overview #th_main .th_content li,
+	.th_w50percent {
+		float: none;
+		width: auto;
+		height: auto;
+	}
+}
