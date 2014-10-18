@@ -45,5 +45,3 @@ get_header(); ?>
 </section><!-- #primary -->
 
 <?php get_footer(); ?>
-
-<!-- test conmment -->
