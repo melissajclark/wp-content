@@ -154,11 +154,11 @@ function starter_theme_scripts_method() {
 	);
 
 
-	wp_enqueue_script(
-		'bxslider',
-		get_template_directory_uri() . '/assets/vendor/jquery.bxslider.js',
-		array('jquery')
-	);
+	// wp_enqueue_script(
+	// 	'bxslider',
+	// 	get_template_directory_uri() . '/assets/vendor/jquery.bxslider.js',
+	// 	array('jquery')
+	// );
 
 	wp_enqueue_script(
 	    'theme',
