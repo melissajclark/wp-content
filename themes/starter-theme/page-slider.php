@@ -21,7 +21,7 @@ get_header(); ?>
             <div class="entry-content">
 
             <!-- Custom Field Content for Images -->
-
+            <div class="flexslider">
             <?php 
 
             $images = get_field('gallery');
@@ -37,17 +37,8 @@ get_header(); ?>
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <div id="carousel" class="flexslider">
-                    <ul class="slides">
-                        <?php foreach( $images as $image ): ?>
-                            <li>
-                                <img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
             <?php endif; ?>
-
+            </div>
 
                 <?php the_content(); ?>
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
