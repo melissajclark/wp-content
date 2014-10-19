@@ -47,3 +47,30 @@ function starter_theme_custom_query( $query ) {
     return $query;
 }
 add_filter( 'pre_get_posts', 'starter_theme_custom_query' );
+
+
+/**
+ * Remove the front-end admin bar for everybody, always
+ */
+show_admin_bar( false );
+
+/**
+ * Add TinyMCE buttons that are disabled by default to 2nd row
+ */
+function starter_theme_mce_buttons($buttons) {    
+ $buttons[] = 'justify'; // fully justify text
+ $buttons[] = 'hr'; // insert HR
+
+ return $buttons;
+}
+add_filter('mce_buttons_2', 'starter_theme_mce_buttons');
+
+/**
+ * Remove from TinyMCE all colors except those specified
+ */
+function starter_theme_change_mce_colors( $init ) {
+ $init['theme_advanced_text_colors'] = '8dc63f';
+ $init['theme_advanced_more_colors'] = false;
+return $init;
+}
+add_filter('tiny_mce_before_init', 'starter_theme_change_mce_colors');
