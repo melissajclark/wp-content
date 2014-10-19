@@ -19,16 +19,13 @@
 	</div>
 </footer><!-- #colophon -->
 
-
-    <script>
-    jQuery(document).ready(function($){
-        $('.bxslider').bxSlider({
-            mode: 'fade',
-            pager: false
-        });
-    });
-    </script>
-
+    <?php if ( is_page_template( 'page-slider.php' ) ) : ?>
+     
+     <script>     
+        slider(); // calls slider function in theme.js for bxSlider
+    </script>  
+           
+    <?php endif; ?>
  
 <?php wp_footer(); ?> 
 </body>
