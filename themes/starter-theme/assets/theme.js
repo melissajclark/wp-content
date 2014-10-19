@@ -2,7 +2,11 @@ function slider(){
     jQuery(document).ready(function($){
         $('.bxslider').bxSlider({
             mode: 'fade',
-            pager: false
+            pager: true,
+            nextSelector: '#slider-next',
+            prevSelector: '#slider-prev',
+             nextText: 'Onward →',
+             prevText: '← Go back'
         });
     });
 }
