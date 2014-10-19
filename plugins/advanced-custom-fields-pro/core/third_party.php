@@ -35,7 +35,7 @@ class acf_third_party {
 		
 		
 		// Post Type Switcher - http://wordpress.org/extend/plugins/post-type-switcher/
-		add_filter('pts_post_type_filter', array($this, 'pts_post_type_filter'));
+		add_filter('pts_allowed_pages', array($this, 'pts_allowed_pages'));
 		
 	}
 	
@@ -130,39 +130,48 @@ class acf_third_party {
 	
 	
 	/*
-	*  pts_post_type_filter
+	*  pts_allowed_pages
 	*
-	*  This function modifies the args for the ACF post types
+	*  This filter will prevent PTS from running on the field group page!
 	*
 	*  @type	function
-	*  @date	19/11/12
-	*  @since	3.5.3
+	*  @date	25/09/2014
+	*  @since	5.0.0
 	*
-	*  @param	$args (array)
-	*  @return	$args
+	*  @param	$pages (array)
+	*  @return	$pages
 	*/
 	
-	function pts_post_type_filter( $args ) {
+	function pts_allowed_pages( $pages ) {
 		
-		// global
-		global $typenow;
+		// vars
+		$post_type = '';
 		
+		
+		// check $_GET becuase it is too early to use functions / global vars
+		if( !empty($_GET['post_type']) ) {
+			
+			$post_type = $_GET['post_type'];
+			
+		} elseif( !empty($_GET['post']) ) {
+			
+			$post_type = get_post_type( $_GET['post'] );
+			
+		}
+				
 		
 		// check post type
-		if( $typenow == 'acf-field' || $typenow == 'acf-field-group' ) {
-		
-			$args = array(
-				'public'  => false,
-				'show_ui' => true
-			);
+		if( $post_type == 'acf-field-group' ) {
+			
+			$pages = array();
 			
 		}
 		
 		
 		// return
-		return $args;
-	}
-	
+		return $pages;
+		
+	}	
 	
 }
 

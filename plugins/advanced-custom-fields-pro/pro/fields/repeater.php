@@ -248,7 +248,7 @@ class acf_field_repeater extends acf_field {
 	
 	<tbody>
 		<?php foreach( $field['value'] as $i => $row ): ?>
-			<tr class="acf-row<?php echo ($i === 'acfcloneindex') ? ' clone' : ''; ?>">
+			<tr class="acf-row<?php echo ($i === 'acfcloneindex') ? ' acf-clone' : ''; ?>">
 				
 				<?php if( $show_order ): ?>
 					<td class="order" title="<?php _e('Drag to reorder','acf'); ?>"><?php echo intval($i) + 1; ?></td>

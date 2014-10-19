@@ -263,7 +263,7 @@
 				 start: function() {
 				 	$input.select2("onSortStart");
 				 },
-				 update: function() {
+				 stop: function() {
 				 	$input.select2("onSortEnd");
 				 }
 			});

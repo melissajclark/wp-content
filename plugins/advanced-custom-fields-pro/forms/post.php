@@ -225,6 +225,7 @@ class acf_form_post {
 		
 		// Allow 'acf_after_title' metabox position
 		add_action('edit_form_after_title', array($this, 'edit_form_after_title'));
+		add_action('edit_form_after_editor', array($this, 'edit_form_after_editor'));
 		
 		
 		// remove ACF from meta postbox
@@ -250,14 +251,6 @@ class acf_form_post {
 		global $post, $wp_meta_boxes;
 		
 		
-		// render post data
-		acf_form_data(array( 
-			'post_id'	=> $this->post_id, 
-			'nonce'		=> 'post',
-			'ajax'		=> 1
-		));
-		
-		
 		// render
 		do_meta_boxes( get_current_screen(), 'acf_after_title', $post);
 		
@@ -265,6 +258,31 @@ class acf_form_post {
 		// clean up
 		unset( $wp_meta_boxes['post']['acf_after_title'] );
 
+	}
+	
+	
+	/*
+	*  edit_form_after_editor
+	*
+	*  This function will add the acf_form_data after the post's editor
+	*
+	*  @type	function
+	*  @date	2/10/2014
+	*  @since	5.0.9
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function edit_form_after_editor() {
+		
+		// render post data
+		acf_form_data(array( 
+			'post_id'	=> $this->post_id, 
+			'nonce'		=> 'post',
+			'ajax'		=> 1
+		));	
+		
 	}
 	
 	

@@ -47,10 +47,11 @@
 			
 			
 			// add message
-			if( message !== undefined )
-			{
+			if( message !== undefined ) {
+				
 				$field.children('.acf-input').children('.' + this.message_class).remove();
 				$field.children('.acf-input').prepend('<div class="' + this.message_class + '"><p>' + message + '</p></div>');
+			
 			}
 			
 			
@@ -130,27 +131,27 @@
 			var self = this;
 			
 			
-			// remove previous error message
-			$form.children('.' + this.message_class).remove();
-			
-			
 			// hide ajax stuff on submit button
-			if( $('#submitdiv').exists() ) {
+			if( $('#submitpost').exists() ) {
 				
 				// remove disabled classes
-				$('#submitdiv').find('.disabled').removeClass('disabled');
-				$('#submitdiv').find('.button-disabled').removeClass('button-disabled');
-				$('#submitdiv').find('.button-primary-disabled').removeClass('button-primary-disabled');
+				$('#submitpost').find('.disabled').removeClass('disabled');
+				$('#submitpost').find('.button-disabled').removeClass('button-disabled');
+				$('#submitpost').find('.button-primary-disabled').removeClass('button-primary-disabled');
 				
 				
 				// remove spinner
-				$('#submitdiv .spinner').hide();
+				$('#submitpost .spinner').hide();
 				
 			}
 			
 			
 			// validate json
 			if( !json || typeof json.result === 'undefined' || json.result == 1) {
+				
+				// remove previous error message
+				acf.remove_el( $form.children('.' + this.message_class) );
+				
 			
 				// remove hidden postboxes (this will stop them from being posted to save)
 				$form.find('.acf-postbox.acf-hidden').remove();
@@ -165,13 +166,14 @@
 				
 				
 				// submit form again
-				if( this.$trigger )
-				{
+				if( this.$trigger ) {
+					
 					this.$trigger.click();
-				}
-				else
-				{
+				
+				} else {
+					
 					$form.submit();
+				
 				}
 				
 				
@@ -180,8 +182,8 @@
 			}
 			
 			
-			// show error message	
-			$form.prepend('<div class="' + this.message_class + '"><p>' + json.message + '</p></div>');
+			// vars
+			var $first_field = null;
 			
 			
 			// show field error messages
@@ -210,11 +212,42 @@
 					
 					
 					// add error
-					self.add_error( $field, error.message );
+					this.add_error( $field, error.message );
 					
+					
+					// save as first field
+					if( i == 0 ) {
+						
+						$first_field = $field;
+						
+					}
 					
 				}
 			
+			}
+			
+				
+			// get $message
+			var $message = $form.children('.' + this.message_class);
+			
+			if( !$message.exists() ) {
+				
+				$message = $('<div class="' + this.message_class + '"><p></p></div>');
+				
+				$form.prepend( $message );
+				
+			}
+			
+			
+			// update message text
+			$message.children('p').text( json.message );
+			
+			
+			// if message is not in view, scroll to first error field
+			if( !acf.is_in_view($message) && $first_field ) {
+				
+				$("html, body").animate({ scrollTop: ($first_field.offset().top - 32 - 20) }, 500);
+				
 			}
 			
 		},

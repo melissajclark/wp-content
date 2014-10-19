@@ -93,84 +93,6 @@ function acf_get_field_reference( $field_name, $post_id ) {
 
 
 /*
-*  acf_get_valid_post_id
-*
-*  This function will return a valid post_id based on the current screen / parameter
-*
-*  @type	function
-*  @date	8/12/2013
-*  @since	5.0.0
-*
-*  @param	$post_id (mixed) can be a post ID, comment / user / widget / options, or even an object 
-*  @return	$post_id (int)
-*/
-
-function acf_get_valid_post_id( $post_id = 0 ) {
-	
-	// set post_id to global
-	if( !$post_id )
-	{
-		$post_id = get_the_ID();
-		$post_id = intval( $post_id );
-	}
-	
-	
-	// allow for option == options
-	if( $post_id == "option" )
-	{
-		$post_id = "options";
-	}
-	
-	
-	// object
-	if( is_object($post_id) )
-	{
-		if( isset($post_id->roles, $post_id->ID) )
-		{
-			$post_id = 'user_' . $post_id->ID;
-		}
-		elseif( isset($post_id->taxonomy, $post_id->term_id) )
-		{
-			$post_id = $post_id->taxonomy . '_' . $post_id->term_id;
-		}
-		elseif( isset($post_id->comment_ID) )
-		{
-			$post_id = 'comment_' . $post_id->comment_ID;
-		}
-		elseif( isset($post_id->ID) )
-		{
-			$post_id = $post_id->ID;
-		}
-	}		
-		
-	/*
-	*  Override for preview
-	*  
-	*  If the $_GET['preview_id'] is set, then the user wants to see the preview data.
-	*  There is also the case of previewing a page with post_id = 1, but using get_field
-	*  to load data from another post_id.
-	*  In this case, we need to make sure that the autosave revision is actually related
-	*  to the $post_id variable. If they match, then the autosave data will be used, otherwise, 
-	*  the user wants to load data from a completely different post_id
-	*/
-	
-	if( isset($_GET['preview_id']) )
-	{
-		$autosave = wp_get_post_autosave( $_GET['preview_id'] );
-		if( $autosave->post_parent == $post_id )
-		{
-			$post_id = intval( $autosave->ID );
-		}
-	}
-	
-	
-	// return
-	return $post_id;
-	
-}
-
-
-/*
 *  the_field()
 *
 *  This function is the same as echo get_field().
@@ -329,7 +251,7 @@ function get_field_object( $selector, $post_id = false, $format_value = true, $l
 		$field['name'] = $override_name;	
 		
 	}
-	
+		
 	
 	// load value
 	if( $load_value ) {
@@ -378,12 +300,14 @@ function get_fields( $post_id = false, $format_value = true ) {
 	
 	
 	// populate
-	if( is_array($fields) )
-	{
-		foreach( $fields as $k => $field )
-		{
+	if( is_array($fields) ) {
+		
+		foreach( $fields as $k => $field ) {
+		
 			$return[ $k ] = $field['value'];
+			
 		}
+		
 	}
 	
 	
@@ -419,89 +343,115 @@ function get_field_objects( $post_id = false, $format_value = true, $load_value 
 
 
 	// vars
-	$value = array();
+	$meta = array();
+	$fields = array();
 	
-	
+				
 	// get field_names
-	if( is_numeric($post_id) )
-	{
-		$keys = $wpdb->get_col($wpdb->prepare(
-			"SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d and meta_key LIKE %s AND meta_value LIKE %s",
-			$post_id,
-			'_%',
-			'field_%'
-		));
-	}
-	elseif( strpos($post_id, 'user_') !== false )
-	{
-		$user_id = str_replace('user_', '', $post_id);
+	if( is_numeric($post_id) ) {
 		
-		$keys = $wpdb->get_col($wpdb->prepare(
-			"SELECT meta_value FROM $wpdb->usermeta WHERE user_id = %d and meta_key LIKE %s AND meta_value LIKE %s",
-			$user_id,
-			'_%',
-			'field_%'
-		));
-	}
-	elseif( strpos($post_id, 'comment_') !== false )
-	{
-		$comment_id = str_replace('comment_', '', $post_id);
+		$meta = get_post_meta( $post_id );
+	
+	} elseif( strpos($post_id, 'user_') !== false ) {
 		
-		$keys = $wpdb->get_col($wpdb->prepare(
-			"SELECT meta_value FROM $wpdb->commentmeta WHERE user_id = %d and meta_key LIKE %s AND meta_value LIKE %s",
-			$comment_id,
-			'_%',
-			'field_%'
-		));
-	}
-	else
-	{
-		$keys = $wpdb->get_col($wpdb->prepare(
-			"SELECT option_value FROM $wpdb->options WHERE option_name LIKE %s",
+		$user_id = (int) str_replace('user_', '', $post_id);
+		
+		$meta = get_user_meta( $user_id );
+		
+	} elseif( strpos($post_id, 'comment_') !== false ) {
+		
+		$comment_id = (int) str_replace('comment_', '', $post_id);
+		
+		$meta = get_comment_meta( $comment_id );
+		
+	} else {
+		
+		$rows = $wpdb->get_results($wpdb->prepare(
+			"SELECT option_name, option_value FROM $wpdb->options WHERE option_name LIKE %s OR option_name LIKE %s",
+			$post_id . '_%' ,
 			'_' . $post_id . '_%' 
-		));
+		), ARRAY_A);
+		
+		if( !empty($rows) ) {
+			
+			foreach( $rows as $row ) {
+				
+				$meta[ $row['option_name'] ][] = $row['option_value'];
+				
+			}
+			
+		}
+		
 	}
 	
-	if( is_array($keys) ) {
 	
-		foreach( $keys as $key ) {
+	// populate vars
+	if( !empty($meta) ) {
+		
+		foreach( $meta as $k => $v ) {
+			
+			// Hopefuly improve efficiency: bail early if $k does start with an '_'
+			if( $k[0] === '_' ) {
+				
+				continue;
+				
+			}
+			
+			
+			// does a field key exist for this value?
+			if( !array_key_exists("_{$k}", $meta) ) {
+				
+				continue;
+				
+			}
+			
 			
 			// get field
-			$field = get_field_object( $key, $post_id, $format_value, $load_value );
+			$field_key = $meta["_{$k}"][0];
+			$field = acf_get_field( $field_key );
 			
 			
-			// validate field
-			if( empty($field) ) {
-			
-				continue;
-			
-			}
-			
-			
-			// ignore sub fields
-			if( acf_is_sub_field($field) ) {
+			// bail early if not a parent field
+			if( empty($field) || acf_is_sub_field($field) ) {
 				
 				continue;
 				
 			}
 			
 			
+			// load value
+			if( $load_value ) {
+			
+				$field['value'] = acf_get_value( $post_id, $field );
+				
+				// format value
+				if( $format_value ) {
+					
+					// get value for field
+					$field['value'] = acf_format_value( $field['value'], $post_id, $field );
+					
+				}
+				
+			}
+			
+						
 			// append to $value
-			$value[ $field['name'] ] = $field;
+			$fields[ $field['name'] ] = $field;
 		}
+		
  	}
  	
- 
- 	
+ 	 	
 	// no value
-	if( empty($value) )
-	{
+	if( empty($fields) ) {
+	
 		return false;
+	
 	}
 	
 	
 	// return
-	return $value;
+	return $fields;
 }
 
 

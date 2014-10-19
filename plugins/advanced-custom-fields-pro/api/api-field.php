@@ -31,7 +31,7 @@ function acf_is_field_key( $field_key = '' ) {
 	}
 	
 	
-	// allow local field key to not start with '_field'
+	// allow local field key to not start with 'field_'
 	if( acf_is_local_field($field_key) ) {
 		
 		return true;

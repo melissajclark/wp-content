@@ -20,8 +20,17 @@ class acf_wpml_compatibility {
 	
 	function __construct() {
 		
+		// global
+		global $sitepress;
+		
+		
 		// vars
 		$this->lang = ICL_LANGUAGE_CODE;
+		
+		
+		// update settings
+		acf_update_setting('default_language', $sitepress->get_default_language());
+		acf_update_setting('current_language', $this->lang);
 		
 		
 		// actions

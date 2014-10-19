@@ -1,9 +1,3 @@
-
-
-/* **********************************************
-     Begin event-manager.js
-********************************************** */
-
 ( function( window, undefined ) {
 	"use strict";
 
@@ -249,12 +243,6 @@
 	window.wp.hooks = new EventManager();
 
 } )( window );
-
-
-/* **********************************************
-     Begin acf.js
-********************************************** */
-
 var acf;
 
 (function($){
@@ -605,13 +593,9 @@ var acf;
 			
 			// filter out fields
 			if( !all ) {
-			
-				$fields = $fields.filter(function(){
-					
-					return acf.apply_filters('is_field_ready_for_js', true, $(this));			
-
-				});
 				
+				$fields = acf.apply_filters('get_fields', $fields);
+								
 			}
 			
 			
@@ -1999,15 +1983,26 @@ frame.on('all', function( e ) {
 		onReady: function(){
 			
 			// vars
-			var major = acf.get('wp_version');
+			var version = acf.get('wp_version');
 			
 			
-			// add class
-			if( major ) {
+			// bail early if no version
+			if( !version ) {
 				
-				$('body').addClass('acf-wp-' + major.substr(0,1));
+				return;
 				
 			}
+			
+			
+			// use only major version
+			if( typeof version == 'string' ) {
+				
+				version = version.substr(0,1);
+				
+			}
+			
+			
+			$('body').addClass('acf-wp-' + version);
 			
 		},
 		
@@ -3045,13 +3040,7 @@ frame.on('all', function( e ) {
 		
 	};
 	
-})(jQuery);
-
-/* **********************************************
-     Begin ajax.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.ajax = acf.model.extend({
 		
@@ -3366,13 +3355,7 @@ frame.on('all', function( e ) {
 
 
 	
-})(jQuery);
-
-/* **********************************************
-     Begin color-picker.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.color_picker = acf.field.extend({
 		
@@ -3440,13 +3423,7 @@ frame.on('all', function( e ) {
 	});
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin date-picker.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.date_picker = acf.field.extend({
 		
@@ -3525,13 +3502,7 @@ frame.on('all', function( e ) {
 		
 	});
 	
-})(jQuery);
-
-/* **********************************************
-     Begin file.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.file = acf.field.extend({
 		
@@ -3586,7 +3557,7 @@ frame.on('all', function( e ) {
 							
 						
 						// find next image field
-						$tr.nextAll('.acf-row').not('.clone').each(function(){
+						$tr.nextAll('.acf-row:visible').each(function(){
 							
 							// get next $field
 							$next = acf.get_field( field_key, $(this) );
@@ -3735,13 +3706,7 @@ frame.on('all', function( e ) {
 	});
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin google-map.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	/*
 	*  Location
@@ -4271,13 +4236,7 @@ frame.on('all', function( e ) {
 	});
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin image.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.image = acf.field.extend({
 		
@@ -4330,7 +4289,7 @@ frame.on('all', function( e ) {
 							
 						
 						// find next image field
-						$tr.nextAll('.acf-row').not('.clone').each(function(){
+						$tr.nextAll('.acf-row:visible').each(function(){
 							
 							// get next $field
 							$next = acf.get_field( field_key, $(this) );
@@ -4478,13 +4437,7 @@ frame.on('all', function( e ) {
 	});
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin oembed.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.oembed = {
 		
@@ -4745,19 +4698,7 @@ acf.add_action('ready append', function( $el ){
 		
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin post_object.js
-********************************************** */
-
-
-
-/* **********************************************
-     Begin radio.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.radio = acf.field.extend({
 		
@@ -4797,13 +4738,7 @@ acf.add_action('ready append', function( $el ){
 		
 	});	
 
-})(jQuery);
-
-/* **********************************************
-     Begin relationship.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.relationship = acf.field.extend({
 		
@@ -5248,13 +5183,7 @@ var scroll_timer = null;
 	});
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin select.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	function add_select2( $select, settings ) {
 		
@@ -5519,7 +5448,7 @@ var scroll_timer = null;
 				 start: function() {
 				 	$input.select2("onSortStart");
 				 },
-				 update: function() {
+				 stop: function() {
 				 	$input.select2("onSortEnd");
 				 }
 			});
@@ -5646,13 +5575,7 @@ var scroll_timer = null;
 	});
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin tab.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.tab = acf.field.extend({
 		
@@ -5986,13 +5909,7 @@ var scroll_timer = null;
 	
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin url.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.url = acf.field.extend({
 		
@@ -6028,13 +5945,7 @@ var scroll_timer = null;
 		
 	});
 
-})(jQuery);
-
-/* **********************************************
-     Begin validation.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
     
 	acf.validation = acf.model.extend({
 		
@@ -6083,10 +5994,11 @@ var scroll_timer = null;
 			
 			
 			// add message
-			if( message !== undefined )
-			{
+			if( message !== undefined ) {
+				
 				$field.children('.acf-input').children('.' + this.message_class).remove();
 				$field.children('.acf-input').prepend('<div class="' + this.message_class + '"><p>' + message + '</p></div>');
+			
 			}
 			
 			
@@ -6166,27 +6078,27 @@ var scroll_timer = null;
 			var self = this;
 			
 			
-			// remove previous error message
-			$form.children('.' + this.message_class).remove();
-			
-			
 			// hide ajax stuff on submit button
-			if( $('#submitdiv').exists() ) {
+			if( $('#submitpost').exists() ) {
 				
 				// remove disabled classes
-				$('#submitdiv').find('.disabled').removeClass('disabled');
-				$('#submitdiv').find('.button-disabled').removeClass('button-disabled');
-				$('#submitdiv').find('.button-primary-disabled').removeClass('button-primary-disabled');
+				$('#submitpost').find('.disabled').removeClass('disabled');
+				$('#submitpost').find('.button-disabled').removeClass('button-disabled');
+				$('#submitpost').find('.button-primary-disabled').removeClass('button-primary-disabled');
 				
 				
 				// remove spinner
-				$('#submitdiv .spinner').hide();
+				$('#submitpost .spinner').hide();
 				
 			}
 			
 			
 			// validate json
 			if( !json || typeof json.result === 'undefined' || json.result == 1) {
+				
+				// remove previous error message
+				acf.remove_el( $form.children('.' + this.message_class) );
+				
 			
 				// remove hidden postboxes (this will stop them from being posted to save)
 				$form.find('.acf-postbox.acf-hidden').remove();
@@ -6201,13 +6113,14 @@ var scroll_timer = null;
 				
 				
 				// submit form again
-				if( this.$trigger )
-				{
+				if( this.$trigger ) {
+					
 					this.$trigger.click();
-				}
-				else
-				{
+				
+				} else {
+					
 					$form.submit();
+				
 				}
 				
 				
@@ -6216,8 +6129,8 @@ var scroll_timer = null;
 			}
 			
 			
-			// show error message	
-			$form.prepend('<div class="' + this.message_class + '"><p>' + json.message + '</p></div>');
+			// vars
+			var $first_field = null;
 			
 			
 			// show field error messages
@@ -6246,11 +6159,42 @@ var scroll_timer = null;
 					
 					
 					// add error
-					self.add_error( $field, error.message );
+					this.add_error( $field, error.message );
 					
+					
+					// save as first field
+					if( i == 0 ) {
+						
+						$first_field = $field;
+						
+					}
 					
 				}
 			
+			}
+			
+				
+			// get $message
+			var $message = $form.children('.' + this.message_class);
+			
+			if( !$message.exists() ) {
+				
+				$message = $('<div class="' + this.message_class + '"><p></p></div>');
+				
+				$form.prepend( $message );
+				
+			}
+			
+			
+			// update message text
+			$message.children('p').text( json.message );
+			
+			
+			// if message is not in view, scroll to first error field
+			if( !acf.is_in_view($message) && $first_field ) {
+				
+				$("html, body").animate({ scrollTop: ($first_field.offset().top - 32 - 20) }, 500);
+				
 			}
 			
 		},
@@ -6366,13 +6310,7 @@ var scroll_timer = null;
 	});
 	
 
-})(jQuery);
-
-/* **********************************************
-     Begin wysiwyg.js
-********************************************** */
-
-(function($){
+})(jQuery);(function($){
 	
 	acf.fields.wysiwyg = acf.field.extend({
 		

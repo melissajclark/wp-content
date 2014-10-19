@@ -107,6 +107,19 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 5.0.9 =
+* Options page: Added compatibility for different language values
+* Image field: Fixed bug preventing image selection
+* Select field: Fixed bug where orphaned value could not be removed
+* WYSIWYG field: Fixed bug causing issues with DFW fullscreen
+* Core: Improved JS performance when working with large scale repeater fields
+* Core: Improved efficiency of `get_fields()` function
+* Core: Added window scroll to validation message when not in view
+* Core: Fixed incompatibility with post type switcher plugin
+* Core: Minor fixes and improvements
+* Language: Added Turkish translation - thanks to Ramazan POLAT
+* Language: Updated Persian translation - thanks to Kamel Kimiaei
+
 = 5.0.8 =
 * Checkbox field: Fixed PHP error when editing field default value
 * Image field: Added logic to update thumbnail after image has been edited

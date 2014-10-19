@@ -133,6 +133,10 @@
 	margin-right: 4px;
 }
 
+.acf-field-list .field .field-info .row-options .delete-field:hover {
+	color: #f00;
+}
+
 .acf-field-list .field:hover > .field-info .row-options {
 	visibility: visible;
 }
@@ -271,8 +275,18 @@
 *	
 *---------------------------------------------------------------------------------------------*/
 
+#acf-field-group-options tr[data-name="hide_on_screen"] li {
+	float: left;
+	width: 33%;
+}
 
-
+@media (max-width: 1100px) {
+	
+	#acf-field-group-options tr[data-name="hide_on_screen"] li {
+		width: 50%;
+	}
+	
+}
 
 
 /*---------------------------------------------------------------------------------------------
@@ -372,6 +386,26 @@ table.conditional-logic-rules tbody td {
 .acf-field-list .field_type-date_picker .acf-radio-list span {
 	display: inline-block;
 	width: 100px;
+}
+
+
+/*--------------------------------------------------------------------------------------------
+*
+*	RTL
+*
+*--------------------------------------------------------------------------------------------*/
+
+html[dir="rtl"] .acf-field-list .field.open > .field-info {
+	margin: -1px -1px 0;
+}
+
+html[dir="rtl"] .acf-field-list .field .field-info .acf-icon {
+	float: right;
+}
+
+html[dir="rtl"] .acf-field-list .li-field_order {
+    padding-left: 0 !important;
+    padding-right: 15px !important;
 }
 
 

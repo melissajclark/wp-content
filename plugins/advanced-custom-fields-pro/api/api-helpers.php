@@ -2460,6 +2460,106 @@ function acf_in_array( $value, $array ) {
 
 
 /*
+*  acf_get_valid_post_id
+*
+*  This function will return a valid post_id based on the current screen / parameter
+*
+*  @type	function
+*  @date	8/12/2013
+*  @since	5.0.0
+*
+*  @param	$post_id (mixed)
+*  @return	$post_id (mixed)
+*/
+
+function acf_get_valid_post_id( $post_id = 0 ) {
+	
+	// set post_id to global
+	if( !$post_id ) {
+	
+		$post_id = (int) get_the_ID();
+		
+	}
+	
+	
+	// allow for option == options
+	if( $post_id == 'option' ) {
+	
+		$post_id = 'options';
+		
+	}
+	
+	
+	// $post_id may be an object
+	if( is_object($post_id) ) {
+		
+		if( isset($post_id->roles, $post_id->ID) ) {
+		
+			$post_id = 'user_' . $post_id->ID;
+			
+		} elseif( isset($post_id->taxonomy, $post_id->term_id) ) {
+		
+			$post_id = $post_id->taxonomy . '_' . $post_id->term_id;
+			
+		} elseif( isset($post_id->comment_ID) ) {
+		
+			$post_id = 'comment_' . $post_id->comment_ID;
+			
+		} elseif( isset($post_id->ID) ) {
+		
+			$post_id = $post_id->ID;
+			
+		}
+		
+	}
+	
+	
+	// append language code
+	if( $post_id == 'options' ) {
+		
+		$dl = acf_get_setting('default_language');
+		$cl = acf_get_setting('current_language');
+		
+		if( $cl && $cl !== $dl ) {
+			
+			$post_id .= '_' . $cl;
+			
+		}
+		
+	}
+	
+	
+	/*
+	*  Override for preview
+	*  
+	*  If the $_GET['preview_id'] is set, then the user wants to see the preview data.
+	*  There is also the case of previewing a page with post_id = 1, but using get_field
+	*  to load data from another post_id.
+	*  In this case, we need to make sure that the autosave revision is actually related
+	*  to the $post_id variable. If they match, then the autosave data will be used, otherwise, 
+	*  the user wants to load data from a completely different post_id
+	*/
+	
+	if( isset($_GET['preview_id']) ) {
+	
+		$autosave = wp_get_post_autosave( $_GET['preview_id'] );
+		
+		if( $autosave->post_parent == $post_id ) {
+		
+			$post_id = (int) $autosave->ID;
+			
+		}
+		
+	}
+	
+	
+	// return
+	return $post_id;
+	
+}
+
+
+/*
 *  Hacks
 *
 *  description

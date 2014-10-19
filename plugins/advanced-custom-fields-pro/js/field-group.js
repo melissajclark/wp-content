@@ -131,17 +131,13 @@
 			
 			
 			// filter for new_field
-			acf.add_filter('is_field_ready_for_js', function( ready, $field ){
-				
-				// repeater sub field
-				if( $field.parents('.field[data-key="acfcloneindex"]').exists() )
-				{
-					ready = false;
-				}
-				
+			acf.add_filter('get_fields', function( $fields ){
+			 	
+			 	$fields = $fields.not('.field[data-key="acfcloneindex"] .acf-field');
+			 	
 				
 				// return
-				return ready;
+				return $fields;
 			    
 		    }, 99);
 		    
@@ -1241,7 +1237,7 @@
 			// - this prevents a strange rendering bug in Firefox
 			setTimeout(function(){
 			
-	        	$el.find('.field_form input[type="text"]:first').focus();
+	        	$el.find('input[type="text"]:first').focus();
 	        	
 	        }, 251);
 			

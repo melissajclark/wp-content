@@ -9,43 +9,16 @@
 		},
 		
 		filters: {
-			'is_field_ready_for_js' : 'is_field_ready_for_js',
+			'get_fields' : 'get_fields',
 		},
 		
-		is_field_ready_for_js : function( ready, $field ){
+		get_fields : function( $fields ){
 			
-			// debug
-			//console.log('is_field_ready_for_js %o, %b', $field, ready);
-			
-			
-			// check cache
-			if( $field.data('acf_clone') ) {
-				
-				return false;
-				
-			}
-			
-			
-			// repeater sub field
-			if( $field.closest('.clone').exists() ) {
-				
-				$field.data('acf_clone', 1);
-				return false;
-				
-			}
-			
-			
-			// flexible content sub field
-			if( $field.closest('.clones').exists() ) {
-				
-				$field.data('acf_clone', 1);
-				return false;
-				
-			}
-			
+			// remove clone fields
+			$fields = $fields.not('.acf-clone .acf-field');
 			
 			// return
-			return ready;
+			return $fields;
 		
 		},
 		
@@ -71,7 +44,7 @@
 			var key = acf.get_field_key( $field ),
 				$table = $field.closest('.acf-table'),
 				$th = $table.find('> thead > tr > th[data-key="' + key + '"]'),
-				$td = $table.find('> tbody > tr:not(.clone) > td[data-key="' + key + '"]');
+				$td = $table.find('> tbody > tr:not(.acf-clone) > td[data-key="' + key + '"]');
 			
 			
 			// remove class
@@ -113,7 +86,7 @@
 			var key = acf.get_field_key( $field ),
 				$table = $field.closest('.acf-table'),
 				$th = $table.find('> thead > tr > th[data-key="' + key + '"]'),
-				$td = $table.find('> tbody > tr:not(.clone) > td[data-key="' + key + '"]');
+				$td = $table.find('> tbody > tr:not(.acf-clone) > td[data-key="' + key + '"]');
 			
 			
 			// add class
@@ -228,6 +201,7 @@
 		
 		type: 'repeater',
 		$el: null,
+		$tbody: null,
 		$clone: null,
 		
 		actions: {
@@ -238,13 +212,13 @@
 		events: {
 			'click .acf-repeater-add-row': 		'add',
 			'click .acf-repeater-remove-row': 	'remove',
-			'mouseenter .acf-row':				'mouseenter'
 		},
 		
 		focus: function(){
 			
-			this.$el = this.$field.find('.acf-repeater').first();
-			this.$clone = this.$el.find('> table > tbody > tr.clone');
+			this.$el = this.$field.find('.acf-repeater:first');
+			this.$tbody = this.$el.find('tbody:first');
+			this.$clone = this.$tbody.children('tr.acf-clone');
 			
 			this.settings = acf.get_data( this.$el );
 			
@@ -252,44 +226,66 @@
 		
 		initialize: function(){
 			
-			// reference
-			var self = this,
-				$field = this.$field;
+			// CSS fix
+			this.$tbody.on('mouseenter', 'tr.acf-row', function( e ){
+				
+				// vars
+				var $tr = $(this),
+					$td = $tr.children('.remove'),
+					$a = $td.find('.acf-repeater-add-row'),
+					margin = ( $td.height() / 2 ) + 9; // 9 = padding + border
+				
+				
+				// css
+				$a.css('margin-top', '-' + margin + 'px' );
+				
+			});
 			
 			
 			// sortable
 			if( this.settings.max != 1 ) {
 				
-				this.$el.find('> table > tbody').unbind('sortable').sortable({
+				// reference
+				var self = this,
+					$tbody = this.$tbody,
+					$field = this.$field;
+					
 				
-					items					: '> tr',
-					handle					: '> td.order',
-					forceHelperSize			: true,
-					forcePlaceholderSize	: true,
-					scroll					: true,
+				$tbody.one('mouseenter', 'td.order', function( e ){
 					
-					start : function (event, ui) {
-						
-						acf.do_action('sortstart', ui.item, ui.placeholder);
-						
-		   			},
-		   			
-		   			stop : function (event, ui) {
+					$tbody.unbind('sortable').sortable({
 					
-						acf.do_action('sortstop', ui.item, ui.placeholder);
+						items					: '> tr',
+						handle					: '> td.order',
+						forceHelperSize			: true,
+						forcePlaceholderSize	: true,
+						scroll					: true,
 						
+						start : function (event, ui) {
+							
+							acf.do_action('sortstart', ui.item, ui.placeholder);
+							
+			   			},
+			   			
+			   			stop : function (event, ui) {
 						
-						// render
-						self.doFocus($field).render();
-						
-		   			}
+							acf.do_action('sortstop', ui.item, ui.placeholder);
+							
+							
+							// render
+							self.doFocus($field).render();
+							
+			   			}
+			   			
+					});
+				
 				});
 				
 			}
-			
+
 			
 			// set column widths
-			acf.pro.render_table( this.$el.find('> table') );
+			acf.pro.render_table( this.$el.children('table') );
 			
 			
 			// disable clone inputs
@@ -303,14 +299,14 @@
 		
 		count: function(){
 			
-			return this.$el.find('> table > tbody > tr').length - 1;
+			return this.$tbody.children().length - 1;
 			
 		},
 		
 		render: function(){
 			
 			// update order numbers
-			this.$el.find('> table > tbody > tr').each(function(i){
+			this.$tbody.children().each(function(i){
 				
 				$(this).children('td.order').html( i+1 );
 				
@@ -376,7 +372,7 @@
 			
 			
 			// remove clone class
-			$html.removeClass('clone');
+			$html.removeClass('acf-clone');
 			
 			
 			// enable inputs
@@ -449,21 +445,7 @@
 				
 			});
 			
-		},
-		
-		mouseenter: function( e ){
-			
-			// vars
-			var $td = e.$el.find('> td.remove'),
-				$a = $td.find('.acf-repeater-add-row'),
-				margin = ( $td.height() / 2 ) + 9; // 9 = padding + border
-			
-			
-			// css
-			$a.css('margin-top', '-' + margin + 'px' );
-			
 		}
-		
 		
 	});	
 	
@@ -512,36 +494,42 @@
 		},
 		
 		initialize: function(){
-		
-			// reference
-			var self = this,
-				$field = this.$field;
-			
 			
 			// sortable
 			if( this.settings.max != 1 ) {
 				
-				this.$values.unbind('sortable').sortable({
+				// reference
+				var self = this,
+					$values = this.$values,
+					$field = this.$field;
 					
-					items					: '> .layout',
-					handle					: '> .acf-fc-layout-handle',
-					forceHelperSize			: true,
-					forcePlaceholderSize	: true,
-					scroll					: true,
+				
+				$values.one('mouseenter', '.acf-fc-layout-handle', function( e ){
 					
-					start : function (event, ui) {
+					$values.unbind('sortable').sortable({
 					
-						acf.do_action('sortstart', ui.item, ui.placeholder);
-		        		
-		   			},
-		   			stop : function (event, ui) {
+						items					: '> .layout',
+						handle					: '> .acf-fc-layout-handle',
+						forceHelperSize			: true,
+						forcePlaceholderSize	: true,
+						scroll					: true,
 						
-						acf.do_action('sortstop', ui.item, ui.placeholder);
+						start : function (event, ui) {
 						
-						
-						// render
-						self.doFocus($field).render();
-		   			}
+							acf.do_action('sortstart', ui.item, ui.placeholder);
+			        		
+			   			},
+			   			stop : function (event, ui) {
+							
+							acf.do_action('sortstop', ui.item, ui.placeholder);
+							
+							
+							// render
+							self.doFocus($field).render();
+			   			}
+			   			
+					});
+				
 				});
 				
 			}
@@ -880,6 +868,10 @@
 							
 			// hide no values message
 			this.$el.children('.no-value-message').hide();
+			
+			
+			// remove class
+			$html.removeClass('acf-clone');
 			
 			
 			// add row

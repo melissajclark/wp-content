@@ -744,6 +744,7 @@ ul.acf-checkbox-list li label {
 	border: #DFDFDF solid 1px;
 	min-height: 84px;
 	position: relative;
+	background: #fff;
 }
 
 .acf-file-uploader .file-icon {

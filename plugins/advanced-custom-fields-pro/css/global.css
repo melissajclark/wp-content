@@ -618,8 +618,6 @@ img.acf-fw {
 }
 
 
-
-
 /*--------------------------------------------------------------------------------------------
 *
 *	acf-button
@@ -1068,6 +1066,10 @@ img.acf-fw {
     width: 200px;
 }
 
+.form-table th.acf-th {
+	width: auto;
+}
+
 
 /*--------------------------------------------------------------------------------------------
 *
@@ -1262,6 +1264,39 @@ img.acf-fw {
 	min-height: 50px;
 }
 
+
+/*--------------------------------------------------------------------------------------------
+*
+*	RTL
+*
+*--------------------------------------------------------------------------------------------*/
+
+html[dir="rtl"] .acf-fl { float: right; }
+html[dir="rtl"] .acf-fr { float: left; }
+
+html[dir="rtl"] .acf-hl > li {
+	float: right;
+}
+
+html[dir="rtl"] .acf-hl > li.acf-fr {
+    float: left;
+}
+
+html[dir="rtl"] .acf-icon.logo {
+	left: 0;
+	right: auto;
+}
+
+html[dir="rtl"] .acf-table > tbody > tr > td {
+	border: 0 none;
+	border-top: 1px solid #F5F5F5;
+	border-right: 1px solid #F5F5F5;
+}
+
+html[dir="rtl"] .acf-table td.acf-input {
+	border-left-color: #F5F5F5;
+	border-right-color: #E1E1E1;
+}
 
 
 /*---------------------------------------------------------------------------------------------

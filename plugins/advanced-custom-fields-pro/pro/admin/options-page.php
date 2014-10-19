@@ -222,8 +222,14 @@ class acf_pro_options_page {
 		
 			// save data
 		    if( acf_validate_save_post(true) ) {
-		    
-				acf_save_post( "options" );
+		    	
+		    	// get post_id (allow lang modification)
+		    	$post_id = acf_get_valid_post_id('options');
+		    	
+		    	
+		    	// save
+				acf_save_post( $post_id );
+				
 				
 				// redirect
 				wp_redirect( admin_url("admin.php?page={$plugin_page}&message=1") );
@@ -358,7 +364,8 @@ class acf_pro_options_page {
 		extract( $args ); // all variables from the args argument
 		
 		
-		// classes
+		// vars
+		$post_id = acf_get_valid_post_id('options');
 		$class = 'acf-postbox ' . $field_group['style'];
 		$toggle_class = 'acf-postbox-toggle';
 		
@@ -373,14 +380,14 @@ class acf_pro_options_page {
 			?>
 			<table class="acf-table">
 				<tbody>
-					<?php acf_render_fields( 'options', $fields, 'tr', $field_group['instruction_placement'] ); ?>
+					<?php acf_render_fields( $post_id, $fields, 'tr', $field_group['instruction_placement'] ); ?>
 				</tbody>
 			</table>
 			<?php
 		
 		} else {
 		
-			acf_render_fields( 'options', $fields, 'div', $field_group['instruction_placement'] );
+			acf_render_fields( $post_id, $fields, 'div', $field_group['instruction_placement'] );
 			
 		}
 		

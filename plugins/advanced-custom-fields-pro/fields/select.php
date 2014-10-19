@@ -175,27 +175,6 @@ class acf_field_select extends acf_field {
 		);
 		
 		
-		
-		// hidden input
-		if( $field['ui'] ) {
-		
-			acf_hidden_input(array(
-				'type'	=> 'hidden',
-				'id'	=> $field['id'],
-				'name'	=> $field['name'],
-				'value'	=> implode(',', $field['value'])
-			));
-			
-		} elseif( $field['multiple'] ) {
-			
-			acf_hidden_input(array(
-				'type'	=> 'hidden',
-				'name'	=> $field['name'],
-			));
-			
-		} 
-		
-		
 		// ui
 		if( $field['ui'] ) {
 		
@@ -269,7 +248,7 @@ class acf_field_select extends acf_field {
 		
 		// prepende orphans
 		/*
-if( !empty($field['value']) ) {
+		if( !empty($field['value']) ) {
 			
 			foreach( $field['value'] as $v ) {
 				
@@ -288,7 +267,30 @@ if( !empty($field['value']) ) {
 			}
 			
 		}
-*/
+		*/
+		
+		
+		// hidden input
+		if( $field['ui'] ) {
+			
+			// find real value based on $choices and $field['value']
+			$real_value = array_intersect($field['value'], $choices);
+		
+			acf_hidden_input(array(
+				'type'	=> 'hidden',
+				'id'	=> $field['id'],
+				'name'	=> $field['name'],
+				'value'	=> implode(',', $real_value)
+			));
+			
+		} elseif( $field['multiple'] ) {
+			
+			acf_hidden_input(array(
+				'type'	=> 'hidden',
+				'name'	=> $field['name'],
+			));
+			
+		}
 		
 		
 		// null

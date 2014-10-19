@@ -53,7 +53,7 @@
 							
 						
 						// find next image field
-						$tr.nextAll('.acf-row').not('.clone').each(function(){
+						$tr.nextAll('.acf-row:visible').each(function(){
 							
 							// get next $field
 							$next = acf.get_field( field_key, $(this) );
@@ -107,24 +107,31 @@
 						self.doFocus( $next );
 						
 					}
-											
 					
-			    	// vars
-			    	var file = {
-				    	id:		attachment.id,
-				    	title:	attachment.attributes.title,
-				    	name:	attachment.attributes.filename,
-				    	url:	attachment.attributes.url,
-				    	icon:	attachment.attributes.icon,
-				    	size:	attachment.attributes.filesize
-			    	};
-			    	
-			    	
+									
 			    	// add file to field
-			        self.render( file );
+					self.render( self.prepare(attachment) );
 					
 				}
 			});
+			
+		},
+		
+		prepare: function( attachment ) {
+		
+			// vars
+	    	var file = {
+		    	id:		attachment.id,
+		    	title:	attachment.attributes.title,
+		    	name:	attachment.attributes.filename,
+		    	url:	attachment.attributes.url,
+		    	icon:	attachment.attributes.icon,
+		    	size:	attachment.attributes.filesize
+	    	};
+	    	
+	    	
+	    	// return
+	    	return file;
 			
 		},
 		
@@ -163,19 +170,7 @@
 				
 				select:	function( attachment, i ) {
 					
-			    	// vars
-			    	var file = {
-				    	id:		attachment.id,
-				    	title:	attachment.attributes.title,
-				    	name:	attachment.attributes.filename,
-				    	url:	attachment.attributes.url,
-				    	icon:	attachment.attributes.icon,
-				    	size:	attachment.attributes.filesize
-			    	};
-			    	
-			    	
-			    	// add file to field
-			        self.render( file );
+			    	self.render( self.prepare(attachment) );
 					
 				}
 			});

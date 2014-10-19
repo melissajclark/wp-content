@@ -206,11 +206,16 @@ class acf_field_flexible_content extends acf_field {
 			'name'	=> $field['name'],
 		));
 		
+		
+		// no value message
+		$no_value_message = __('Click the "%s" button below to start creating your layout','acf');
+		$no_value_message = apply_filters('acf/fields/flexible_content/no_value_message', $no_value_message, $field);
+
 ?>
 <div <?php acf_esc_attr_e(array( 'class' => 'acf-flexible-content', 'data-min' => $field['min'], 'data-max'	=> $field['max'] )); ?>>
 	
 	<div class="no-value-message" <?php if( $field['value'] ){ echo 'style="display:none;"'; } ?>>
-		<?php printf( __('Click the "%s" button below to start creating your layout','acf'), $field['button_label']); ?>
+		<?php printf( $no_value_message, $field['button_label'] ); ?>
 	</div>
 	
 	<div class="clones">
@@ -287,7 +292,10 @@ class acf_field_flexible_content extends acf_field {
 	function render_layout( $field, $layout, $i, $value ) {
 		
 		// vars
-		$order = is_numeric($i) ? ($i + 1) : 0;
+		$order = 0;
+		
+		
+		// atts
 		$layout_atts = array(
 			'class'			=> 'layout',
 			'data-layout'	=> $layout['name'],
@@ -313,6 +321,17 @@ class acf_field_flexible_content extends acf_field {
 		}
 		
 		
+		// clone
+		if( is_numeric($i) ) {
+			
+			$order = $i + 1;
+			
+		} else {
+			
+			$layout_atts['class'] .= ' acf-clone';
+			
+		}
+		
 		
 		// field wrap
 		$el = 'td';
@@ -329,6 +348,10 @@ class acf_field_flexible_content extends acf_field {
 		<?php acf_hidden_input(array( 'name' => "{$field['name']}[{$i}][acf_fc_layout]", 'value' => $layout['name'] )); ?>
 	</div>
 	
+	<div class="acf-fc-layout-handle">
+		<span class="fc-layout-order"><?php echo $order; ?></span>. <?php echo $layout['label']; ?>
+	</div>
+	
 	<ul class="acf-fc-layout-controlls acf-hl acf-clearfix">
 		<li>
 			<a class="acf-icon small acf-fc-add" href="#" data-before="1" title="<?php _e('Add layout','acf'); ?>">
@@ -341,10 +364,6 @@ class acf_field_flexible_content extends acf_field {
 			</a>
 		</li>
 	</ul>
-		
-	<div class="acf-fc-layout-handle">
-		<span class="fc-layout-order"><?php echo $order; ?></span>. <?php echo $layout['label']; ?>
-	</div>
 	
 <?php if( !empty($layout['sub_fields']) ): ?>
 		

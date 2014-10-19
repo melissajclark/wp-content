@@ -348,13 +348,9 @@ var acf;
 			
 			// filter out fields
 			if( !all ) {
-			
-				$fields = $fields.filter(function(){
-					
-					return acf.apply_filters('is_field_ready_for_js', true, $(this));			
-
-				});
 				
+				$fields = acf.apply_filters('get_fields', $fields);
+								
 			}
 			
 			
@@ -1742,15 +1738,26 @@ frame.on('all', function( e ) {
 		onReady: function(){
 			
 			// vars
-			var major = acf.get('wp_version');
+			var version = acf.get('wp_version');
 			
 			
-			// add class
-			if( major ) {
+			// bail early if no version
+			if( !version ) {
 				
-				$('body').addClass('acf-wp-' + major.substr(0,1));
+				return;
 				
 			}
+			
+			
+			// use only major version
+			if( typeof version == 'string' ) {
+				
+				version = version.substr(0,1);
+				
+			}
+			
+			
+			$('body').addClass('acf-wp-' + version);
 			
 		},
 		

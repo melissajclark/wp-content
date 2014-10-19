@@ -228,17 +228,13 @@ class acf_form_widget {
 <script type="text/javascript">
 (function($) {
 	
-	 acf.add_filter('is_field_ready_for_js', function( ready, $field ){
+	 acf.add_filter('get_fields', function( $fields ){
 	 	
-		// widget
-		if( $field.parents('#available-widgets').exists() ) {
-		
-			ready = false;
-		
-		}
+	 	$fields = $fields.not('#available-widgets .acf-field');
+	 	
 		
 		// return
-		return ready;
+		return $fields;
 	    
     });
 		
