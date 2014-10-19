@@ -21,35 +21,21 @@ get_header(); ?>
             <div class="entry-content">
 
             <!-- Custom Field Content for Images -->
-            <?php if( have_rows( 'images' ) ): ?>
+            <?php 
 
-                <ul class="bxslider">
+            $images = get_field('gallery');
 
-                <?php while( have_rows( 'images' ) ): the_row(); 
-
-                    $image = get_sub_field( 'image' );
-                    $link = get_sub_field( 'url' );
-
-                    ?>
-
-                    <li>
-
-                        <?php if( $link ): ?>
-                            <a href="<?php echo $link; ?>">
-                        <?php endif; ?>
-
-                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?>" />
-
-                        <?php if( $link ): ?>
-                            </a>
-                        <?php endif; ?>
-
-                    </li>
-
-                <?php endwhile; ?>
-
-                </ul>
-
+            if( $images ): ?>
+                <div id="slider">
+                    <ul class="bxslider">
+                        <?php foreach( $images as $image ): ?>
+                            <li>
+                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <p><?php echo $image['caption']; ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             <?php endif; ?>
 
                 <?php the_content(); ?>
