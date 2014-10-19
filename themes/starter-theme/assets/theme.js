@@ -5,8 +5,8 @@ function slider(){
             pager: true,
             nextSelector: '#slider-next',
             prevSelector: '#slider-prev',
-             nextText: 'Onward →',
-             prevText: '← Go back'
+            nextText: 'Onward →',
+            prevText: '← Go back'
         });
     });
 }
