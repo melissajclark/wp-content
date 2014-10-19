@@ -141,6 +141,12 @@ function starter_theme_scripts_method() {
 		get_template_directory_uri() . '/assets/vendor/jquery.bxslider.js',
 		array('jquery')
 	);
+
+	wp_enqueue_script(
+	    'theme',
+	    get_template_directory_uri() . '/assets/theme.js',
+	    array('jquery')
+	);
 }    
 add_action('wp_enqueue_scripts', 'starter_theme_scripts_method');
 
