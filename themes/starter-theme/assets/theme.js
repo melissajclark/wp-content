@@ -13,15 +13,11 @@ function sliderBX(){
 
 function wooSlider(){
   jQuery(document).ready(function($) {
-
-    $(window).load(function() {
+    $(document).ready(function() {
       $('.flexslider').flexslider({
         animation: "slide",
-        controlNav: "thumbnails"
+        // controlNav: "thumbnails"
       });
     });
-
-
   }); // jQuery ready function
-
 }
