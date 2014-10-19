@@ -18,9 +18,9 @@
 		<a href="http://melissajclark.ca" rel="nofollow">theme by Melissa</a>
 	</div>
 </footer><!-- #colophon -->
-
+	
     <?php if ( is_page_template( 'page-slider.php' ) ) : ?>
-     
+    
      <script>     
         sliderBX(); // calls slider function in theme.js for bxSlider
     </script>  
