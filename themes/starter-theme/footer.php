@@ -18,6 +18,17 @@
 		<a href="http://melissajclark.ca" rel="nofollow">theme by Melissa</a>
 	</div>
 </footer><!-- #colophon -->
+
+
+    <script>
+    jQuery(document).ready(function($){
+        $('.bxslider').bxSlider({
+            mode: 'fade',
+            pager: false
+        });
+    });
+    </script>
+
  
 <?php wp_footer(); ?> 
 </body>
