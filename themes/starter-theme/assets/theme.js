@@ -1,8 +1,10 @@
-function slider(){
+function sliderBX(){
     jQuery(document).ready(function($){
         $('.bxslider').bxSlider({
-          auto: true,
-          autoControls: true
+          infiniteLoop: false,
+            hideControlOnEnd: true,
+            adaptiveHeight: true,
+            responsive: true
         });
     });
 }
