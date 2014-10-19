@@ -21,13 +21,42 @@ get_header(); ?>
             <div class="entry-content">
 
             <!-- Custom Field Content for Images -->
+
+
+
             <?php 
 
             $images = get_field('gallery');
 
             if( $images ): ?>
-                <div id="slider">
-                    <ul class="bxslider">
+                <div id="slider" class="flexslider">
+                    <ul class="slides">
+                        <?php foreach( $images as $image ): ?>
+                            <li>
+                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <p><?php echo $image['caption']; ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <div id="carousel" class="flexslider">
+                    <ul class="slides">
+                        <?php foreach( $images as $image ): ?>
+                            <li>
+                                <img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+      <!--       <?php 
+
+            $images = get_field('gallery');
+
+            if( $images ): ?>
+                <div id="slider" class="flexslider">
+                    <ul class="slides">
                         <?php foreach( $images as $image ): ?>
                             <li>
                                 <img src="<?php echo $image['sizes']['slider']; ?>" alt="<?php echo $image['alt']; ?>" />
@@ -36,7 +65,18 @@ get_header(); ?>
                         <?php endforeach; ?>
                     </ul>
                 </div>
-            <?php endif; ?>
+
+                    <div id="carousel" class="flexslider">
+                        <ul class="slides">
+                            <?php foreach( $images as $image ): ?>
+                                <li>
+                                    <img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?> -->
+      
 
                 <?php the_content(); ?>
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
