@@ -19,15 +19,12 @@
 	</div>
 </footer><!-- #colophon -->
 	
-    <?php if ( is_page_template( 'page-slider.php' ) ) : ?>
-    
-     <script>     
-        sliderBX(); // calls slider function in theme.js for bxSlider
-    </script>  
+    <?php if ( is_page_template( 'page-slider.php' ) ) : ?>   
     
     <script>     
-        wooSlider(); // calls slider function in theme.js for bxSlider
-    </script>        
+        wooSlider(); // calls slider function in theme.js for wooSlider
+    </script>  
+
     <?php endif; ?>
  
 <?php wp_footer(); ?> 
