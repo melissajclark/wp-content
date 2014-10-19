@@ -24,7 +24,10 @@
      <script>     
         sliderBX(); // calls slider function in theme.js for bxSlider
     </script>  
-           
+    
+    <script>     
+        wooSlider(); // calls slider function in theme.js for bxSlider
+    </script>        
     <?php endif; ?>
  
 <?php wp_footer(); ?> 
