@@ -22,7 +22,7 @@
     <?php if ( is_page_template( 'page-slider.php' ) ) : ?>
      
      <script>     
-        slider(); // calls slider function in theme.js for bxSlider
+        sliderBX(); // calls slider function in theme.js for bxSlider
     </script>  
            
     <?php endif; ?>
