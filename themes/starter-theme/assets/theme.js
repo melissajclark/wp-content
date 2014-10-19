@@ -12,25 +12,11 @@ function sliderBX(){
 }
 
 function wooSlider(){
-jQuery(document).ready(function($){
-$(window).load(function() {
-  // The slider being synced must be initialized first
-  $('#carousel').flexslider({
-    animation: "slide",
-    controlNav: false,
-    animationLoop: false,
-    slideshow: false,
-    itemWidth: 210,
-    itemMargin: 5,
-    asNavFor: '#slider'
-  });
-   
-  $('#slider').flexslider({
-    animation: "slide",
-    controlNav: false,
-    animationLoop: false,
-    slideshow: false,
-    sync: "#carousel"
-  });
-});
-} // closes required WordPress wrapper
+  jQuery(document).ready(function($) {
+
+    
+
+
+  }); // jQuery ready function
+
+}
