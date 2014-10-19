@@ -32,7 +32,7 @@ get_header(); ?>
                         <?php foreach( $images as $image ): ?>
                             <li>
                                 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
-                                <p><?php echo $image['caption']; ?></p>
+                              <!--   <p><?php echo $image['caption']; ?></p> -->
                             </li>
                         <?php endforeach; ?>
                     </ul>

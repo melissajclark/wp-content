@@ -14,10 +14,13 @@ function sliderBX(){
 function wooSlider(){
   jQuery(document).ready(function($) {
     $(document).ready(function() {
-      $('.flexslider').flexslider({
-        animation: "slide",
-        // controlNav: "thumbnails"
-      });
+     $('.flexslider').flexslider({
+       animation: "slide",
+       animationLoop: false,
+       itemWidth: 550,
+       itemMargin: 5,
+       pausePlay: true,
+     });
     });
   }); // jQuery ready function
 }
