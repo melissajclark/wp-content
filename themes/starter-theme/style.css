@@ -1439,7 +1439,7 @@ html[xmlns] .slides { display: block; }
 /* Pause/Play */
 .flex-pauseplay a { display: block; width: 20px; height: 20px; position: absolute; bottom: 5px; left: 10px; opacity: 0.8; z-index: 10; overflow: hidden; cursor: pointer; color: #000; }
 
-.flex-pauseplay a:before { font-family: "FontAwesome"; font-size: 20px; display: inline-block; content: "\f0ab"; }
+.flex-pauseplay a:before { font-family: "FontAwesome"; font-size: 20px; display: inline-block; content: '\f004'; }
 
 .flex-pauseplay a:hover { opacity: 1; }
 
