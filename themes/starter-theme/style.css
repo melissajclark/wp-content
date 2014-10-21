@@ -899,7 +899,7 @@ article.comment {
 
 /* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides img {
-  width: 100%;
+  max-width: 99%;
   display: block;
 }
 
