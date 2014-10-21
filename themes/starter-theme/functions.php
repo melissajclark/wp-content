@@ -125,14 +125,16 @@ add_action( 'widgets_init', 'starter_theme_widgets_init' );
 /**
  * Enqueue javascript files as needed
  */
-function starter_theme_scripts_method() {
+function starter_theme_scripts() {
+
+	// theme style.css file
+    wp_enqueue_style( 'starter-theme-style', get_stylesheet_uri() );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
 	// below block of code - used for every JS / JQ file included, put all inside this function
-
 
 	// Optional: include conditional at beginning of function if script is only needed on a certain page:
 
@@ -145,7 +147,6 @@ function starter_theme_scripts_method() {
 	// );
 
 	// endif; --> only include line if it is conditional
-
 
 	wp_enqueue_script(
 		'bxslider',
@@ -165,7 +166,7 @@ function starter_theme_scripts_method() {
 	    array('jquery')
 	);
 }    
-add_action('wp_enqueue_scripts', 'starter_theme_scripts_method');
+add_action('wp_enqueue_scripts', 'starter_theme_scripts');
 
 // enables ACF Options Page
 
