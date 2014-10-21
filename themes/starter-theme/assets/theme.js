@@ -4,22 +4,22 @@ function wooSlider() {
 
     $(window).load(function() {
       // initalize slider first
-      $("#carousel").flexslider({
-        animation: "fade",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        itemWidth: 210,
-        itemMargin: 5,
-        asNavFor: "#slider"
-      });
+      // $("#carousel").flexslider({
+      //   animation: "slide",
+      //   controlNav: false,
+      //   animationLoop: false,
+      //   slideshow: false,
+      //   itemWidth: 100,
+      //   itemMargin: 10,
+      //   asNavFor: "#slider"
+      // });
      
       $("#slider").flexslider({
-        animation: "fade",
+        animation: "slide",
         controlNav: false,
         animationLoop: false,
         slideshow: false,
-        sync: "#carousel"
+        // sync: "#carousel"
       });
     });
 
