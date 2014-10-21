@@ -153,7 +153,6 @@ function starter_theme_scripts_method() {
 		array('jquery')
 	);
 
-
 	// wp_enqueue_script(
 	// 	'bxslider',
 	// 	get_template_directory_uri() . '/assets/vendor/jquery.bxslider.js',
@@ -173,10 +172,12 @@ add_action('wp_enqueue_scripts', 'starter_theme_scripts_method');
 if(function_exists('acf_add_options_page')) { 
  
 	acf_add_options_page();
-	acf_add_options_sub_page('Header');
-	acf_add_options_sub_page('Footer');
+	// acf_add_options_sub_page('Header');
+	// acf_add_options_sub_page('Footer');
+	acf_add_options_sub_page('Starter_Theme Options');
  
 }
+
 
 // adjusts for paging on Grid Archive pages
 
