@@ -17,10 +17,11 @@ function wooSlider(){
      $('.flexslider').flexslider({
        animation: "slide",
        animationLoop: false,
-       itemHeight: 550,
-       itemMargin: 5,
+       // itemHeight: 550,
+       // itemMargin: 5,
        pausePlay: true,
+       controlNav: true
      });
     });
   }); // jQuery ready function
-}
+} // end wooSlider function
