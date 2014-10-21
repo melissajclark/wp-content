@@ -151,7 +151,7 @@ html[xmlns] .slides {
 	cursor: default;
 }
 .flex-direction-nav a:before {
-	font-family: "flexslider-icon";
+	font-family: "FontAwesome";
 	font-size: 40px;
 	line-height: 1;
 	display: inline-block;
@@ -176,10 +176,10 @@ html[xmlns] .slides {
 	color: #000;
 }
 .flex-pauseplay a:before {
-	font-family: "flexslider-icon";
+	font-family: "FontAwesome";
 	font-size: 20px;
 	display: inline-block;
-	content: '\f004';
+	content: $fa-var-arrow-circle-down;
 }
 .flex-pauseplay a:hover {
 	opacity: 1;
