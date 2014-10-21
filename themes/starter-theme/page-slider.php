@@ -23,7 +23,7 @@ get_header(); ?>
             <!-- Custom Field Content for Images -->
             <div class="flexslider">
             <?php 
-
+            
             $images = get_field('gallery');
 
             if( $images ): ?>
@@ -32,7 +32,6 @@ get_header(); ?>
                         <?php foreach( $images as $image ): ?>
                             <li>
                                 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
-                              <!--   <p><?php echo $image['caption']; ?></p> -->
                             </li>
                         <?php endforeach; ?>
                     </ul>
