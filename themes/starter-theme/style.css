@@ -1130,31 +1130,7 @@ html[xmlns] .slides {
   cursor: default;
 }
 
-/* Media Queries
-***********************/
-@media screen and (max-width: 960px) {
-  #container {
-    padding: 35px;
-  }
-
-  header {
-    width: 380px;
-  }
-
-  #main {
-    margin-left: 380px;
-  }
-
-  aside h3 {
-    float: none;
-    font-size: 20px;
-  }
-
-  .toggle {
-    margin-left: 0;
-    float: none;
-  }
-}
+/* Media Queries ***********************/
 @media screen and (max-width: 768px) {
   #container {
     padding: 20px 30px;
@@ -1164,19 +1140,6 @@ html[xmlns] .slides {
     width: 100%;
     float: none;
     text-align: center;
-  }
-
-  header img {
-    width: 120px;
-  }
-
-  header h1 {
-    margin: 0 auto 10px;
-    font-size: 32px;
-  }
-
-  header h2 {
-    font-size: 16px;
   }
 
   header .button {
@@ -1224,7 +1187,7 @@ html[xmlns] .slides {
   }
 
   nav li a {
-    border: none!important;
+    border: none !important;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
   }
 
@@ -1270,7 +1233,7 @@ html[xmlns] .slides {
   }
 
   nav ul:hover .active {
-    border: 1px solid #1e5486!important;
+    border: 1px solid #1e5486 !important;
     background: #255a8c;
     -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
