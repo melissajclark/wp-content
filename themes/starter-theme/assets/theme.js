@@ -17,7 +17,7 @@ function wooSlider(){
      $('.flexslider').flexslider({
        animation: "slide",
        animationLoop: false,
-       itemWidth: 550,
+       itemHeight: 550,
        itemMargin: 5,
        pausePlay: true,
      });
