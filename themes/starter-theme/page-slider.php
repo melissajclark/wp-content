@@ -18,8 +18,6 @@ get_header(); ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
             </header><!-- .entry-header -->
 
-            <div class="entry-content">
-
             <!-- Custom Field Content for Images -->
             <div class="flexslider">
             <?php 
@@ -38,6 +36,10 @@ get_header(); ?>
                 </div>
             <?php endif; ?>
             </div>
+
+            <div class="entry-content">
+
+
 
                 <?php the_content(); ?>
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
