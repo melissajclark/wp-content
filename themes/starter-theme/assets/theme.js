@@ -12,27 +12,27 @@
 // }
 
 function wooSlider(){
-  jQuery(document).ready(function($) {
+  jQuery(document).ready(function($){
     $(document).load(function() {
       // The slider being synced must be initialized first
-      $('#carousel').flexslider({
+      $("#carousel").flexslider({
         animation: "slide",
         controlNav: false,
         animationLoop: false,
         slideshow: false,
         itemWidth: 210,
         itemMargin: 5,
-        asNavFor: '#slider'
+        asNavFor: "#slider"
       });
        
-      $('#slider').flexslider({
+      $("#slider").flexslider({
         animation: "slide",
         controlNav: false,
         animationLoop: false,
         slideshow: false,
         sync: "#carousel"
       });
-    });
+    // });
 
   }); // jQuery ready function
 }); // end wooSlider function
