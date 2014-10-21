@@ -18,10 +18,9 @@ get_header(); ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
             </header><!-- .entry-header -->
 
-            <!-- Custom Field Content for Images -->
-            <div class="flexslider">
+
             <?php 
-            
+
             $images = get_field('gallery');
 
             if( $images ): ?>
@@ -30,12 +29,23 @@ get_header(); ?>
                         <?php foreach( $images as $image ): ?>
                             <li>
                                 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <p><?php echo $image['caption']; ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                
+                <div id="carousel" class="flexslider">
+                    <ul class="slides">
+                        <?php foreach( $images as $image ): ?>
+                            <li>
+                                <img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
                             </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
-            <?php endif; ?>
             </div>
+            <?php endif; ?>
+
 
             <div class="entry-content">
 
