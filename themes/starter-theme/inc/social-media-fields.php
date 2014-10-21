@@ -2,6 +2,8 @@
 
 	<!-- ============= Displays Content From Theme's Option Page: Social Media Links ================-->
 
+		<!-- Important: Update links to assets before using! -->
+	
 			<!-- Twitter -->
 			
 			<?php if ( get_field( 'twitter', 'options' ) ) : ?>
@@ -11,7 +13,7 @@
 			<?php endif; ?>
 
 			<!-- Instagram -->
-			
+
 			<?php if ( get_field( 'instagram', 'options' ) ) : ?>
 			<a href="<?php the_field( 'instagram', 'options' ); ?>" target="_blank" class="social-link" alt="instagram-profile">
 			    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/instagram-64.png" alt="instagram" class="social">
