@@ -155,10 +155,10 @@ html[xmlns] .slides {
 	font-size: 40px;
 	line-height: 1;
 	display: inline-block;
-	content: $fa-var-angle-left;
+	content: '\f001';
 }
 .flex-direction-nav a.flex-next:before {
-	content: $fa-var-angle-left;
+	content: '\f002';
 }
 
 /* Pause/Play */
@@ -179,13 +179,13 @@ html[xmlns] .slides {
 	font-family: "FontAwesome";
 	font-size: 20px;
 	display: inline-block;
-	content: $fa-var-angle-left;
+	content: $fa-var-arrow-circle-down;
 }
 .flex-pauseplay a:hover {
 	opacity: 1;
 }
 .flex-pauseplay a.flex-play:before {
-	content: $fa-var-angle-left;
+	content: '\f003';
 }
 
 /* Control Nav */
