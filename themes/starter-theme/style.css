@@ -1432,18 +1432,18 @@ html[xmlns] .slides { display: block; }
 
 .flex-direction-nav .flex-disabled { opacity: 0 !important; filter: alpha(opacity=0); cursor: default; }
 
-.flex-direction-nav a:before { font-family: "FontAwesome"; font-size: 40px; line-height: 1; display: inline-block; content: "\f104"; }
+.flex-direction-nav a:before { font-family: "FontAwesome"; font-size: 40px; line-height: 1; display: inline-block; content: '\f001'; }
 
-.flex-direction-nav a.flex-next:before { content: "\f104"; }
+.flex-direction-nav a.flex-next:before { content: '\f002'; }
 
 /* Pause/Play */
 .flex-pauseplay a { display: block; width: 20px; height: 20px; position: absolute; bottom: 5px; left: 10px; opacity: 0.8; z-index: 10; overflow: hidden; cursor: pointer; color: #000; }
 
-.flex-pauseplay a:before { font-family: "FontAwesome"; font-size: 20px; display: inline-block; content: "\f104"; }
+.flex-pauseplay a:before { font-family: "FontAwesome"; font-size: 20px; display: inline-block; content: "\f0ab"; }
 
 .flex-pauseplay a:hover { opacity: 1; }
 
-.flex-pauseplay a.flex-play:before { content: "\f104"; }
+.flex-pauseplay a.flex-play:before { content: '\f003'; }
 
 /* Control Nav */
 .flex-control-nav { width: 100%; position: absolute; bottom: -40px; text-align: center; }
