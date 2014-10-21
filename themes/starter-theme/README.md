@@ -24,6 +24,7 @@ http://melissajclark.ca
     + PHP templates
     + ACF fields
     + PHP includes 
+- Also, do a search for [TO DO] - this denotes any must-do changes for new projects
 
 ## File Structure Info:
 - /content/ 
