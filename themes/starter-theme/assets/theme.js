@@ -41,16 +41,14 @@ function wooSlider() {
         slideshow: false,
         smoothHeight: true,
         slideShowSpeed: 9000,
-        useCSS: true,
-        touch: true,
-        directionNav: true,
-        prevText: "Previous",
-        nextText: "Next",
-        keyboard: true
-
-
-      });
-    });
+        multipleKeyboard: true
+        // useCSS: true,
+        // touch: true,
+        // directionNav: true,
+        // prevText: "Previous",
+        // nextText: "Next",
+      }); // end of slider function
+    }); // end of window load function
 
   }); // end of WordPress doc ready function
 
