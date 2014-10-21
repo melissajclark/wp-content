@@ -34,7 +34,7 @@ get_header(); ?>
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <div id="carousel" class="flexslider">
+           <!--      <div id="carousel" class="flexslider">
                     <ul class="slides">
                         <?php foreach( $images as $image ): ?>
                             <li>
@@ -42,7 +42,7 @@ get_header(); ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                </div>
+                </div> -->
             
             <?php endif; ?>
 
