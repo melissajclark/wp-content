@@ -19,7 +19,8 @@ function wooSliderAndCarousel() {
         controlNav: false,
         animationLoop: false,
         slideshow: false,
-        sync: "#carousel"
+        sync: "#carousel",
+        maxItems: 8
       });
     });
 
@@ -34,12 +35,20 @@ function wooSlider() {
 
     $(window).load(function() {   
       $("#slider").flexslider({
-        animation: "fade",
-        controlNav: false,
+        animation: "slide",
+        controlNav: true,
         animationLoop: false,
         slideshow: false,
-        smoothHeight: true
-        
+        smoothHeight: true,
+        slideShowSpeed: 9000,
+        useCSS: true,
+        touch: true,
+        directionNav: true,
+        prevText: "Previous",
+        nextText: "Next",
+        keyboard: true
+
+
       });
     });
 
