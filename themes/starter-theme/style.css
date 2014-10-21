@@ -934,7 +934,7 @@ html[xmlns] .slides {
 
 /* FlexSlider Default Theme *********************************/
 .flexslider {
-  margin: auto;
+  margin: 1em;
   position: relative;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
