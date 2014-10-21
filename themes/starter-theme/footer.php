@@ -13,10 +13,14 @@
 </div><!-- #page -->
  
 <footer id="colophon" role="contentinfo">
+
+<?php get_template_part ('inc/social-media-fields') ?>
+
 	<div id="copyright">
 		&copy; <?php echo date("Y"); ?> <?php echo bloginfo( "name" ); ?><br>
 		<a href="http://melissajclark.ca" rel="nofollow">theme by Melissa</a>
 	</div>
+
 </footer><!-- #colophon -->
 	
     <?php if ( is_page_template( 'page-slider.php' ) ) : ?>   
