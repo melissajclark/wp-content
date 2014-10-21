@@ -188,6 +188,10 @@ html[xmlns] .slides {
 	content: '\f003';
 }
 
+a.flex-prev {
+	content:$fa-var-arrow-right;
+}
+
 /* Control Nav */
 .flex-control-nav {
 	width: 100%;

@@ -1447,6 +1447,8 @@ html[xmlns] .slides { display: block; }
 
 .flex-pauseplay a.flex-play:before { content: '\f003'; }
 
+a.flex-prev { content: "\f061"; }
+
 /* Control Nav */
 .flex-control-nav { width: 100%; position: absolute; bottom: -40px; text-align: center; }
 
