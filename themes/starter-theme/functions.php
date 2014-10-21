@@ -148,7 +148,7 @@ function starter_theme_scripts() {
 	// endif; --> only include line if it is conditional
 
 	wp_enqueue_script(
-		'bxslider',
+		'flexslider',
 		get_template_directory_uri() . '/assets/vendor/jquery.flexslider-min.js',
 		array('jquery')
 	);
