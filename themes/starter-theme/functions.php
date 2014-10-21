@@ -122,9 +122,8 @@ function starter_theme_widgets_init() {
 }
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
-/**
- * Enqueue javascript files as needed
- */
+/* ENQUEUE SCRIPTS & STYLES
+ ========================== */
 function starter_theme_scripts() {
 
 	// theme style.css file
