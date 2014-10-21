@@ -17,6 +17,10 @@ Text Domain: themeTextDomain
 @import "mixins";
 @import "variables";
 
+/* =FONT SPECIFIC
+------------------ */
+@import "fonts/all";
+
 /* =LAYOUTS
 ------------------ */
 @import "layout";
