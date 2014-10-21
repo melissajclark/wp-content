@@ -14,7 +14,8 @@
  
 <footer id="colophon" role="contentinfo">
 
-<?php get_template_part ('inc/social-media-fields') ?>
+
+<?php get_template_part ('inc/social-media-fields') // grabs theme's social media content - [TO DO] update icon assets in final theme?>
 
 	<div id="copyright">
 		&copy; <?php echo date("Y"); ?> <?php echo bloginfo( "name" ); ?><br>
