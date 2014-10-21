@@ -36,17 +36,15 @@ function wooSlider() {
     $(window).load(function() {   
       $("#slider").flexslider({
         animation: "slide",
-        controlNav: true,
         animationLoop: false,
         slideshow: false,
         smoothHeight: true,
         slideShowSpeed: 9000,
-        multipleKeyboard: true
-        // useCSS: true,
-        // touch: true,
-        // directionNav: true,
-        // prevText: "Previous",
-        // nextText: "Next",
+        multipleKeyboard: true,
+        touch: true,
+        directionNav: true,
+        prevText: "Previous",
+        nextText: "Next"
       }); // end of slider function
     }); // end of window load function
 
