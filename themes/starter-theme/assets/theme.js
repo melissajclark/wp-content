@@ -63,3 +63,12 @@ function sliderBX(){
         });
     }); // end of WordPress doc ready function
 } // end of sliderBX function
+
+
+(function() { //wallopSlider function
+    'use strict';
+
+    // New isntance of WallopSlider
+    var photoSlider = new WallopSlider('.photo-slider');
+
+})();
