@@ -82,10 +82,6 @@ get_header(); ?>
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <div class="slider-arrows">
-                    <a href="#" class="slider-arrow slider-arrow--right"></a>
-                    <a href="#" class="slider-arrow slider-arrow--left"></a>
-                </div>
             <?php endif; ?>
 
         <hr/>
