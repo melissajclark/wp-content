@@ -1135,19 +1135,19 @@ textarea { overflow: auto; vertical-align: top; }
 
 /* =LAYOUTS
 ------------------ */
-body { background: white; margin: 0; padding: 0; max-width: 90em; }
+body { background: white; margin: 0; padding: 0; max-width: 90%; }
 
-#page { width: 80em; padding: 0 15px; }
+#page { width: 85%; padding: 0 15px; }
 
 #main { clear: both; }
 
-#primary { float: left; margin: 0; width: 80%; max-width: 100%; }
+#primary { float: left; margin: 0; max-width: 75%; }
 
 #content { margin: 0; width: 100%; float: left; }
 
 #primary.full-width, #primary.full-width #content { width: 100%; float: none; }
 
-#secondary { float: right; padding: 0; width: 250px; }
+#secondary { float: right; padding: 0; max-width: 22.5%; }
 
 #colophon { clear: both; overflow: hidden; }
 
@@ -1170,18 +1170,13 @@ body { margin: 0px; padding: 0px; }
 #access ul li { position: relative; display: block; float: left; position: relative; right: 50%; }
 #access ul li a { letter-spacing: 0.15em; display: block; padding: 3px 0 3px 10px; margin: 2px 0; text-decoration: none; cursor: pointer; }
 #access ul li a:after { content: '/'; color: #555555; }
-#access ul li a :hover { color: red; }
+#access ul li a :hover { color: navy; }
 #access ul li:last-of-type a:after { content: none; }
 
 /* =CONTENT
 ------------------ */
-/* Web fonts integration*/
-@font-face { font-family: name1; src: url("inc/fonts/filename.eot"); src: url("inc/fonts/filename.eot?#iefix") format("embedded-opentype"), url("inc/fonts/filename.woff") format("woff"), url("inc/fonts/filename.ttf") format("truetype"); font-weight: normal; font-style: normal; }
-
-@font-face { font-family: name2; src: url("inc/fonts/filename.eot"); src: url("inc/fonts/filename.eot?#iefix") format("embedded-opentype"), url("inc/fonts/filename.woff") format("woff"), url("inc/fonts/filename.ttf") format("truetype"); font-weight: normal; font-style: normal; }
-
 /* Styling starts here */
-body, input, textarea { color: #555555; font-family: sans-serif; font-size: 14px; line-height: 1.625; }
+body, input, textarea { color: #555555; font-family: sans-serif; font-size: 1em; line-height: 1.5em; }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 { clear: both; }
@@ -1231,8 +1226,8 @@ sup { bottom: 1ex; }
 sub { top: .5ex; }
 
 /* Links */
-a { color: blue; text-decoration: none; }
-a:focus, a:active, a:hover { color: red; }
+a { color: grey; text-decoration: none; }
+a:focus, a:active, a:hover { color: navy; }
 
 /* Assistive text */
 .assistive-text { position: absolute !important; clip: rect(1px 1px 1px 1px); /* IE6, IE7 */ clip: rect(1px, 1px, 1px, 1px); }
@@ -1352,7 +1347,7 @@ article.comment { border-bottom: 1px solid black; padding: 10px 0; }
 /* Post author highlighting */
 .commentlist > li.bypostauthor, .commentlist .children > li.bypostauthor { border: 1px solid black; padding: 5px 10px; }
 
-.entry-title, .entry-title a { clear: both; color: blue; line-height: 1em; padding-bottom: 0.5em; }
+.entry-title, .entry-title a { clear: both; color: grey; line-height: 1em; padding-bottom: 0.5em; }
 
 .entry-meta { clear: both; }
 
