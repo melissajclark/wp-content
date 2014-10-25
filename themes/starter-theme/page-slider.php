@@ -65,6 +65,28 @@ get_header(); ?>
         <hr/>
 
 
+        <h3>Glide Slider</h3>
+
+        <!-- Custom Field Content for Images -->
+            <?php 
+
+            $images = get_field('gallery');
+
+            if( $images ): ?>
+                <div id="slider">
+                    <ul class="slider__wrapper">
+                        <?php foreach( $images as $image ): ?>
+                            <li class="slider__item"><img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <p><?php echo $image['caption']; ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+        <hr/>
+
+
                 <?php the_content(); ?>
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
             </div><!-- .entry-content -->
