@@ -34,6 +34,10 @@
         sliderBX(); // calls slider function in theme.js for BX Slider
     </script>
 
+    <script>     
+        glideSlider(); // calls slider function in theme.js for glide Slider
+    </script>
+
     <?php endif; ?>
  
 <?php wp_footer(); ?> 
