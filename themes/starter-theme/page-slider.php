@@ -67,13 +67,14 @@ get_header(); ?>
         <h3>Wallop Slider</h3>
 
         <!-- Custom Field Content for Images -->
+
+        <div class="photo-slider wallop-slider wallop-slider--slide">
             <?php 
 
             $images = get_field('gallery');
 
             if( $images ): ?>
-                <div id="slider">
-                    <ul class="bxslider">
+                    <ul class="wallop-slider__list">
                         <?php foreach( $images as $image ): ?>
                             <li>
                                 <img src="<?php echo $image['sizes']['slider']; ?>" alt="<?php echo $image['alt']; ?>" />
@@ -81,8 +82,9 @@ get_header(); ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                </div>
             <?php endif; ?>
+
+    </div> <!-- end of wallopSlider -->
 
         <hr/>
 
