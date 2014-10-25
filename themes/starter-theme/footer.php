@@ -34,22 +34,7 @@
         sliderBX(); // calls slider function in theme.js for BX Slider
     </script>
 
-    <!-- <script>var slider = new WallopSlider('.wallop-slider');</script>    -->
-
-    <script>
-      // Create new instance of WallopSlider
-      var slider = new WallopSlider('.wallop-slider', {
-        wSBtnPreviousClass: 'wallop-slider__btn--previous',
-        wSBtnNextClass: 'wallop-slider__btn--next',
-        wSItemClass: 'wallop-slider__item',
-        wSCurrentItemClass: 'wallop-slider item--current',
-        wSShowPreviousClass: 'wallop-slider__item--show-previous',
-        wSShowNextClass: 'wallop-slider__item--show-next',
-        wSHidePreviousClass: 'wallop-slider__item--hide-previous',
-        wSHideNextClass: 'wallop-slider__item--hide-next',
-        wSCarousel: false
-      });
-    </script>
+    <script>var slider = new WallopSlider('.wallop-slider');</script>   
 
     <?php endif; ?>
  
