@@ -18,6 +18,9 @@ get_header(); ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
             </header><!-- .entry-header -->
 
+            <div class="entry-content">
+
+            <h3>Woo Flexslider</h3>
 
             <?php 
 
@@ -37,9 +40,7 @@ get_header(); ?>
             
         <?php endif; ?>
 
-
-            <div class="entry-content">
-
+        <hr/>
 
 
                 <?php the_content(); ?>
