@@ -76,13 +76,15 @@ get_header(); ?>
             if( $images ): ?>
                     <ul class="wallop-slider__list">
                         <?php foreach( $images as $image ): ?>
-                            <li class="wallop-slider__item">
+                            <li class="wallop-slider__item--current">
                                 <img src="<?php echo $image['sizes']['slider']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
                         <?php endforeach; ?>
                     </ul>
             <?php endif; ?>
+            <button class="wallop-slider__btn wallop-slider__btn--previous btn btn--previous" disabled="disabled">Previous</button>
+      <button class="wallop-slider__btn wallop-slider__btn--next btn btn--next">Next</button>
 
     </div> <!-- end of wallopSlider -->
 
