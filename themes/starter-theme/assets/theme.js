@@ -78,7 +78,8 @@ function glideSlider(){
         $('.slider').glide({
           autoplay: 5000,
           arrows: 'body',
-          navigation: 'body'
+          navigation: 'body',
+          arrows: true
         });
     }); // end of WordPress doc ready function
 } // end of glideSlider function
