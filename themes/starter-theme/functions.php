@@ -148,19 +148,26 @@ function starter_theme_scripts() {
 	// endif; --> only include line if it is conditional
 
 	wp_enqueue_script(
-		'flexslider',
+		'flexslider', // woo flexslider
 		get_template_directory_uri() . '/assets/vendor/jquery.flexslider-min.js',
 		array('jquery')
 	);
 
 	wp_enqueue_script(
-		'bxslider',
+		'bxslider', // bxSlider
 		get_template_directory_uri() . '/assets/vendor/jquery.bxslider.js',
 		array('jquery')
 	);
 
+
 	wp_enqueue_script(
-	    'theme',
+		'WallopSlider', // wallop slider
+		get_template_directory_uri() . '/assets/vendor/WallopSlider.js',
+		array('jquery')
+	);
+
+	wp_enqueue_script(
+	    'theme', // all functions in theme.js
 	    get_template_directory_uri() . '/assets/theme.js',
 	    array('jquery')
 	);
