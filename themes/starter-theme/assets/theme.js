@@ -79,7 +79,14 @@ function glideSlider(){
           autoplay: 5000,
           arrows: 'body',
           navigation: 'body',
-          arrows: true
+          arrows: true,
+          arrowsWrapperClass: 'slider__arrows',
+          arrowMainClass: 'slider__arrows-item',
+          arrowRightClass: 'slider__arrows-item--right',
+          arrowLeftClass: 'slider__arrows-item--left',
+          arrowRightText: '>',
+          arrowLeftText: '<',
+          keyboard: true
         });
     }); // end of WordPress doc ready function
 } // end of glideSlider function
