@@ -72,3 +72,14 @@ function sliderBX(){
     var photoSlider = new WallopSlider('.photo-slider');
 
 })();
+
+function glideSlider(){ 
+    jQuery(document).ready(function($){
+        $('.slider').glide({
+          autoplay: 5000,
+          arrows: 'body',
+          navigation: 'body'
+        });
+    }); // end of WordPress doc ready function
+} // end of glideSlider function
+
