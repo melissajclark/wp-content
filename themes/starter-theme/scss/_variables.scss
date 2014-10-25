@@ -4,11 +4,13 @@
 /* Sizes */
 $width: 85%;
 $width-outer: $width + 5%;
+$primary: $width - 10%;
+$secondary: $primary * .3; 
 
 /* Colors */
 $text: #555;
-$links: blue;
-$hover: red;
+$links: grey;
+$hover: navy;
 
 $bg: #FFF;
 
