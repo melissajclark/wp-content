@@ -76,7 +76,7 @@ function sliderBX(){
 function glideSlider(){ 
     jQuery(document).ready(function($){
         $('.slider').glide({
-          autoplay: 5000,
+          autoplay: false,
           arrows: 'body',
           navigation: 'body',
           arrows: true,
