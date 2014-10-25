@@ -76,7 +76,7 @@ get_header(); ?>
 
             if( !empty($image) ): ?>
             <ul class="wallop-slider__list">
-                <li class="wallop-slider__item__item--current">
+                <li class="wallop-slider__item item--current">
                     <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
                 </li>
 
