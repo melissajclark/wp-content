@@ -34,8 +34,6 @@
         sliderBX(); // calls slider function in theme.js for BX Slider
     </script>
 
-    <script>var slider = new WallopSlider('.wallop-slider');</script>   
-
     <?php endif; ?>
  
 <?php wp_footer(); ?> 
