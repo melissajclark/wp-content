@@ -14,8 +14,7 @@ body {
 #primary {
 	float: left;
 	margin: 0;
-	width: 80%;
-	max-width:100%;
+	max-width: $width - 10%;
 }
 #content {
 	margin: 0;
