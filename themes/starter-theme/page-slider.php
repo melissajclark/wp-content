@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Page with Slider
+ * Template Name: Slider Testing Template
  *
  * This is the template that displays all pages by default.
  *
