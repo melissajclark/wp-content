@@ -51,3 +51,15 @@ function wooSlider() {
   }); // end of WordPress doc ready function
 
 } // end of wooslider function
+
+
+function sliderBX(){ 
+    jQuery(document).ready(function($){
+        $('.bxslider').bxSlider({
+          infiniteLoop: false,
+            hideControlOnEnd: true,
+            adaptiveHeight: true,
+            responsive: true
+        });
+    }); // end of WordPress doc ready function
+} // end of sliderBX function
