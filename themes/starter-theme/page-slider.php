@@ -76,7 +76,7 @@ get_header(); ?>
             if( $images ): ?>
                     <ul class="wallop-slider__list">
                         <?php foreach( $images as $image ): ?>
-                            <li>
+                            <li class="wallop-slider__item">
                                 <img src="<?php echo $image['sizes']['slider']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
