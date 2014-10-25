@@ -73,7 +73,7 @@ get_header(); ?>
             $images = get_field('gallery');
 
             if( $images ): ?>
-                <div id="slider">
+                <div class="slider">
                     <ul class="slider__wrapper">
                         <?php foreach( $images as $image ): ?>
                             <li class="slider__item"><img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
