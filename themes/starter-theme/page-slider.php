@@ -89,7 +89,7 @@ get_header(); ?>
             if( $images ): ?>
                     
                         <?php foreach( $images as $image ): ?>
-                            <li class="wallop-slider__item__item--current">
+                            <li class="wallop-slider__item">
                                 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
