@@ -64,6 +64,28 @@ get_header(); ?>
 
         <hr/>
 
+        <h3>Wallop Slider</h3>
+
+        <!-- Custom Field Content for Images -->
+            <?php 
+
+            $images = get_field('gallery');
+
+            if( $images ): ?>
+                <div id="slider">
+                    <ul class="bxslider">
+                        <?php foreach( $images as $image ): ?>
+                            <li>
+                                <img src="<?php echo $image['sizes']['slider']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <p><?php echo $image['caption']; ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+        <hr/>
+
 
                 <?php the_content(); ?>
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
