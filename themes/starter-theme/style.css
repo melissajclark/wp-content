@@ -1561,3 +1561,5 @@ a.flex-prev { content: "\f061"; }
 .slider__nav-item--current { background: #ccc; }
 
 .slider__nav-item:hover { background: #ccc; }
+
+img.glideSlideImage { margin: auto; display: block; }
