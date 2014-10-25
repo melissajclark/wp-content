@@ -28,7 +28,11 @@
     
     <script>     
         wooSlider(); // calls slider function in theme.js for wooSlider
-    </script>  
+    </script>
+
+    <script>     
+        sliderBX(); // calls slider function in theme.js for BX Slider
+    </script>   
 
     <?php endif; ?>
  
