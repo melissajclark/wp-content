@@ -14,7 +14,7 @@ body {
 #primary {
 	float: left;
 	margin: 0;
-	max-width: $width - 10%;
+	max-width: $primary-width;
 }
 #content {
 	margin: 0;
@@ -29,7 +29,7 @@ body {
 #secondary {
 	float: right;
 	padding: 0;
-	width: 250px;
+	max-width: $secondary-width;
 }
 #colophon {
 	clear: both;
