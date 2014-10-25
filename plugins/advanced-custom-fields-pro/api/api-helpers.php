@@ -1153,15 +1153,18 @@ function acf_get_admin_notices()
 
 function acf_get_image_sizes() {
 	
+	// global
+	global $_wp_additional_image_sizes;
+	
+	
 	// vars
 	$sizes = array(
 		'thumbnail'	=>	__("Thumbnail",'acf'),
 		'medium'	=>	__("Medium",'acf'),
-		'large'		=>	__("Large",'acf'),
-		'full'		=>	__("Full Size",'acf')
+		'large'		=>	__("Large",'acf')
 	);
-
-
+	
+	
 	// find all sizes
 	$all_sizes = get_intermediate_image_sizes();
 	
@@ -1189,9 +1192,28 @@ function acf_get_image_sizes() {
 	}
 	
 	
+	// add sizes
+	foreach( array_keys($sizes) as $s ) {
+		
+		// vars
+		$w = isset($_wp_additional_image_sizes[$s]['width']) ? $_wp_additional_image_sizes[$s]['width'] : get_option( "{$s}_size_w" );
+		$h = isset($_wp_additional_image_sizes[$s]['height']) ? $_wp_additional_image_sizes[$s]['height'] : get_option( "{$s}_size_h" );
+		
+		if( $w && $h ) {
+			
+			$sizes[ $s ] .= " ({$w} x {$h})";
+			
+		}
+		
+	}
+	
+	
+	// add full end
+	$sizes['full'] = __("Full Size",'acf');
+	
 	
 	// filter for 3rd party customization
-	$sizes = apply_filters( 'image_size_names_choose', $sizes );
+	$sizes = apply_filters( 'acf/get_image_sizes', $sizes );
 	
 	
 	// return

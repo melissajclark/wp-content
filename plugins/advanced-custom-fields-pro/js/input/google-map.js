@@ -216,9 +216,9 @@
 		    
 		    
 		    // update inputs
-			this.$el.find('.input-lat').val( lat );
-			this.$el.find('.input-lng').val( lng ).trigger('change');
-			
+		    acf.val( this.$el.find('.input-lat'), lat );
+		    acf.val( this.$el.find('.input-lng'), lng );
+		    
 			
 		    // update marker
 		    this.map.marker.setPosition( latlng );
@@ -299,7 +299,7 @@
 
 				
 				// update input
-				$el.find('.input-address').val( location.formatted_address ).trigger('change');
+				acf.val( $el.find('.input-address'), location.formatted_address );
 				
 			});
 			
@@ -351,10 +351,10 @@
 			
 			
 			// clear inputs
-			this.$el.find('.input-address').val('');
-			this.$el.find('.input-lat').val('');
-			this.$el.find('.input-lng').val('');
-			
+			acf.val( this.$el.find('.input-address'), '' );
+			acf.val( this.$el.find('.input-lat'), '' );
+			acf.val( this.$el.find('.input-lng'), '' );
+						
 			
 			// hide marker
 			this.map.marker.setVisible( false );

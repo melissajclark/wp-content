@@ -10,7 +10,7 @@
  * Plugin Name:       Quick Featured Images
  * Plugin URI:        http://wordpress.org/plugins/quick-featured-images
  * Description:       Your time-saving Swiss Army Knife for featured images: Set, replace and delete them in bulk, set default images, get overview lists.
- * Version:           8.2.1
+ * Version:           8.2.2
  * Author:            Martin Stehle
  * Author URI:        http://stehle-internet.de
  * Text Domain:       quick-featured-images

@@ -21,8 +21,48 @@ class acf_revisions {
 		
 		
 		// filters
+		add_filter('_wp_post_revision_fields', array($this, 'wp_preview_post_fields') );
 		add_filter('_wp_post_revision_fields', array($this, 'wp_post_revision_fields') );
 		add_filter('wp_save_post_revision_check_for_changes', array($this, 'force_save_revision'), 10, 3);
+	}
+	
+	
+	/*
+	*  wp_preview_post_fields
+	*
+	*  This function is used to trick WP into thinking that one of the $post's fields has changed and
+	*  will allow an autosave to be updated. 
+	*  Fixes an odd bug causing the preview page to render the non autosave post data on every odd attempt
+	*
+	*  @type	function
+	*  @date	21/10/2014
+	*  @since	5.1.0
+	*
+	*  @param	$fields (array)
+	*  @return	$fields
+	*/
+	
+	function wp_preview_post_fields( $fields ) {
+		
+		// bail early if not previewing a post
+		if( empty($_POST['wp-preview']) || $_POST['wp-preview'] != 'dopreview') {
+			
+			return $fields;
+			
+		}
+		
+		
+		// add to fields if ACF has changed
+		if( !empty($_POST['_acfchanged']) ) {
+			
+			$fields['_acfchanged'] = 'different than 1';
+			
+		}
+		
+		
+		// return
+		return $fields;
+		
 	}
 	
 	

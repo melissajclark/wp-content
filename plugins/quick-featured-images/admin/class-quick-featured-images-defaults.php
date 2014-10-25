@@ -446,7 +446,7 @@ class Quick_Featured_Images_Defaults {
 				continue;
 			}
 			// checkboxes
-			if ( 'use_first_image_as_default' == $key ) {
+			if ( 'overwrite_automatically' == $key or 'use_first_image_as_default' == $key ) {
 				$sanitized_input[ $key ] = isset( $input[ $key ] ) ? '1' : '0';
 				continue;
 			}
@@ -540,6 +540,8 @@ class Quick_Featured_Images_Defaults {
 		if ( wp_is_post_autosave( $post_id ) ) return;
 		// get out if post is revision
 		if ( wp_is_post_revision( $post_id ) ) return;
+		// get out if post is a newly created post, with no content
+		if ( 'auto-draft' == get_post_status( $post_id ) ) return;
 		// get post object if not valid
 		if ( ! $post ) {
 			$post = get_post( $post_id );
@@ -547,7 +549,14 @@ class Quick_Featured_Images_Defaults {
 		// get out if post does not support featured images
 		if ( ! post_type_supports( $post->post_type, 'thumbnail' ) ) return;
 		// else go on
+
+		// load all rules
 		$settings = $this->get_stored_settings();
+
+		// get out if user wishes not to overwrite existing featured images and post has already a featured image
+		if ( has_post_thumbnail( $post_id ) and ( ! isset( $settings[ 'overwrite_automatically' ] ) ) ) return;
+		
+		// set the thumbnail if a rule matches
 		/*
 		 * Rule cascade order:
 		 * 1. first embedded content image
@@ -560,12 +569,9 @@ class Quick_Featured_Images_Defaults {
 		$thumb_id = 0;
 		// 1. Image by first embedded content image
 		if ( isset( $settings[ 'use_first_image_as_default' ] ) ) {
-			// get out if user wishes the first image as featured if there is none and post has already a featured image
-			if ( 'use_if_no_img' == $settings[ 'first_image_handling' ] and has_post_thumbnail( $post_id ) ) {
-				return;
-			}
-			// else get first content image
+			// get first content image
 			$thumb_id = $this->get_image_id_by_url( $post->post_content );
+			// if computed id does not yield a valid image reset the variable
 			if ( ! wp_attachment_is_image( $thumb_id ) ) {
 				$thumb_id = 0;
 			}
@@ -574,7 +580,7 @@ class Quick_Featured_Images_Defaults {
 		if ( ! $thumb_id and isset( $settings[ 'rules' ] ) ) {
 			$args = array( 'fields' => 'ids' );
 			// 2. Image by matched custom taxonomy
-			$skipped_taxonomies = array( 'post_type', 'post_tag', 'category' );
+			$skipped_taxonomies = array( 'post_type', 'post_tag', 'category', 'user' );
 			foreach ( $settings[ 'rules' ] as $rule ) {
 				if ( in_array( $rule[ 'taxonomy' ], $skipped_taxonomies ) ) {
 					continue;
@@ -671,7 +677,7 @@ class Quick_Featured_Images_Defaults {
 	 * @since    8.0
 	 */
 	private function get_thumb_id ( $post_id, $rule ) {
-	
+
 		$terms = wp_get_post_terms( $post_id, $rule[ 'taxonomy' ], array( 'fields' => 'ids' ) );
 		
 		if ( is_wp_error( $terms ) ) {

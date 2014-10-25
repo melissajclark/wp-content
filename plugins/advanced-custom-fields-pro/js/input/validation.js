@@ -132,16 +132,18 @@
 			
 			
 			// hide ajax stuff on submit button
-			if( $('#submitpost').exists() ) {
+			var $submit = $('#submitpost').exists() ? $('#submitpost') : $('#submitdiv');
+			
+			if( $submit.exists() ) {
 				
 				// remove disabled classes
-				$('#submitpost').find('.disabled').removeClass('disabled');
-				$('#submitpost').find('.button-disabled').removeClass('button-disabled');
-				$('#submitpost').find('.button-primary-disabled').removeClass('button-primary-disabled');
+				$submit.find('.disabled').removeClass('disabled');
+				$submit.find('.button-disabled').removeClass('button-disabled');
+				$submit.find('.button-primary-disabled').removeClass('button-primary-disabled');
 				
 				
 				// remove spinner
-				$('#submitpost .spinner').hide();
+				$submit.find('.spinner').hide();
 				
 			}
 			

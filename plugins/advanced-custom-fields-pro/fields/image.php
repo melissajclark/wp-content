@@ -157,9 +157,8 @@ class acf_field_image extends acf_field {
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Preview Size','acf'),
 			'instructions'	=> __('Shown when entering data','acf'),
-			'type'			=> 'radio',
+			'type'			=> 'select',
 			'name'			=> 'preview_size',
-			'layout'		=> 'horizontal',
 			'choices'		=> acf_get_image_sizes()
 		));
 		

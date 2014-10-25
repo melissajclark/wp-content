@@ -1288,6 +1288,40 @@ var acf;
 		
 		    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 					
+		},
+		
+		
+		/*
+		*  val
+		*
+		*  This function will update an elements value and trigger the change event if differene
+		*
+		*  @type	function
+		*  @date	16/10/2014
+		*  @since	5.0.9
+		*
+		*  @param	$el (jQuery)
+		*  @param	val (mixed)
+		*  @return	n/a
+		*/
+		
+		val: function( $el, val ){
+			
+			// vars
+			var orig = $el.val();
+			
+			
+			// update value
+			$el.val( val );
+			
+			
+			// trigger change
+			if( val != orig ) {
+				
+				$el.trigger('change');
+				
+			}
+			
 		}
 		
 	};

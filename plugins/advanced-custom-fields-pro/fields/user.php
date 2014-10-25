@@ -54,37 +54,28 @@ class acf_field_user extends acf_field {
 
 	
 	/*
-	*  query_posts
+	*  get_choices
 	*
-	*  description
+	*  This function will return an array of data formatted for use in a select2 AJAX response
 	*
 	*  @type	function
-	*  @date	24/10/13
-	*  @since	5.0.0
+	*  @date	15/10/2014
+	*  @since	5.0.9
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	$options (array)
+	*  @return	(array)
 	*/
 	
-	function ajax_query() {
-
-   		// options
-   		$options = acf_parse_args( $_POST, array(
+	function get_choices( $options = array() ) {
+		
+   		// defaults
+   		$options = acf_parse_args($options, array(
 			'post_id'		=>	0,
 			's'				=>	'',
 			'field_key'		=>	'',
-			'nonce'			=>	'',
 		));
 		
-		
-		// validate
-		if( ! wp_verify_nonce($options['nonce'], 'acf_nonce') ) {
-		
-			die();
-			
-		}
-		
-		
+				
    		// vars
    		$r = array();
    		$args = array();
@@ -95,7 +86,7 @@ class acf_field_user extends acf_field {
 		
 		if( !$field ) {
 		
-			die();
+			return false;
 			
 		}
 		
@@ -213,8 +204,49 @@ class acf_field_user extends acf_field {
 		}
 		
 		
+		// return
+		return $r;
+			
+	}
+	
+	
+	/*
+	*  ajax_query
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	24/10/13
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function ajax_query() {
+		
+		// validate
+		if( empty($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'acf_nonce') ) {
+		
+			die();
+			
+		}
+		
+		
+		// get choices
+		$choices = $this->get_choices( $_POST );
+		
+		
+		// validate
+		if( !$choices ) {
+			
+			die();
+			
+		}
+		
+		
 		// return JSON
-		echo json_encode( $r );
+		echo json_encode( $choices );
 		die();
 			
 	}

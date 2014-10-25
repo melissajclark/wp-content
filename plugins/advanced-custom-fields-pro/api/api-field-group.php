@@ -513,6 +513,10 @@ function acf_update_field_group( $field_group = array() ) {
 	do_action('acf/update_field_group', $field_group);
 	
 	
+	// clear cache
+	wp_cache_delete('field_groups', 'acf');
+	
+	
     // return
     return $field_group;
 	

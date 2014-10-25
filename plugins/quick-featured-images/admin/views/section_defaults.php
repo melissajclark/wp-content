@@ -190,25 +190,38 @@ if ( ! current_theme_supports( 'post-thumbnails' ) ) {
 			<tr id="row_1">
 				<td class="num">1</td>
 				<td>
-					<?php printf( '<img src="%s" alt="%s" width="80" height="80" />', plugins_url( 'assets/images/first-content-image.gif' , dirname( __FILE__ ) ), __( 'Text with images in WordPress editor', $this->plugin_slug ) ); ?><br />
-					<p class="description"><?php _e( 'First content image', $this->plugin_slug ); ?></p>
+					<?php printf( '<img src="%s" alt="%s" width="80" height="80" />', plugins_url( 'assets/images/overwrite-image.jpg' , dirname( __FILE__ ) ), __( 'An image overwrites an existing image', $this->plugin_slug ) ); ?><br />
+				</td>
+				<td>
+					<p class="description"><?php _e( 'If activated the rule is used automatically while saving a post to overwrite an existing featured image with the new one based on the following rules. Do not use this if you want to keep manually set featured images.', $this->plugin_slug ); ?></p>
 				</td>
 				<td>
 <?php
-$stored_value = isset( $this->selected_rules[ 'first_image_handling' ] ) ? esc_attr( $this->selected_rules[ 'first_image_handling' ] ) : 'always';
+$key = 'overwrite_automatically';
+$attr_checked = checked( isset( $this->selected_rules[ $key ] ), '1', false );
+printf( '<label for="%s"><input type="checkbox" %s value="1" id="%s" name="%s">%s</label>', $key, $attr_checked, $key, $key, __( 'Activate to automatically overwrite an existing featured image while saving a post', $this->plugin_slug ) );
 ?>
-				<fieldset>
-					<legend class="screen-reader-text"><span><?php _e( 'How to use the first content image', $this->plugin_slug ); ?></span></legend>
-					<label for="always"><input type="radio" name="first_image_handling" value="always" id="always"<?php checked( 'always' == $stored_value ); ?>> <span><?php _e( 'Always use first content image as featured image', $this->plugin_slug ); ?></span></label><br />
-					<label for="use_if_no_img"><input type="radio" name="first_image_handling" value="use_if_no_img" id="use_if_no_img"<?php checked( 'use_if_no_img' == $stored_value ); ?>> <span><?php _e( 'Use first content image as featured image, only if there is no featured image', $this->plugin_slug ); ?></span></label><br />
-					<p class="description"><?php _e( 'If activated the rule is used automatically at saving if the post has content images. If the post has no content images the next rules will be applied.', $this->plugin_slug ); ?></p>
-				</fieldset>
 				</td>
-				<td><label for="use_first_image_as_default"><input type="checkbox" <?php checked( isset( $this->selected_rules[ 'use_first_image_as_default' ] ) ); ?> value="1" id="use_first_image_as_default" name="use_first_image_as_default"><?php _e( 'Activate to use first content image as featured image', $this->plugin_slug ); ?></label></td>
+			</tr>
+			<tr id="row_2" class="alt">
+				<td class="num">2</td>
+				<td>
+					<?php printf( '<img src="%s" alt="%s" width="80" height="80" />', plugins_url( 'assets/images/first-content-image.gif' , dirname( __FILE__ ) ), __( 'Text with images in WordPress editor', $this->plugin_slug ) ); ?><br />
+				</td>
+				<td>
+					<p class="description"><?php _e( 'If activated the rule is used automatically while saving a post to set the first content image as the featured image of the post. If the post has no content images the next rules will be applied.', $this->plugin_slug ); ?></p>
+				</td>
+				<td>
+<?php
+$key = 'use_first_image_as_default';
+$attr_checked = checked( isset( $this->selected_rules[ $key ] ), '1', false );
+printf( '<label for="%s"><input type="checkbox" %s value="1" id="%s" name="%s">%s</label>', $key, $attr_checked, $key, $key, __( 'Activate to automatically use the first content image as featured image while saving a post', $this->plugin_slug ) );
+?>
+				</td>
 			</tr>
 <?php
+$c = 3;
 if ( isset( $this->selected_rules[ 'rules' ] ) ) {
-	$c = 2;
 	foreach ( $this->selected_rules[ 'rules' ] as $rule ) {
 		// only consider valid values
 		if ( '0' == $rule[ 'id' ] ) continue;
@@ -306,16 +319,16 @@ if ( isset( $this->selected_rules[ 'rules' ] ) ) {
 } else {
 	// show default taxonomy rule row
 ?>
-			<tr id="row_2" class="alt">
-				<td class="num">2</td>
+			<tr id="row_<?php echo $c; ?>">
+				<td class="num"><?php echo $c; ?></td>
 				<td>
-					<input type="hidden" value="0" name="rules[2][id]" id="image_id_2">
-					<img src="<?php echo $no_thumb_url; ?>" alt="<?php echo $feat_img_label; ?>" id="selected_image_2" />
+					<input type="hidden" value="0" name="rules[<?php echo $c; ?>][id]" id="image_id_<?php echo $c; ?>">
+					<img src="<?php echo $no_thumb_url; ?>" alt="<?php echo $feat_img_label; ?>" id="selected_image_<?php echo $c; ?>" />
 				</td>
 				<td>
-					<input type="button" name="upload_image_2" value="<?php echo $choose_image_label; ?>" class="button imageupload" id="upload_image_2" /><br />
-					<label for="taxonomy_2"><?php echo $taxonomy_label; ?></label><br />
-					<select name="rules[2][taxonomy]" id="taxonomy_2" class="selection_rules">
+					<input type="button" name="upload_image_<?php echo $c; ?>" value="<?php echo $choose_image_label; ?>" class="button imageupload" id="upload_image_<?php echo $c; ?>" /><br />
+					<label for="taxonomy_<?php echo $c; ?>"><?php echo $taxonomy_label; ?></label><br />
+					<select name="rules[<?php echo $c; ?>][taxonomy]" id="taxonomy_<?php echo $c; ?>" class="selection_rules">
 						<option value=""><?php echo $first_option_label; ?></option>
 <?php
 		$key = esc_attr( $rule[ 'taxonomy' ] );
@@ -338,12 +351,12 @@ if ( isset( $this->selected_rules[ 'rules' ] ) ) {
 ?>
 					</select><br />
 					<?php echo $matches_label; ?>:<br />
-					<label for="matchterm_2"><?php echo $value_label; ?></label><br />
-					<select name="rules[2][matchterm]" id="matchterm_2">
+					<label for="matchterm_<?php echo $c; ?>"><?php echo $value_label; ?></label><br />
+					<select name="rules[<?php echo $c; ?>][matchterm]" id="matchterm_<?php echo $c; ?>">
 						<option value=""><?php echo $first_option_label; ?></option>
 					</select>
 				</td>
-				<td><input type="button" name="remove_rule_2" value="X" class="button remove_rule" id="remove_rule_2"></td>
+				<td><input type="button" name="remove_rule_<?php echo $c; ?>" value="X" class="button remove_rule" id="remove_rule_<?php echo $c; ?>"></td>
 			</tr>
 <?php
 } // if( rules )
@@ -408,7 +421,6 @@ wp_nonce_field( 'save_default_images', 'knlk235rf' );
 	<li><?php _e( 'matched category. If not then...', $this->plugin_slug ); ?></li>
 	<li><?php _e( 'matched author. If not then...', $this->plugin_slug ); ?></li>
 	<li><?php _e( 'matched post type. If not then...', $this->plugin_slug ); ?></li>
-<?php /*	?>					<li><?php _e( 'default image for any post. If not then...', $this->plugin_slug ); ?></li><?php */ ?> 
 	<li><?php _e( 'no featured image.', $this->plugin_slug ); ?></li>
 </ol>
 <p><?php _e( 'Bear in mind that if two or more rules with the same taxonomy would fit to the post it is unforeseeable which image will become the featured image.', $this->plugin_slug ); ?></p>

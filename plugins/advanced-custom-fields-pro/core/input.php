@@ -193,23 +193,42 @@ class acf_input_listener {
 	
 	function __construct() {
 		
+		// enqueue scripts
 		do_action('acf/input/admin_enqueue_scripts');
 		
-		if( is_admin() )
-		{
-			add_action('admin_head', 			array( $this, 'admin_head'), 20 );
-			add_action('admin_footer', 			array( $this, 'admin_footer'), 20 );
-		}
-		else
-		{
-			add_action('wp_head', 				array( $this, 'admin_head'), 20 );
-			add_action('wp_footer', 			array( $this, 'admin_footer'), 20 );
+		
+		// vars
+		$admin_head = 'admin_head';
+		$admin_footer = 'admin_footer';
+		
+		
+		// global
+		global $pagenow;
+		
+		
+		// determin action hooks
+		if( $pagenow == 'customize.php' ) {
 			
+			$admin_head = 'customize_controls_print_scripts';
+			$admin_footer = 'customize_controls_print_footer_scripts';
 			
-			// wp-login.php
-			add_action('login_head', 			array( $this, 'admin_head'), 20 );
-			add_action('login_footer', 			array( $this, 'admin_footer'), 20 );
+		} elseif( $pagenow == 'wp-login.php' ) { 
+		
+			$admin_head = 'login_head';
+			$admin_footer = 'login_footer';
+			
+		} elseif( !is_admin() ) {
+			
+			$admin_head = 'wp_head';
+			$admin_footer = 'wp_footer';
+			
 		}
+		
+		
+		// add actions
+		add_action($admin_head, 	array( $this, 'admin_head'), 20 );
+		add_action($admin_footer, 	array( $this, 'admin_footer'), 20 );
+		
 	}
 	
 	function admin_head() {

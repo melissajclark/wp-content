@@ -94,34 +94,34 @@ if ( 'replace' == $this->selected_action ) {
 				$desc = __( 'Search by post type. By default all posts, pages and custom post types will be affected.', $this->plugin_slug );
 				break;
 			case 'filter_status':
-				$desc = __( ' Search by several statuses (published, draft, private etc.). By default all statuses will be affected.', $this->plugin_slug );
+				$desc = __( 'Search by several statuses (published, draft, private etc.). By default all statuses will be affected.', $this->plugin_slug );
 				break;
 			case 'filter_search':
-				$desc = __( ' Search by search term', $this->plugin_slug );
+				$desc = __( 'Search by search term', $this->plugin_slug );
 				break;
 			case 'filter_time':
-				$desc = __( ' Search by time specifications', $this->plugin_slug );
+				$desc = __( 'Search by time specifications', $this->plugin_slug );
 				break;
 			case 'filter_author':
-				$desc = __( ' Search by author', $this->plugin_slug );
+				$desc = __( 'Search by author', $this->plugin_slug );
 				break;
 			/* case 'filter_custom_field':
-				$desc = __( ' Search by custom field', $this->plugin_slug );
+				$desc = __( 'Search by custom field', $this->plugin_slug );
 				break; */
 			case 'filter_custom_taxonomies':
-				$desc = __( ' Search by other taxonomies like plugin categories etc.', $this->plugin_slug );
+				$desc = __( 'Search by other taxonomies like plugin categories etc.', $this->plugin_slug );
 				break;
 			case 'filter_image_size':
-				$desc = __( ' Search by original dimensions of added featured image', $this->plugin_slug );
+				$desc = __( 'Search by original dimensions of added featured image', $this->plugin_slug );
 				break;
 			case 'filter_category':
-				$desc = __( ' Search posts by category', $this->plugin_slug );
+				$desc = __( 'Search posts by category', $this->plugin_slug );
 				break;
 			case 'filter_tag':
-				$desc = __( ' Search posts by tag', $this->plugin_slug );
+				$desc = __( 'Search posts by tag', $this->plugin_slug );
 				break;
 			case 'filter_parent_page':
-				$desc = __( ' Search child pages by parent page', $this->plugin_slug );
+				$desc = __( 'Search child pages by parent page', $this->plugin_slug );
 				break;
 			default:
 				$desc = '';

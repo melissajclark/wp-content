@@ -2,7 +2,11 @@
 <p><?php _e( 'The search will find posts with an already added featured image which its original image file is smaller than one of the given dimensions.', $this->plugin_slug ); ?></p>
 <p><?php _e( 'For example you can search for posts with too small featured images.', $this->plugin_slug ); ?></p>
 <?php
-$label = sprintf( '%s =&gt; %s', __( 'Settings', $this->plugin_slug ), __( 'Media', $this->plugin_slug ) );
+$text = 'Settings';
+$label_settings = __( $text );
+$text = 'Media';
+$label_media = _x( $text, 'post type general name' );
+$label = sprintf( '%s =&gt; %s', $label_settings, $label_media );
 if ( current_user_can( 'manage_options' ) ) {
 	$text = sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'options-media.php' ) ), $label );
 } else {

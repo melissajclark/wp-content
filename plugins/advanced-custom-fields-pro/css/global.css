@@ -463,10 +463,10 @@ img.acf-fw {
 	display: block;
 	
 	background: #F55E4F;
-	border: #DD4232 solid 1px;
 	border-radius: 3px;
 	margin: 5px 0 15px;
-	padding: 0 9px;
+	padding: 1px 10px;
+	min-height: 0px;
 }
 
 .acf-error-message p {
@@ -485,30 +485,9 @@ img.acf-fw {
 	background: #F55E4F;
 	color: #fff;
 	margin: 0 0 10px;
-	padding: 0 8px !important;
 }
 
-.acf-field .acf-error-message p {
-	margin: 6px 0 !important;
-}
-
-.acf-field .acf-error-message p:before {
-	content: "";
-	display: block;
-	
-	width: 0;
-	height: 0;
-	border: transparent 5px solid;
-	border-top-color: #DD4232;
-	
-	display: block;
-	position: absolute;
-	bottom: -11px;
-	left: 8px;
-	
-}
-
-.acf-field .acf-error-message p:after {
+.acf-field .acf-error-message:after {
 	content: "";
 	display: block;
 	
@@ -520,8 +499,12 @@ img.acf-fw {
 	display: block;
 	position: absolute;
 	bottom: -10px;
-	left: 8px;
+	left: 10px;
 	
+}
+
+.acf-field .acf-error-message p {
+	margin: 8px 0 !important;
 }
 
 
