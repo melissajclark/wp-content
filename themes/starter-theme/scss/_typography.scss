@@ -34,7 +34,7 @@ body, input, textarea {
 	font-family: $main;
 	font-size: 1em;
 	line-height: 1.5em;
-	word-wrap:break-all;
+	word-wrap:break-word;
 }
 
 /* Headings */
@@ -162,10 +162,12 @@ sub {
 a {
 	color: $links;
 	text-decoration: none;
+	word-wrap:break-word;
 	&:focus,
 	&:active,
 	&:hover {
 		color: $hover;
+		word-wrap:break-word;
 	}
 }
 
