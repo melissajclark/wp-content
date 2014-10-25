@@ -1550,9 +1550,9 @@ a.flex-prev { content: "\f061"; }
 
 .slider__arrows-item { position: absolute; display: block; margin-bottom: -20px; padding: 20px; }
 
-.slider__arrows-item--right { bottom: 50%; right: 30px; }
+.slider__arrows-item--right { bottom: 50%; right: -20px; }
 
-.slider__arrows-item--left { bottom: 50%; left: 30px; }
+.slider__arrows-item--left { bottom: 50%; left: 48px; }
 
 .slider__nav { position: absolute; bottom: 30px; }
 
