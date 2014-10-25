@@ -54,7 +54,7 @@ get_header(); ?>
                     <ul class="bxslider">
                         <?php foreach( $images as $image ): ?>
                             <li>
-                                <img src="<?php echo $image['sizes']['slider']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
                         <?php endforeach; ?>
@@ -77,7 +77,7 @@ get_header(); ?>
                     <ul class="wallop-slider__list">
                         <?php foreach( $images as $image ): ?>
                             <li class="wallop-slider__item">
-                                <img src="<?php echo $image['sizes']['slider']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
                         <?php endforeach; ?>
