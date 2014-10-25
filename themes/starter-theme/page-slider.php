@@ -76,7 +76,7 @@ get_header(); ?>
                 <div class="slider">
                     <ul class="slider__wrapper">
                         <?php foreach( $images as $image ): ?>
-                            <li class="slider__item"><img src="<?php echo $image['url']; ?>" class="glideSlideImage" alt="<?php echo $image['alt']; ?>"/>
+                            <li class="slider__item"><img class="glideSlideImage" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
                         <?php endforeach; ?>
