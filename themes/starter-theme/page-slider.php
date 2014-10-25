@@ -69,14 +69,27 @@ get_header(); ?>
         <!-- Custom Field Content for Images -->
 
         <div class="photo-slider wallop-slider wallop-slider--slide">
+
+            <?php 
+
+            $image = get_field('first_image');
+
+            if( !empty($image) ): ?>
+            <ul class="wallop-slider__list">
+                <li class="wallop-slider__item__item--current">
+                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                </li>
+
+            <?php endif; ?>            
+
             <?php 
 
             $images = get_field('gallery');
 
             if( $images ): ?>
-                    <ul class="wallop-slider__list">
+                    
                         <?php foreach( $images as $image ): ?>
-                            <li class="wallop-slider__item">
+                            <li class="wallop-slider__item__item--current">
                                 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
