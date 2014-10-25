@@ -86,7 +86,8 @@ function glideSlider(){
           arrowLeftClass: 'slider__arrows-item--left',
           arrowRightText: '>',
           arrowLeftText: '<',
-          keyboard: true
+          keyboard: true,
+          navigation: false
         });
     }); // end of WordPress doc ready function
 } // end of glideSlider function
