@@ -39,6 +39,16 @@
     </script>
 
     <?php endif; ?>
+
+    
+
+    <?php if ( is_page_template( 'page-gallery.php' ) ) : ?>   
+
+    <script>     
+        glideSlider(); // calls slider function in theme.js for glide Slider
+    </script>
+
+    <?php endif; ?>
  
 <?php wp_footer(); ?> 
 </body>
