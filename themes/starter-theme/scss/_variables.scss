@@ -4,8 +4,9 @@
 /* Sizes */
 $width: 85%;
 $width-outer: $width + 5%;
-$primary: $width - 10%;
-$secondary: $primary * .3; 
+$primary-width: $width - 10%;
+$secondary-width: $primary-width * .3;
+ 
 
 /* Colors */
 $text: #555;
