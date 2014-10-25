@@ -32,7 +32,9 @@
 
     <script>     
         sliderBX(); // calls slider function in theme.js for BX Slider
-    </script>   
+    </script>
+
+    <script>var slider = new WallopSlider('.wallop-slider');</script>   
 
     <?php endif; ?>
  
