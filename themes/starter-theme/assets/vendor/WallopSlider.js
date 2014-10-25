@@ -24,7 +24,7 @@ WallopSlider = (function() {
       wSBtnPreviousClass: 'wallop-slider__btn--previous',
       wSBtnNextClass: 'wallop-slider__btn--next',
       wSItemClass: 'wallop-slider__item',
-      wSCurrentItemClass: 'wallop-slider__item--current',
+      wSCurrentItemClass: 'wallop-slider item--current',
       wSShowPreviousClass: 'wallop-slider__item--show-previous',
       wSShowNextClass: 'wallop-slider__item--show-next',
       wSHidePreviousClass: 'wallop-slider__item--hide-previous',
