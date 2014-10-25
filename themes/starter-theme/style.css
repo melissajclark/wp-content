@@ -1147,7 +1147,7 @@ body { background: white; margin: 0; padding: 0; max-width: 100%; }
 
 #primary.full-width, #primary.full-width #content { width: 100%; float: none; }
 
-#secondary { float: right; padding: 0; max-width: 25.5%; }
+#secondary { float: right; padding: 0; max-width: 17%; }
 
 #colophon { clear: both; overflow: hidden; }
 
@@ -1176,7 +1176,7 @@ body { margin: 0px; padding: 0px; }
 /* =CONTENT
 ------------------ */
 /* Styling starts here */
-body, input, textarea { color: #555555; font-family: sans-serif; font-size: 1em; line-height: 1.5em; }
+body, input, textarea { color: #555555; font-family: sans-serif; font-size: 1em; line-height: 1.5em; word-wrap: break-word; }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 { clear: both; }
@@ -1226,8 +1226,8 @@ sup { bottom: 1ex; }
 sub { top: .5ex; }
 
 /* Links */
-a { color: grey; text-decoration: none; }
-a:focus, a:active, a:hover { color: navy; }
+a { color: grey; text-decoration: none; word-wrap: break-word; }
+a:focus, a:active, a:hover { color: navy; word-wrap: break-word; }
 
 /* Assistive text */
 .assistive-text { position: absolute !important; clip: rect(1px 1px 1px 1px); /* IE6, IE7 */ clip: rect(1px, 1px, 1px, 1px); }
