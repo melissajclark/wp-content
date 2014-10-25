@@ -68,7 +68,7 @@ get_header(); ?>
 
         <!-- Custom Field Content for Images -->
 
-        <div class="photo-slider wallop-slider wallop-slider--slide">
+        <div class="wallop-slider">
 
             <?php 
 
