@@ -166,6 +166,13 @@ function starter_theme_scripts() {
 		array('jquery')
 	);
 
+
+	wp_enqueue_script(
+		'glideSlider', // glide slider
+		get_template_directory_uri() . '/assets/vendor/glideSlider.js',
+		array('jquery')
+	);
+
 	wp_enqueue_script(
 	    'theme', // all functions in theme.js
 	    get_template_directory_uri() . '/assets/theme.js',
