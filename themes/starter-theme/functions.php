@@ -169,7 +169,7 @@ function starter_theme_scripts() {
 
 	wp_enqueue_script(
 		'glideSlider', // glide slider
-		get_template_directory_uri() . '/assets/vendor/glideSlider.js',
+		get_template_directory_uri() . '/assets/vendor/jquery.glide.min.js',
 		array('jquery')
 	);
 
