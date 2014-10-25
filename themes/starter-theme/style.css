@@ -1147,7 +1147,7 @@ body { background: white; margin: 0; padding: 0; max-width: 100%; }
 
 #primary.full-width, #primary.full-width #content { width: 100%; float: none; }
 
-#secondary { float: right; padding: 0; max-width: 17%; }
+#secondary { float: right; padding: 0; max-width: 12.75%; }
 
 #colophon { clear: both; overflow: hidden; }
 
