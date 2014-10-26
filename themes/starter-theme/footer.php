@@ -22,23 +22,7 @@
 		<a href="http://melissajclark.ca" rel="nofollow">theme by Melissa</a>
 	</div>
 
-</footer><!-- #colophon -->
-	
- <!--    <?php if ( is_page_template( 'page-slider.php' ) ) : ?>   
-    
-    <script>     
-        wooSlider(); // calls slider function in theme.js for wooSlider
-    </script>
-
-    <script>     
-        sliderBX(); // calls slider function in theme.js for BX Slider
-    </script>
-
-    <script>     
-        glideSlider(); // calls slider function in theme.js for glide Slider
-    </script>
-
-    <?php endif; ?> -->    
+</footer><!-- #colophon -->  
 
     <?php if ( is_page_template( 'page-gallery.php' ) ) : ?>   
 
