@@ -80,12 +80,12 @@ function glideSlider(){
           arrows: 'body',
           navigation: 'body',
           arrows: true,
-          arrowsWrapperClass: 'slider__arrows',
-          arrowMainClass: 'slider__arrows-item',
-          arrowRightClass: 'slider__arrows-item--right',
-          arrowLeftClass: 'slider__arrows-item--left',
-          arrowRightText: '>',
-          arrowLeftText: '<',
+          // arrowsWrapperClass: 'slider__arrows',
+          // arrowMainClass: 'slider__arrows-item',
+          // arrowRightClass: 'slider__arrows-item--right',
+          // arrowLeftClass: 'slider__arrows-item--left',
+          // arrowRightText: '>',
+          // arrowLeftText: '<',
           keyboard: true,
           navigation: false
         });
