@@ -78,7 +78,7 @@ function glideSlider(){
         $('.slider').glide({
           autoplay: false,
           arrows: 'body',
-          navigation: '.glideSlideNav',
+          navigation: 'body',
           arrows: true,
           // arrowsWrapperClass: 'slider__arrows',
           // arrowMainClass: 'slider__arrows-item',
