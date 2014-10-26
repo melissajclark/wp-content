@@ -38,9 +38,7 @@
         glideSlider(); // calls slider function in theme.js for glide Slider
     </script>
 
-    <?php endif; ?> -->
-
-    
+    <?php endif; ?> -->    
 
     <?php if ( is_page_template( 'page-gallery.php' ) ) : ?>   
 
