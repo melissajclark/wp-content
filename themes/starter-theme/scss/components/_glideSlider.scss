@@ -9,6 +9,8 @@
   list-style: none;
   overflow: hidden;
   *zoom: 1;
+  padding-left: 10%;
+  padding-right: 10%;
   -webkit-backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
 }
@@ -28,7 +30,7 @@
   right: -20px;
 }
 .slider__arrows-item--left {
-  bottom: 50%;
+  bottom: 20%;
   left: 48px;
 }
 .slider__nav {
