@@ -3036,6 +3036,8 @@ article.comment {
   list-style: none;
   overflow: hidden;
   *zoom: 1;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
   width: 80%;
 }
 
@@ -3083,4 +3085,9 @@ article.comment {
 
 .slider__nav-item:hover {
   background: #ccc;
+}
+
+img.glideSlideImage {
+  display: block;
+  margin: auto;
 }
