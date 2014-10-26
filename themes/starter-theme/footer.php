@@ -48,6 +48,15 @@
     </script>
 
     <?php endif; ?>
+
+
+    <?php if ( is_page_template( 'page-wooslider.php' ) ) : ?>   
+    
+    <script>     
+        wooSlider(); // calls slider function in theme.js for wooSlider
+    </script>
+
+    <?php endif; ?>
  
 <?php wp_footer(); ?> 
 </body>
