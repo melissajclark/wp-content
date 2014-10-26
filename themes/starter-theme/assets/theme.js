@@ -38,7 +38,7 @@ function wooSlider() {
         animation: "slide",
         animationLoop: false,
         slideshow: false,
-        smoothHeight: true,
+        // smoothHeight: true,
         slideShowSpeed: 9000,
         multipleKeyboard: true,
         touch: true,
