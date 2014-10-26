@@ -50,4 +50,8 @@ get_header(); ?>
 
 </section><!-- #primary -->
 
+<script>     
+        wooSlider(); // calls slider function in theme.js for wooSlider
+    </script>
+
 <?php get_footer(); ?>
