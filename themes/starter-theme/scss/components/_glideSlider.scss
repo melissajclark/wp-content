@@ -25,11 +25,11 @@
 }
 .slider__arrows-item--right {
   bottom: 50%;
-  right: -20px;
+  right: 30px;
 }
 .slider__arrows-item--left {
-  bottom: 20%;
-  left: 48px;
+  bottom: 50%;
+  left: 30px;
 }
 .slider__nav {
   position: absolute;
@@ -50,8 +50,3 @@
 .slider__nav-item:hover {
   background: #ccc;
 }
-
-// img.glideSlideImage {
-//   margin:auto;
-//   display:block;
-// }
