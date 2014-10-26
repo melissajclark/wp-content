@@ -5,7 +5,7 @@
 $width: 95%;
 $width-outer: $width + 5%;
 $primary-width: $width - 10%;
-$secondary-width: $primary-width * .15;
+$secondary-width: $width; // $primary-width * .15
  
 
 /* Colors */
