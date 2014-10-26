@@ -24,7 +24,7 @@
 
 </footer><!-- #colophon -->
 	
-    <?php if ( is_page_template( 'page-slider.php' ) ) : ?>   
+ <!--    <?php if ( is_page_template( 'page-slider.php' ) ) : ?>   
     
     <script>     
         wooSlider(); // calls slider function in theme.js for wooSlider
@@ -38,7 +38,7 @@
         glideSlider(); // calls slider function in theme.js for glide Slider
     </script>
 
-    <?php endif; ?>
+    <?php endif; ?> -->
 
     
 
