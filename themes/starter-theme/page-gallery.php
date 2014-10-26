@@ -20,8 +20,6 @@ get_header(); ?>
 
             <div class="entry-content">
 
-             <h3>Glide Slider</h3>
-
             <?php        // Custom Field Content for Images
 
             $images = get_field('gallery');
@@ -30,8 +28,9 @@ get_header(); ?>
                 <div class="slider">
                     <ul class="slider__wrapper">
                         <?php foreach( $images as $image ): ?>
-                            <li class="slider__item"><img class="glideSlideImage" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
-                             <!--    <p><?php echo $image['caption']; ?></p> -->
+                            <li class="slider__item">
+                                <img class="glideSlideImage" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
+                                <p><?php echo $image['caption']; ?></p>
                             </li>
                         <?php endforeach; ?>
                     </ul>
