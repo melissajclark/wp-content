@@ -9,8 +9,8 @@
   list-style: none;
   overflow: hidden;
   *zoom: 1;
-  // -webkit-backface-visibility: hidden;
-  // -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
   width:80%;
 }
 .slider__item {
@@ -51,3 +51,5 @@
 .slider__nav-item:hover {
   background: #ccc;
 }
+
+
