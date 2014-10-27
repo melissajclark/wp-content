@@ -52,6 +52,19 @@ function wooSlider() {
 
 } // end of wooslider function
 
+function basicWooSlider() {
+
+  jQuery(document).ready(function($){
+
+    $(window).load(function() {
+      $('.flexslider').flexslider({
+        animation: "slide"
+      });
+    });
+
+  }); // end of WordPress doc ready function
+
+} // end of wooslider function
 
 function sliderBX(){ 
     jQuery(document).ready(function($){
