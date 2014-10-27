@@ -54,21 +54,20 @@ function wooSlider() {
 
 
 function anotherWooSlider() {
-
   jQuery(document).ready(function($){
 
     $(window).load(function() {
      $('.flexslider').flexslider({
         animation: "slide",
         multipleKeyboard: true,
-        smoothHeight: true
+        smoothHeight: true,
         start: function(slider){
           $('body').removeClass('loading');
         }
-      });
-    });
-
-  }); // end of WordPress doc ready function
+      }); // end of window load function
+    }); // end of WordPress doc ready function
+  }); 
+} // end of woo slider 
 
 function basicWooSlider() {
 
