@@ -33,7 +33,7 @@ get_header(); ?>
             $images = get_field('gallery');
 
             if( $images ): ?>
-            <section class="flexSliderWrapper"> 
+           <!--  <section class="flexSliderWrapper">  -->
                 <section id="slider" class="flexslider">
                     <ul class="slides">
                         <?php foreach( $images as $image ): ?>
@@ -43,7 +43,7 @@ get_header(); ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                </section>
+   <!--              </section> -->
             </section>
         <?php endif; ?>
 
