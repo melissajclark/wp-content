@@ -1,13 +1,14 @@
 <?php
 /**
- * Template Name: Gallery Template
+ * Template Name: Gallery
  *
- * This is the template that displays all pages by default.
+ * This is the template that displays all gallery pages by default.
  *
  * @package Starter_Theme
  */
 
 get_header(); ?>
+
 
 <section id="primary" role="main">
 
@@ -18,26 +19,27 @@ get_header(); ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
             </header><!-- .entry-header -->
 
-
             <div class="entry-content">
 
             <?php the_content(); ?>
 
-            <?php        // Custom Field Content for Images
+            <?php // gallery content begins here
 
             $images = get_field('gallery');
 
             if( $images ): ?>
-                <div class="slider">
-                    <ul class="slider__wrapper">
+            <section class="wooSliderContainer">
+                <section class="flexslider">
+                    <ul class="slides">
                         <?php foreach( $images as $image ): ?>
-                            <li class="slider__item">
-                                <img class="glideSlideImage" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
+                            <li>
+                                <img class="flexSliderImage" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                </div>
+                </section>
+            </section>
             <?php endif; ?>
 
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
@@ -47,5 +49,7 @@ get_header(); ?>
     <?php endwhile; // end of the loop. ?>
 
 </section><!-- #primary -->
+
+    
 
 <?php get_footer(); ?>
