@@ -25,7 +25,7 @@
 </footer><!-- #colophon -->
 
 
-<?php if ( is_page_template( 'page-wooslider.php' ) ) : ?>   
+<?php if ( is_page_template( 'page-gallery.php' ) ) : ?>   
 
 <script>     
     simpleWooSlider(); // calls slider function in theme.js for wooSlider
