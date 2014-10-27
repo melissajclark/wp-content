@@ -10,7 +10,7 @@
 get_header(); ?>
 
     <script>     
-        wooSlider(); // calls slider function in theme.js for wooSlider
+        simpleWooSlider(); // calls slider function in theme.js for wooSlider
     </script>
 
 <section id="primary" role="main">
@@ -33,16 +33,16 @@ get_header(); ?>
             $images = get_field('gallery');
 
             if( $images ): ?>
-                <div id="slider" class="flexslider">
+                <section class="flexslider">
                     <ul class="slides">
                         <?php foreach( $images as $image ): ?>
                             <li>
-                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                <img class="flexSliderImage" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
                                 <p><?php echo $image['caption']; ?></p>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                </div>
+                </section>
             <?php endif; ?>
 
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
