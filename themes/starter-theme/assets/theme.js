@@ -1,3 +1,18 @@
+function simpleWooSlider() {
+  jQuery(document).ready(function($){ // wordpress doc ready
+
+    $(window).load(function() {
+      $('.flexslider').flexslider({
+        animation: "slide"
+      });
+    });
+
+  }); // end of WordPress doc ready function
+
+} // end of simpleWooSlider
+
+
+
 function wooSliderAndCarousel() {
 
   jQuery(document).ready(function($){
