@@ -24,7 +24,15 @@
 
 </footer><!-- #colophon -->
 
-    <?php endif; ?>
+
+<?php if ( is_page_template( 'page-wooslider.php' ) ) : ?>   
+
+<script>     
+    simpleWooSlider(); // calls slider function in theme.js for wooSlider
+</script>
+
+<?php endif; ?>
+
  
 <?php wp_footer(); ?> 
 </body>
