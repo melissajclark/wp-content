@@ -1427,6 +1427,8 @@ article.comment { border-bottom: 1px solid black; padding: 10px 0; }
 * http://www.gnu.org/licenses/gpl-2.0.html
 *
 * Contributing author:Tyler Smith (@mbmufffin) */
+.wooSliderContainer { height: 550px; }
+
 /* Browser Resets *********************************/
 .flex-container a:active, .flexslider a:active, .flex-container a:focus, .flexslider a:focus { outline: none; }
 
