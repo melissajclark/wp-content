@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: WooSlider Template
+ * Template Name: Gallery
  *
- * This is the template that displays all pages by default.
+ * This is the template that displays all gallery pages by default.
  *
  * @package Starter_Theme
  */
