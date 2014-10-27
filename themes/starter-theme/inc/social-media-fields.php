@@ -1,4 +1,4 @@
-	<div class="socialmedia">
+<!-- 	<div class="socialmedia"> -->
 
 	<!-- ============= Displays Content From Theme's Option Page: Social Media Links ================-->
 
@@ -143,4 +143,4 @@
 			    </a>
 			<?php endif; ?>
 
-	</div>
+<!-- 	</div> -->
