@@ -33,8 +33,7 @@ get_header(); ?>
             $images = get_field('gallery');
 
             if( $images ): ?>
-           <!--  <section class="flexSliderWrapper">  -->
-                <section id="slider" class="flexslider">
+                <div id="slider" class="flexslider">
                     <ul class="slides">
                         <?php foreach( $images as $image ): ?>
                             <li>
@@ -43,9 +42,17 @@ get_header(); ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-   <!--              </section> -->
-            </section>
-        <?php endif; ?>
+                </div>
+                <div id="carousel" class="flexslider">
+                    <ul class="slides">
+                        <?php foreach( $images as $image ): ?>
+                            <li>
+                                <img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
             </div><!-- .entry-content -->
