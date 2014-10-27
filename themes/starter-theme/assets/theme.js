@@ -3,7 +3,8 @@ function simpleWooSlider() {
 
     $(window).load(function() {
       $('.flexslider').flexslider({
-        animation: "fade"
+        animation: "fade",
+        smoothHeight: true
       });
     });
 
