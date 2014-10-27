@@ -8,9 +8,9 @@
 * Contributing author:Tyler Smith (@mbmufffin) */
 
 // Custom Styles:
-.wooSliderContainer {
-	height: 550px;
-}
+// .wooSliderContainer .flexslider {
+// 	height: 550px; 
+// }
 
 
 
@@ -256,13 +256,13 @@ html[xmlns] .slides {
 	opacity: 1;
 	cursor: default;
 }
-// @media screen and (max-width:860px) {
-// 	.flex-direction-nav .flex-prev {
-// 		opacity: 1;
-// 		left: 10px;
-// 	}
-// 	.flex-direction-nav .flex-next {
-// 		opacity: 1;
-// 		right: 10px;
-// 	}
-// }
+@media screen and (max-width:860px) {
+	.flex-direction-nav .flex-prev {
+		opacity: 1;
+		left: 10px;
+	}
+	.flex-direction-nav .flex-next {
+		opacity: 1;
+		right: 10px;
+	}
+}
