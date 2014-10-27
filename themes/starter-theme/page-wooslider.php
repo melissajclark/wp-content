@@ -33,6 +33,7 @@ get_header(); ?>
             $images = get_field('gallery');
 
             if( $images ): ?>
+            <section class="wooSliderContainer">
                 <section class="flexslider">
                     <ul class="slides">
                         <?php foreach( $images as $image ): ?>
@@ -43,6 +44,7 @@ get_header(); ?>
                         <?php endforeach; ?>
                     </ul>
                 </section>
+            </section>
             <?php endif; ?>
 
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
