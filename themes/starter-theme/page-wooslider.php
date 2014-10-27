@@ -10,7 +10,7 @@
 get_header(); ?>
 
     <script>     
-        wooSlider(); // calls slider function in theme.js for wooSlider
+        basicWooSlider(); // calls slider function in theme.js for wooSlider
     </script>
 
 <section id="primary" role="main">
