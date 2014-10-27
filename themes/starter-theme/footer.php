@@ -49,12 +49,12 @@
 
     <?php endif; ?> -->
 
-
+<!-- 
     <?php if ( is_page_template( 'page-wooslider.php' ) ) : ?>   
     
     <script>     
         wooSlider(); // calls slider function in theme.js for wooSlider
-    </script>
+    </script> -->
 
     <?php endif; ?>
  
