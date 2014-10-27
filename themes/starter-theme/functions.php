@@ -154,26 +154,6 @@ function starter_theme_scripts() {
 	);
 
 	wp_enqueue_script(
-		'bxslider', // bxSlider
-		get_template_directory_uri() . '/assets/vendor/jquery.bxslider.js',
-		array('jquery')
-	);
-
-
-	wp_enqueue_script(
-		'WallopSlider', // wallop slider
-		get_template_directory_uri() . '/assets/vendor/WallopSlider.js',
-		array('jquery')
-	);
-
-
-	wp_enqueue_script(
-		'glideSlider', // glide slider
-		get_template_directory_uri() . '/assets/vendor/jquery.glide.js',
-		array('jquery')
-	);
-
-	wp_enqueue_script(
 	    'theme', // all functions in theme.js
 	    get_template_directory_uri() . '/assets/theme.js',
 	    array('jquery')
