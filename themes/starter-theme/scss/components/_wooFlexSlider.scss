@@ -8,6 +8,8 @@
 * Contributing author:Tyler Smith (@mbmufffin) */
 
 
+
+
 /* Browser Resets *********************************/
 .flex-container a:active, .flexslider a:active, .flex-container a:focus, .flexslider a:focus {
 	outline: none;
@@ -250,13 +252,13 @@ html[xmlns] .slides {
 	opacity: 1;
 	cursor: default;
 }
-@media screen and (max-width:860px) {
-	.flex-direction-nav .flex-prev {
-		opacity: 1;
-		left: 10px;
-	}
-	.flex-direction-nav .flex-next {
-		opacity: 1;
-		right: 10px;
-	}
-}
+// @media screen and (max-width:860px) {
+// 	.flex-direction-nav .flex-prev {
+// 		opacity: 1;
+// 		left: 10px;
+// 	}
+// 	.flex-direction-nav .flex-next {
+// 		opacity: 1;
+// 		right: 10px;
+// 	}
+// }
