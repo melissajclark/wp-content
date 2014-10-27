@@ -9,9 +9,6 @@
 
 get_header(); ?>
 
-    <script>     
-        simpleWooSlider(); // calls slider function in theme.js for wooSlider
-    </script>
 
 <section id="primary" role="main">
 
