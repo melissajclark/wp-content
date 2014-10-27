@@ -9,6 +9,10 @@
 
 get_header(); ?>
 
+    <script>     
+        wooSlider(); // calls slider function in theme.js for wooSlider
+    </script>
+
 <section id="primary" role="main">
 
     <?php while ( have_posts() ) : the_post(); ?>
@@ -50,8 +54,6 @@ get_header(); ?>
 
 </section><!-- #primary -->
 
-<script>     
-        wooSlider(); // calls slider function in theme.js for wooSlider
-    </script>
+    
 
 <?php get_footer(); ?>
