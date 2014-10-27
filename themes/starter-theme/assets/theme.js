@@ -52,6 +52,24 @@ function wooSlider() {
 
 } // end of wooslider function
 
+
+function anotherWooSlider() {
+
+  jQuery(document).ready(function($){
+
+    $(window).load(function() {
+     $('.flexslider').flexslider({
+        animation: "slide",
+        multipleKeyboard: true,
+        smoothHeight: true
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+
+  }); // end of WordPress doc ready function
+
 function basicWooSlider() {
 
   jQuery(document).ready(function($){
