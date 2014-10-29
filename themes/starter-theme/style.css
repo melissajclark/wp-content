@@ -1135,7 +1135,7 @@ textarea { overflow: auto; vertical-align: top; }
 
 /* =LAYOUTS
 ------------------ */
-body { background: white; margin: 0; padding: 0; max-width: 100%; }
+body { background: rgba(108, 103, 103, 0.12); margin: 0; padding: 0; max-width: 100%; }
 
 #page { width: 95%; padding: 0 15px; }
 
@@ -1149,15 +1149,17 @@ body { background: white; margin: 0; padding: 0; max-width: 100%; }
 
 #secondary { float: right; padding: 0; max-width: 95%; }
 
+#colophon { clear: both; overflow: hidden; }
+
 /* Sticky footer */
 html, body { height: 100%; }
 
 body { margin: 0px; padding: 0px; }
 
-#page { min-height: 100%; height: auto !important; height: 100%; margin-bottom: -50px; }
-#page #main { padding: 0 0 50px 0; }
+#page { min-height: 100%; height: auto !important; height: 100%; margin-bottom: -100px; }
+#page #main { padding: 0 0 100px 0; }
 
-#colophon { height: 50px; }
+#colophon { height: 100px; }
 
 #site-header { margin-bottom: 45px; position: relative; z-index: 250; }
 #site-header img { height: auto; }
