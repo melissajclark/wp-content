@@ -26,10 +26,11 @@ acf_form_head(); ?>
             <?php acf_form(array(
                     'post_id'       => 'new_post',
                     'new_post'      => array(
-                    'post_type'     => 'event',
-                    'post_status'   => 'publish'
+                    'post_type'     => 'application',
+                    'post_status'   => 'draft',
+                    'post_content'  => true
                     ),
-                        'submit_value'      => 'Create a new event'
+                        'submit_value'      => 'Create new application'
                     )); ?>
 
             <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
@@ -42,5 +43,5 @@ acf_form_head(); ?>
 
     </section><!-- #primary -->
 
-<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>
