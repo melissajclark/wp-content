@@ -1,6 +1,6 @@
 <?php
 /**
- * The Page template
+ * Template Name: Form
  *
  * This is the template that displays all pages by default.
  *
