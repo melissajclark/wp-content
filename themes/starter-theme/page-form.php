@@ -23,7 +23,14 @@ acf_form_head(); ?>
             <div class="entry-content">
                 <?php the_content(); ?>
 
-                <?php acf_form(); ?>
+            <?php acf_form(array(
+                    'post_id'       => 'new_post',
+                    'new_post'      => array(
+                    'post_type'     => 'event',
+                    'post_status'   => 'publish'
+                    ),
+                        'submit_value'      => 'Create a new event'
+                    )); ?>
 
             <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
 
