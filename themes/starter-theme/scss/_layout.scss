@@ -31,9 +31,9 @@ body {
 	padding: 0;
 	max-width: $secondary-width;
 }
-// #colophon {
-// 	clear: both;
-// 	overflow: hidden;
-// }
+#colophon {
+	clear: both;
+	overflow: hidden;
+}
 /* Sticky footer */
-@include sticky-footer(50px, '#page','#main','#colophon');
+@include sticky-footer(100px, '#page','#main','#colophon');
