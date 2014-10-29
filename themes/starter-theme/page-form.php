@@ -28,7 +28,7 @@ acf_form_head(); ?>
                     'new_post'      => array(
                     'post_type'     => 'application',
                     'post_status'   => 'draft',
-                    'post_content'  => true
+                    'post_content'  => true,
                     ),
                         'submit_value'      => 'Create new application'
                     )); ?>
