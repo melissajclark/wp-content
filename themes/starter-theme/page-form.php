@@ -10,31 +10,18 @@
 acf_form_head(); ?>
 <?php get_header(); ?>
 
-<section id="primary" role="main">
+    <div id="primary">
+        <div id="content" role="main">
 
-    <?php while ( have_posts() ) : the_post(); ?>
+            <?php /* The loop */ ?>
+            <?php while ( have_posts() ) : the_post(); ?>
 
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <header class="entry-header">
-                <h1 class="entry-title"><?php the_title(); ?></h1>
-            </header><!-- .entry-header -->
+                <?php acf_form(); ?>
 
-            <div class="entry-content">
-                <?php the_content(); ?>
+            <?php endwhile; ?>
 
-                        <?php /* The loop */ ?>
-                        <?php while ( have_posts() ) : the_post(); ?>
+        </div><!-- #content -->
+    </div><!-- #primary -->
 
-                            <?php acf_form(); ?>
-
-                        <?php endwhile; ?>
-
-                <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
-            </div><!-- .entry-content -->
-        </article><!-- #post-<?php the_ID(); ?> -->
-
-    <?php endwhile; // end of the loop. ?>
-
-</section><!-- #primary -->
-
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>
