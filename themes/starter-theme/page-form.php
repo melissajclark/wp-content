@@ -30,7 +30,7 @@ acf_form_head(); ?>
                     'post_status'   => 'draft',
                     'post_content'  => true,
                     ),
-                        'submit_value'      => 'Create new application'
+                        'submit_value'      => 'Save Application'
                     )); ?>
 
             <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
