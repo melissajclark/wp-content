@@ -1,0 +1,1613 @@
+# This file is distributed under the same license as the Ninja Forms package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ninja Forms\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-08-08 16:07+0100\n"
+"Last-Translator: Roland Lemminga <roland.lemminga@home.nl>\n"
+"Language-Team: R.Lemminga <roland@robeliki.nl>\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.7\n"
+
+#: includes/activation.php:172
+msgid "Fields marked with a * are required"
+msgstr "Velden met een * zijn verplichte velden"
+
+#: includes/activation.php:175
+msgid "This is a required field"
+msgstr "Dit is een verplicht veld"
+
+#: includes/activation.php:176 includes/activation.php:193
+msgid "Please answer the anti-spam question correctly."
+msgstr "Beantwoord deze anti-spam vraag correct."
+
+#: includes/activation.php:177
+msgid "Processing"
+msgstr "Bezig te verwerken"
+
+#: includes/activation.php:178 includes/activation.php:184
+msgid "Login"
+msgstr "Inloggen"
+
+#: includes/activation.php:179
+msgid "Username"
+msgstr "Gebruikensnaam"
+
+#: includes/activation.php:180
+msgid "Reset Password (Opens in a new window)"
+msgstr "Reset Paswoord (opent in een nieuw venster)"
+
+#: includes/activation.php:181
+msgid "Password"
+msgstr "Paswoord"
+
+#: includes/activation.php:182 includes/fields/password.php:38
+msgid "Re-enter Password"
+msgstr "Nogmaals Paswoord"
+
+#: includes/activation.php:183
+msgid "Passwords do not match."
+msgstr "Paswoorden zijn niet gelijk"
+
+#: includes/activation.php:185 includes/fields/list.php:187
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: includes/activation.php:186
+msgid "Login failed, please try again."
+msgstr "Inloggen mislukt, probeer opnieuw"
+
+#: includes/activation.php:187 includes/activation.php:189
+msgid "Register"
+msgstr "Registreer"
+
+#: includes/activation.php:188
+msgid "Email Address"
+msgstr "Email adres"
+
+#: includes/activation.php:190
+msgid "There was an error registering you for this site."
+msgstr "Er is een fout opgetreden bij het registreren voor deze site"
+
+#: includes/activation.php:191
+msgid "4 + 9 = "
+msgstr "4 + 9 ="
+
+#: includes/activation.php:192
+msgid "13"
+msgstr "13"
+
+#: includes/activation.php:546
+msgid "Ninja Forms Password"
+msgstr "Ninja Forms Paswoord"
+
+#: includes/activation.php:547
+msgid ""
+"You are receiving this email because you have an incomplete form. Your "
+"username is now your email address and your password has been reset. It is "
+"now "
+msgstr ""
+"Je krijgt deze mail, omdat je een incomplete formulier hebt. Je "
+"gebruikersnaam is nu je email adres en je paswoord is gereset. Het is nu "
+
+#: includes/widget.php:14
+msgid "Ninja Forms Widget"
+msgstr "Ninja Forms Widget"
+
+#: includes/widget.php:84
+msgid "Display Title"
+msgstr "Venster titel"
+
+#: includes/admin/post-metabox.php:39 includes/fields/hidden.php:52
+#: includes/fields/textbox.php:125 includes/fields/textbox.php:162
+#: includes/widget.php:91
+msgid "None"
+msgstr "Niets"
+
+#: includes/admin/admin.php:142
+msgid "Save Form Settings"
+msgstr "Bewaar formulier instellingen"
+
+#: includes/admin/output-tab-metabox.php:283
+msgid "Select All"
+msgstr "Selecteer alles"
+
+#: includes/admin/post-metabox.php:12 includes/admin/post-metabox.php:20
+msgid "Append A Ninja Form"
+msgstr "Voeg een Ninja formulier toe"
+
+#: includes/admin/edit-field/li.php:100 includes/admin/sidebar.php:53
+msgid "Edit Menu Item"
+msgstr "Bewerk menu item"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:173
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:101
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:5
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:569
+#: includes/admin/sidebar.php:154
+msgid "View Submissions"
+msgstr "Bekijk Inzendingen"
+
+#: includes/admin/edit-field/help.php:33 includes/fields/calc.php:221
+msgid ""
+"If \"help text\" is enabled, there will be a question mark %s placed next to "
+"the input field. Hovering over this question mark will show the help text."
+msgstr ""
+"ALs de |\"help tekst\"is geactiveerd, dan zal een vraagteken naast het in te "
+"voeren veld worden geplaastst. Wanneer men de muis over de vraagteken gaat, "
+"dan zal de help tekst worden vertoond"
+
+#: includes/admin/edit-field/remove-button.php:6
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: includes/admin/edit-field/req.php:25
+msgid "Required"
+msgstr "Benodigd"
+
+#: includes/admin/edit-field/save-button.php:5
+#: includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php:7
+msgid "Save Field Settings"
+msgstr "Bewaar veld instellingen"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:88
+msgid "Field Settings Saved"
+msgstr "Veld instellingen bewaard"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:15
+msgid ""
+"Any character you place in the \"custom mask\" box that is not in the list "
+"below will be automatically entered for the user as they type and will not "
+"be removeable"
+msgstr ""
+"Elke karakter die je plaatst in de \"aangepast sjabloon\"box, dat niet in de "
+"onderliggende lijst zit, wordt automatisch toegevoegd als de gebruiker deze "
+"typt en kan niet worden verwijderd"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:16
+msgid "These are the predefined masking characters"
+msgstr "Dit zijn de voorgedefinieerde sjabloon tekens"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:18
+msgid ""
+"a - Represents an alpha character (A-Z,a-z) - Only allows letters to be "
+"entered"
+msgstr ""
+"a - Reprensenteerd een alpha karakter (A-z, a-z) - Alleen letters zijn "
+"toegestaan"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:19
+msgid ""
+"9 - Represents a numeric character (0-9) - Only allows numbers to be entered"
+msgstr ""
+"9 - Representeerd een nummeriek karakter (0-9) - Alleen nummers zijn "
+"toegestaan"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:20
+msgid ""
+"* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both "
+"numbers and letters to be entered"
+msgstr ""
+"* - Representeerd een alphanummeriek karakter (A-Z,a-z,0-9) - Hier mogen "
+"nummers en letters worden ingevoerd."
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid ""
+"So, if you wanted to a mask for an an American Social Security Number, you'd "
+"put 999-99-9999 into the box"
+msgstr ""
+"Dus, als je een sjabloon voor een Amerikaans Sociaal Nummer wilt voer dan "
+"999-99-9999 in het veld"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid ""
+"The 9s would represent any number, and the -s would be automatically added"
+msgstr "De 9s reprensenteerd elk nummer, en de -s wordt automatisch toegevoegd"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
+msgid "This would prevent the user from putting in anything other than numbers"
+msgstr ""
+"Zo wordt voorkomen dat een gebruiker niets anders kan invullen dan alleen "
+"nummers"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:27
+msgid "You can also combine these for specific applications"
+msgstr "Je kunt deze ook altijd combineren, voor specifieke aplicaties"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:27
+msgid ""
+"For instance, if you had a product key that was in the form of A4B51.989."
+"B.43C, you could mask it with: a9a99.999.a.99a, which would force all the "
+"a's to be letters and the 9s to be numbers"
+msgstr ""
+"Bijvoorbeeld, als u een productcode had, die in de vorm was van A4B51.989."
+"B.43C , kun je dit type sjabloon gebruiken: a9a99.999.a.99a , dit dwingt "
+"gebruikers om alle a's in letters en de 9s zijn dan alleen nummers"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:26
+msgid "Add New Form"
+msgstr "Voeg Nieuwe Formulier Toe"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:84
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:148
+msgid "Bulk Actions"
+msgstr "Bulkacties"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:85
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:170
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:149
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:283
+msgid "Delete"
+msgstr "Verwijder"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:86
+msgid "Export Forms"
+msgstr "Exporteer Formulieren"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:96
+msgid "Forms Per Page"
+msgstr "Formulieren Per Pagina"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:103
+msgid "Form"
+msgstr "Formulier"
+
+#: includes/admin/admin.php:10 includes/admin/admin.php:11
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:103
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:6
+msgid "Forms"
+msgstr "Formulieren"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:141
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:198
+msgid "Form Title"
+msgstr "Formuliertitel"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:142
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:199
+msgid "Shortcode"
+msgstr "Korte code"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:143
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:200
+msgid "Template Function"
+msgstr "Sjabloon Functie"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:144
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:201
+msgid "Date Updated"
+msgstr "Datum Geüpdatet"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:217
+msgid "Forms Deleted"
+msgstr "Formulieren Verwijderd"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:219
+msgid "Form Deleted"
+msgstr "Formulier Verwijderd"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:98
+#: includes/admin/pages/ninja-forms/tabs/form-settings/help.php:7
+msgid "Basic Settings"
+msgstr "Basis Instellingen"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:104
+msgid "Display Form Title"
+msgstr "Venster Formulier Titel"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:110
+msgid "Save form submissions?"
+msgstr "Bewaar formulier inzending?"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:120
+msgid "Require Logged-in?"
+msgstr "Vereist Ingelogd zijn?"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:128
+msgid "Append to a page"
+msgstr "Toevoegen aan een pagina"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:137
+msgid "Submit via ajax?"
+msgstr "Verstuur via Ajax"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:146
+msgid "Success Page"
+msgstr "Succes Pagina"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:157
+msgid "Clear successfully completed form?"
+msgstr "Maak succesvol verstuurde formulier leeg?"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:159
+msgid ""
+"If this box is checked, Ninja Forms will clear the form after it has been "
+"successfully submitted."
+msgstr ""
+"Als dit vakje is aangevinkt, zal Ninja Formulieren het formulier te wissen "
+"nadat deze is verzonden."
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:167
+msgid "Hide successfully completed form?"
+msgstr "Verberg succesvol ingevulde formulier?"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:169
+msgid ""
+"If this box is checked, Ninja Forms will hide the form after it has been "
+"successfully submitted."
+msgstr ""
+"Als dit vakje is aangevinkt, zal Ninja Formulieren het formulier verbergen "
+"nadat het is verzonden."
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:176
+msgid "Success Message"
+msgstr "Succes Bericht"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:177
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:241
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:278
+msgid ""
+"If you want to include field data entered by the user, for instance a name, "
+"you can use the following shortcode: [ninja_forms_field id=23] where 23 is "
+"the ID of the field you want to insert. This will tell Ninja Forms to "
+"replace the bracketed text with whatever input the user placed in that "
+"field. You can find the field ID when you expand the field for editing."
+msgstr ""
+"Als u veldgegevens, die ingevoerd zijn door de gebruiker, wilt gebruiken, "
+"bijvoorbeeld een naam, kunt u de volgende shortcode gebruiken: "
+"[Ninja_forms_field id = 23], waar 23 is het ID van het veld dat u wilt "
+"invoegen Dit zal Ninja Forms vertellen, dat  tussen de haakjes, de tekst te "
+"vervangen door de waarde  van het veld wat de gebruiker ingevuld heeft. U "
+"kunt het veld ID vinden wanneer u het veld uitklapt om te bewerken."
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:191
+msgid "Email Settings"
+msgstr "Email Instellingen"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:204
+msgid "Email From Address"
+msgstr "Email Van Adres"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:205
+msgid "Steve Jones <steve@myurl.com>"
+msgstr "Steve Jones <steve@myurl.com>"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:210
+msgid "Email Type"
+msgstr "Email Type"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:228
+msgid "User Email"
+msgstr "Gebruiker Email"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:235
+msgid "Subject for the user email"
+msgstr "Onderwerp voor de gebruiker e-mail"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:240
+msgid "Email message sent to the user"
+msgstr "E-mailbericht verzonden naar de gebruiker"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:246
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:283
+msgid "Include a list of fields?"
+msgstr "Sluit een lijst van velden in?"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:259
+msgid "Administrator Email"
+msgstr "Administrator Email"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:266
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:310
+msgid "Administrator Email Addresses"
+msgstr "Administrator Email Adressen"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:272
+msgid "Admin Subject"
+msgstr "Administrator Onderwerp"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:277
+msgid "Admin Email Message"
+msgstr "Administrator Email Bericht"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:290
+msgid "Attach CSV of submission?"
+msgstr "In de bijlage CSV van de inzending?"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:315
+msgid "Please enter all the addresses this form should be sent to."
+msgstr ""
+"Vul alle email adressen in, waarnaar dit formulier dient te worden gezonden."
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:362
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:367
+msgid "Form Settings Saved"
+msgstr "Formulier Instellingen Bewaard"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/help.php:15
+msgid "Ninja Forms basic help goes here."
+msgstr "Ninja Forms basis help komt hier."
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:6
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:20
+msgid "Backup / Restore"
+msgstr "Backup / Herstel"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:22
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:24
+msgid "Backup Ninja Forms"
+msgstr "Backup Ninja Forms"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:28
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:32
+msgid "Restore Ninja Forms"
+msgstr "Herstel Ninja Forms"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:23
+msgid "Import Favorite Fields"
+msgstr "Importeer Favorieten Velden"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:28
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:27
+msgid "Select a file"
+msgstr "Selecteer een bestand"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:36
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:132
+msgid "Import Favorites"
+msgstr "Importeer Formulieren"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:57
+msgid "No Favorite Fields Found"
+msgstr "Geen Favorieten Velden Gevonden"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:63
+msgid "Export Favorite Fields"
+msgstr "Exporteer Favorieten Velden"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:81
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:93
+msgid "Export Fields"
+msgstr "Exporteer Velden"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:130
+msgid "Please select favorite fields to export."
+msgstr "Selecteer favoriete velden om te exporteren."
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:143
+msgid "Favorites imported successfully."
+msgstr "Favorieten succesvol geïmporteerd."
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:145
+msgid "Please select a valid favorite fields file."
+msgstr "Selecteer een geldig favoriet veld bestand."
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:22
+msgid "Import a form"
+msgstr "Importeer een formulier"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:35
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:128
+msgid "Import Form"
+msgstr "Importeer Formulier"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:60
+msgid "Export a form"
+msgstr "Exporteer een formulier"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:65
+msgid "Select a form"
+msgstr "Selecteer een formulier"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:171
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:73
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:122
+msgid "Export Form"
+msgstr "Exporteer Formulier"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:126
+msgid "Please select a form."
+msgstr "Selecteer een formulier alstublieft"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:155
+msgid "Form Imported Successfully."
+msgstr "Formulier succesvol geïmporteerd."
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:158
+msgid "Please select a valid exported form file."
+msgstr "Selecteer een geldig formulier bestand om te exporteren."
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:18
+msgid "Import / Export Submissions"
+msgstr "Importeren / Exporteren Inzendingen"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:20
+#: includes/admin/pages/ninja-forms-settings/tabs/favorite-fields/favorite-fields.php:19
+msgid "Date Settings"
+msgstr "Datum Instellingen"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:28
+msgid "Ajax Message Settings"
+msgstr "Ajax Bericht Instellingen"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:33
+msgid "Ajax Message Format"
+msgstr "Ajax Berichten Formaat"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:34
+msgid ""
+"(Advanced setting: Ninja Forms will require you to create two javascript "
+"functions: one to handle the beforeSubmit call and one to handle the server "
+"response. These should be named ninja_forms_custom_ajax_before_submit and "
+"ninja_forms_custom_ajax_response.)"
+msgstr ""
+"(Geavanceerde instelling: Ninja Forms zal vereisen dat u twee javascript "
+"functies maken:. Een om het gesprek van de functie beforeSubmit te "
+"behandelen en één om de server antwoord te  behandelen Deze moeten worden "
+"genoemd ninja_forms_custom_ajax_before_submit en "
+"ninja_forms_custom_ajax_response.)"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:40
+msgid "Ninja Forms Test"
+msgstr "Ninja Forms Test"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:63
+msgid "Ajax Loading Gif"
+msgstr "Ajax Laden Gif"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:68
+msgid "Default"
+msgstr "Standaard"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:73
+#: includes/fields/hidden.php:58 includes/fields/textbox.php:131
+#: includes/fields/textbox.php:166
+msgid "Custom"
+msgstr "Aangepast"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:92
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:58
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:78
+msgid "Settings Saved"
+msgstr "Instellingen Bewaard"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/favorite-fields/favorite-fields.php:17
+msgid "Favorite Field Settings"
+msgstr "Favoriete Veld Instellingen"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:24
+msgid "General Settings"
+msgstr "Algemeen Instellingen"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:29
+msgid "Version"
+msgstr "Versie"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:35
+msgid "Date Format"
+msgstr "Datum Formaat"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:36
+msgid ""
+"e.g. m/d/Y, d/m/Y - Tries to follow the <a href=\"http://www.php.net/manual/"
+"en/function.date.php\" target=\"_blank\">PHP date() function</a> "
+"specifications, but not every format is supported."
+msgstr ""
+"v.b. m/d/Y, d/m/Y - Kijk ook naar <a href=\"http://www.php.net/manual/en/"
+"function.date.php\" target=\"_blank\">PHP date() function</a> specificaties, "
+"want niet elke formaat wordt geaccepteerd."
+
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:41
+msgid "Currency Symbol"
+msgstr "Valuta Symbool"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:42
+msgid "e.g. $, &pound;, &euro;"
+msgstr "v.b. $, &pound;, &euro;"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:23
+msgid "Message Labels"
+msgstr "Berichten Labels"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:28
+msgid "Required Field Label"
+msgstr "Verplicht Veld Label"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:35
+msgid "Required field symbol"
+msgstr "Verplicht Veld Symbool"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:40
+msgid "Error message given if all required fields are not completed"
+msgstr "Fout melding geven, wanneer niet alle verplichte velden zijn ingevuld"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:45
+msgid "Required Field Error"
+msgstr "Verplicht Veld Fout"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:51
+msgid "Anti-spam error message"
+msgstr "Anti-spam fout bericht"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:57
+msgid "Please enter a valid email address"
+msgstr "Voer a.u.b. een geldig email adres in."
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:63
+msgid "Ajax submitting message"
+msgstr "Ajax inzendingen bericht"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:64
+msgid ""
+"If your form is submitted via ajax, what message should appear to let users "
+"know it is being processed?"
+msgstr ""
+"Als je formulier via ajax is verstuurd, welek bericht zou moeten verschijnen "
+"om je gebruikers te laten weten dat het verwerkt wordt?"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:7
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:22
+msgid "Licenses"
+msgstr "Licenties"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:43
+msgid "Licenses Saved"
+msgstr "Licenties Opgeslagen"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:73
+msgid "View Form Submissions"
+msgstr "Bekijk Formulier Inzendingen"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:171
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:150
+msgid "Export"
+msgstr "Exporteer"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:160
+msgid "Submissions Per Page"
+msgstr "Inzendingen Per Pagina"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:164
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:526
+msgid "Download All Submissions"
+msgstr "Download alle inzendingen"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:170
+msgid "Submission"
+msgstr "Inzendingen"
+
+#: includes/admin/admin.php:13
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-subs/impexp-subs.php:6
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:170
+msgid "Submissions"
+msgstr "Inzendingen"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:242
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:390
+#: includes/fields/textbox.php:164
+msgid "Date"
+msgstr "Datum"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:169
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:282
+msgid "Edit"
+msgstr "Bewerk"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:284
+msgid "Export to CSV"
+msgstr "Exporteer naar CSV"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:358
+msgid "No submissions found"
+msgstr "Geen inzendingen gevonden"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:409
+msgid "Back"
+msgstr "Terug"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:88
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:152
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:503
+msgid "Apply"
+msgstr "Toepassen"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:514
+msgid "Submissions Deleted"
+msgstr "Inzendingen Verwijderd"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:516
+msgid "Submission Deleted"
+msgstr "Inzendingen Verwijderd"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:351
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:567
+msgid "Save Sub"
+msgstr "Bewaar Inzending"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:58
+msgid "Select A Form"
+msgstr "Selecteer Een Formulier"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:72
+msgid "Date Range"
+msgstr "Datum Reeks"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:72
+msgid "Optional"
+msgstr "Optioneel"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:75
+msgid "Begin Date"
+msgstr "Begin Datum"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:81
+msgid "End Date"
+msgstr "Eind Datum"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:87
+msgid ""
+"If both Begin Date and End Date are left blank, all submissions will be "
+"displayed."
+msgstr ""
+"Als zowel Begin Datum en Eind Datum leeg gelaten worden, alle inzendingen "
+"zullen worden vertoond."
+
+#: includes/display/scripts.php:216 includes/fields/password.php:127
+msgid "Strength indicator"
+msgstr "Sterkte indicator"
+
+#: includes/display/scripts.php:217
+msgid "Very weak"
+msgstr "Erg zwak"
+
+#: includes/display/scripts.php:218
+msgid "Weak"
+msgstr "Zwak"
+
+#: includes/display/scripts.php:221
+msgid "Strong"
+msgstr "<strong> Geselecteerd </strong> Berekende Waarde"
+
+#: includes/display/scripts.php:222
+msgid "Mismatch"
+msgstr "Verkeerde combinatie"
+
+#: includes/display/form/required-label.php:16
+msgid "Fields marked with a * are required."
+msgstr "Velden met een * zijn verplicht."
+
+#: includes/display/processing/email-add-fields.php:39
+#: includes/display/processing/email-add-fields.php:48
+msgid "User Submitted Values:"
+msgstr "Gebruiker Ingevoerde Waarde:"
+
+#: includes/display/processing/email-user.php:42
+msgid "Thank you for filling out this form."
+msgstr "Bedankt voor het invullen van dit formulier."
+
+#: includes/display/processing/req-fields-pre-process.php:51
+msgid "Please check required fields."
+msgstr "Controleer a.u.b. de verplichte velden."
+
+#: includes/fields/calc.php:112 includes/fields/checkbox.php:19
+#: includes/fields/desc.php:11 includes/fields/hidden.php:50
+#: includes/fields/textarea.php:11 includes/fields/textbox.php:122
+#: includes/fields/textbox.php:139
+msgid "Default Value"
+msgstr "Standaard Waarde"
+
+#: includes/fields/desc.php:18
+msgid "Text Element"
+msgstr "Tekst Elemen"
+
+#: includes/fields/hidden.php:53 includes/fields/textbox.php:126
+msgid "User ID (If logged in)"
+msgstr "Gebruiker ID (wanneer ingelogd)"
+
+#: includes/fields/hidden.php:54 includes/fields/textbox.php:127
+msgid "User Firstname (If logged in)"
+msgstr "Gebruiker Voornaam (wanneer ingelogd)"
+
+#: includes/fields/hidden.php:55 includes/fields/textbox.php:128
+msgid "User Lastname (If logged in)"
+msgstr "Gebruiker Achternaam (wanneer ingelogd)"
+
+#: includes/fields/hidden.php:56 includes/fields/textbox.php:129
+msgid "User Display Name (If logged in)"
+msgstr "Gebruiker Venster Naam (wanneer ingelogd)"
+
+#: includes/fields/hidden.php:57 includes/fields/textbox.php:130
+msgid "User Email (If logged in)"
+msgstr "Gebruiker Email (wanneer ingelogd)"
+
+#: includes/fields/hidden.php:64
+msgid "Custom Default Value"
+msgstr "Aangepaste Standaard Waarde"
+
+#: includes/fields/hidden.php:85 includes/fields/textbox.php:16
+msgid "Is this an email address?"
+msgstr "Is dit een email adres?"
+
+#: includes/fields/hidden.php:93
+msgid ""
+"If this box is checked, Ninja Forms will validate this input as an email "
+"address."
+msgstr ""
+"Als dit vakje is aangevinkt, zal Ninja Forms dit als een e-mailadres "
+"valideren."
+
+#: includes/fields/hidden.php:100 includes/fields/textbox.php:21
+msgid "Send a copy of the form to this address?"
+msgstr "Verzend een kopie van dit formulier naar dit adres?"
+
+#: includes/fields/hidden.php:108
+msgid ""
+"If this box is checked, Ninja Forms will send a copy of this form (and any "
+"messages attached) to this address."
+msgstr ""
+"Als dit vakje is aangevinkt, zal Ninja Forms een kopie van dit formulier (en "
+"geen berichten aanbevestigd) sturen naar dit adres."
+
+#: includes/fields/list.php:153
+msgid "Multi-Select Box Size"
+msgstr "Multi-Select Box Maat"
+
+#: includes/fields/list.php:156
+msgid "Expand / Collapse Options"
+msgstr "Ineen / Uiteen Opties"
+
+#: includes/fields/list.php:160
+msgid "Options"
+msgstr "Opties"
+
+#: includes/admin/admin.php:12
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:310
+#: includes/fields/list.php:160
+msgid "Add New"
+msgstr "Voeg Nieuw Toe"
+
+#: includes/fields/list.php:161
+msgid "Import Options"
+msgstr "Importeer Opties"
+
+#: includes/fields/list.php:167
+msgid "Show option values"
+msgstr "Toon optie waardes"
+
+#: includes/fields/list.php:186
+msgid "Import"
+msgstr "Importeer"
+
+#: includes/fields/list.php:188
+msgid "To use this feature, you can paste your CSV into the textarea above."
+msgstr ""
+"Om deze functie te gebruiken, kunt u uw CSV plakken in het tekstveld "
+"hierboven."
+
+#: includes/fields/list.php:189
+msgid "The format should look like the following:"
+msgstr "De format moet er als volgt uitzien:"
+
+#: includes/fields/list.php:196
+msgid "If you want to send an empty value, you can use '' for the value."
+msgstr "Als u een lege waarde wilt sturen, gebruikdan de '' als waarde."
+
+#: includes/fields/password.php:28
+msgid "Use this as a registration password field"
+msgstr "Gebruik dit als een registratie wachtwoord veld"
+
+#: includes/fields/password.php:30
+msgid ""
+"If this box is checked, both password and re-password textboxes will be "
+"output."
+msgstr ""
+"Als dit vakje is aangevinkt, zal zowel wachtwoord- en het  her-wachtwoord "
+"tekstvak worden uitgestuurd."
+
+#: includes/fields/password.php:36
+msgid "Re-enter Password Label"
+msgstr "Nogmaals Paswoord Label"
+
+#: includes/fields/password.php:44
+msgid "Show Password Strength Indicator"
+msgstr "Toon Paswoord Sterkte Indicator"
+
+#: includes/fields/password.php:128
+msgid ""
+"Hint: The password should be at least seven characters long. To make it "
+"stronger, use upper and lower case letters, numbers and symbols like ! \" ? "
+"$ % ^ &amp; )."
+msgstr ""
+"Hint: Het wachtwoord moet minimaal zeven tekens lang zijn. Om het sterker te "
+"maken, gebruik hoofdletters en kleine letters, cijfers en symbolen zoals  ! "
+"\" ? $ % ^ &amp; )."
+
+#: includes/fields/password.php:146
+msgid "Passwords do not match"
+msgstr "Paswoorden zijn niet gelijk."
+
+#: includes/fields/rating.php:12
+msgid "Number of stars"
+msgstr "Aantal sterren."
+
+#: includes/fields/spam.php:29 includes/fields/spam.php:65
+msgid "Spam Question"
+msgstr "Spam vraag"
+
+#: includes/fields/spam.php:36 includes/fields/spam.php:71
+msgid "Spam Answer"
+msgstr "Spam Antwoord"
+
+#: includes/fields/textarea.php:18
+msgid "Show Rich Text Editor?"
+msgstr "Toon Rich Tekst Editor."
+
+#: includes/fields/textbox.php:11
+msgid "Datepicker"
+msgstr "Datumkiezer"
+
+#: includes/fields/textbox.php:26
+msgid ""
+"Use this as the \"From\" email address for Administrative recipients of this "
+"form?"
+msgstr ""
+"Gebruik dit als de  \"Van \" e-mailadres voor Administratieve ontvangers van "
+"dit formulier?"
+
+#: includes/fields/textbox.php:39
+msgid ""
+"Use this as the \"From\" email name for Administrative recipients of this "
+"form?"
+msgstr ""
+"Gebruik dit als de  \"Van \" e-mail naam voor Administratieve ontvangers van "
+"dit formulier?"
+
+#: includes/fields/textbox.php:159
+msgid "Input Mask"
+msgstr "Invoer Sjabloon"
+
+#: includes/fields/textbox.php:163
+msgid "Phone - (555) 555-5555"
+msgstr "Telefoon - (555) 555-5555"
+
+#: includes/fields/textbox.php:165
+msgid "Currency"
+msgstr "Valuta"
+
+#: includes/fields/textbox.php:174
+msgid "Custom Mask Definition"
+msgstr "Aangepast Sjabloon Defenitie"
+
+#: includes/fields/textbox.php:274
+msgid "Please enter a valid email address."
+msgstr "Voer a.u.b. een geldig email adres in."
+
+#: includes/admin/edit-field/calc.php:38
+msgid "Calculation Settings"
+msgstr "Rekenen Instellingen"
+
+#: includes/admin/edit-field/calc.php:46
+msgid "<strong>Checked</strong> Calculation Value"
+msgstr "<strong> Geselecteerd </strong> Berekende Waarde"
+
+#: includes/admin/edit-field/calc.php:46
+msgid "This is the value that will be used if <strong>Checked</strong>."
+msgstr ""
+"Dit is de waarde die wordt gebruikt als <strong> Geselecteerd </ strong>."
+
+#: includes/admin/edit-field/calc.php:47
+msgid "<strong>Unchecked</strong> Calculation Value"
+msgstr "<strong>Niet gedselecteerd</strong> Berekende Waarde"
+
+#: includes/admin/edit-field/calc.php:47
+msgid "This is the value that will be used if <strong>Unchecked</strong>."
+msgstr ""
+"Dit is de waarde die wordt gebruikt als <strong> Niet geselecteerd </ "
+"strong>."
+
+#: includes/admin/edit-field/calc.php:50
+msgid "Include in the auto-total? (If enabled)"
+msgstr "Opnemen in de auto-totaal? (Indien ingeschakeld)"
+
+#: includes/admin/edit-field/calc.php:52
+msgid "Include in payment details list?"
+msgstr "Opnemen in betalingsgegevens lijst?"
+
+#: includes/admin/edit-field/calc.php:52
+msgid ""
+" - Should this field be considered as pertinant to a payment/product? i.e. "
+"an item option, a product size or color, etc."
+msgstr ""
+"- Moet dit gebied worden beschouwd als pertinant voor een ​​betaling / "
+"product? Dat wil zeggen een item optie, een maat of kleur product, enz."
+
+#: includes/admin/edit-field/edit-field.php:73
+#: includes/admin/edit-field/edit-field.php:88
+#: includes/admin/sidebar-fields.php:14 includes/admin/sidebar.php:50
+msgid "name"
+msgstr "naam"
+
+#: includes/admin/edit-field/help.php:34 includes/fields/calc.php:222
+msgid "Show Help Text"
+msgstr "Zie Help Tekst"
+
+#: includes/admin/edit-field/help.php:38 includes/fields/calc.php:226
+msgid "Help Text"
+msgstr "Help Tekst"
+
+#: includes/admin/edit-field/label.php:41 includes/fields/calc.php:153
+msgid "Left of Element"
+msgstr "Links van het veld"
+
+#: includes/admin/edit-field/label.php:42 includes/fields/calc.php:154
+msgid "Above Element"
+msgstr "Boven van het veld"
+
+#: includes/admin/edit-field/label.php:43 includes/fields/calc.php:155
+msgid "Below Element"
+msgstr "Beneden van het veld"
+
+#: includes/admin/edit-field/label.php:44 includes/fields/calc.php:156
+msgid "Right of Element"
+msgstr "Rechts van het veld"
+
+#: includes/admin/edit-field/label.php:45
+msgid "Inside Element"
+msgstr "Binnen het veld"
+
+#: includes/admin/edit-field/label.php:58 includes/fields/calc.php:158
+msgid "Label Position"
+msgstr "Label Positie"
+
+#: includes/admin/sidebar.php:103 includes/admin/sidebar.php:108
+#: includes/admin/sidebar.php:125 includes/admin/sidebar.php:141
+#: includes/admin/sidebar.php:147
+msgid "label"
+msgstr "label"
+
+#: includes/admin/sidebar.php:164
+msgid "help"
+msgstr "help"
+
+#: includes/display/scripts.php:220
+msgctxt "password strength"
+msgid "Medium"
+msgstr "Gemiddeld"
+
+#: includes/fields/calc.php:43
+msgid "Number of decimal places."
+msgstr "Aantal decimalen."
+
+#: includes/fields/calc.php:68
+msgid "calc_name"
+msgstr "calc_naam"
+
+#: includes/fields/calc.php:111
+msgid "Calculation name"
+msgstr "Berekeningsnaam"
+
+#: includes/fields/calc.php:111
+msgid ""
+"This is the programmatic name of your field. Examples are: my_calc, "
+"price_total, user-total."
+msgstr ""
+"Dit is de programmatische naam van uw veld. Voorbeelden zijn: my_calc, "
+"prijs_totaal, gebruikers-totaal."
+
+#: includes/fields/calc.php:115
+msgid "Display Options"
+msgstr "Venster Opties"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:58
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:60
+#: includes/fields/calc.php:118
+msgid "- None"
+msgstr "- Niets"
+
+#: includes/fields/calc.php:119
+msgid "Textbox"
+msgstr "Tekstveld"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:212
+#: includes/fields/calc.php:120
+msgid "HTML"
+msgstr "HTML"
+
+#: includes/fields/calc.php:128
+msgid "Output calculation as"
+msgstr "Output berekening "
+
+#: includes/fields/calc.php:144 includes/fields/list.php:555
+msgid "Label"
+msgstr "Label"
+
+#: includes/fields/calc.php:166
+msgid "Disable input?"
+msgstr "UItschakelen invoer?"
+
+#: includes/fields/calc.php:182
+msgid ""
+"Use the following shortcode to insert the final calculation: "
+"[ninja_forms_calc]"
+msgstr ""
+"Gebruik de volgende shortcode om de definitieve berekening te voegen: "
+"[ninja_forms_calc]"
+
+#: includes/fields/calc.php:218
+msgid "Custom CSS Class"
+msgstr "Aangepaste CSS Klasse"
+
+#: includes/fields/calc.php:268
+msgid ""
+"You can enter calculation equations here using field_x where x is the ID of "
+"the field you want to use. For example, <strong>field_53 + field_28 + "
+"field_65</strong>."
+msgstr ""
+"U kunt berekeningsvergelijkingen hier invoeren met field_x waarbij x de ID "
+"van het veld dat u wilt gebruiken. Bijvoorbeeld, <strong> field_53 + "
+"field_28 + field_65 </ strong>."
+
+#: includes/fields/calc.php:269
+msgid ""
+"Complex equations can be created by adding parentheses: <strong>( field_45 * "
+"field_2 ) / 2</strong>."
+msgstr ""
+"Complexe vergelijkingen kunnen worden gemaakt door het toevoegen van "
+"haakjes: <strong> (field_45 * field_2) / 2 </ strong>."
+
+#: includes/fields/calc.php:270
+msgid ""
+"Please use these operators: + - * /. This is an advanced feature. Watch out "
+"for things like division by 0."
+msgstr ""
+"Gebruik deze operatoren: + - * /. Dit is een geavanceerde functie. Kijk uit "
+"voor dingen als delen door 0."
+
+#: includes/fields/calc.php:272
+msgid "Automatically Total Calculation Values"
+msgstr "Bereken Totalen Waardes Automatisch"
+
+#: includes/fields/calc.php:273
+msgid "Specify Operations And Fields (Advanced)"
+msgstr "Specifeer Uitwerking En Velden (Gevorderd)"
+
+#: includes/fields/calc.php:274
+msgid "Use An Equation (Advanced)"
+msgstr "Gebruik Een Vergelijking (Gevorderd)"
+
+#: includes/fields/calc.php:276
+msgid "Calculation Method"
+msgstr "Rekenkundige Methode"
+
+#: includes/fields/calc.php:282
+msgid "Field Operations"
+msgstr "Veld Uitwerking"
+
+#: includes/fields/calc.php:282
+msgid "Add Operation"
+msgstr "Voeg Uitwerking toe"
+
+#: includes/fields/calc.php:300
+msgid "Advanced Equation"
+msgstr "Gevorderde Vergelijking"
+
+#: includes/fields/calc.php:410
+msgid "- Select a Field"
+msgstr "- Selecteer een Veld"
+
+#: includes/fields/country.php:267
+msgid "Default Country"
+msgstr "Standaard Land"
+
+#: includes/fields/list.php:23
+msgid "This is the user's state"
+msgstr "Dit is de gebruikers status"
+
+#: includes/fields/list.php:558
+msgid "Value"
+msgstr "Waarde"
+
+#: includes/fields/list.php:561
+msgid "Calc"
+msgstr "Rekenen"
+
+#: includes/fields/list.php:564
+msgid "Selected"
+msgstr "Geselecteerd"
+
+#: includes/fields/tax.php:21
+msgid "Tax Percentage"
+msgstr "Belasting Percentage"
+
+#: includes/fields/tax.php:23
+msgid "Should be entered as a percentage. e.g. 8.25%, 4%"
+msgstr "Moet ingevoerd worden als een percentage, v.b. 8,25%, 4%"
+
+#: includes/fields/textarea.php:23
+msgid "Disable Rich Text Editor on Mobile"
+msgstr "Schakel Rich Tekst (RTF) Editor uit voor Mobiel"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:7
+msgid "Form Settings"
+msgstr "Formulier Instellingen"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:35
+msgid "Enter form title here"
+msgstr "Voer formuliertitel hier in"
+
+#: ninja-forms.php:0
+msgid "Ninja Forms"
+msgstr "Ninja Forms"
+
+#: ninja-forms.php:0
+msgid "http://ninjaforms.com/ninja-forms/"
+msgstr "http://ninjaforms.com/ninja-forms/"
+
+#: ninja-forms.php:0
+msgid ""
+"Ninja Forms is a webform builder with unparalleled ease of use and features."
+msgstr ""
+"Ninja Forms is een webformulier bouwer met een ongeëvenaard gebruiksgemak en "
+"functies."
+
+#: ninja-forms.php:0
+msgid "The WP Ninjas"
+msgstr "De WP Ninjas"
+
+#: ninja-forms.php:0
+msgid "http://ninjaforms.com"
+msgstr "http://ninjaforms.com"
+
+#: ninja-forms.php:0
+msgid "2.2.31"
+msgstr "2.2.31"
+
+#: includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:12
+msgid "Field Settings"
+msgstr "Veld Instellingen"
+
+#: includes/admin/admin.php:11
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:17
+msgid "All Forms"
+msgstr "Alle Formulieren"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:126
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:193
+msgid "Go to the first page"
+msgstr "Ga naar de eerste pagina"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:127
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:194
+msgid "Go to the previous page"
+msgstr "Ga naar de vorige pagina"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:129
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:196
+msgid "Go to the next page"
+msgstr "Ga naar de volgende pagina"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:130
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:197
+msgid "Go to the last page"
+msgstr "Ga naar de laatste pagina"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:155
+msgid "F d, Y"
+msgstr "F d, Y"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:170
+msgid "Delete this form"
+msgstr "Verwijder dit formulier"
+
+#: includes/admin/pages/ninja-forms/tabs/form-preview/form-preview.php:13
+msgid "Form Preview"
+msgstr "Formulier Voorbeeld"
+
+#: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:213
+msgid "Plain Text"
+msgstr "Platte Tekst"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:6
+msgid "Extend Ninja Forms"
+msgstr "Uitbreidingen Ninja Forms"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:27
+msgid "Layout and Styles"
+msgstr "Lay-out en Stijlen"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:29
+msgid ""
+"This extension gives you power over the look and feel of your Ninja Forms "
+"from within your WordPress admin. It gives you the ability to style almost "
+"every part of your form, down to the the smallest detail, with little to no …"
+msgstr ""
+"Deze uitbreiding geeft je de macht over de stijl van uw Ninja formulieren "
+"vanuit uw WordPress admin. Het geeft je de mogelijkheid om bijna elk deel "
+"van uw formulier, de stijl, tot in de het kleinste detail, met weinig tot "
+"geen ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:35
+msgid "Save User Progress"
+msgstr "Save User Progress"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:37
+msgid ""
+"Sometimes forms can grow quite large, and it would be very helpful for users "
+"to be able to save their progress and come back at a later time. This "
+"extension does just that for you. Using the built-in WordPress user …"
+msgstr ""
+"Soms kunnen formulieren erg groot worden, en het zou zeer nuttig zijn om "
+"voor gebruikers in staat  te kunnen zijn, om hun voortgang op te slaan en "
+"terug te komen op een later tijdstip. Deze uitbreiding doet precies dat voor "
+"je. Met behulp van de ingebouwde WordPress gebruiker ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:43
+msgid "File Uploads"
+msgstr "File Uploads"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:45
+msgid ""
+"File Uploads for Ninjas Forms gives you the ability to insert file upload "
+"fields to your forms. This will allow users the ability to upload images, "
+"docs, audio or video files, or anything else you may need. You can easily …"
+msgstr ""
+"File Uploads voor Ninjas Forms, geeft u de mogelijkheid om velden voor "
+"bestanden te uploaden toe te voegen aan uw formulieren. Dit zal gebruikers "
+"de mogelijkheid geven om beelden, documenten, audio-of videobestanden, of "
+"iets anders dat u nodig heeft, uploaden. U kunt eenvoudig ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:51
+msgid "Front-End Posting"
+msgstr "Front-End Posting"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:53
+msgid ""
+"The Ninja Forms Front-end Posting extension gives you the power of the "
+"WordPress post editor on any publicly viewable page you choose. You can "
+"allow users the ability to create content and have it assigned to any "
+"publicly available built-in or custom …"
+msgstr ""
+"De Ninja Forms Front-end Posting uitbreiding, geeft je de kracht van de "
+"WordPress bericht editor op een voor iedereen zichtbaar pagina die u kiest. "
+"U kunt gebruikers de mogelijkheid geven om content te creëren en  het "
+"toegewijzen aan een openbaar ingebouwde of aangepaste ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:59
+msgid "Front-End Editor"
+msgstr "Front-End Editor"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:61
+msgid ""
+"The Front-End Editor Extension brings the power of your WordPress admin to "
+"your front-facing site. It is a one-stop solution for almost all your front-"
+"end editing needs. Users can now be allowed to create, edit, or delete "
+"posts, pages, or any custom post type without the need to see the WordPress "
+"admin."
+msgstr ""
+"De Front-End Editor Uitbreiding brengt de kracht van uw WordPress admin om "
+"uw front-facing-site. Het is een one-stop oplossing voor vrijwel al uw front-"
+"end editing behoeften. Gebruikers kunnen nu worden toegestaan ​​om berichten, "
+"pagina's, of een aangepaste berich type te maken, bewerken of verwijderen "
+"zonder de noodzaak om de WordPress admin zien."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:67
+msgid "Multi-Part Forms"
+msgstr "Multi-Part Forms"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:69
+msgid ""
+"The Multi-Part Forms extension allows you to break long forms into sections, "
+"creating a natural flow for your visitors. You can add a breadcrumb trail "
+"through the various sections of the form and a progress bar so that your "
+"users …"
+msgstr ""
+"De Multi-Part-formulieren uitbreiding kunt u lange formulieren breken in "
+"delen, het creëren van een natuurlijke stroom voor uw bezoekers. U kunt een "
+"broodkruimelspoor maken, door de verschillende secties van het formulier en "
+"een voortgangsbalk, zodat uw gebruikers ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:75
+msgid "Conditional Logic"
+msgstr "Conditional Logic"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:77
+msgid ""
+"This extension for Ninja Forms allows you to create “smart” forms. Fields "
+"within these forms can dynamically change based upon user input; show or "
+"hide fields based on a selected item, set field values based upon a list "
+"selection, or …"
+msgstr ""
+"Deze uitbreiding voor Ninja Formulieren kunt u 'slimme' formulieren te "
+"maken. Velden binnen deze formulieren kan dynamisch veranderen op basis van "
+"input van de gebruiker; weergeven of verbergen van velden op basis van een "
+"geselecteerd item, ingesteld veld waarden op basis van een keuzelijst, of ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:83
+msgid "MailChimp"
+msgstr "MailChimp"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:85
+msgid ""
+"The MailChimp extension allows you to quickly create newsletter signup forms "
+"for your MailChimp account using the power and flexibility that Ninja Forms "
+"provides. …"
+msgstr ""
+"De MailChimp uibreiding kunt u  nieuwsbrief aanmeldformulieren voor uw "
+"MailChimp Groep maken, gebruik van de kracht en flexibiliteit die Ninja "
+"Forms biedt. .... ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:91
+msgid "Campaign Monitor"
+msgstr "Campaign Monitor"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:93
+msgid ""
+"The Campaign Monitor extension allows you to quickly create newsletter "
+"signup forms for your Campaign Monitor account using the power and "
+"flexibility that Ninja Forms provides. …"
+msgstr ""
+"De Campaign Monitor uitbreiding kunt u snel nieuwsbrief aanmeldformulieren "
+"voor uw Campaign Monitor Groep  maken, gebruik van de kracht en "
+"flexibiliteit die Ninja Forms biedt. ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:99
+msgid "User Analytics"
+msgstr "User Analytics"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:101
+msgid ""
+"The User Analytics extension will help website owners understand how hot a "
+"lead is based on extra data automatically collected about the user. …"
+msgstr ""
+"De User Analytics uitbreiding zal helpen website-eigenaren begrijpen hoe hot "
+"een lead is, gebaseerd op extra gegevens automatisch verzameld over de "
+"gebruiker. ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:107
+msgid "Constant Contact"
+msgstr "Constant Contact"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:109
+msgid ""
+"The Constant Contact extension allows you to quickly create newsletter "
+"signup forms for your Constant Contact account using the power and…"
+msgstr ""
+"Met de Constant Contact uitbreiding, kunt u snel  nieuwsbrief "
+"aanmeldformulieren voor uw Constant Contact Groep maken, gebruik van de "
+"kracht en ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:115
+msgid "Pushover"
+msgstr "Pushover"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:117
+msgid ""
+"When email and SMS notifications just do not cut it, send yourself push "
+"notifications of form submissions with Pushover. Pushover makes…"
+msgstr ""
+"Wanneer e-mail en sms-berichten gewoon niet voldoen, stuur je push-"
+"notificaties van formulierinzendingen met Pushover. Pushover maakt ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:123
+msgid "Freshbooks"
+msgstr "Freshbooks"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:125
+msgid ""
+"Automatically insert Ninja Forms data right into Freshbooks when your "
+"potential clients submit forms. Go from lead to invoice that much quicker…"
+msgstr ""
+"Automatisch invoegen van Ninja Formulieren gegevens, rechtsstreeks in "
+"FreshBooks, wanneer uw potentiële klanten formulieren in dienen. Ga van lead "
+"tot factuur die veel sneller ..."
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:139
+msgid "Extension Documentation"
+msgstr "Uitbreidingen Documentatie"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:141
+msgid "Documentation coming soon."
+msgstr "Documentatie komt binnenkort"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:146
+msgid "Active"
+msgstr "Aktief"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:148
+msgid "Installed"
+msgstr "Geïnstaleerd"
+
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:150
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:153
+msgid "Learn More"
+msgstr "Leer Meer"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-backup/impexp-backup.php:37
+msgid "Data restored successfully!"
+msgstr "Data succesvol hersteld"
+
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-fields/impexp-fields.php:7
+#: includes/admin/pages/ninja-forms-settings/tabs/favorite-fields/favorite-fields.php:6
+msgid "Favorite Fields"
+msgstr "Favorieten Velden"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:12
+msgid "Ajax Settings"
+msgstr "Ajax instellingen"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:36
+msgid "Inline Messages (Default)"
+msgstr "Inline Berichten (Standaard)"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php:38
+msgid "Custom Message Display (Advanced)"
+msgstr "Aangepaste melding in een venster (Gevorderd)"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:6
+msgid "General"
+msgstr "Algemeen"
+
+#: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:6
+msgid "Labels"
+msgstr "Labels"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php:6
+msgid "Find Submissions"
+msgstr "Zoek Inzendingen"
+
+#: includes/admin/admin.php:14
+msgid "Import/Export"
+msgstr "Importeren/Exporteren"
+
+#: includes/admin/admin.php:14
+msgid "Import / Export"
+msgstr "Importeren / Exporteren"
+
+#: includes/admin/admin.php:15
+msgid "Ninja Form Settings"
+msgstr "Ninja Form Instellingen"
+
+#: includes/admin/admin.php:15
+msgid "Plugin Settings"
+msgstr "Plugin Instellingen"
+
+#: includes/admin/admin.php:16
+msgid "Ninja Form Extensions"
+msgstr "Ninja Form Uitbreidingen"
+
+#: includes/admin/admin.php:16
+msgid "Extend"
+msgstr "Verlengen"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:97
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:161
+msgid "Go"
+msgstr "Gaan"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:195
+msgid "Current page"
+msgstr "Huidige Pagina"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:209
+msgid "Back To Sub List"
+msgstr "Terug naar Sub lijst"
+
+#: includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php:416
+msgid "Save"
+msgstr "Bewaar"
+
+#: includes/admin/form-preview.php:44
+msgid "Preview Form"
+msgstr "Voorbeeld Formulier"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:79
+msgid "All"
+msgstr "Alles"
+
+#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:103
+msgid "of"
+msgstr "van"
