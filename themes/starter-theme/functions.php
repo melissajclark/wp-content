@@ -90,6 +90,31 @@ function my_custom_sizes( $sizes ) {
     ) );
 }
 
+/*================================================================
+=            Useful Functions to Override WP Defaults            =
+================================================================*/
+
+// function to remove <p> tags on images
+function filter_ptags_on_images($content){
+    return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+}
+add_filter('the_content', 'filter_ptags_on_images');
+
+// function to set default image link to none
+update_option('image_default_link_type','none');
+
+// enables ACF Options Page
+if(function_exists('acf_add_options_page')) { 
+ 
+	acf_add_options_page();
+	// acf_add_options_sub_page('Header');
+	// acf_add_options_sub_page('Footer');
+	acf_add_options_sub_page('Starter_Theme Options');
+ 
+}
+/*-----  End of Useful Functions to Override WP Defaults  ------*/
+
+
 /**
  * Register sidebars and widgetized areas
  */
@@ -161,17 +186,6 @@ function starter_theme_scripts() {
 }    
 add_action('wp_enqueue_scripts', 'starter_theme_scripts');
 
-// enables ACF Options Page
-
-if(function_exists('acf_add_options_page')) { 
- 
-	acf_add_options_page();
-	// acf_add_options_sub_page('Header');
-	// acf_add_options_sub_page('Footer');
-	acf_add_options_sub_page('Starter_Theme Options');
- 
-}
-
 
 // adjusts for paging on Grid Archive pages
 
@@ -182,8 +196,3 @@ function starter_theme_custom_query( $query ) {
     return $query;
 }
 add_filter( 'pre_get_posts', 'starter_theme_custom_query' );
-
-
-
-
-
