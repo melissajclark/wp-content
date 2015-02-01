@@ -1,13 +1,11 @@
 {
   "dependencies": {
-    "gulp": "~3.8.6",
-    "gulp-ruby-sass": "~0.6.0",
-    "gulp-autoprefixer": "0.0.8",
-    "gulp-minify-css": "~0.3.6",
-    "gulp-newer": "~0.3.0",
-    "gulp-imagemin": "~0.6.1",
-    "tiny-lr": "0.0.9",
-    "gulp-livereload": "~2.1.0",
-    "gulp-plumber": "~0.6.3"
+    "gulp": "*",
+    "gulp-ruby-sass": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-newer": "*",
+    "gulp-imagemin": "*",
+    "tiny-lr": "*",
+    "gulp-plumber": "*"
   }
 }
