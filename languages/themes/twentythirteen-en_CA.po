@@ -14,6 +14,7 @@ msgstr ""
 msgid "Not Found"
 msgstr "Not Found"
 
+#. Description of the plugin/theme
 msgid "The 2013 theme for WordPress takes us back to the blog, featuring a full range of post formats, each displayed beautifully in their own unique way. Design details abound, starting with a vibrant color scheme and matching header images, beautiful typography and icons, and a flexible layout that looks great on any device, big or small."
 msgstr "The 2013 theme for WordPress takes us back to the blog, featuring a full range of post formats, each displayed beautifully in their own unique way. Design details abound, starting with a vibrant colour scheme and matching header images, beautiful typography and icons, and a flexible layout that looks great on any device, big or small."
 
@@ -21,6 +22,7 @@ msgstr "The 2013 theme for WordPress takes us back to the blog, featuring a full
 msgid "Appears in the footer section of the site."
 msgstr "Appears in the footer section of the site."
 
+#. Theme URI of the plugin/theme
 msgid "http://wordpress.org/themes/twentythirteen"
 msgstr "http://wordpress.org/themes/twentythirteen"
 
@@ -176,6 +178,8 @@ msgstr "Sorry, but nothing matched your search terms. Please try again with diff
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 
+#. #-#-#-#-#  twentythirteen.pot (Twenty Thirteen 1.3)  #-#-#-#-#
+#. Author URI of the plugin/theme
 #: footer.php:19
 msgid "http://wordpress.org/"
 msgstr "http://en-ca.wordpress.org/"
@@ -192,11 +196,17 @@ msgstr "Proudly powered by %s"
 msgid "Navigation Menu"
 msgstr "Navigation Menu"
 
+#. Translators: If there are characters in your language that are not
+#. * supported by Source Sans Pro, translate this to 'off'. Do not translate
+#. * into your own language.
 #: functions.php:128
 msgctxt "Source Sans Pro font: on or off"
 msgid "on"
 msgstr "on"
 
+#. Translators: If there are characters in your language that are not
+#. * supported by Bitter, translate this to 'off'. Do not translate into your
+#. * own language.
 #: functions.php:134
 msgctxt "Bitter font: on or off"
 msgid "on"
@@ -236,6 +246,7 @@ msgstr "%title <span class=\"meta-nav\">&rarr;</span>"
 msgid "Sticky"
 msgstr "Sticky"
 
+#. Translators: used between list items, there is a space after the comma.
 #: functions.php:328 functions.php:334
 msgid ", "
 msgstr ", "
@@ -296,8 +307,10 @@ msgstr "Tag Archives: %s"
 msgid "%s Archives"
 msgstr "%s Archives"
 
+#. Theme Name of the plugin/theme
 msgid "Twenty Thirteen"
 msgstr "Twenty Thirteen"
 
+#. Author of the plugin/theme
 msgid "the WordPress team"
 msgstr "the WordPress team"
