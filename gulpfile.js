@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 
 gulp.task('styles', function(){
   return gulp.src(['themes/starter-theme/scss/*.scss',
-                   'themes/starter-theme/scss/**/*.scss', 
+                   'themes/starter-theme/scss/**/*.scss'], 
             {base: 'themes/starter-theme/scss/'} )
       .pipe(plumber())
         .pipe(sass({ style: 'expanded' }))
