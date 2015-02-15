@@ -33,6 +33,11 @@ Text Domain: themeTextDomain
 @import "typography";
 @import "forms";
 
+/* =FilterContent
+------------------ */
+@import "all-filteredContent";
+
+
 /* =COMPONENTS
 ------------------ */
 /* Includes password protection for pages and posts, 404 page */
