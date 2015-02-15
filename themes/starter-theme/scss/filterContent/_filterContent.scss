@@ -1,0 +1,66 @@
+// =============================================
+// =            Filter Content Styles            =
+// =============================================*/
+
+// div that holds items
+.filterable {
+	color:white;
+	margin: 0 auto;	
+}
+
+// individual items (sections)
+.filterableItem {
+	height:175px;
+	width:175px;
+	display:inline-block;
+	float:left;
+	margin:5px;
+	// vertical centering technique:
+	position:relative; // relative because it is the parent of the <p> element inside it
+}
+
+// individual item hidden
+.filterableItemHidden {
+	display:none;
+}
+
+// item content 
+.filterableItem p {
+	text-transform:capitalize;
+	// vertical centering technique:
+	// http://css-tricks.com/centering-css-complete-guide/
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/*======================================================
+=        Styles for filterable content (items)    	=
+======================================================*/
+
+.type1 {
+	background:lighten(teal,14%);
+}
+
+.type2 {
+	background:darken(pink,20%);
+}
+
+.type3 {
+	background:lighten(purple,5%);
+}
+
+.type4 {
+	background:lighten(red,10%);
+}
+
+.type5 {
+	background:lighten(blue,30%);
+}
+
+/*-----  End of Styles for filterable content (items)  ------*/
+
+
+
+/*-----  End of Filter Content Styles  ------*/
