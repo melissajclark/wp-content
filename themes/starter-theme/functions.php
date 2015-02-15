@@ -212,11 +212,11 @@ register_post_type('projects', array(
 'show_in_menu' => true,
 'capability_type' => 'post',
 'map_meta_cap' => true,
-'hierarchical' => false,
+'hierarchical' => true,
 'rewrite' => array('slug' => 'projects', 'with_front' => true),
 'query_var' => true,
 'has_archive' => true,
-'supports' => array('title','editor','excerpt','comments','revisions','thumbnail','author'),
+'supports' => array('title','editor','excerpt','revisions','thumbnail','author'),
 'labels' => array (
   'name' => 'Projects',
   'singular_name' => 'Project',
