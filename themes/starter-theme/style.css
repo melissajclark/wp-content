@@ -182,8 +182,7 @@ Text Domain: themeTextDomain
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
 }
 
 .fa-stack {
@@ -2482,15 +2481,6 @@ a:focus, a:active, a:hover {
 
 /* See _mixins.scss for more on this method for handling HTML5 elements */
 /* Placeholders */
-::-webkit-input-placeholder {
-  color: TEXTCOLOR;
-}
-::-moz-placeholder {
-  color: TEXTCOLOR;
-}
-:-ms-input-placeholder {
-  color: TEXTCOLOR;
-}
 ::placeholder {
   color: TEXTCOLOR;
 }
@@ -2635,6 +2625,18 @@ img.alignleft, img.alignright, img.aligncenter {
 
 /* Uncomment if you have a custom home page
 @import "home";*/
+/*=====================================
+=            Project Items            =
+=====================================*/
+.projectItem {
+  max-width: 35%;
+  background: white;
+  float: left;
+  margin: 2%;
+  border: 2px solid black;
+}
+
+/*-----  End of Project Items  ------*/
 /* =BLOG SPECIFIC
 ------------------ */
 /* Blog Styles */
@@ -2897,6 +2899,8 @@ html[xmlns] .slides {
 .flexslider {
   margin: 1em;
   position: relative;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
   zoom: 1;
@@ -2905,6 +2909,8 @@ html[xmlns] .slides {
 .flex-viewport {
   max-height: 2000px;
   -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
   transition: all 1s ease;
 }
 
@@ -2940,6 +2946,7 @@ html[xmlns] .slides {
   color: rgba(0, 0, 0, 0.8);
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
   -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
   transition: all .3s ease;
 }
 
@@ -3037,9 +3044,12 @@ html[xmlns] .slides {
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   text-indent: -9999px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
   -o-border-radius: 20px;
   border-radius: 20px;
   -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
   -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 }
@@ -3094,3 +3104,5 @@ html[xmlns] .slides {
     right: 10px;
   }
 }
+
+/*# sourceMappingURL=style.css.map */

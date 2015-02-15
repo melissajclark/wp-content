@@ -2625,6 +2625,18 @@ img.alignleft, img.alignright, img.aligncenter {
 
 /* Uncomment if you have a custom home page
 @import "home";*/
+/*=====================================
+=            Project Items            =
+=====================================*/
+.projectItem {
+  max-width: 35%;
+  background: white;
+  float: left;
+  margin: 2%;
+  border: 2px solid black;
+}
+
+/*-----  End of Project Items  ------*/
 /* =BLOG SPECIFIC
 ------------------ */
 /* Blog Styles */
