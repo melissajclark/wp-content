@@ -8,10 +8,10 @@
 
     <div class="entry-content">
     <ul>
-        <li><?php the_field('date'); ?></li>
-        <li><?php the_field('language'); ?></li>
-        <li><?php the_field('team_members'); ?></li>
-        <li><?php the_field('city'); ?></li>
+        <li>Date: <?php the_field('date'); ?></li>
+        <li>Language: <?php the_field('language'); ?></li>
+        <li>People: <?php the_field('team_members'); ?></li>
+        <li>Location: <?php the_field('city'); ?></li>
 
     </ul>
           
