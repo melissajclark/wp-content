@@ -216,7 +216,7 @@ register_post_type('projects', array(
 'rewrite' => array('slug' => 'projects', 'with_front' => true),
 'query_var' => true,
 'has_archive' => true,
-'supports' => array('title','editor','excerpt','trackbacks','custom-fields','comments','revisions','thumbnail','author','page-attributes','post-formats'),
+'supports' => array('title','editor','excerpt','comments','revisions','thumbnail','author'),
 'labels' => array (
   'name' => 'Projects',
   'singular_name' => 'Project',
