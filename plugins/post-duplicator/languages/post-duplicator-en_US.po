@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Post Duplicator v2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-08-25 19:02:54+0000\n"
+"Last-Translator: admin <joe@metaphorcreations.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes/settings.php:32
+#@ post-duplicator
+msgid "Post Status"
+msgstr ""
+
+#: includes/settings.php:35
+#@ post-duplicator
+msgid "Same as original"
+msgstr ""
+
+#: includes/settings.php:36
+#@ post-duplicator
+msgid "Draft"
+msgstr ""
+
+#: includes/settings.php:37
+#@ post-duplicator
+msgid "Published"
+msgstr ""
+
+#: includes/settings.php:38
+#@ post-duplicator
+msgid "Pending"
+msgstr ""
+
+#: includes/settings.php:44
+#@ post-duplicator
+msgid "Post Date"
+msgstr ""
+
+#: includes/settings.php:47
+#@ post-duplicator
+msgid "Duplicate Timestamp"
+msgstr ""
+
+#: includes/settings.php:48
+#@ post-duplicator
+msgid "Current Time"
+msgstr ""
+
+#: includes/settings.php:55
+#@ post-duplicator
+msgid "Offset Date"
+msgstr ""
+
+#: includes/settings.php:61
+#@ post-duplicator
+msgid " days"
+msgstr ""
+
+#: includes/settings.php:68
+#@ post-duplicator
+msgid " hours"
+msgstr ""
+
+#: includes/settings.php:75
+#@ post-duplicator
+msgid " minutes"
+msgstr ""
+
+#: includes/settings.php:82
+#@ post-duplicator
+msgid " seconds"
+msgstr ""
+
+#: includes/settings.php:89
+#@ post-duplicator
+msgid "newer"
+msgstr ""
+
+#: includes/settings.php:90
+#@ post-duplicator
+msgid "older"
+msgstr ""
+
+#: includes/settings.php:136
+#@ post-duplicator
+msgid "Post Duplicator Settings"
+msgstr ""
+
