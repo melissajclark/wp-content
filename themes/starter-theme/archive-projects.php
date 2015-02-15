@@ -1,7 +1,8 @@
 <?php
 
-/** * Archive Template for Projects Post Type 
-*
+/** * Template Name: Project Archive 
+* This file is used to display a page when nothing more specific matches a query. 
+* Learn more: http://codex.wordpress.org/Template_Hierarchy 
 * * @package Starter_Theme */
 
 get_header(); ?>
@@ -17,18 +18,27 @@ get_header(); ?>
             get_template_part( 'inc/archive-header' );
         endif; ?>
         
-      <?php /* Start the Loop */ ?>
-           <?php while ( have_posts() ) : the_post(); ?>
-            
-            <?php get_template_part('content/content-project') ?>
+            <?php while ( have_posts() ) : the_post(); ?>
 
-        <nav id="nav-below">
-            <div class="nav-previous"><?php next_posts_link( __( "Older posts", "starter-theme" ) ); ?></div>
-            <div class="nav-next"><?php previous_posts_link( __( "Newer posts", "starter-theme" ) ); ?></div>
-        </nav><!-- #nav-above -->
+                <article id="post-<?php the_ID(); ?>" <?php post_class("projectItem"); ?>>
+                    <header class="entry-header">
+                        <h1><?php the_title(); ?></h1>
+                    </header><!-- .entry-header -->
 
-    <?php else : ?>
-        <!-- there IS NOT content for this query -->
+                    <?php get_template_part('content/content-project'); ?>
+
+                </article><!-- #post-<?php the_ID(); ?> -->
+
+            <?php endwhile; ?>
+
+            <nav id="nav-below">
+                <div class="nav-previous"><?php next_posts_link( __( "Older posts", "starter-theme" ) ); ?></div>
+                <div class="nav-next"><?php previous_posts_link( __( "Newer posts", "starter-theme" ) ); ?></div>
+            </nav><!-- #nav-above -->
+
+        <?php else : ?>
+            <!-- there IS NOT content for this query -->
+
 
         <article id="post-0" class="hentry post no-results not-found">
             <header class="entry-header">
