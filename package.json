@@ -2,9 +2,7 @@
 	"repository": {
 		"type"	: "git",
 		"url"	: "https://bitbucket.org/melissajclark/wp-content/"
-
 	}, // end repository info
-
 	  "dependencies": {
 	    "gulp": "*",
 	    "gulp-ruby-sass": "*",
@@ -13,6 +11,5 @@
 	    "gulp-imagemin": "*",
 	    "tiny-lr": "*",
 	    "gulp-plumber": "*"
-	  } // end dependencies 
-	  
+	  } // end dependencies   
 } // end package.json
