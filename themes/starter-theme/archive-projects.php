@@ -1,8 +1,7 @@
 <?php
 
-/** * Grid Archive Template File *  
-* This file is used to display a page when nothing more specific matches a query. 
-* Learn more: http://codex.wordpress.org/Template_Hierarchy 
+/** * Archive Template for Projects Post Type 
+*
 * * @package Starter_Theme */
 
 get_header(); ?>
