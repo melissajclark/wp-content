@@ -1,5 +1,5 @@
 <!-- Individual Article / Project -->
-<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("projectItem"); ?>>
+<article id="post-<?php the_ID(); ?>" data-date="<?php echo implode(', ', get_field('date')); ?>" data-language="<?php echo implode(', ', get_field('language')); ?>" data-people="<?php echo implode(', ', get_field('team_members')); ?>" data-location="<?php echo implode(', ', get_field('city')); ?>"<?php post_class("projectItem"); ?>>
     <header class="entry-header">
         <h1 class="entry-title">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
@@ -8,11 +8,11 @@
     </header><!-- .entry-header -->
 
     <div class="entry-content">
-    <ul>
-        <li>Date: <?php the_field('date'); ?></li>
-        <li>Language: <?php the_field('language'); ?></li>
-        <li>People: <?php the_field('team_members'); ?></li>
-        <li>Location: <?php the_field('city'); ?></li>
+    <ul style="list-style-type:none; display:inline-block; margin: 0em 0em 0em 0em; padding: 0 0 0 0;">
+        <li><strong>Date:</strong> <?php the_field('date'); ?></li>
+        <li><strong>Language:</strong> <?php the_field('language'); ?></li>
+        <li><strong>People:</strong> <?php the_field('team_members'); ?></li>
+        <li><strong>Location:</strong> <?php the_field('city'); ?></li>
 
     </ul>
           
