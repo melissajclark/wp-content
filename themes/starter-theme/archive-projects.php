@@ -17,17 +17,22 @@ get_header(); ?>
             // if so, print the archive title before the loop begins
             get_template_part( 'inc/archive-header' );
         endif; ?>
+            
+            <section class="filterControls">
+                <ul class="filterNav clearfix">
+                    <li><a class="filterControl typeOneFilter" href="#">type1</a></li>
+                    <li><a class="filterControl typeTwoFilter" href="#">type2</a></li>
+                    <li><a class="filterControl typeThreeFilter" href="#">type3</a></li>
+                    <li><a class="filterControl typeFourFilter" href="#">type4</a></li>
+                    <li><a class="filterControl typeFiveFilter" href="#">type5</a></li>
+                    <li><a class="filterControl typeAll" href="#">View All</a></li>
+                </ul>
+            </section>
+
         
             <?php while ( have_posts() ) : the_post(); ?>
 
-                <article id="post-<?php the_ID(); ?>" <?php post_class("projectItem"); ?>>
-                    <header class="entry-header">
-                        <h1><?php the_title(); ?></h1>
-                    </header><!-- .entry-header -->
-
                     <?php get_template_part('content/content-project'); ?>
-
-                </article><!-- #post-<?php the_ID(); ?> -->
 
             <?php endwhile; ?>
 
