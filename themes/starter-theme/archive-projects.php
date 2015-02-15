@@ -19,15 +19,8 @@ get_header(); ?>
         
       <?php /* Start the Loop */ ?>
            <?php while ( have_posts() ) : the_post(); ?>
-
-               <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                   <header class="entry-header">
-                       <h1><?php the_title(); ?></h1>
-                   </header><!-- .entry-header -->
-
-                   <?php the_content(); ?>
-
-               </article><!-- #post-<?php the_ID(); ?> -->
+            
+            <?php get_template_part('content/content-project') ?>
 
         <nav id="nav-below">
             <div class="nav-previous"><?php next_posts_link( __( "Older posts", "starter-theme" ) ); ?></div>
