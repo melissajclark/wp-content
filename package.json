@@ -1,11 +1,18 @@
 {
-  "dependencies": {
-    "gulp": "*",
-    "gulp-ruby-sass": "*",
-    "gulp-autoprefixer": "*",
-    "gulp-newer": "*",
-    "gulp-imagemin": "*",
-    "tiny-lr": "*",
-    "gulp-plumber": "*"
-  }
-}
+	"repository": {
+		"type"	: "git",
+		"url"	: "https://bitbucket.org/melissajclark/wp-content/"
+
+	}, // end repository info
+
+	  "dependencies": {
+	    "gulp": "*",
+	    "gulp-ruby-sass": "*",
+	    "gulp-autoprefixer": "*",
+	    "gulp-newer": "*",
+	    "gulp-imagemin": "*",
+	    "tiny-lr": "*",
+	    "gulp-plumber": "*"
+	  } // end dependencies 
+	  
+} // end package.json
