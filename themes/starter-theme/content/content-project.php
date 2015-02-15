@@ -7,6 +7,14 @@
     </header><!-- .entry-header -->
 
     <div class="entry-content">
+    <ul>
+        <li><?php the_field('date'); ?></li>
+        <li><?php the_field('language'); ?></li>
+        <li><?php the_field('team_members'); ?></li>
+        <li><?php the_field('city'); ?></li>
+
+    </ul>
+          
         <?php the_content(); ?>
         <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
     </div><!-- .entry-content -->
