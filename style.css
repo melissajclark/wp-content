@@ -2486,6 +2486,95 @@ a:focus, a:active, a:hover {
 }
 
 /* Search form */
+/* =FilterContent
+------------------ */
+/*=====================================
+=            FilterContent            =
+=====================================*/
+.filterable {
+  color: white;
+  margin: 0 auto;
+}
+
+.filterableItem {
+  height: 175px;
+  width: 175px;
+  display: inline-block;
+  float: left;
+  margin: 5px;
+  position: relative;
+}
+
+.filterableItemHidden {
+  display: none;
+}
+
+.filterableItem p {
+  text-transform: capitalize;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*======================================================
+=        Styles for filterable content (items)    	=
+======================================================*/
+.type1 {
+  background: #00c7c7;
+}
+
+.type2 {
+  background: #ff5a77;
+}
+
+.type3 {
+  background: #9a0099;
+}
+
+.type4 {
+  background: #ff3333;
+}
+
+.type5 {
+  background: #9999ff;
+}
+
+/*-----  End of Styles for filterable content (items)  ------*/
+/*-----  End of Filter Content Styles  ------*/
+/*==================================
+=            Filter Nav            =
+==================================*/
+.filterControls {
+  margin-bottom: 50px;
+  margin: 0 auto;
+}
+
+ul.filterNav {
+  list-style-type: none;
+}
+
+ul.filterNav li a {
+  display: inline-block;
+  float: left;
+  text-align: center;
+  padding: 15px;
+  margin: 0 10px 0 10px;
+}
+
+a.filterControl {
+  font-size: 24px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #8f008f;
+}
+a.filterControl:hover {
+  background: #00b3b3;
+  color: white;
+}
+
+/*-----  End of Filter Nav  ------*/
+/*-----  End of FilterContent  ------*/
 /* =COMPONENTS
 ------------------ */
 /* Includes password protection for pages and posts, 404 page */
