@@ -10,18 +10,14 @@
 
 // individual items (sections)
 .filterableItem {
-	height:175px;
-	width:175px;
 	display:inline-block;
 	float:left;
-	margin:5px;
 	// vertical centering technique:
 	position:relative; // relative because it is the parent of the <p> element inside it
-}
-
-// individual item hidden
-.filterableItemHidden {
-	display:none;
+	height:150px;
+	width:150px;
+	margin:5px;
+	padding:10px;
 }
 
 // item content 
@@ -33,34 +29,7 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	background:lighten(black,15%);
+	padding:1em;
 }
-
-/*======================================================
-=        Styles for filterable content (items)    	=
-======================================================*/
-
-.type1 {
-	background:lighten(teal,14%);
-}
-
-.type2 {
-	background:darken(pink,20%);
-}
-
-.type3 {
-	background:lighten(purple,5%);
-}
-
-.type4 {
-	background:lighten(red,10%);
-}
-
-.type5 {
-	background:lighten(blue,30%);
-}
-
-/*-----  End of Styles for filterable content (items)  ------*/
-
-
-
 /*-----  End of Filter Content Styles  ------*/
