@@ -67,7 +67,7 @@ filterApp.init = function() { // this function holds everything to start the app
 		$("article.filterableItem").not('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "none");
 
 		//finds items matching user's selection and shows them
-		$("article.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("background", "purple");
+		$("article.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "inline-block");
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
