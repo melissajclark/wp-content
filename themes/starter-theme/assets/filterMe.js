@@ -119,7 +119,10 @@ filterApp.init = function() { // this function holds everything to start the app
 * Doc Ready = calls all code above
 *
 **/
+function filterMe() {
+  jQuery(document).ready(function($){ // wordpress doc ready
 
-$(document).ready(function(){
-	filterApp.init();
-}); // end doc ready
+    filterApp.init();
+
+  }); // end of WordPress doc ready function
+} // end of filterMe
