@@ -23,18 +23,18 @@ get_header(); ?>
             <section class="filterResults">
 
                 <ul id="filterOptionsTypes" class="filterNav">
-                <li><span class="legend">View By Type:</span></li>
+                <li><span class="legend">View By Language:</span></li>
                     <!-- li items appended with jQuery -->
                 </ul>
              </section>
 
-<!--             <section class="filterResults">
+            <section class="filterResults">
 
                 <ul id="filterOptionsShapes" class="filterNav">
-                    <li><span class="legend">View By Shape:</span></li> -->
+                    <li><span class="legend">View By Shape:</span></li>
                     <!-- li items appended with jQuery -->
-      <!--           </ul>
-            </section> -->
+                </ul>
+            </section>
 
             <section class="filterResults filterResultsCurrent">
 
