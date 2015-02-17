@@ -1,7 +1,7 @@
 // Empty object for all code to live on
 
 var filterApp = {};
-filterApp.sortTypes = ["all", "german", "french", "cantonese", "portugese", "spanish"]; // object to hold options for filtering
+filterApp.sortTypes = ["all", "German", "French", "Cantonese", "Portugese", "Spanish"]; // object to hold options for filtering
 filterApp.sortShapes = ["all", "circle", "hexagon", "square"]; // object to hold options for filtering
 filterApp.eachItem = "";
 
@@ -67,7 +67,7 @@ filterApp.init = function() { // this function holds everything to start the app
 		$("section.filterableItem").not('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "none");
 
 		//finds items matching user's selection and shows them
-		$("section.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "inline-block");
+		$("section.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("background", "purple");
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
