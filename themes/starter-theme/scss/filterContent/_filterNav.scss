@@ -4,31 +4,33 @@
 
 .filterControls {
 	margin-bottom:50px;
-	// max-width:800px;
-	margin:0 auto;
 }
 
-ul.filterNav {
-	list-style-type: none;
-	// margin: 0 auto;
-} // ul.filterNav;
+.filterResults {
+	float:left;
+	min-height:50px;
+}
 
-ul.filterNav li a {
+// span.legend {
+// 	font-style:italic;
+// }
+
+ul.filterNav li {
+	list-style-type: none;
 	display:inline-block;
 	float:left;
 	text-align:center;
-	padding:15px;
-	margin:0 10px 0 10px;
-}
-
-a.filterControl{
+	margin:3px;
 	font-size:24px;
+	padding:2px;
+} 
+
+a, a.filterControl{
 	text-transform:uppercase;
+	color:purple;
 	text-decoration:none;
-	color:lighten(purple,3%);
 	&:hover {
-		background: lighten(teal,10%);
-		color:white; 
+		border-bottom: 3px solid #333;
 	}
 } // li a.filterControl
 
