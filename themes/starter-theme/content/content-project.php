@@ -1,5 +1,5 @@
 <!-- Individual Article / Project -->
-<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("projectItem"); ?>>
+<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("filterableItem"); ?>>
     <header class="entry-header">
         <h1 class="entry-title">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
