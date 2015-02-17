@@ -243,3 +243,30 @@ register_post_type('projects', array(
 
 /*-----  End of Custom Post Type: Projects  ------*/
 
+
+/*
+ * Get Terms as a list
+ */     
+    function get_term_list_not_linked($postID, $tax, $parentTermID, $sep) {
+        $terms = get_the_terms( $postID, $taxonomy);
+
+        if ( $terms && ! is_wp_error( $terms ) ) { 
+
+            $termList = array();
+
+            foreach ( $terms as $term ) {
+                if($term->parent == $parentTermID) {
+                    $term_list[] = $term->name;                
+                }
+            }
+
+            $termList = join( $separator, $termList);
+
+            return $termList;
+
+        } else {
+            return null;
+        }   
+
+    }
+
