@@ -3,33 +3,31 @@
 // =============================================*/
 
 // div that holds items
-// .filterable {
-// 	color:white;
-// 	margin: 0 auto;	
-// }
+.filterable {
+	margin: 0 auto;	
+}
 
 // individual items (sections)
 .filterableItem {
 	display:inline-block;
 	float:left;
+	
 	// vertical centering technique:
 	position:relative; // relative because it is the parent of the <p> element inside it
-	height:150px;
-	width:150px;
-	margin:5px;
-	padding:10px;
 }
 
 // item content 
-.filterableItem p {
-	text-transform:capitalize;
+// .filterableItem p {
+
 	// vertical centering technique:
 	// http://css-tricks.com/centering-css-complete-guide/
-	position:absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background:lighten(black,15%);
-	padding:1em;
-}
+
+	// position:absolute;
+	// top: 50%;
+	// left: 50%;
+	// transform: translate(-50%, -50%);
+
+	//black backgroun:
+	// background:lighten(black,15%);
+// }
 /*-----  End of Filter Content Styles  ------*/
