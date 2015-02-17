@@ -84,34 +84,34 @@ filterApp.init = function() { // this function holds everything to start the app
 	
 	// ============ Function that listens on click & evaluates shape data
 
-	$("#filterOptionsShapes a.filterControl").on("click",function(){ 
+// 	$("#filterOptionsShapes a.filterControl").on("click",function(){ 
 
-		// finds the value of the user's selection (aka the desired shape to view)
-		filterApp.sortChoiceShape = $(this).text();
+// 		// finds the value of the user's selection (aka the desired shape to view)
+// 		filterApp.sortChoiceShape = $(this).text();
 
-		$("section.filterResultsCurrent").show(); // displays legend after user clicks on a filter link
+// 		$("section.filterResultsCurrent").show(); // displays legend after user clicks on a filter link
 
-		// finds items NOT matching user's selection and hides them
-		$("section.filterableItem").not('[data-shape="' + filterApp.sortChoiceShape + '"]').css("display", "none");
+// 		// finds items NOT matching user's selection and hides them
+// 		$("section.filterableItem").not('[data-shape="' + filterApp.sortChoiceShape + '"]').css("display", "none");
 
-		//finds items matching user's selection and shows them
-		$("section.filterableItem").filter('[data-shape="' + filterApp.sortChoiceShape + '"]').css("display", "inline-block");
+// 		//finds items matching user's selection and shows them
+// 		$("section.filterableItem").filter('[data-shape="' + filterApp.sortChoiceShape + '"]').css("display", "inline-block");
 
 
-		// hides legend if "all" is selected + shows all items when all is selected
-		if (filterApp.sortChoiceShape === "all") {
-			$("section.filterResultsCurrent").hide();
-			$("section.filterableItem").css("display", "inline-block");
-		} else {
-			$("section.filterResultsCurrent").show();
-			$("li span.currentChoice").html("Shape: " + filterApp.sortChoiceShape);
-		}
+// 		// hides legend if "all" is selected + shows all items when all is selected
+// 		if (filterApp.sortChoiceShape === "all") {
+// 			$("section.filterResultsCurrent").hide();
+// 			$("section.filterableItem").css("display", "inline-block");
+// 		} else {
+// 			$("section.filterResultsCurrent").show();
+// 			$("li span.currentChoice").html("Shape: " + filterApp.sortChoiceShape);
+// 		}
 
-	}); // end function on shapes select
+// 	}); // end function on shapes select
 	
-	// ============ End function that listens on click & evaluates shape data
+// 	// ============ End function that listens on click & evaluates shape data
 
-}; // end filterApp.init
+// }; // end filterApp.init
 
 
 /**
