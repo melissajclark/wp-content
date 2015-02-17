@@ -11,9 +11,11 @@
 .filterableItem {
 	display:inline-block;
 	float:left;
-	
+	min-width:20%;
+	margin:2em;
 	// vertical centering technique:
 	position:relative; // relative because it is the parent of the <p> element inside it
+	word-wrap:break-word;
 }
 
 // item content 
