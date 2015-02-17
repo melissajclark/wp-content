@@ -61,20 +61,20 @@ filterApp.init = function() { // this function holds everything to start the app
 		filterApp.sortChoiceType = $(this).text();
 
 		// displays legend after user clicks on a filter link
-		$("section.filterResultsCurrent").show(); 
+		$("article.filterResultsCurrent").show(); 
 
 		// finds items NOT matching user's selection and hides them
-		$("section.filterableItem").not('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "none");
+		$("article.filterableItem").not('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "none");
 
 		//finds items matching user's selection and shows them
-		$("section.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("background", "purple");
+		$("article.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("background", "purple");
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
-			$("section.filterResultsCurrent").hide();
-			$("section.filterableItem").css("display", "inline-block");
+			$("article.filterResultsCurrent").hide();
+			$("article.filterableItem").css("display", "inline-block");
 		} else {
-			$("section.filterResultsCurrent").show();
+			$("article.filterResultsCurrent").show();
 			$("li span.currentChoice").html("Language: " + filterApp.sortChoiceType);
 		}
 
