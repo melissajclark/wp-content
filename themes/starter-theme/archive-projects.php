@@ -74,5 +74,7 @@ get_header(); ?>
     <?php endif; ?>
 
 </section><!-- #primary -->
-
+<script>     
+    filterMe(); // calls slider function in theme.js for wooSlider
+</script>
 <?php get_footer(); ?>
