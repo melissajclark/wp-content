@@ -18,16 +18,32 @@ get_header(); ?>
             get_template_part( 'inc/archive-header' );
         endif; ?>
             
-            <div class="filterControls clearfix">
-                <ul class="filterNav clearfix">
-                    <li><a class="filterControl typeOneFilter" href="#">type1</a></li>
-                    <li><a class="filterControl typeTwoFilter" href="#">type2</a></li>
-                    <li><a class="filterControl typeThreeFilter" href="#">type3</a></li>
-                    <li><a class="filterControl typeFourFilter" href="#">type4</a></li>
-                    <li><a class="filterControl typeFiveFilter" href="#">type5</a></li>
-                    <li><a class="filterControl typeAll" href="#">View All</a></li>
+        <div class="filterControls clearfix">
+
+            <section class="filterResults">
+
+                <ul id="filterOptionsTypes" class="filterNav">
+                <li><span class="legend">View By Type:</span></li>
+                    <!-- li items appended with jQuery -->
                 </ul>
-            </div>
+             </section>
+
+            <section class="filterResults">
+
+                <ul id="filterOptionsShapes" class="filterNav">
+                    <li><span class="legend">View By Shape:</span></li>
+                    <!-- li items appended with jQuery -->
+                </ul>
+            </section>
+
+            <section class="filterResults filterResultsCurrent">
+
+                <ul id="filterOptionsCurrent" class="filterNav">
+                    <li><span class="legend">Current Filter:</span>
+                    <li><span class="currentChoice"><!-- content appended with jQuery --></span></li>
+                </ul>
+            </section>
+        </div><!-- / section.filterControls -->
 
         <div class="filterable">
             <?php while ( have_posts() ) : the_post(); ?>
