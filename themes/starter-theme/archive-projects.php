@@ -45,6 +45,8 @@ get_header(); ?>
             </section>
         </div><!-- / section.filterControls -->
 
+
+
         <div class="filterable">
             <?php while ( have_posts() ) : the_post(); ?>
 
