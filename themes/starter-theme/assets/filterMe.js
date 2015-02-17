@@ -1,8 +1,8 @@
 // Empty object for all code to live on
 
 var filterApp = {};
-filterApp.sortTypes = ["all", "type1", "type2", "type3", "type4", "type5"]; // object to hold options for filtering
-// filterApp.sortShapes = ["all", "circle", "hexagon", "square"]; // object to hold options for filtering
+filterApp.sortTypes = ["all", "german", "french", "cantonese", "portugese", "spanish"]; // object to hold options for filtering
+filterApp.sortShapes = ["all", "circle", "hexagon", "square"]; // object to hold options for filtering
 filterApp.eachItem = "";
 
 // ------------------------------------
@@ -75,7 +75,7 @@ filterApp.init = function() { // this function holds everything to start the app
 			$("section.filterableItem").css("display", "inline-block");
 		} else {
 			$("section.filterResultsCurrent").show();
-			$("li span.currentChoice").html("Type: " + filterApp.sortChoiceType);
+			$("li span.currentChoice").html("Language: " + filterApp.sortChoiceType);
 		}
 
 	}); // end function on shapes select
