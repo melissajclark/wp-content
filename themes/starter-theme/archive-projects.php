@@ -18,7 +18,7 @@ get_header(); ?>
             get_template_part( 'inc/archive-header' );
         endif; ?>
             
-            <section class="filterControls">
+            <div class="filterControls clearfix">
                 <ul class="filterNav clearfix">
                     <li><a class="filterControl typeOneFilter" href="#">type1</a></li>
                     <li><a class="filterControl typeTwoFilter" href="#">type2</a></li>
@@ -27,7 +27,7 @@ get_header(); ?>
                     <li><a class="filterControl typeFiveFilter" href="#">type5</a></li>
                     <li><a class="filterControl typeAll" href="#">View All</a></li>
                 </ul>
-            </section>
+            </div>
 
         <div class="filterable">
             <?php while ( have_posts() ) : the_post(); ?>
