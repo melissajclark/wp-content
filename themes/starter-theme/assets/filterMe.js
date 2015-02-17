@@ -64,10 +64,10 @@ filterApp.init = function() { // this function holds everything to start the app
 		$("section.filterResultsCurrent").show(); 
 
 		// finds items NOT matching user's selection and hides them
-		$("section.filterableItem").not('[data-type="' + filterApp.sortChoiceType + '"]').css("display", "none");
+		$("section.filterableItem").not('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "none");
 
 		//finds items matching user's selection and shows them
-		$("section.filterableItem").filter('[data-type="' + filterApp.sortChoiceType + '"]').css("display", "inline-block");
+		$("section.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "inline-block");
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
