@@ -179,6 +179,12 @@ function starter_theme_scripts() {
 	);
 
 	wp_enqueue_script(
+	    'filterMe', // all JS in filterMe.js
+	    get_template_directory_uri() . '/assets/filterMe.js',
+	    array('jquery')
+	);
+
+	wp_enqueue_script(
 	    'theme', // all functions in theme.js
 	    get_template_directory_uri() . '/assets/theme.js',
 	    array('jquery')
