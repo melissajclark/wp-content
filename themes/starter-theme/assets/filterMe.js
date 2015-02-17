@@ -71,14 +71,14 @@ filterApp.init = function() { // this function holds everything to start the app
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
-			$("article.filterResultsCurrent").hide();
+			$("section.filterResultsCurrent").hide();
 			$("article.filterableItem").css("display", "inline-block");
 		} else {
-			$("article.filterResultsCurrent").show();
+			$("section.filterResultsCurrent").show();
 			$("li span.currentChoice").html("Language: " + filterApp.sortChoiceType);
 		}
 
-	}); // end function on shapes select
+	}); // end function on types select
 	
 	// ============ End function that listens on click & evaluates type data
 	
@@ -111,7 +111,8 @@ filterApp.init = function() { // this function holds everything to start the app
 	
 // 	// ============ End function that listens on click & evaluates shape data
 
-// }; // end filterApp.init
+
+}; // end filterApp.init
 
 
 /**
