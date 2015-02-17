@@ -29,12 +29,14 @@ get_header(); ?>
                 </ul>
             </section>
 
-        
+        <div class="filterable">
             <?php while ( have_posts() ) : the_post(); ?>
 
                     <?php get_template_part('content/content-project'); ?>
 
             <?php endwhile; ?>
+            
+         </div>
 
             <nav id="nav-below">
                 <div class="nav-previous"><?php next_posts_link( __( "Older posts", "starter-theme" ) ); ?></div>
