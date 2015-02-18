@@ -18,17 +18,7 @@ get_header(); ?>
             get_template_part( 'inc/archive-header' );
         endif; ?>
 
-        <?php // displays list of terms in the "status" taxonomy
-             $terms = get_terms( 'status' );
-             if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-                 echo '<ul>';
-                 foreach ( $terms as $term ) {
-                     echo '<li><a href="#">' . $term->name . '</a></li>';
-                    
-                 }
-                 echo '</ul>';
-             }
-                ?>
+         <?php taxonomy_list( 'status' ); // displays list of terms in status taxonomy in list (see functions.php) ?>
             
         <div class="filterControls clearfix">
 
