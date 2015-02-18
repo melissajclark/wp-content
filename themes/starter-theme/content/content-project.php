@@ -45,24 +45,24 @@ if ( $terms && ! is_wp_error( $terms ) ) :
         <li><strong>Language:</strong> <?php the_field('language'); ?></li>
         <li><strong>People:</strong> <?php the_field('team_members'); ?></li>
         <li><strong>Location:</strong> <?php the_field('city'); ?></li>
-        <li><strong>Status:</strong>        <?php
-            $taxonomy = 'status';
+        <li><strong>Status:</strong> <?php 
 
-            // get the term IDs assigned to post.
-            $post_terms = wp_get_object_terms( $post->ID, $taxonomy, array( 'fields' => 'ids' ) );
-            // separator between links
-            $separator = ', ';
+        $terms = get_the_terms( $post->ID, 'status');
+                        
+            if ( $terms && ! is_wp_error( $terms ) ) : 
 
-            if ( !empty( $post_terms ) && !is_wp_error( $post_terms ) ) {
+            $status_links = array();
 
-                $term_ids = implode( ',' , $post_terms );
-                $terms = wp_list_categories( '&style=none&echo=0&taxonomy=' . $taxonomy . '&include=' . $term_ids );
-                $terms = rtrim( trim( str_replace( '',  $separator, $terms ) ), $separator );
-
-                // display post categories
-                echo  $terms;
+            foreach ( $terms as $term ) {
+                $status_links[] = $term->name;
             }
-        ?></li>
+                                
+            $on_status = join(",", $status_links);
+            ?>
+            <?php echo $on_status; ?>
+
+            <?php endif; ?>
+        </li>
     </ul>
 
           
