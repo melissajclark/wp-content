@@ -62,18 +62,24 @@ filterApp.init = function() { // this function holds everything to start the app
 
 		console.log(filterApp.sortChoiceType);
 		
-		// displays legend after user clicks on a filter link
+		// displays legend after user clicks on a filter link filterApp.sortChoiceType
 		$("article.filterResultsCurrent").show(); 
 
-		// finds items NOT matching user's selection and hides them
-		$("article.filterableItem").not('[data-status="' + '        ' + filterApp.sortChoiceType + '       "]').css("background", "red");
+		$( "article:contains('status')" ).css( "text-decoration", "underline" );
 
-		console.log($("article.filterableItem").not('[data-status="' + '        ' + filterApp.sortChoiceType + '       "]'));
+		// finds items NOT matching user's selection and hides them
+		$("article.filterableItem").not('[data-status="'            + filterApp.sortChoiceType  + '\
+        "]').css("background", "red");
+
+		console.log($("article.filterableItem").not('[data-status="'            + filterApp.sortChoiceType  + '\
+        "]'));
 
 		//finds items matching user's selection and shows them
-		$("article.filterableItem").filter('[data-status="' + '        ' + filterApp.sortChoiceType + '       "]').css("background", "green");
+		$("article.filterableItem").filter('[data-status="'            + filterApp.sortChoiceType  + '\
+        "]').css("background", "green");
 
-		console.log( 'user clicked on:' + '[data-status="' + '        ' + filterApp.sortChoiceType + '       "]');
+		console.log( $("article.filterableItem").not('[data-status="'            + filterApp.sortChoiceType  + '\
+        "]'));
 
 
 		// hides legend if "all" is selected + shows all items when all is selected
