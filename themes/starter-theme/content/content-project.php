@@ -1,7 +1,5 @@
 <!-- Individual Article / Project -->
-<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>" data-status="<?php  $term_list = wp_get_post_terms($post->ID, 'status', array("fields" => "names"));
-print_r($term_list); ?>"  <?php post_class("filterableItem"); ?>>
-
+<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>" data-status="<?php echo get_the_term_list( $post->ID, 'status' ); ?>"  <?php post_class("filterableItem"); ?>>
 
     <header class="entry-header">
         <h1 class="entry-title">
