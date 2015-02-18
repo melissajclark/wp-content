@@ -1,5 +1,5 @@
 <!-- Individual Article / Project -->
-<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>" data-status='<?php $terms = get_the_terms( $post->ID, 'status');
+<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-status="<?php $terms = get_the_terms( $post->ID, 'status');
                         
 if ( $terms && ! is_wp_error( $terms ) ) : 
 
@@ -13,7 +13,7 @@ if ( $terms && ! is_wp_error( $terms ) ) :
 ?>
     <?php echo $on_status; ?>
 
-<?php endif; ?>'<?php post_class("filterableItem"); ?>>
+<?php endif; ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("filterableItem"); ?>>
 
     <header class="entry-header">
         <h1 class="entry-title">
