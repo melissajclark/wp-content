@@ -58,16 +58,18 @@ filterApp.init = function() { // this function holds everything to start the app
 	$("#filterOptionsTypes a.filterControl").on("click",function(){ 
 
 		// finds the value of the user's selection (aka the desired shape to view)
-		filterApp.sortChoiceType = $(this).text();
+		filterApp.sortChoiceType = $(this).text().toLowerCase();
+
+		console.log(filterApp.sortChoiceType);
 
 		// displays legend after user clicks on a filter link
 		$("article.filterResultsCurrent").show(); 
 
 		// finds items NOT matching user's selection and hides them
-		$("article.filterableItem").not('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "none");
+		$("article.filterableItem").not('[data-status="' + filterApp.sortChoiceType + '"]').css("display", "none");
 
 		//finds items matching user's selection and shows them
-		$("article.filterableItem").filter('[data-language="' + filterApp.sortChoiceType + '"]').css("display", "inline-block");
+		$("article.filterableItem").filter('[data-status="' + filterApp.sortChoiceType + '"]').css("display", "inline-block");
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
@@ -75,7 +77,7 @@ filterApp.init = function() { // this function holds everything to start the app
 			$("article.filterableItem").css("display", "inline-block");
 		} else {
 			$("section.filterResultsCurrent").show();
-			$("li span.currentChoice").html("Language: " + filterApp.sortChoiceType);
+			$("li span.currentChoice").html("Status: " + filterApp.sortChoiceType);
 		}
 
 	}); // end function on types select
