@@ -13,7 +13,10 @@ if ( $terms && ! is_wp_error( $terms ) ) :
 ?>
     <?php echo $on_status; ?>
 
-<?php endif; ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("filterableItem"); ?>>
+
+
+<?php endif; ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("filterableItem");  
+    // end article info?>>
 
     <header class="entry-header">
         <h1 class="entry-title">
@@ -64,4 +67,4 @@ if ( $terms && ! is_wp_error( $terms ) ) :
             ?>
         </div>
     </footer><!-- #entry-meta -->
-</article><!-- #post-<?php the_ID(); ?> -->
+</article><!-- #post-<?php the_ID(); ?>
