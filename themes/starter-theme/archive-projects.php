@@ -17,15 +17,15 @@ get_header(); ?>
             // if so, print the archive title before the loop begins
             get_template_part( 'inc/archive-header' );
         endif; ?>
-
-         <?php taxonomy_list( 'status' ); // displays list of terms in status taxonomy in list (see functions.php) ?>
             
         <div class="filterControls clearfix">
 
             <section class="filterResults">
 
                 <ul id="filterOptionsTypes" class="filterNav">
-                <li><span class="legend">View By Language:</span></li>
+                <li><span class="legend">View By Status:</span>
+                    <?php taxonomy_list( 'status' ); // displays list of terms in status taxonomy in list (see functions.php) ?>
+                </li>
                     <!-- li items appended with jQuery -->
                 </ul>
              </section>
