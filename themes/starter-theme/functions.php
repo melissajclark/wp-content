@@ -290,10 +290,31 @@ function taxonomy_list( $taxonomy ) {
     if ( $terms ) {
         printf( '<ul>', esc_attr( $taxonomy ) );
         foreach ( $terms as $term ) {
-        	printf( '<li><a class="filterControl" href="#">%s</a>></li>', esc_html( $term->name ) );
+        	printf( '<li><a class="filterControl" href="#"> %s </a> </li>', esc_html( $term->name ) );
         }
         print( '</ul>' );
     }
 }
 
+/**
+*
+* Useful function: Displays list of terms attached to a post.
+*
+**/
+
+$terms = get_the_terms( $post->ID, 'TAXONOMY');
+                        
+if ( $terms && ! is_wp_error( $terms ) ) : 
+
+    $status_links = array();
+
+    foreach ( $terms as $term ) {
+        $status_links[] = $term->slug;
+    }
+                        
+    $on_status = join(",", $status_links);
+?>
+    <?php echo $on_status; ?>
+
+<?php endif; ?>
 
