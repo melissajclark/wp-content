@@ -1,6 +1,23 @@
 <!-- Individual Article / Project -->
 <article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>" data-status="<?php echo get_the_term_list( $post->ID, 'status' ); ?>"  <?php post_class("filterableItem"); ?>>
 
+<?php
+$terms = get_the_terms( $post->ID, 'status' );
+                        
+if ( $terms && ! is_wp_error( $terms ) ) : 
+
+    $status_links = array();
+
+    foreach ( $terms as $term ) {
+        $status_links[] = $term->slug;
+    }
+                        
+    $on_status = join( ", ", $status_links );
+?>
+    <?php echo $on_status; ?>
+
+<?php endif; ?>
+
     <header class="entry-header">
         <h1 class="entry-title">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
