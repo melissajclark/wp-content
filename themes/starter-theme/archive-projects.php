@@ -18,36 +18,17 @@ get_header(); ?>
             get_template_part( 'inc/archive-header' );
         endif; ?>
 
-        <?php 
-        // no default values. using these as examples
-        $taxonomies = array( 
-            'status',
-        );
-
-        $args = array(
-            'orderby'           => 'name', 
-            'order'             => 'ASC',
-            'hide_empty'        => true, 
-            'exclude'           => array(), 
-            'exclude_tree'      => array(), 
-            'include'           => array(),
-            'number'            => '', 
-            'fields'            => 'all', 
-            'slug'              => '',
-            'parent'            => '',
-            'hierarchical'      => true, 
-            'child_of'          => 0, 
-            'get'               => '', 
-            'name__like'        => '',
-            'description__like' => '',
-            'pad_counts'        => false, 
-            'offset'            => '', 
-            'search'            => '', 
-            'cache_domain'      => 'core'
-        ); 
-
-        $terms = get_terms($taxonomies, $args);
-        ?>
+        <?php // displays list of terms in the "status" taxonomy
+             $terms = get_terms( 'status' );
+             if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+                 echo '<ul>';
+                 foreach ( $terms as $term ) {
+                   echo '<li>' . $term->name . '</li>';
+                    
+                 }
+                 echo '</ul>';
+             }
+                ?>
             
         <div class="filterControls clearfix">
 
