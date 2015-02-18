@@ -279,6 +279,7 @@ array( 'hierarchical' => true,
 /**
 *
 * Function to display terms in a taxonomy from: http://wordpress.stackexchange.com/questions/23606/how-do-i-list-custom-taxonomy-terms-without-the-links
+* REALLY USEFUL: displays all terms in the taxonomy - not post specific!
 *
 **/
 
