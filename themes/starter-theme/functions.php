@@ -288,9 +288,9 @@ function taxonomy_list( $taxonomy ) {
     $args = array('order'=>'ASC','hide_empty'=>false);
     $terms = get_terms( $taxonomy, $args );
     if ( $terms ) {
-        printf( '<ul name="%s">', esc_attr( $taxonomy ) );
+        printf( '<ul>', esc_attr( $taxonomy ) );
         foreach ( $terms as $term ) {
-            printf( '<li>%s</li>', esc_html( $term->name ) );
+        	printf( '<li><a href="#">%s</a>></li>', esc_html( $term->name ) );
         }
         print( '</ul>' );
     }
