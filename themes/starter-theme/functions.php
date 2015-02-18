@@ -242,3 +242,57 @@ register_post_type('projects', array(
 ) ); }
 
 /*-----  End of Custom Post Type: Projects  ------*/
+
+
+/*=================================================
+=            Custom Taxonomy: Statuses            =
+=================================================*/
+
+add_action('init', 'cptui_register_my_taxes_status');
+function cptui_register_my_taxes_status() {
+register_taxonomy( 'status',array (
+  0 => 'projects',
+),
+array( 'hierarchical' => true,
+	'label' => 'Statuses',
+	'show_ui' => true,
+	'query_var' => true,
+	'show_admin_column' => true,
+	'labels' => array (
+  'search_items' => 'Status',
+  'popular_items' => '',
+  'all_items' => '',
+  'parent_item' => '',
+  'parent_item_colon' => '',
+  'edit_item' => '',
+  'update_item' => '',
+  'add_new_item' => '',
+  'new_item_name' => '',
+  'separate_items_with_commas' => '',
+  'add_or_remove_items' => '',
+  'choose_from_most_used' => '',
+)
+) ); 
+}
+/*-----  End of Custom Taxonomy: Statuses  ------*/
+
+/**
+*
+* Function to display terms in a taxonomy from: http://wordpress.stackexchange.com/questions/23606/how-do-i-list-custom-taxonomy-terms-without-the-links
+*
+**/
+
+
+function taxonomy_list( $taxonomy ) {
+    $args = array('order'=>'ASC','hide_empty'=>false);
+    $terms = get_terms( $taxonomy, $args );
+    if ( $terms ) {
+        printf( '<ul name="%s">', esc_attr( $taxonomy ) );
+        foreach ( $terms as $term ) {
+            printf( '<li>%s</li>', esc_html( $term->name ) );
+        }
+        print( '</ul>' );
+    }
+}
+
+
