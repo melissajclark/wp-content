@@ -58,7 +58,7 @@ filterApp.init = function() { // this function holds everything to start the app
 	$("#filterOptionsTypes a.filterControl").on("click",function(){ 
 
 		// finds the value of the user's selection (aka the desired shape to view)
-		filterApp.sortChoiceType = "    " + $(this).text().toLowerCase() + "    ";
+		filterApp.sortChoiceType = $(this).text().toLowerCase().replace(/\s+/g, '');
 
 		console.log("-" + filterApp.sortChoiceType + "-");
 
