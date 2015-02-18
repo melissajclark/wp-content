@@ -60,16 +60,16 @@ filterApp.init = function() { // this function holds everything to start the app
 		// finds the value of the user's selection (aka the desired shape to view)
 		filterApp.sortChoiceType = $(this).text().toLowerCase();
 
-		console.log(filterApp.sortChoiceType);
+		console.log("-" + filterApp.sortChoiceType + "-");
 
 		// displays legend after user clicks on a filter link
 		$("article.filterResultsCurrent").show(); 
 
 		// finds items NOT matching user's selection and hides them
-		$("article.filterableItem").not('[data-status="' + filterApp.sortChoiceType + '"]').css("background", "blue");
+		$("article.filterableItem").not('[data-status=" ' + filterApp.sortChoiceType + ' "]').css("background", "blue");
 
 		//finds items matching user's selection and shows them
-		$("article.filterableItem").filter('[data-status="' + filterApp.sortChoiceType + '"]').css("display", "inline-block");
+		$("article.filterableItem").filter('[data-status=" ' + filterApp.sortChoiceType + ' "]').css("display", "inline-block");
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
