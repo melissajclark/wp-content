@@ -62,7 +62,7 @@ filterApp.init = function() { // this function holds everything to start the app
 
 		console.log(filterApp.sortChoiceType);
 
-		filterApp.dataInfo = $(".filterable").find(".filterableItem[data-status]");
+		filterApp.dataInfo = $(".filterable").find("article.filterableItem[data-status]");
 		console.log(filterApp.dataInfo);
 
 
