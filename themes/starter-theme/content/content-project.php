@@ -15,9 +15,6 @@ if ( $terms && ! is_wp_error( $terms ) ) :
 
 <?php endif; ?>'<?php post_class("filterableItem"); ?>>
 
-<?php $object_terms = wp_get_object_terms( $post_id, 'status', array( 'fields' => 'names' ) );
-if ( $object_terms ) { ?><ul><li><?php echo implode( '</li><li>', $object_terms ); ?></li></ul><?php } ?>
-
     <header class="entry-header">
         <h1 class="entry-title">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
