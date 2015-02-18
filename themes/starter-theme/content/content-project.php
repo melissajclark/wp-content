@@ -15,22 +15,8 @@ if ( $terms && ! is_wp_error( $terms ) ) :
 
 <?php endif; ?>'<?php post_class("filterableItem"); ?>>
 
-<?php $terms = get_the_terms( $post->ID, 'status');
-                        
-if ( $terms && ! is_wp_error( $terms ) ) : 
-
-    $status_links = array();
-
-    foreach ( $terms as $term ) {
-        $status_links[] = $term->slug;
-    }
-                        
-    $on_status = join(",", $status_links);
-?>
-    <?php echo $on_status; ?>
-
-<?php endif; ?>
-
+<?php $object_terms = wp_get_object_terms( $post_id, 'status', array( 'fields' => 'names' ) );
+if ( $object_terms ) { ?><ul><li><?php echo implode( '</li><li>', $object_terms ); ?></li></ul><?php } ?>
 
     <header class="entry-header">
         <h1 class="entry-title">
@@ -45,8 +31,9 @@ if ( $terms && ! is_wp_error( $terms ) ) :
         <li><strong>Language:</strong> <?php the_field('language'); ?></li>
         <li><strong>People:</strong> <?php the_field('team_members'); ?></li>
         <li><strong>Location:</strong> <?php the_field('city'); ?></li>
-        <li><strong>Status:</strong><?php $terms = get_the_terms( $post->ID, 'status');if ( $terms && ! is_wp_error($terms) ) : $status_links = array(); foreach ( $terms as $term ) { $status_links[] = $term->name;} $on_status = join(",", $status_links);?><?php echo $on_status; ?><?php endif; ?>
-        </li>
+        <li><strong>Status:</strong></li>
+        <li><strong>New:</strong></li>
+
     </ul>
 
           
