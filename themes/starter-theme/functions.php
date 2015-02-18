@@ -302,19 +302,16 @@ function taxonomy_list( $taxonomy ) {
 *
 **/
 
-$terms = get_the_terms( $post->ID, 'TAXONOMY');
+// $terms = get_the_terms( $post->ID, 'TAXONOMY');
                         
-if ( $terms && ! is_wp_error( $terms ) ) : 
+//if ( $terms && ! is_wp_error( $terms ) ) : 
 
-    $status_links = array();
+    // $status_links = array();
 
-    foreach ( $terms as $term ) {
-        $status_links[] = $term->slug;
-    }
+   // foreach ( $terms as $term ) {
+        // $status_links[] = $term->slug;
+   // }
                         
-    $on_status = join(",", $status_links);
-?>
-    <?php echo $on_status; ?>
-
-<?php endif; ?>
+    //$on_status = join(",", $status_links);
+   // <?php echo $on_status;
 
