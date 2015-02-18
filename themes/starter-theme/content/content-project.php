@@ -9,7 +9,7 @@ if ( $terms && ! is_wp_error( $terms ) ) :
         $status_links[] = $term->slug;
     }
                         
-    $on_status = joinjoin(", ", $status_links);
+    $on_status = join(",", $status_links);
 ?>
     <?php echo $on_status; ?>
 
@@ -45,7 +45,7 @@ if ( $terms && ! is_wp_error( $terms ) ) :
 
         <?php endif; ?></li>
 
-    </ul><!-- / list -->
+    </ul><!-- / list-->
 
           
         <!-- <?php the_content(); ?> -->
