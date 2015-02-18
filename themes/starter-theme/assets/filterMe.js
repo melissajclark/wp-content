@@ -61,18 +61,14 @@ filterApp.init = function() { // this function holds everything to start the app
 		filterApp.sortChoiceType = $(this).text().toLowerCase().replace(/\s+/g, '').toString();
 
 		console.log(filterApp.sortChoiceType);
-
-		filterApp.dataInfo = $("article:contains(filterApp.sortChoiceType)");
-		console.log("I contain: " + filterApp.dataInfo);
-
-
+		
 		// displays legend after user clicks on a filter link
 		$("article.filterResultsCurrent").show(); 
 
 		// finds items NOT matching user's selection and hides them
-		$("article.filterableItem").not('[data-status="' + filterApp.sortChoiceType + '"]').css("background", "red");
+		$("article.filterableItem").not('[data-status="' + '"        "' + filterApp.sortChoiceType + '"       + '"]").css("background", "red");
 
-		console.log($("article.filterableItem").not('[data-status="' + filterApp.sortChoiceType + '"]'));
+		console.log($("article.filterableItem").not('[data-status="' + '"        "' + filterApp.sortChoiceType + '"       + '"]"));
 
 		//finds items matching user's selection and shows them
 		$("article.filterableItem").filter('[data-status="' + filterApp.sortChoiceType + '"]').css("background", "green");
