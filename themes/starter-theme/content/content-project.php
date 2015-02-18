@@ -1,21 +1,20 @@
 <!-- Individual Article / Project -->
-<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-status="<?php $terms = get_the_terms( $post->ID, 'status');
-                        
-if ( $terms && ! is_wp_error( $terms ) ) : 
+<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-status="<?php // displays status terms attached to post
+        $terms = get_the_terms( $post->ID, 'status');
+                                
+        if ( $terms && ! is_wp_error( $terms ) ) : 
 
-    $status_links = array();
+            $status_links = array();
 
-    foreach ( $terms as $term ) {
-        $status_links[] = $term->slug;
-    }
-                        
-    $on_status = join(",", $status_links);
-?>
-    <?php echo $on_status; ?>
+            foreach ( $terms as $term ) {
+                $status_links[] = $term->slug;
+            }
+                                
+            $on_status = join(", ", $status_links);
+        ?>
+            <?php echo $on_status; ?>
 
-
-
-<?php endif; ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("filterableItem");  
+        <?php endif; ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("filterableItem");  
     // end article info?>>
 
     <header class="entry-header">
@@ -48,9 +47,7 @@ if ( $terms && ! is_wp_error( $terms ) ) :
 
         <?php endif; ?></li>
 
-    </ul><!-- / list-->
-
-          
+    </ul><!-- / list-->   
         <!-- <?php the_content(); ?> -->
         <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
     </div><!-- .entry-content -->
