@@ -23,7 +23,7 @@ get_header(); ?>
              if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
                  echo '<ul>';
                  foreach ( $terms as $term ) {
-                   echo '<li>' . $term->name . '</li>';
+                     echo '<li><a href="#">' . $term->name . '</a></li>';
                     
                  }
                  echo '</ul>';
