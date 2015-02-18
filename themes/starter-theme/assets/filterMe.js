@@ -58,12 +58,12 @@ filterApp.init = function() { // this function holds everything to start the app
 	$("#filterOptionsTypes a.filterControl").on("click",function(){ 
 
 		// finds the value of the user's selection (aka the desired shape to view)
-		filterApp.sortChoiceType = $(this).text().toLowerCase().replace(/\s+/g, '');
+		filterApp.sortChoiceType = $(this).text().toLowerCase().replace(/\s+/g, '').toString();
 
 		console.log(filterApp.sortChoiceType);
 
-		filterApp.dataInfo = $(".filterable").find("article.filterableItem[data-status]");
-		console.log(filterApp.dataInfo);
+		filterApp.dataInfo = $("article:contains(filterApp.sortChoiceType)");
+		console.log("I contain: " + filterApp.dataInfo);
 
 
 		// displays legend after user clicks on a filter link
