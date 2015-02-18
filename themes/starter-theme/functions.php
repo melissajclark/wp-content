@@ -292,7 +292,7 @@ function taxonomy_list( $taxonomy ) {
         foreach ( $terms as $term ) {
         	printf( '<li><a class="filterControl" href="#"> %s </a> </li>', esc_html( $term->name ) );
         }
-        print( '</ul>' );
+        print( '' );
     }
 }
 
