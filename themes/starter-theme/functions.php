@@ -288,7 +288,7 @@ function taxonomy_list( $taxonomy ) {
     $args = array('order'=>'ASC','hide_empty'=>false);
     $terms = get_terms( $taxonomy, $args );
     if ( $terms ) {
-        printf( '<ul class="filterNav">', esc_attr( $taxonomy ) );
+        printf( '<ul id="filterOptionsTypes" class="filterNav">', esc_attr( $taxonomy ) );
         foreach ( $terms as $term ) {
         	printf( '<li><a class="filterControl" href="#"> %s </a> </li>', esc_html( $term->name ) );
         }
