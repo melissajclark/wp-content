@@ -15,6 +15,22 @@ if ( $terms && ! is_wp_error( $terms ) ) :
 
 <?php endif; ?>'<?php post_class("filterableItem"); ?>>
 
+<?php $terms = get_the_terms( $post->ID, 'status');
+                        
+if ( $terms && ! is_wp_error( $terms ) ) : 
+
+    $status_links = array();
+
+    foreach ( $terms as $term ) {
+        $status_links[] = $term->slug;
+    }
+                        
+    $on_status = join(",", $status_links);
+?>
+    <?php echo $on_status; ?>
+
+<?php endif; ?>
+
 
     <header class="entry-header">
         <h1 class="entry-title">
