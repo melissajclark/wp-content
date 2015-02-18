@@ -9,7 +9,7 @@ if ( $terms && ! is_wp_error( $terms ) ) :
         $status_links[] = $term->slug;
     }
                         
-    $on_status = join(",", $status_links);
+    $on_status = joinjoin(", ", $status_links);
 ?>
     <?php echo $on_status; ?>
 
@@ -28,23 +28,24 @@ if ( $terms && ! is_wp_error( $terms ) ) :
         <li><strong>Language:</strong> <?php the_field('language'); ?></li>
         <li><strong>People:</strong> <?php the_field('team_members'); ?></li>
         <li><strong>Location:</strong> <?php the_field('city'); ?></li>
-        <li><strong>Status:</strong><?php $terms = get_the_terms( $post->ID, 'status');
-                        
-if ( $terms && ! is_wp_error( $terms ) ) : 
+        <li><strong>Status:</strong><?php // displays status terms attached to post
+        $terms = get_the_terms( $post->ID, 'status');
+                                
+        if ( $terms && ! is_wp_error( $terms ) ) : 
 
-    $status_links = array();
+            $status_links = array();
 
-    foreach ( $terms as $term ) {
-        $status_links[] = $term->name;
-    }
-                        
-    $on_status = join(", ", $status_links);
-?>
-    <?php echo $on_status; ?>
+            foreach ( $terms as $term ) {
+                $status_links[] = $term->name;
+            }
+                                
+            $on_status = join(", ", $status_links);
+        ?>
+            <?php echo $on_status; ?>
 
-<?php endif; ?></li>
+        <?php endif; ?></li>
 
-    </ul>
+    </ul><!-- / list -->
 
           
         <!-- <?php the_content(); ?> -->
