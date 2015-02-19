@@ -290,7 +290,7 @@ function taxonomy_list( $taxonomy ) {
     if ( $terms ) {
         printf( '', esc_attr( $taxonomy ) );
         foreach ( $terms as $term ) {
-        	printf( '<li><a class="filterControl" href="#"> %s </a> </li>', esc_html( $term->name ) );
+        	printf( '<li><a class="filterControl" href="#">%s</a></li>', esc_html( $term->name ) );
         }
         print( '' );
     }

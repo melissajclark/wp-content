@@ -23,13 +23,13 @@ function sliderBX(){
 } // end of sliderBX function
 
 
-(function() { //wallopSlider function
-    'use strict';
+// (function() { //wallopSlider function
+//     'use strict';
 
-    // New isntance of WallopSlider
-    var photoSlider = new WallopSlider('.photo-slider');
+//     // New isntance of WallopSlider
+//     var photoSlider = new WallopSlider('.photo-slider');
 
-})();
+// })();
 
 function glideSlider(){ 
     jQuery(document).ready(function($){
