@@ -22,6 +22,8 @@ get_header(); ?>
 
             <section class="filterResults">
 
+            <?php if(function_exists('show_beautiful_filters')){ show_beautiful_filters(); } ?>
+
                 <ul id="filterOptionsTypes" class="filterNav">
                 <li><span class="legend">View By Status:</span>
                     <?php taxonomy_list( 'status' ); // displays list of terms in status taxonomy in list (see functions.php) ?>
