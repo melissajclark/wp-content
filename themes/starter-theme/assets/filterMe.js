@@ -65,18 +65,11 @@ filterApp.init = function() { // this function holds everything to start the app
 		// displays legend after user clicks on a filter link filterApp.sortChoiceType
 		$("article.filterResultsCurrent").show(); 
 
-		$( "article:contains('status')" ).css( "text-decoration", "underline" );
-
 		// finds items NOT matching user's selection and hides them
-		$("article.filterableItem").not('[data-status="            '+ filterApp.sortChoiceType  + '\
-        "]').css("background", "red");
-
-        console.log("not" + ($("article.filterableItem").not('[data-status="            '+ filterApp.sortChoiceType  + '\
-        "]')));
+		$("article.filterableItem").not('[data-status="' + filterApp.sortChoiceType  + '"]').css("background", "red");
 
 		//finds items matching user's selection and shows them
-		$("article.filterableItem").filter('[data-status="            '+ filterApp.sortChoiceType  + '\
-        "]').css("background", "green");
+		$("article.filterableItem").filter('[data-status="' + filterApp.sortChoiceType  + '"]').css("background", "green");
 
 		// hides legend if "all" is selected + shows all items when all is selected
 		if (filterApp.sortChoiceType === "all") {
@@ -88,9 +81,6 @@ filterApp.init = function() { // this function holds everything to start the app
 		}
 
 	}); // end function on types select
-
-// /            inprogress
-//         /
 	
 	// ============ End function that listens on click & evaluates type data
 	
