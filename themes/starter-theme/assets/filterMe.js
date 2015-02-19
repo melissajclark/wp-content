@@ -5,8 +5,6 @@ filterApp.eachItem = "";
 
 // ------------------------------------
 
-
-
 filterApp.init = function() { // this function holds everything to start the app
 
 	// ======== functions that need to occur on page load ============
