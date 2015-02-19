@@ -1,8 +1,6 @@
 // Empty object for all code to live on
 
 var filterApp = {};
-filterApp.sortTypes = ["all", "German", "French", "Cantonese", "Portugese", "Spanish"]; // object to hold options for filtering
-filterApp.sortShapes = ["all", "circle", "hexagon", "square"]; // object to hold options for filtering
 filterApp.eachItem = "";
 
 // ------------------------------------
