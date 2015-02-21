@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields Pro
 Plugin URI: http://www.advancedcustomfields.com/
 Description: Fully customise WordPress edit screens with powerful fields. Boasting a professional interface and a powerful API, it’s a must have for any web developer working with WordPress. Field types include: Wysiwyg, text, textarea, image, file, select, checkbox, page link, post object, date picker, color picker, repeater, flexible content, gallery and more!
-Version: 5.1.0
+Version: 5.1.8
 Author: elliot condon
 Author URI: http://www.elliotcondon.com/
 Copyright: Elliot Condon
@@ -61,7 +61,7 @@ class acf {
 			
 			// basic
 			'name'				=> __('Advanced Custom Fields', 'acf'),
-			'version'			=> '5.1.0',
+			'version'			=> '5.1.8',
 						
 			// urls
 			'basename'			=> plugin_basename( __FILE__ ),
@@ -126,7 +126,6 @@ class acf {
 			acf_include('admin/settings-export.php');
 			//acf_include('admin/settings-addons.php');
 			acf_include('admin/settings-info.php');
-			
 		}
 		
 		
@@ -301,20 +300,20 @@ class acf {
 			
 			array(
 				'handle'	=> 'select2',
-				'src'		=> acf_get_dir( "inc/select2/select2{$min}.js" ),
-				'deps'		=> array('jquery'),
+				'src'		=> acf_get_dir( "assets/inc/select2/select2{$min}.js" ),
+				'deps'		=> false
 			),
 			
 			array(
 				'handle'	=> 'acf-input',
-				'src'		=> acf_get_dir( "js/input{$min}.js" ),
-				'deps'		=> array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'select2'),
+				'src'		=> acf_get_dir( "assets/js/acf-input{$min}.js" ),
+				'deps'		=> array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-resizable', 'jquery-ui-datepicker', 'wp-color-picker', 'select2')
 			),
 			
 			array(
 				'handle'	=> 'acf-field-group',
-				'src'		=> acf_get_dir( "js/field-group{$min}.js"),
-				'deps'		=> array('acf-input'),
+				'src'		=> acf_get_dir( "assets/js/acf-field-group{$min}.js"),
+				'deps'		=> array('acf-input')
 			)
 			
 		);
@@ -331,32 +330,32 @@ class acf {
 			
 			array(
 				'handle'	=> 'select2',
-				'src'		=> acf_get_dir( 'inc/select2/select2.css' ),
-				'deps'		=> array(),
+				'src'		=> acf_get_dir('assets/inc/select2/select2.css'),
+				'deps'		=> false
 			),
 			
 			array(
 				'handle'	=> 'acf-datepicker',
-				'src'		=> acf_get_dir( 'inc/datepicker/jquery-ui-1.10.4.custom.min.css' ),
-				'deps'		=> array(),
+				'src'		=> acf_get_dir('assets/inc/datepicker/jquery-ui-1.10.4.custom.min.css'),
+				'deps'		=> false
 			),
 			
 			array(
 				'handle'	=> 'acf-global',
-				'src'		=> acf_get_dir( 'css/global.css' ),
-				'deps'		=> array(),
-			),
-			
-			array(
-				'handle'	=> 'acf-field-group',
-				'src'		=> acf_get_dir( 'css/field-group.css' ),
-				'deps'		=> array(),
+				'src'		=> acf_get_dir('assets/css/acf-global.css'),
+				'deps'		=> false
 			),
 			
 			array(
 				'handle'	=> 'acf-input',
-				'src'		=> acf_get_dir( 'css/input.css' ),
-				'deps'		=> array('acf-datepicker', 'select2'),
+				'src'		=> acf_get_dir('assets/css/acf-input.css'),
+				'deps'		=> array('acf-global', 'wp-color-picker', 'select2', 'acf-datepicker')
+			),
+			
+			array(
+				'handle'	=> 'acf-field-group',
+				'src'		=> acf_get_dir('assets/css/acf-field-group.css'),
+				'deps'		=> array('acf-input')
 			)
 			
 		);		
@@ -402,13 +401,6 @@ class acf {
 	    if( $field_name = $wp_query->get('acf_field_name') ) {
 	    
 			$where .= $wpdb->prepare(" AND {$wpdb->posts}.post_excerpt = %s", $field_name );
-			
-			// acf_post_id
-		    if( $post_id = $wp_query->get('acf_post_id') ) {
-		    
-				$where .= $wpdb->prepare(" AND {$wpdb->postmeta}.post_id = %d", $post_id );
-				
-			}
 			
 	    }
 	    

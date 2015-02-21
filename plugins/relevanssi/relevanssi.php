@@ -3,7 +3,7 @@
 Plugin Name: Relevanssi
 Plugin URI: http://www.relevanssi.com/
 Description: This plugin replaces WordPress search with a relevance-sorting search.
-Version: 3.3.7.1
+Version: 3.3.8
 Author: Mikko Saari
 Author URI: http://www.mikkosaari.fi/
 */
@@ -224,7 +224,7 @@ function relevanssi_check_old_data() {
 }
 
 function _relevanssi_install() {
-	global $wpdb, $relevanssi_variables;
+	global $relevanssi_variables;
 	
 	add_option('relevanssi_title_boost', $relevanssi_variables['title_boost_default']);
 	add_option('relevanssi_comment_boost', $relevanssi_variables['comment_boost_default']);
@@ -259,7 +259,7 @@ function _relevanssi_install() {
 	add_option('relevanssi_implicit_operator', 'OR');
 	add_option('relevanssi_omit_from_logs', '');
 	add_option('relevanssi_synonyms', '');
-	add_option('relevanssi_index_excerpt', '');
+	add_option('relevanssi_index_excerpt', 'off');
 	add_option('relevanssi_index_limit', '500');
 	add_option('relevanssi_disable_or_fallback', 'off');
 	add_option('relevanssi_respect_exclude', 'on');
@@ -297,8 +297,15 @@ function relevanssi_get_post($id) {
 function relevanssi_remove_doc($id) {
 	global $wpdb, $relevanssi_variables;
 	
-	$q = "DELETE FROM " . $relevanssi_variables['relevanssi_table'] . " WHERE doc=$id";
+	$D = get_option( 'relevanssi_doc_count');
+
+ 	$q = "DELETE FROM " . $relevanssi_variables['relevanssi_table'] . " WHERE doc=$id";
 	$wpdb->query($q);
+	$rows_updated = $wpdb->query($q);
+
+	if($rows_updated && $rows_updated > 0) {
+		update_option('relevanssi_doc_count', $D - $rows_updated);
+	}
 }
 
 /*****

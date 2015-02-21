@@ -18,6 +18,8 @@ class acf_input {
 	
 	function __construct() {
 		
+		add_action('acf/save_post', 							array($this, 'save_files'), 5, 1);
+		add_action('acf/save_post', 							array($this, 'save_post'), 10, 1);
 		add_action('acf/input/admin_enqueue_scripts', 			array($this, 'admin_enqueue_scripts'), 0, 0);
 		add_action('acf/input/admin_footer', 					array($this, 'admin_footer'), 0, 0);
 		
@@ -29,9 +31,72 @@ class acf_input {
 	
 	
 	/*
+	*  save_files
+	*
+	*  This function will save the $_FILES data
+	*
+	*  @type	function
+	*  @date	24/10/2014
+	*  @since	5.0.9
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function save_files( $post_id = 0 ) {
+		
+		// bail early if no $_FILES data
+		if( empty($_FILES['acf']['name']) ) {
+			
+			return;
+			
+		}
+		
+		
+		// upload files
+		acf_upload_files();
+	
+	}
+	
+	
+	/*
+	*  save_post
+	*
+	*  This function will save the $_POST data
+	*
+	*  @type	function
+	*  @date	24/10/2014
+	*  @since	5.0.9
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function save_post( $post_id = 0 ) {
+		
+		// save $_POST data
+		foreach( $_POST['acf'] as $k => $v ) {
+			
+			// get field
+			$field = acf_get_field( $k );
+			
+			
+			// update field
+			if( $field ) {
+				
+				acf_update_value( $v, $post_id, $field );
+				
+			}
+			
+		}
+	
+	}
+	
+	
+	/*
 	*  admin_enqueue_scripts
 	*
-	*  This functiln will enqueue all the required scripts / styles for ACF
+	*  This function will enqueue all the required scripts / styles for ACF
 	*
 	*  @type	action (acf/input/admin_enqueue_scripts)
 	*  @date	6/10/13
@@ -41,34 +106,15 @@ class acf_input {
 	*  @return	n/a
 	*/
 	
-	function admin_enqueue_scripts()
-	{
+	function admin_enqueue_scripts() {
 
 		// scripts
-		wp_enqueue_script(array(
-			'jquery',
-			'jquery-ui-core',
-			'jquery-ui-tabs',
-			'jquery-ui-sortable',
-			'jquery-ui-resizable',
-			'wp-color-picker',
-			'thickbox',
-			'media-upload',
-			'acf-input',
-			'acf-datepicker',	
-		));
+		wp_enqueue_script('acf-input');
 		
-		
-		//acf_enqueue_uploader();
 		
 		// styles
-		wp_enqueue_style(array(
-			'thickbox',
-			'wp-color-picker',
-			'acf-global',
-			'acf-input',
-			'acf-datepicker',	
-		));
+		wp_enqueue_style('acf-input');
+		
 	}
 	
 
@@ -128,19 +174,34 @@ class acf_input {
 		
 	}
 	
+	
+	/*
+	*  ajax_validate_save_post
+	*
+	*  This function will validate the $_POST data via AJAX
+	*
+	*  @type	function
+	*  @date	27/10/2014
+	*  @since	5.0.9
+	*
+	*  @param	n/a
+	*  @return	n/a
+	*/
+	
 	function ajax_validate_save_post() {
 		
 		// validate
-		if( !isset($_POST['_acfnonce']) )
-		{
+		if( !isset($_POST['_acfnonce']) ) {
+			
 			// ignore validation, this form $_POST was not correctly configured
 			die();
+			
 		}
 		
 		
 		// success
-		if( acf_validate_save_post() )
-		{
+		if( acf_validate_save_post() ) {
+			
 			$json = array(
 				'result'	=> 1,
 				'message'	=> __('Validation successful', 'acf'),
@@ -148,6 +209,7 @@ class acf_input {
 			);
 			
 			die( json_encode($json) );
+			
 		}
 		
 		
@@ -163,9 +225,9 @@ class acf_input {
 		$i = count( $json['errors'] );
 		$json['message'] .= '. ' . sprintf( _n( '1 required field below is empty', '%s required fields below are empty', $i, 'acf' ), $i );
 		
-
-		die( json_encode($json) );
 		
+		// return
+		die( json_encode($json) );
 		
 	}
 	
@@ -276,6 +338,19 @@ function acf_enqueue_scripts() {
 }
 
 
+/*
+*  acf_enqueue_uploader
+*
+*  This function will render a WP WYSIWYG and enqueue media
+*
+*  @type	function
+*  @date	27/10/2014
+*  @since	5.0.9
+*
+*  @param	n/a
+*  @return	n/a
+*/
+
 function acf_enqueue_uploader() {
 	
 	// bail early if doing ajax
@@ -298,8 +373,12 @@ function acf_enqueue_uploader() {
 	acf_update_setting('enqueue_uploader', 1);
 	
 	
-	// enqueue media
-	wp_enqueue_media();
+	// enqueue media if user can upload
+	if( current_user_can( 'upload_files' ) ) {
+		
+		wp_enqueue_media();
+		
+	}
 	
 	
 	// create dummy editor
@@ -344,7 +423,8 @@ function acf_form_data( $args = array() ) {
 	// enqueue uploader if page allows AJAX fields to appear
 	if( $args['ajax'] ) {
 		
-		acf_enqueue_uploader();
+		add_action('admin_footer', 'acf_enqueue_uploader', 1);
+		//acf_enqueue_uploader();
 		
 	}
 	
@@ -373,37 +453,20 @@ function acf_form_data( $args = array() ) {
 
 function acf_save_post( $post_id = 0 ) {
 	
-	// loop through and save
-	if( !empty($_POST['acf']) )
-	{
-		// loop through and save $_POST data
-		foreach( $_POST['acf'] as $key => $value )
-		{
-			// get field
-			$field = acf_get_field( $key );
-			
-			
-			// validate field
-			if( !$field )
-			{
-				continue;
-			}
-			
-			
-			// update field
-			acf_update_value( $value, $post_id, $field );
-			
-		}
-		// foreach($fields as $key => $value)
+	// bail early if no acf values
+	if( empty($_POST['acf']) ) {
+		
+		return false;
+		
 	}
-	// if($fields)
 	
 	
 	// hook for 3rd party customization
 	do_action('acf/save_post', $post_id);
 	
 	
-	return $post_id;
+	// return
+	return true;
 
 }
 
@@ -417,27 +480,26 @@ function acf_save_post( $post_id = 0 ) {
 *  @date	25/11/2013
 *  @since	5.0.0
 *
-*  @param	$post_id (int)
-*  @return	$post_id (int)
+*  @param	$show_errors (boolean) if true, errors will be shown via a wo_die screen
+*  @return	(boolean)
 */
 
 function acf_validate_save_post( $show_errors = false ) {
 	
 	// validate required fields
-	if( !empty($_POST['acf']) )
-	{
+	if( !empty($_POST['acf']) ) {
+		
 		$keys = array_keys($_POST['acf']);
 		
 		// loop through and save $_POST data
-		foreach( $keys as $key )
-		{
+		foreach( $keys as $key ) {
+			
 			// get field
 			$field = acf_get_field( $key );
 			
 			
 			// validate
 			acf_validate_value( $_POST['acf'][ $key ], $field, "acf[{$key}]" );
-			
 			
 		}
 		// foreach($fields as $key => $value)
@@ -450,20 +512,22 @@ function acf_validate_save_post( $show_errors = false ) {
 	
 	
 	// check errors
-	if( $errors = acf_get_validation_errors() )
-	{
-		if( $show_errors )
-		{
+	if( $errors = acf_get_validation_errors() ) {
+		
+		if( $show_errors ) {
+			
 			$message = '<h2>Validation failed</h2><ul>';
 			
-			foreach( $errors as $error )
-			{
+			foreach( $errors as $error ) {
+				
 				$message .= '<li>' . $error['message'] . '</li>';
+				
 			}
 			
 			$message .= '</ul>';
 			
 			wp_die( $message, 'Validation failed' );
+			
 		}
 		
 		return false;
@@ -475,6 +539,21 @@ function acf_validate_save_post( $show_errors = false ) {
 	return true;
 }
 
+
+/*
+*  acf_validate_value
+*
+*  This function will validate a value for a field
+*
+*  @type	function
+*  @date	27/10/2014
+*  @since	5.0.9
+*
+*  @param	$value (mixed)
+*  @param	$field (array)
+*  @param	$input (string) name attribute of DOM elmenet
+*  @return	(boolean)
+*/
 
 function acf_validate_value( $value, $field, $input ) {
 	
@@ -504,17 +583,19 @@ function acf_validate_value( $value, $field, $input ) {
 	
 	
 	// allow $valid to be a custom error message
-	if( !empty($valid) && is_string($valid) )
-	{
+	if( !empty($valid) && is_string($valid) ) {
+		
 		$message = $valid;
 		$valid = false;
+		
 	}
 	
 	
-	if( !$valid )
-	{
+	if( !$valid ) {
+		
 		acf_add_validation_error( $input, $message );
 		return false;
+		
 	}
 	
 	
@@ -533,16 +614,18 @@ function acf_validate_value( $value, $field, $input ) {
 *  @date	25/11/2013
 *  @since	5.0.0
 *
-*  @param	$post_id (int)
+*  @param	$input (string) name attribute of DOM elmenet
+*  @param	$message (string) error message
 *  @return	$post_id (int)
 */
 
 function acf_add_validation_error( $input, $message = '' ) {
 	
 	// instantiate array if empty
-	if( empty($GLOBALS['acf_validation_errors']) )
-	{
+	if( empty($GLOBALS['acf_validation_errors']) ) {
+		
 		$GLOBALS['acf_validation_errors'] = array();
+		
 	}
 	
 	
@@ -558,26 +641,26 @@ function acf_add_validation_error( $input, $message = '' ) {
 /*
 *  acf_add_validation_error
 *
-*  description
+*  This function will return any validation errors
 *
 *  @type	function
 *  @date	25/11/2013
 *  @since	5.0.0
 *
-*  @param	$post_id (int)
-*  @return	$post_id (int)
+*  @param	n/a
+*  @return	(array|boolean)
 */
 
 function acf_get_validation_errors() {
 	
-	if( empty($GLOBALS['acf_validation_errors']) )
-	{
+	if( empty($GLOBALS['acf_validation_errors']) ) {
+		
 		return false;
+		
 	}
 	
 	return $GLOBALS['acf_validation_errors'];
 	
 }
-
 
 ?>

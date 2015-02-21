@@ -19,7 +19,7 @@
 	 *
 	 * @var     string
 	 */
-	protected $plugin_version = '8.2.2';
+	protected $plugin_version = '9.1';
 
 	/**
 	 * Instance of this class.
@@ -572,56 +572,9 @@
 class Quick_Featured_Images_Base {
 
 	/**
-	 * Returns the post id of an uploaded image, else 0
-	 * Looks for internal images only, i.e. images from the 
-	 * media library and not images embedded by URL from 
-	 * external servers
-	 *
-	 * @access   private
-	 * @since     5.0
-	 * @updated   5.1.1: refactored
-	 * @updated   7.0: improved performance by changing intval() to (int)
-	 *
-	 * @return    integer    the post id of the image
-	 */
-	protected function get_image_id_by_url ( $content ) {
-		// set variables
-		global $wpdb;
-		$thumb_id = 0;
-		$pat_find_img_src = '/<img.*?src=[\'"]([^\'"]+)[\'"][^>]*>/i';
-		// look for images in HTML code
-		preg_match_all( $pat_find_img_src, $content, $matches );
-		// if img elements found: try to get the first image's ID
-		if ( isset( $matches ) and 0 < count( $matches ) ) {
-			foreach ( $matches[ 1 ] as $url ) {
-				preg_match( '|' . get_site_url() . '|i', $url, $matches );
-				// if site-owned image
-				if ( isset( $matches ) and 0 < count( $matches ) ) {
-					// delete optional query string in img src
-					$url = preg_replace( '/([^?]+).*/', '\1', $url );
-					// delete image dimensions data in img file name, just take base name and extension
-					$guid = preg_replace( '/(.+)-\d+x\d+\.(\w+)/', '\1.\2', $url );
-					// look up its ID in the db
-					$img_id = $wpdb->get_var( $wpdb->prepare( "SELECT `ID` FROM $wpdb->posts WHERE `guid` = '%s'", $guid ) );
-					// if it is available take its ID as new thumb id
-					if ( $img_id ) {
-						// finally we have an id
-						$thumb_id = (int) $img_id ;
-					}
-				} // if $matches
-				// stop loop, because we want only the first matching image of a post
-				if ( $thumb_id ) {
-					break;
-				}
-			} // foreach( $url )
-		} // if $matches
-		return $thumb_id;
-	}
-
-	/**
 	 * For development: Display a var_dump() of the variable within HTML 'pre' elements and die if true
 	 *
-	 * dambedei: read: "dump and die". If you know what it is you know my home region ;-)
+	 * about the term dambedei (read: "dump and die"): If you know what it is you know my home region ;-)
 	 *
 	 * @since    1.0.0
 	 */

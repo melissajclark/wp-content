@@ -1,6 +1,8 @@
 <h3><?php _e( 'Your selection', $this->plugin_slug ); ?></h3>
 <?php
+$two_columns = false;
 if ( in_array( $this->selected_action, array_keys( $this->valid_actions ) ) && $this->selected_image_id ) {
+	$two_columns = true;
 ?>
 <div class="th_wrapper">
 	<div class="th_w50percent">
@@ -14,6 +16,7 @@ if ( in_array( $this->selected_action, array_keys( $this->valid_actions ) ) && $
 	<div class="th_w50percent">
 <?php
 } elseif ( in_array( $this->selected_action, array_keys( $this->valid_actions_multiple_images ) ) && $this->selected_multiple_image_ids ) {
+	$two_columns = true;
 ?>
 <div class="th_wrapper">
 	<div class="th_w50percent">
@@ -50,7 +53,7 @@ if ( isset( $this->valid_actions[ $this->selected_action ] ) ) {
 		<p><?php echo $selected_action; ?></p>
 		<p><a class="button" href='<?php echo esc_url( admin_url( sprintf( 'admin.php?page=%s', $this->page_slug ) ) );?>'><?php _e( 'If wrong action start again', $this->plugin_slug );?></a></p>
 <?php
-if ( $this->selected_image_id || $this->selected_multiple_image_ids ) {
+if ( $two_columns ) {
 ?>
 	</div><!-- .th_w50percent -->
 </div><!-- .th_wrapper -->

@@ -97,6 +97,9 @@ class Quick_Featured_Images_Columns {
 	 * settings page and menu.
 	 *
 	 * @since     7.0
+	 *
+	 * @updated 8.3.1: sanitized recognition of key names, fixed bug on displaying undesired columns
+	 * @updated 9.0: added column sort function
 	 */
 	private function __construct() {
 
@@ -107,57 +110,54 @@ class Quick_Featured_Images_Columns {
 		$this->plugin_version = $plugin->get_plugin_version();
 		$this->settings_db_slug = $plugin->get_settings_db_slug();
 
-		// Load admin style sheet and JavaScript.
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
-		#add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
 		// add featured image columns if desired
-		$filter_function = array( $this, 'add_thumbnail_column' );
-		$action_function = array( $this, 'display_thumbnail_in_column' );
+		$add_column_function = array( $this, 'add_thumbnail_column' );
+		$display_column_function = array( $this, 'display_thumbnail_in_column' );
+		$add_sort_function = array( $this, 'add_sortable_column' );
 		// get current or default settings
 		$this->stored_settings = get_option( $this->settings_db_slug, array() );
 
+		// add Featured Image column in desired posts lists
 		foreach ( $this->stored_settings as $key => $value ) {
-			if ( preg_match('/^show_(.+)_images$/', $key, $matches ) ) {
-				if ( '1' == $value ) {
+			if ( '1' == $value ) {
+				if ( preg_match('/^column_thumb_([a-z0-9_\-]+)$/', $key, $matches ) ) {
 					// make the following lines more readable
 					$post_type = $matches[ 1 ];
-					// add filter and action functions to show the additional column with images
-					// check with has_filter() to prevent multiple images in a column row
-					if ( 'posts' == $post_type or 'pages' == $post_type ) {
-						// use hooks for WP standard post types
-						$hook = sprintf( 'manage_%s_columns', $post_type );
-						if ( ! has_filter( $hook, $filter_function ) ) {
-							add_filter( $hook, $filter_function );
-						}
-						$hook = sprintf( 'manage_%s_custom_column', $post_type );
-						if ( ! has_action( $hook, $action_function ) ) {
-							add_action( $hook, $action_function, 10, 2 );
-						}
-					} else {
-						// use hooks for custom post types
-						$hook = sprintf( 'manage_%s_posts_columns', $post_type );
-						if ( ! has_filter( $hook, $filter_function ) ) {
-							add_filter( $hook, $filter_function );
-						}
-						if ( is_post_type_hierarchical( $post_type ) ) {
-							$hook = 'manage_pages_custom_column';
-							if ( ! has_action( $hook, $action_function ) ) {
-								add_action( $hook, $action_function, 10, 2 );
-							}
-						} else {
-							$hook = sprintf( 'manage_%s_posts_custom_column', $post_type );
-							if ( ! ( has_action( 'manage_posts_custom_column', $action_function ) or has_action( $hook, $action_function ) ) ) {
-								add_action( $hook, $action_function, 10, 2 );
-							}
-						} // if ( is_post_type_hierarchical )
-					} // if ( post type )
-				} // if ( value == 1 )
-			} // if ( preg_match() )
+					
+					// get the hook name for the columns filter
+					$hook = sprintf( 'manage_%s_posts_columns', $post_type );
+					// add a column to list of desired post type and
+					// sanitizing: check with has_filter() to prevent multiple columns in a row
+					if ( ! has_filter( $hook, $add_column_function ) ) {
+						add_filter( $hook, $add_column_function );
+					}
+					
+					// get the hook name for the sortable columns filter
+					$hook = sprintf( 'manage_edit-%s_sortable_columns', $post_type );
+					// add the column to list of sortable columns
+					// sanitizing: check with has_filter() to prevent more than 1 call
+					if ( ! has_filter( $hook, $add_sort_function ) ) {
+						add_filter( $hook, $add_sort_function );
+					}
+					
+					// get the hook name for the column edit action
+					$hook = sprintf( 'manage_%s_posts_custom_column', $post_type );
+					// add thumbnail in column per post
+					// sanitizing: check with has_filter() to prevent multiple contents in a column
+					if ( ! has_action( $hook, $display_column_function ) ) {
+						add_action( $hook, $display_column_function, 10, 2 );
+					}
+					
+				} // if ( preg_match() )
+			} // if ( value == 1 )
 		} // foreach( stored_settings )
 
-		// style for thumbnail column
+		// load admin style sheet
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
+		// print style for thumbnail column
 		add_action( 'admin_head', array( $this, 'display_thumbnail_column_style' ) );
+		// define image column sort order
+		add_filter( 'pre_get_posts', array( $this, 'sort_column_by_image_id' ) );
 	}
 
 	/**
@@ -223,20 +223,34 @@ class Quick_Featured_Images_Columns {
 	 *
 	 * @since     7.0
 	 *
-	 * @return    null    
+	 * @return    array	list of columns    
 	 */
     public function add_thumbnail_column( $cols ) {
 		$text = 'Featured Image';
-        $cols[ $this->column_name ] = __( $text );
+		$cols[ $this->column_name ] = __( $text );
         return $cols;
     }
 	
+    /**
+     * Add the Featured Image column to sortable columns
+     *
+	 * @since     9.0
+	 *
+	 * @return    array	extended list of sortable columns    
+     */
+    public function add_sortable_column( $cols ) {
+        $cols[ $this->column_name ] = $this->column_name;
+
+        return $cols;
+    }
+
 	/**
 	 * Print the featured image in the column
 	 *
 	 * @since     7.0
+	 * @updated 9.1: revised label text for WP 4.1
 	 *
-	 * @return    null    
+	 * @return    array	extended list of columns    
 	 */
     public function display_thumbnail_in_column( $column_name, $post_id ) {
 		/*
@@ -257,7 +271,8 @@ class Quick_Featured_Images_Columns {
 			if ( $thumbnail_id ) {
 				echo wp_get_attachment_image( $thumbnail_id, array( $width, $height ) );
 			} else {
-				echo __( 'No Image' );
+				$text = 'No image set';
+				echo __( $text );
 			}
 		}
     }
@@ -290,5 +305,23 @@ class Quick_Featured_Images_Columns {
 		print "\n";
 		print '</style>';
 	}
+
+    /**
+     * Define sort order: order posts by featured image id
+     *
+	 * @since     9.0
+	 *
+     * @param $query
+     */
+    public function sort_column_by_image_id( $query ) {
+	
+		// if user wants to get rows sorted by featured image
+        if ( $query->get( 'orderby' ) === $this->column_name ) {
+			// set thumbnail id as sort value
+            $query->set( 'meta_key', '_thumbnail_id' );
+			// change sorting from alphabetical to numeric
+            $query->set( 'orderby', 'meta_value_num' );
+        }
+    }
 
 }

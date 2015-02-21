@@ -206,7 +206,7 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 2.0
 	 */
-	function restore() {
+	public function restore() {
 
 		delete_option( "cpac_options_{$this->key}" );
 
@@ -219,7 +219,7 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 2.0
 	 */
-	function store( $columns = '' ) {
+	public function store( $columns = '' ) {
 
 		if ( ! empty( $_POST[ $this->key ] ) ) {
 			$columns = array_filter( $_POST[ $this->key ] );
@@ -255,6 +255,17 @@ abstract class CPAC_Storage_Model {
 
 		// refresh columns otherwise the newly added columns will not be displayed
 		$this->set_columns_on_current_screen();
+
+		/**
+		 * Fires after a new column setup is stored in the database
+		 * Primarily used when columns are saved through the Admin Columns settings screen
+		 *
+		 * @since 2.2.9
+		 *
+		 * @param array $columns List of columns ([columnid] => (array) [column properties])
+		 * @param CPAC_Storage_Model $storage_model_instance Storage model instance
+		 */
+		do_action( 'cac/storage_model/columns_stored', $columns, $this );
 
 		return true;
 	}
@@ -395,7 +406,7 @@ abstract class CPAC_Storage_Model {
 	 * @since 2.0
 	 * @return array Column Type | Column Instance
 	 */
-	function get_custom_registered_columns() {
+	public function get_custom_registered_columns() {
 
 		$columns = array();
 
@@ -442,15 +453,14 @@ abstract class CPAC_Storage_Model {
 	 */
 	public function get_stored_columns() {
 
-		if ( $this->stored_columns !== NULL ) {
-			$columns = $this->stored_columns;
-		}
-		else {
+		$columns = $this->stored_columns;
+
+		if ( $this->stored_columns === NULL ) {
 			$columns = $this->get_database_columns();
 		}
 
 		$columns = apply_filters( 'cpac/storage_model/stored_columns', $columns, $this );
-		$columns = apply_filters( 'cpac/storage_model/stored_columns/storage_key={$this->key}', $columns, $this );
+		$columns = apply_filters( 'cpac/storage_model/stored_columns/storage_key=' . $this->key, $columns, $this );
 
 		if ( ! $columns ) {
 			return array();
@@ -465,6 +475,13 @@ abstract class CPAC_Storage_Model {
 
 	public function set_stored_columns( $columns ) {
 		$this->stored_columns = $columns;
+	}
+
+	/**
+	 * @since 2.1.1
+	 */
+	public function get_post_type() {
+		return isset( $this->post_type ) ? $this->post_type : false;
 	}
 
 	/**
@@ -536,13 +553,16 @@ abstract class CPAC_Storage_Model {
 		$groups = apply_filters( "cac/storage_model/column_type_groups", $groups, $this );
 		$groups = apply_filters( "cac/storage_model/column_type_groups/storage_key={$this->key}", $groups, $this );
 
+		// Integrations first
+		krsort( $groups );
+
 		return $groups;
 	}
 
 	/**
 	 * @since 2.0.2
 	 */
-	function get_registered_columns() {
+	public function get_registered_columns() {
 
 		$types = array();
 
@@ -556,7 +576,7 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 2.0
 	 */
-	function get_columns() {
+	public function get_columns() {
 
 		do_action( 'cac/get_columns', $this );
 
@@ -643,7 +663,7 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 2.0
 	 */
-	function get_column_by_name( $name ) {
+	public function get_column_by_name( $name ) {
 
 		if ( ! isset( $this->columns[ $name ] ) ) {
 			return false;
@@ -728,7 +748,7 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 2.0
 	 */
-	function screen_link() {
+	public function screen_link() {
 
 		echo '<a href="' . $this->get_screen_link() . '" class="add-new-h2">' . __('View', 'cpac') . '</a>';
 	}
@@ -736,7 +756,7 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 2.0
 	 */
-	function get_edit_link() {
+	public function get_edit_link() {
 
 		return add_query_arg( array( 'page' => 'codepress-admin-columns', 'cpac_key' => $this->key ), admin_url( 'options-general.php' ) );
 	}
@@ -748,7 +768,7 @@ abstract class CPAC_Storage_Model {
 	 * @since 2.0.5
      * @return boolean
 	 */
-	function is_doing_ajax() {
+	public function is_doing_ajax() {
 		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
 			return false;
 		}
@@ -766,7 +786,7 @@ abstract class CPAC_Storage_Model {
      * @global object $current_screen
      * @return boolean
 	 */
-	function is_columns_screen() {
+	public function is_columns_screen() {
 
 		global $pagenow;
 
@@ -810,6 +830,13 @@ abstract class CPAC_Storage_Model {
     }
 
     /**
+     * @since 2.3.2
+     */
+    public function delete_general_option() {
+    	delete_option( 'cpac_general_options' );
+    }
+
+    /**
      * @since 2.1.1
      */
     public function get_general_option( $option ) {
@@ -822,15 +849,50 @@ abstract class CPAC_Storage_Model {
     }
 
 	/**
-	 * @since 2.2.4
+	 * @since 3.1.2
+	 * @param $id Cache ID
+	 * @param $column_name Column property name
+	 * @return string MD5 Cache ID
 	 */
-	public function is_table_header_fixed() {
+	public function get_cache_id( $id, $column_name ) {
+		return md5( $this->key . $id . $column_name );
+	}
 
-		/**
-		 * @since 2.2.4
-		 */
-		$fixed = apply_filters( 'cpac/storage_model/table_header_fixed', false, $this );
+	/**
+	 * @since 3.1.2
+	 * @param $id Cache ID
+	 * @param $column_name Column property name
+	 * @param $cache_object Cache Object
+	 */
+	public function set_cache( $id, $column_name, $cache_object ) {
+		if ( empty( $cache_object ) ) {
+			return false;
+		}
+		set_transient( $this->get_cache_id( $id, $column_name ), $cache_object, 3600 * 24 * 7 ); // 7 days
+	}
 
-		return $fixed;
+	/**
+	 * @since 3.1.2
+	 * @param $id Cache ID ( could be a name of an addon for example )
+	 * @param $column_name Column property name
+	 * @return false | mixed Returns either false or the cached objects
+	 */
+	public function get_cache( $id, $column_name ) {
+		$cache = get_transient( $this->get_cache_id( $id, $column_name ) );
+
+		if ( empty( $cache ) ) {
+			return false;
+		}
+
+		return $cache;
+	}
+
+	/**
+	 * @since 3.1.2
+	 * @param $id Cache ID
+	 * @param $column_name Column property name
+	 */
+	public function delete_cache( $id, $column_name ) {
+		delete_transient( $this->get_cache_id( $id, $column_name ) );
 	}
 }

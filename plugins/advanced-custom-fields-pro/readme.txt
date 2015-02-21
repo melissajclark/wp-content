@@ -2,7 +2,7 @@
 Contributors: elliotcondon
 Tags: custom, field, custom field, advanced, simple fields, magic fields, more fields, repeater, matrix, post, type, text, textarea, file, image, edit, admin
 Requires at least: 3.5.0
-Tested up to: 4.0
+Tested up to: 4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +11,7 @@ Fully customise WordPress edit screens with powerful fields. Boasting a professi
 
 == Description ==
 
-Advanced Custom Fields is the perfect solution for any wordpress website which needs more flexible data like other Content Management Systems. 
+Advanced Custom Fields is the perfect solution for any WordPress website which needs more flexible data like other Content Management Systems. 
 
 * Visually create your Fields
 * Select from multiple input types (text, textarea, wysiwyg, image, file, page link, post object, relationship, select, checkbox, radio buttons, date picker, true / false, repeater, flexible content, gallery and more to come!)
@@ -38,7 +38,7 @@ Advanced Custom Fields is the perfect solution for any wordpress website which n
 * Relationship (search, select and order post objects with a tidy interface, api returns the selected post objects)
 * Taxonomy (select taxonomy terms with options to load, display and save, api returns the selected term objects)
 * User (select 1 or more WP users, api returns the selected user objects)
-* Google Maps (interactive map, api returns lat,lng,address data)
+* Google Maps (interactive map, api returns lat, lng, address data)
 * Date Picker (jQuery date picker, options for format, api returns string)
 * Color Picker (WP color swatch picker)
 * Tab (Group fields into tabs)
@@ -107,6 +107,78 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 5.1.8 =
+* WYSIWYG field: Fixed bug causing formatting issue when drag/drop
+* Tab field: Fixed UI glitch where left aligned tabs would get cut off in small field group
+* Message field: Added missing wrapper settings
+* Core: Minor fixes and improvements
+* Language: Updated Russian translation - thanks to Andy Toniyevych
+
+= 5.1.7.1 =
+* Core: Fixed JS error on data input screens
+* Core: Fixed incorrect return_url when using `acf_form()`
+
+= 5.1.7 =
+* Tab field: Added new placement setting for top aligned / left aligned
+* Image field: Fixed selection bug when attachment popup also contains an image field
+* File field: Fixed selection bug when attachment popup also contains a file field
+* WYSIWYG field: Prevented full-height feature until WP provide compatibility for multiple editors 
+* Core: Fixed many field bugs in WP media grid popup
+* Core: Added new friendly field wrap classes: acf-field-{$type} acf-field-{$key}
+* Core: JS speed improvements due to new field wrap classes
+* Core: Added new filter for removing compatibility http://www.advancedcustomfields.com/resources/acfcompatibility/
+* Core: Minor fixes and improvements
+* Language: Updated German translation - thanks to Thomas Meyer
+
+= 5.1.6 =
+* Gallery field: More UI improvements including titles for non image attachments
+* Image field: Added more data to returned attachment including filename, icon, author and type
+* File field: Same as above
+* Gallery field: Same as above
+* Google Maps field: Fixed JS error when google object exists without maps API
+* Select field: Fixed bug where a single numeric value would not save as a default_value
+* Checkbox field: Same as above
+* Radio field: Same as above
+* API: Added $format parameter to the functions the_row() and get_row()
+* Core: Fixed bug when adding 'post_parent' value to post_object/relationship query args
+* Core: Minor fixes and improvements
+* Core: More RTL CSS improvements
+* Language: Updated Hebrew translation - thanks to Lavi Perchik
+* Language: Updated Persian translation - thanks to Kamel
+
+= 5.1.5 =
+* Taxonomy field: Fixed bug where values would not appear selected
+* Core: Added new JSON synchronisation functionality
+* Core: Minor fixes and improvements
+
+= 5.1.4 =
+* Taxonomy field: Major improvement to save/load setting allowing for different values on multiple sub fields
+* Google Map field: Fixed render glitch on sub fields when shown by a tab field
+* Code: Fixed bug where Select2 would continuously load when no results found
+* Core: Fixed bug where translated field groups were lost during DB migration to v5
+* Core: Minor fixes and improvements
+
+= 5.1.3 =
+* Repeater field: Added new 'block' layout style
+* Flexible Content field: Added new 'block' layout style
+* Core: Added new field setting 'wrapper' including width, class and id
+* Core: Minor JS speed improvement for sub field conditional logic
+* Core: Minor fixes and improvements
+* Language: Updated Dutch translation - thanks to Patrick Heiloo
+
+= 5.1.2 =
+* API: Fixed various bugs with the have_rows() function
+
+= 5.1.1 =
+* Image field: Added basic file uploader for non logged in users
+* File field: Added basic file uploader for non logged in users
+* API: Added $format_value parameter to the functions get_sub_field, the_sub_field and get_sub_field_object
+* API: Added $load_value parameter to the function get_sub_field_object
+* API: Added logic in have_rows function to allow for either field name or key
+* Core: Reverted acf_save_post function back to an action with priority of 10.
+* Core: Fixed compatibility bug with Shopp plugin
+* Field group: Fixed bug where sub fields were deleted when moving a repeater field to another group
+
 = 5.1.0 =
 * Google Map field: Fixed JS bug causing navigation prompt to incorrectly appear
 * Image field: Added width & height data next to preview_size settings
@@ -129,7 +201,6 @@ http://support.advancedcustomfields.com/
 * Core: Minor fixes and improvements
 * Language: Added Turkish translation - thanks to Ramazan POLAT
 * Language: Updated Persian translation - thanks to Kamel Kimiaei
-
 
 = 5.0.8 =
 * Checkbox field: Fixed PHP error when editing field default value

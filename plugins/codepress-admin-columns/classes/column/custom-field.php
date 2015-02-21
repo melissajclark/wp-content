@@ -14,7 +14,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 * @see CPAC_Column::init()
 	 * @since 2.2.1
 	 */
-	function init() {
+	public function init() {
 
 		parent::init();
 
@@ -41,10 +41,38 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	}
 
 	/**
+	 * @since 3.2.1
+	 */
+	public function is_field_type( $type ) {
+		return $type === $this->get_field_type();
+	}
+
+	/**
+	 * @since 3.2.1
+	 */
+	public function is_field( $field ) {
+		return $type === $this->get_field();
+	}
+
+	/**
+	 * @since 3.2.1
+	 */
+	public function get_field_type() {
+		return $this->options->field_type;
+	}
+
+	/**
+	 * @since 3.2.1
+	 */
+	public function get_field() {
+		return $this->options->field;
+	}
+
+	/**
 	 * @see CPAC_Column::sanitize_options()
 	 * @since 1.0
 	 */
-	function sanitize_options( $options ) {
+	public function sanitize_options( $options ) {
 
 		if ( empty( $options['date_format'] ) ) {
 			$options['date_format'] = get_option( 'date_format' );
@@ -75,6 +103,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 			'numeric'		=> __( 'Numeric', 'cpac' ),
 			'title_by_id'	=> __( 'Post Title (Post ID\'s)', 'cpac' ),
 			'user_by_id'	=> __( 'Username (User ID\'s)', 'cpac' ),
+			'term_by_id'	=> __( 'Term Name (Term ID\'s)', 'cpac' ),
 		);
 
 		// deprecated. do not use, will be removed.
@@ -176,6 +205,21 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	}
 
 	/**
+	 * Get Terms by ID - Value method
+	 *
+	 * @since 2.3.2
+	 *
+	 * @param array $meta_value Term ID's
+	 * @return string Terms
+	 */
+	public function get_terms_by_id( $meta_value )	{
+		if ( ! is_array( $meta_value) || ! isset( $meta_value['term_id'] ) || ! isset( $meta_value['taxonomy'] ) ) {
+			return false;
+		}
+		return $this->get_terms_for_display( $meta_value['term_id'], $meta_value['taxonomy'] );
+	}
+
+	/**
 	 * Get meta value
 	 *
 	 * @since 2.0
@@ -184,7 +228,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 * @param int $id Optional Object ID
 	 * @return string Users
 	 */
-	function get_value_by_meta( $meta, $id = null ) {
+	public function get_value_by_meta( $meta, $id = null ) {
 
 		switch ( $this->options->field_type ) :
 
@@ -213,6 +257,10 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 				$meta = $this->get_users_by_id( $meta );
 				break;
 
+			case "term_by_id" :
+				$meta = $this->get_terms_by_id( $this->get_raw_value( $id ) );
+				break;
+
 			case "checkmark" :
 				$checkmark = $this->get_asset_image( 'checkmark.png' );
 
@@ -230,8 +278,9 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 				break;
 
 			case "count" :
-				if ( $count = $this->get_raw_value( $id, false ) )
+				if ( $count = $this->get_raw_value( $id, false ) ) {
 					$meta = count( $count );
+				}
 				break;
 
 		endswitch;
@@ -246,7 +295,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 *
 	 * @param string Custom Field Key
 	 */
-	function get_field_key() {
+	public function get_field_key() {
 
 		return substr( $this->options->field, 0, 10 ) == "cpachidden" ? str_replace( 'cpachidden', '', $this->options->field ) : $this->options->field;
 	}
@@ -269,8 +318,9 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 			$meta = $this->recursive_implode( ', ', $meta );
 		}
 
-		if ( ! is_string( $meta ) )
+		if ( ! is_string( $meta ) ) {
 			return false;
+		}
 
 		return $meta;
 	}
@@ -279,7 +329,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 * @see CPAC_Column::get_raw_value()
 	 * @since 2.0.3
 	 */
-	function get_raw_value( $id, $single = true ) {
+	public function get_raw_value( $id, $single = true ) {
 
 		$field_key = $this->get_field_key();
 
@@ -292,7 +342,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 * @see CPAC_Column::get_value()
 	 * @since 1.0
 	 */
-	function get_value( $id ) {
+	public function get_value( $id ) {
 
 		$value = '';
 
@@ -319,7 +369,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 * @see CPAC_Column::display_settings()
 	 * @since 1.0
 	 */
-	function display_settings() {
+	public function display_settings() {
 
 		$show_hidden_meta = true;
 		?>
@@ -331,7 +381,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 				<?php if ( $meta_keys = $this->storage_model->get_meta_keys( $show_hidden_meta ) ) : ?>
 				<select name="<?php $this->attr_name( 'field' ); ?>" id="<?php $this->attr_id( 'field' ); ?>">
 				<?php foreach ( $meta_keys as $field ) : ?>
-					<option value="<?php echo $field ?>"<?php selected( $field, $this->options->field ) ?>><?php echo substr( $field, 0, 10 ) == "cpachidden" ? str_replace( 'cpachidden','', $field ) : $field; ?></option>
+					<option value="<?php echo $field ?>"<?php selected( $field, $this->options->field ) ?>><?php echo substr( $field, 0, 10 ) == "cpachidden" ? str_replace( 'cpachidden', '', $field ) : $field; ?></option>
 				<?php endforeach; ?>
 				</select>
 				<?php else : ?>

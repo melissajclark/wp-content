@@ -58,6 +58,7 @@ function relevanssi_uninstall() {
 	delete_option('relevanssi_index_post_types');
 	delete_option('relevanssi_post_type_weights');
 	delete_option('relevanssi_index_taxonomies_list');
+	delete_option('relevanssi_doc_count');
 
 	// Unused options, removed in case they are still left
 	delete_option('relevanssi_custom_types');

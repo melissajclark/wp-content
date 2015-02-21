@@ -151,9 +151,9 @@ class acf_field_wysiwyg extends acf_field {
    	
    	
    	/*
-   	*  input_form_data
+   	*  input_admin_footer
    	*
-   	*  This function is called once on the input page between the head and footer
+   	*  description
    	*
    	*  @type	function
    	*  @date	6/03/2014
@@ -163,7 +163,7 @@ class acf_field_wysiwyg extends acf_field {
    	*  @return	$post_id (int)
    	*/
    	
-   	function input_form_data( $args ) {
+   	function input_admin_footer() {
 	   	
 	   	// vars
 		$json = array();
@@ -294,8 +294,8 @@ class acf_field_wysiwyg extends acf_field {
 				<?php endif; ?>
 				<?php if( user_can_richedit() && $show_tabs ): ?>
 					<div class="wp-editor-tabs">
-						<a id="<?php echo $id; ?>-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);"><?php echo _x( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></a>
-						<a id="<?php echo $id; ?>-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);"><?php echo __('Visual'); ?></a>
+						<button id="<?php echo $id; ?>-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);" type="button"><?php echo __('Visual', 'acf'); ?></button>
+						<button id="<?php echo $id; ?>-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);" type="button"><?php echo _x( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></button>
 					</div>
 				<?php endif; ?>
 			</div>

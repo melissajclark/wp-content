@@ -399,6 +399,7 @@ class acf_pro_options_page {
 			(function($) {
 				
 				$('#<?php echo $id; ?>').addClass('<?php echo $class; ?>').removeClass('hide-if-js');
+				$('#<?php echo $id; ?> > .inside').addClass('acf-fields acf-cf');
 				$('#adv-settings label[for="<?php echo $id; ?>-hide"]').addClass('<?php echo $toggle_class; ?>');
 				
 			})(jQuery);	

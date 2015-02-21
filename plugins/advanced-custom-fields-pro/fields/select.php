@@ -363,6 +363,7 @@ class acf_field_select extends acf_field {
 	
 	function render_field_settings( $field ) {
 		
+		
 		// encode choices (convert from array)
 		$field['choices'] = acf_encode_choices($field['choices']);
 		$field['default_value'] = acf_encode_choices($field['default_value']);

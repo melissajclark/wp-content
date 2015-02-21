@@ -108,19 +108,12 @@ class acf_field_repeater extends acf_field {
 		// populate the empty row data (used for acfcloneindex and min setting)
 		$empty_row = array();
 		
-		foreach( $field['sub_fields'] as $sub_field ) {
+		foreach( $field['sub_fields'] as $f ) {
 			
-			$sub_value = false;
+			$empty_row[ $f['key'] ] = isset( $f['default_value'] ) ? $f['default_value'] : false;
 			
-			if( !empty($sub_field['default_value']) ) {
-			
-				$sub_value = $sub_field['default_value'];
-				
-			}
-			
-			$empty_row[ $sub_field['key'] ] = $sub_value;
 		}
-		
+				
 		
 		// If there are less values than min, populate the extra values
 		if( $field['min'] ) {
@@ -189,9 +182,21 @@ class acf_field_repeater extends acf_field {
 		
 		// field wrap
 		$el = 'td';
+		$before_fields = '';
+		$after_fields = '';
+		
 		if( $field['layout'] == 'row' ) {
 		
 			$el = 'tr';
+			$before_fields = '<td class="acf-table-wrap"><table class="acf-table">';
+			$after_fields = '</table></td>';
+			
+		} elseif( $field['layout'] == 'block' ) {
+		
+			$el = 'div';
+			
+			$before_fields = '<td class="acf-fields">';
+			$after_fields = '</td>';
 			
 		}
 		
@@ -222,9 +227,9 @@ class acf_field_repeater extends acf_field {
 					
 					
 					// Add custom width
-					if( !empty($sub_field['column_width']) ) {
+					if( $sub_field['wrapper']['width'] ) {
 					
-						$atts['data-width'] = $sub_field['column_width'];
+						$atts['data-width'] = $sub_field['wrapper']['width'];
 						
 					}
 						
@@ -254,10 +259,7 @@ class acf_field_repeater extends acf_field {
 					<td class="order" title="<?php _e('Drag to reorder','acf'); ?>"><?php echo intval($i) + 1; ?></td>
 				<?php endif; ?>
 				
-				<?php if( $field['layout'] == 'row' ): ?>
-					<td class="acf-table-wrap">
-						<table class="acf-table">
-				<?php endif; ?>
+				<?php echo $before_fields; ?>
 				
 				<?php foreach( $field['sub_fields'] as $sub_field ): 
 					
@@ -292,10 +294,7 @@ class acf_field_repeater extends acf_field {
 					
 				<?php endforeach; ?>
 				
-				<?php if( $field['layout'] == 'row' ): ?>
-						</table>
-					</td>
-				<?php endif; ?>
+				<?php echo $after_fields; ?>
 				
 				<?php if( $show_remove ): ?>
 					<td class="remove">
@@ -346,8 +345,7 @@ class acf_field_repeater extends acf_field {
 		);
 		
 		
-		?>
-		<tr class="acf-field" data-setting="repeater" data-name="sub_fields">
+		?><tr class="acf-field" data-setting="repeater" data-name="sub_fields">
 			<td class="acf-label">
 				<label><?php _e("Sub Fields",'acf'); ?></label>
 				<p class="description"></p>		
@@ -399,7 +397,8 @@ class acf_field_repeater extends acf_field {
 			'layout'		=> 'horizontal',
 			'choices'		=> array(
 				'table'			=> __('Table','acf'),
-				'row'			=> __('Block','acf')
+				'block'			=> __('Block','acf'),
+				'row'			=> __('Row','acf')
 			)
 		));
 		
@@ -680,6 +679,11 @@ class acf_field_repeater extends acf_field {
 						} elseif( isset($row[ $sub_field['name'] ]) ) {
 							
 							$v = $row[ $sub_field['name'] ];
+							
+						} else {
+							
+							// input is not set (hidden by conditioanl logic)
+							continue;
 							
 						}
 						

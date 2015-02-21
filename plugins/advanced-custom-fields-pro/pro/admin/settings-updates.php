@@ -228,7 +228,7 @@ class acf_settings_updates {
 			'acf_license'	=> acf_extract_var($_POST, 'acf_pro_licence'),
 			'acf_version'	=> acf_get_setting('version'),
 			'wp_name'		=> get_bloginfo('name'),
-			'wp_url'		=> get_bloginfo('url'),
+			'wp_url'		=> home_url(),
 			'wp_version'	=> get_bloginfo('version'),
 			'wp_language'	=> get_bloginfo('language'),
 			'wp_timezone'	=> get_option('timezone_string'),
@@ -298,7 +298,7 @@ class acf_settings_updates {
 		$args = array(
 			'_nonce'		=> wp_create_nonce('deactivate_pro_licence'),
 			'acf_license'	=> acf_pro_get_license(),
-			'wp_url'		=> get_bloginfo('url'),
+			'wp_url'		=> home_url(),
 		);
 		
 		

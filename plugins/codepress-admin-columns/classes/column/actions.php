@@ -44,7 +44,15 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 			return implode( '', $this->convert_actions_to_icons( $actions ) );
 		}
 
-		return implode( ' | ', $actions );
+		$i = 0;
+		$num_actions = count( $actions );
+
+		foreach ( $actions as $class => $action ) {
+			$actions[ $class ] = '<span class="' . esc_attr( $class ) . '">' . $action . ( $i < $num_actions - 1 ? ' | ' : '' ) . '</span>';
+			$i++;
+		}
+
+		return implode( '', $actions );
 	}
 
 	/**
@@ -53,7 +61,15 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 	 */
 	public function get_raw_value( $post_id ) {
 
-		return $this->get_actions( $post_id );
+		/**
+		 * Filter the action links for the actions column
+		 *
+		 * @since 2.2.9
+		 *
+		 * @param array $actions List of actions ([action name] => [action link]).
+		 * @param CPAC_Column_Actions $column_instance Column object.
+		 */
+		return apply_filters( 'cac/column/actions/action_links', $this->get_actions( $post_id ), $this );
 	}
 
 	/**

@@ -296,7 +296,7 @@ class acf_form_widget {
 		
 		setTimeout(function(){
 			
-			acf.get_fields( {}, $el ).each(function(){
+			acf.get_fields('', $el).each(function(){
 				
 				acf.do_action('show_field', $(this));	
 				

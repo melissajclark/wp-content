@@ -100,7 +100,7 @@ class acf_field_date_picker extends acf_field {
 		// vars
 		$e = '';
 		$div = array(
-			'class'					=> 'acf-date_picker',
+			'class'					=> 'acf-date_picker acf-input-wrap',
 			'data-display_format'	=> acf_convert_date_to_js($field['display_format']),
 			'data-first_day'		=> $field['first_day'],
 		);

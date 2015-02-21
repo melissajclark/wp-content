@@ -215,12 +215,12 @@ function acf_pro_is_license_active() {
 	
 	// vars
 	$data = acf_pro_get_license( true );
-	$url = get_bloginfo('url');
+	$url = home_url();
 	
-
-	if( !empty($data['url']) && !empty($data['key']) && $data['url'] == $url )
-	{
+	if( !empty($data['url']) && !empty($data['key']) && $data['url'] == $url ) {
+		
 		return true;
+		
 	}
 	
 	
@@ -263,7 +263,7 @@ function acf_pro_update_license( $license ) {
 	
 	$save = array(
 		'key'	=> $license,
-		'url'	=> get_bloginfo('url')
+		'url'	=> home_url()
 	);
 	
 	

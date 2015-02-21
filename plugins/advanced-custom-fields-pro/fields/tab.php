@@ -35,6 +35,9 @@ class acf_field_tab extends acf_field {
 		$this->name = 'tab';
 		$this->label = __("Tab",'acf');
 		$this->category = 'layout';
+		$this->defaults = array(
+			'placement'	=> 'top'
+		);
 		
 		
 		// do not delete!
@@ -55,8 +58,17 @@ class acf_field_tab extends acf_field {
 	*/
 	
 	function render_field( $field ) {
-	
-		echo '<div class="acf-tab" data-id="' . $field['key'] . '">' . $field['label'] . '</div>';
+		
+		// vars
+		$atts = array(
+			'class'				=> 'acf-tab',
+			'data-placement'	=> $field['placement']
+		);
+		
+		?>
+		<div <?php acf_esc_attr_e( $atts ); ?>><?php echo $field['label']; ?></div>
+		<?php
+		
 		
 	}
 	
@@ -77,8 +89,7 @@ class acf_field_tab extends acf_field {
 	
 	function render_field_settings( $field ) {
 		
-		?>
-		<tr class="acf-field" data-setting="tab" data-name="warning">
+		?><tr class="acf-field" data-setting="tab" data-name="warning">
 			<td class="acf-label">
 				<label><?php _e("Warning",'acf'); ?></label>
 			</td>
@@ -88,7 +99,6 @@ class acf_field_tab extends acf_field {
 					<?php _e("The tab field will display incorrectly when added to a Table style repeater field or flexible content field layout",'acf'); ?>
 					</span>
 				</p>
-				
 			</td>
 		</tr>
 		<?php
@@ -105,6 +115,17 @@ class acf_field_tab extends acf_field {
 							   
 		));
 		
+		
+		// preview_size
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Placement','acf'),
+			'type'			=> 'select',
+			'name'			=> 'placement',
+			'choices' 		=> array(
+				'top'			=>	__("Top aligned",'acf'),
+				'left'			=>	__("Left Aligned",'acf'),
+			)
+		));
 				
 	}
 	

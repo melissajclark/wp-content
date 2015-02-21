@@ -70,3 +70,4 @@ if ( current_user_can( $qfi_settings_instance->get_required_user_cap() ) ) {
 ?>
 	</li>
 </ul>
+

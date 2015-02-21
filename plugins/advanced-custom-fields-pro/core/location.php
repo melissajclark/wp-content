@@ -645,7 +645,7 @@ class acf_location {
 		
 		
 		// get page template
-		if( ! $page_template ) {
+		if( !$page_template && $options['post_id'] ) {
 		
 			$page_template = get_post_meta( $options['post_id'], '_wp_page_template', true );
 			
@@ -657,19 +657,20 @@ class acf_location {
 			
 			$post_type = $options['post_type'];
 
-			if( !$post_type ) {
+			if( !$post_type && $options['post_id'] ) {
 			
 				$post_type = get_post_type( $options['post_id'] );
 				
 			}
 			
-			if( $post_type == 'page' ) {
+			if( $post_type === 'page' ) {
 			
 				$page_template = "default";
 				
 			}
 		}
-	
+		
+		
 		// compare
         if( $rule['operator'] == "==" ) {
         

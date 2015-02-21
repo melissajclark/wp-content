@@ -316,18 +316,20 @@ class Quick_Featured_Images_Defaults {
 	 * Get current or default settings
 	 *
 	 * @since    8.0
+	 *
+	 * @return    array    Return settings for default featured images
 	 */
 	public function get_stored_settings() {
 		// try to load current settings. If they are not in the DB return set default settings
-		$stored_settings = get_option( $this->settings_db_slug, false );
+		$stored_settings = get_option( $this->settings_db_slug, array() );
 		// if empty array set and store default values
-		if ( false === $stored_settings ) {
+		if ( 0 == sizeof( $stored_settings ) ) {
 			$this->set_default_settings();
+			// try to load current settings again. Now there should be the data
+			$stored_settings = get_option( $this->settings_db_slug, array() );
 		}
-		// try to load current settings again. Now there should be the data
-		$stored_settings = get_option( $this->settings_db_slug, false );
-		
-		return $stored_settings; # todo: return $this->sanitize_options( $stored_settings );
+
+		return $this->sanitize_options( $stored_settings );
 	}
 	
 	/**
@@ -534,6 +536,9 @@ class Quick_Featured_Images_Defaults {
 	 * @since    8.0
 	 * @updated  8.1: add first image handling, small refactoring
 	 * @updated  8.2: added user (author) rule
+	 * @updated  8.2.2: added overwrite rule
+	 * @updated  8.2.2: added user to array of skipped taxonomies
+	 * @updated  8.3: deleted check wp_attachment_is_image()
 	 */
 	public function add_featured_image( $post_id, $post, $is_update ) {
 		// get out if post is autosave type
@@ -570,17 +575,15 @@ class Quick_Featured_Images_Defaults {
 		// 1. Image by first embedded content image
 		if ( isset( $settings[ 'use_first_image_as_default' ] ) ) {
 			// get first content image
-			$thumb_id = $this->get_image_id_by_url( $post->post_content );
-			// if computed id does not yield a valid image reset the variable
-			if ( ! wp_attachment_is_image( $thumb_id ) ) {
-				$thumb_id = 0;
-			}
+			#if ( in_array( $post->post_type, $settings[ 'allowed_post_types' ] ) {
+				$thumb_id = $this->get_first_content_image_id( $post->post_content );
+			#}
 		} // if(use_first_image_as_default)
 		// determine post's properties matched with specified rules
 		if ( ! $thumb_id and isset( $settings[ 'rules' ] ) ) {
 			$args = array( 'fields' => 'ids' );
 			// 2. Image by matched custom taxonomy
-			$skipped_taxonomies = array( 'post_type', 'post_tag', 'category', 'user' );
+			$skipped_taxonomies = array( 'post_tag', 'category', 'user', 'post_type' );
 			foreach ( $settings[ 'rules' ] as $rule ) {
 				if ( in_array( $rule[ 'taxonomy' ], $skipped_taxonomies ) ) {
 					continue;
@@ -693,50 +696,59 @@ class Quick_Featured_Images_Defaults {
 	}
 
 	/**
-	 * Returns the post id of an uploaded image, else 0
-	 * Looks for internal images only, i.e. images from the 
-	 * media library and not images embedded by URL from 
-	 * external servers
+	 * Returns the id of the first image in the content, else 0
 	 *
 	 * @access   private
 	 * @since     5.0
 	 * @updated   5.1.1: refactored
 	 * @updated   7.0: improved performance by changing intval() to (int)
+	 * @updated   8.3: deleted detection for site url, added detection for id in img's class attribute
+	 * @updated   8.3: improved security by changing (int) to absint()
 	 *
 	 * @return    integer    the post id of the image
 	 */
-	private function get_image_id_by_url ( $content ) {
+	private function get_first_content_image_id ( $content ) {
 		// set variables
 		global $wpdb;
-		$thumb_id = 0;
-		$pat_find_img_src = '/<img.*?src=[\'"]([^\'"]+)[\'"][^>]*>/i';
 		// look for images in HTML code
-		preg_match_all( $pat_find_img_src, $content, $matches );
-		// if img elements found: try to get the first image's ID
-		if ( isset( $matches ) and 0 < count( $matches ) ) {
-			foreach ( $matches[ 1 ] as $url ) {
-				preg_match( '|' . get_site_url() . '|i', $url, $matches );
-				// if site-owned image
-				if ( isset( $matches ) and 0 < count( $matches ) ) {
+		preg_match_all( '/<img[^>]+>/i', $content, $all_img_tags );
+		if ( $all_img_tags ) {
+			foreach ( $all_img_tags[ 0 ] as $img_tag ) {
+				// find class attribute and catch its value
+				preg_match( '/<img.*?class\s*=\s*[\'"]([^\'"]+)[\'"][^>]*>/i', $img_tag, $img_class );
+				if ( $img_class ) {
+					// Look for the WP image id
+					preg_match( '/wp-image-([\d]+)/i', $img_class[ 1 ], $found_id );
+					// if first image id found: check whether is image
+					if ( $found_id ) {
+						$img_id = absint( $found_id[ 1 ] );
+						// if is image: return its id
+						if ( wp_get_attachment_image_src( $img_id ) ) {
+							return $img_id;
+						}
+					} // if(found_id)
+				} // if(img_class)
+				
+				// else: try to catch image id by its url as stored in the database
+				// find src attribute and catch its value
+				preg_match( '/<img.*?src\s*=\s*[\'"]([^\'"]+)[\'"][^>]*>/i', $img_tag, $img_src );
+				if ( $img_src ) {
 					// delete optional query string in img src
-					$url = preg_replace( '/([^?]+).*/', '\1', $url );
+					$url = preg_replace( '/([^?]+).*/', '\1', $img_src[ 1 ] );
 					// delete image dimensions data in img file name, just take base name and extension
 					$guid = preg_replace( '/(.+)-\d+x\d+\.(\w+)/', '\1.\2', $url );
 					// look up its ID in the db
-					$img_id = $wpdb->get_var( $wpdb->prepare( "SELECT `ID` FROM $wpdb->posts WHERE `guid` = '%s'", $guid ) );
-					// if it is available take its ID as new thumb id
-					if ( $img_id ) {
-						// finally we have an id
-						$thumb_id = (int) $img_id ;
-					}
-				} // if $matches
-				// stop loop, because we want only the first matching image of a post
-				if ( $thumb_id ) {
-					break;
-				}
-			} // foreach( $url )
-		} // if $matches
-		return $thumb_id;
+					$found_id = $wpdb->get_var( $wpdb->prepare( "SELECT `ID` FROM $wpdb->posts WHERE `guid` = '%s'", $guid ) );
+					// if first image id found: return it
+					if ( $found_id ) {
+						return absint( $found_id );
+					} // if(found_id)
+				} // if(img_src)
+			} // foreach(img_tag)
+		} // if(all_img_tags)
+		
+		// if nothing found: return 0
+		return 0;
 	}
 
 }

@@ -12,20 +12,18 @@ if ( ! current_theme_supports( 'post-thumbnails' ) ) {
 	<h3><?php _e( 'What do you want to do?', $this->plugin_slug ); ?></h3>
 	<p><?php _e( 'Here you can add, replace and delete featured images to your posts. Select one of the following actions and, if necessary, one or more images.', $this->plugin_slug ); ?></p>
 	<p><?php _e( 'Whatever you select: You can refine your choice on the next page.', $this->plugin_slug ); ?></p>
+	<h4><?php _e( 'Important advice', $this->plugin_slug ); ?></h4>
+	<p><strong><?php _e( 'There is no undo function! It is strongly recommended that you make a backup of the WordPress database before you perform mass changes.', $this->plugin_slug ); ?></strong></p>
 	<fieldset>
 		<legend class="screen-reader-text"><span><?php _e( 'Select action', $this->plugin_slug ); ?></span></legend>
-		<h4><?php _e( 'Actions with a selected image', $this->plugin_slug ); ?></h4>
+		<h4><?php _e( 'Actions with a single image', $this->plugin_slug ); ?></h4>
 		<p><?php _e( 'These actions require to select an image with the following button.', $this->plugin_slug ); ?></p>
 <?php 
 foreach ( $this->valid_actions as $name => $label ) {
 ?>
 		<p>
 			<input type="radio" id="<?php echo $name; ?>" name="action" value="<?php echo $name; ?>" <?php checked( 'assign' == $name ); ?> />
-			<label for="<?php echo $name; ?>"><strong><?php echo $label; ?>.</strong><br><?php
-	if ( 'assign' == $name ) {
-		_e( 'This will also replace already added featured images.', $this->plugin_slug );
-	}
-?></label>
+			<label for="<?php echo $name; ?>"><strong><?php echo $label; ?>.</strong></label>
 		</p>
 <?php
 } // foeach( valid_actions )
@@ -63,7 +61,7 @@ if ( $this->selected_image_id ) {
 			</div>
 		</div>
 
-		<h4><?php _e( 'Actions with multiple selected images', $this->plugin_slug ); ?></h4>
+		<h4><?php _e( 'Actions with multiple images', $this->plugin_slug ); ?></h4>
 		<p><?php _e( 'These actions require at least one selected image with the following button.', $this->plugin_slug ); ?></p>
 <?php
 foreach ( $this->valid_actions_multiple_images as $name => $label ) {
@@ -94,7 +92,7 @@ if ( $this->selected_multiple_image_ids ) {
 <?php
 } // if ( $this->selected_multiple_image_ids )
 ?>
-		<h4><?php _e( 'Actions without a selected image', $this->plugin_slug ); ?></h4>
+		<h4><?php _e( 'Actions without any image', $this->plugin_slug ); ?></h4>
 		<p><?php _e( 'These actions do not require a selected image.', $this->plugin_slug ); ?></p>
 <?php
 foreach ( $this->valid_actions_without_image as $name => $label ) {
@@ -108,7 +106,8 @@ foreach ( $this->valid_actions_without_image as $name => $label ) {
 ?>
 	</fieldset>
 <?php 
-wp_nonce_field( 'quickfi_start', $this->plugin_slug . '_nonce' ); 
-submit_button( __( 'Next', $this->plugin_slug ), 'secondary' );
+wp_nonce_field( 'quickfi_start', $this->plugin_slug . '_nonce' );
+$text = 'Next &raquo;';
+submit_button( __( $text ), 'secondary' );
 ?>
 </form>

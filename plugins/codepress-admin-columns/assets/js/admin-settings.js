@@ -4,8 +4,9 @@
  */
 jQuery(document).ready(function() {
 
-	if ( jQuery('#cpac').length === 0 )
+	if ( jQuery('#cpac').length === 0 ) {
 		return false;
+	}
 
 	// General
 	cpac_pointer();
@@ -19,7 +20,6 @@ jQuery(document).ready(function() {
 	cpac_menu();
 	cpac_help();
 	cpac_add_column();
-	cpac_addons();
 	cpac_importexport();
 	cpac_sidebar_feedback();
 	//cpac_sidebar_scroll();
@@ -28,6 +28,7 @@ jQuery(document).ready(function() {
 	jQuery('.cpac-column').each( function( i, col ) {
 		jQuery( col ).column_bind_toggle();
 		jQuery( col ).column_bind_remove();
+		jQuery( col ).column_bind_clone();
 		jQuery( col ).cpac_bind_container_addon_events();
 	});
 });
@@ -36,16 +37,6 @@ function cpac_importexport() {
 	jQuery( '#php-export-results textarea' ).on( 'focus, mouseup', function() {
 		jQuery( this ).select();
 	} ).select().focus();
-}
-
-/**
- * Handle addons settings screen
- *
- * @since 2.2
- */
-function cpac_addons() {
-
-
 }
 
 /*
@@ -102,6 +93,28 @@ jQuery.fn.column_bind_remove = function() {
 	});
 };
 
+/**
+ * Column: bind clone events
+ *
+ * @since NEWVERSION
+ */
+jQuery.fn.column_bind_clone = function() {
+
+	jQuery( this ).find( '.clone-button' ).click( function( e ) {
+		var column, clone;
+
+		e.preventDefault();
+
+		column = jQuery( this ).closest( '.cpac-column' );
+
+		clone = column.column_clone();
+
+		if ( typeof clone !== 'undefined' ) {
+			clone.removeClass( 'loading' ).hide().slideDown();
+		}
+	} );
+};
+
 jQuery.fn.cpac_column_refresh = function() {
 	var el = jQuery( this );
 
@@ -125,6 +138,7 @@ jQuery.fn.cpac_column_refresh = function() {
 		// Bind events
 		el.column_bind_toggle();
 		el.column_bind_remove();
+		el.column_bind_clone();
 		el.column_bind_events();
 
 		// Remove "loading" marking from column
@@ -271,6 +285,57 @@ jQuery.fn.column_remove = function() {
 };
 
 /*
+ * Column: clone
+ *
+ * @since NEWVERSION
+ */
+jQuery.fn.column_clone = function() {
+
+	var container = jQuery( this ).closest( '.columns-container' );
+	var column = jQuery( this );
+
+	if ( typeof column.attr( 'data-clone' ) === 'undefined' ) {
+		var message = cpac_i18n.clone.replace( '%s', '<strong>' + column.find( '.column_label .toggle' ).text() + '</strong>' );
+		/*var el_message = jQuery( '<div class="cpac_message error"><p>' + message + '</p></div>' );
+
+		container.find( '.cpac-boxes' ).before( el_message );
+		el_message.hide().slideDown().delay( 2500 ).slideUp( function() {
+			jQuery( this ).remove();
+		} );*/
+
+		column.addClass( 'opened' ).find( '.column-form' ).slideDown( 150 );
+		column.find( '.msg' ).html( message ).show();
+
+		return;
+	}
+
+	var clone = jQuery( this ).clone();
+
+	clone.cpac_update_clone_id( container.attr( 'data-type' ) );
+	jQuery( this ).after( clone );
+
+	// rebind toggle events
+	clone.column_bind_toggle();
+
+	// rebind remove events
+	clone.column_bind_remove();
+
+	// rebind clone events
+	clone.column_bind_clone();
+
+	// rebind all other events
+	clone.column_bind_events();
+
+	// reinitialize sortability
+	cpac_sortable();
+
+	// hook for addons
+	jQuery( document ).trigger( 'column_add', clone );
+
+	return clone;
+};
+
+/*
  * Update clone ID
  *
  * @since 2.0
@@ -333,6 +398,40 @@ jQuery.fn.cpac_update_clone_id = function( storage_model ) {
 	});
 };
 
+function cpac_create_column( container ) {
+
+	var clone = jQuery( '.for-cloning-only .cpac-column', container ).first().clone();
+	var storage_model = container.attr( 'data-type' );
+
+	if ( clone.length > 0 ) {
+		// increment clone id ( before adding to DOM, otherwise radio buttons will reset )
+		clone.cpac_update_clone_id( storage_model );
+
+		// add to DOM
+		jQuery( '.cpac-columns form', container ).append( clone );
+
+		// rebind toggle events
+		clone.column_bind_toggle();
+
+		// rebind remove events
+		clone.column_bind_remove();
+
+		// rebind clone events
+		clone.column_bind_clone();
+
+		// rebind all other events
+		clone.column_bind_events();
+
+		// reinitialize sortability
+		cpac_sortable();
+
+		// hook for addons
+		jQuery( document ).trigger( 'column_add', clone );
+	}
+
+	return clone;
+}
+
 /*
  * Add Column
  *
@@ -340,41 +439,14 @@ jQuery.fn.cpac_update_clone_id = function( storage_model ) {
  */
 function cpac_add_column() {
 
-	jQuery('#cpac .add_column').click( function(e){
+	jQuery( '#cpac .add_column' ).click( function( e ) {
+		var container = jQuery( this ).closest( '.columns-container' );
+		var clone = cpac_create_column( container );
 
-		var container = jQuery(this).closest('.columns-container');
-
-		var clone = jQuery('.for-cloning-only .cpac-column', container ).first().clone();
-
-		var storage_model = container.attr('data-type');
-
-		if ( clone.length > 0 ) {
-
-			// increment clone id ( before adding to DOM, otherwise radio buttons will reset )
-			clone.cpac_update_clone_id( storage_model );
-
-			// add to DOM
-			jQuery('.cpac-columns form', container).append( clone );
-
-			// rebind toggle events
-			clone.column_bind_toggle();
-
-			// rebind remove events
-			clone.column_bind_remove();
-
-			// rebind all other events
-			clone.column_bind_events();
-
-			// open settings
-			clone.addClass('opened').find('.column-form').slideDown(150, function(){
-				jQuery('html, body').animate({ scrollTop: clone.offset().top - 58 }, 300);
-			});
-
-			cpac_sortable();
-
-			// hook for addons
-			jQuery(document).trigger( 'column_add', clone );
-		}
+		// open settings
+		clone.addClass('opened').find('.column-form').slideDown(150, function(){
+			jQuery('html, body').animate({ scrollTop: clone.offset().top - 58 }, 300);
+		});
 
 		e.preventDefault();
 	});
@@ -550,7 +622,7 @@ function cpac_sortable() {
 		}
 		else {
 			jQuery( this ).sortable( {
-				items					: '.cpac-column'
+				items : '.cpac-column'
 			} );
 		}
 	} );

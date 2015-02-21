@@ -145,7 +145,7 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 
 		// get_column_headers() runs through both the manage_{screenid}_columns
 		// and manage_{$post_type}_posts_columns filters
-		$columns = apply_filters( 'manage_edit-' . $this->key . '_columns', array() );
+		$columns = (array) apply_filters( 'manage_edit-' . $this->key . '_columns', array() );
 		$columns = array_filter( $columns );
 
 		return $columns;
@@ -161,7 +161,15 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
     public function get_meta() {
         global $wpdb;
 
-		return $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} pm JOIN {$wpdb->posts} p ON pm.post_id = p.ID WHERE p.post_type = %s ORDER BY 1", $this->key ), ARRAY_N );
+        if ( $cache = wp_cache_get( $this->key, 'cac_columns' ) ) {
+        	$result = $cache;
+        }
+        else {
+			$result = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} pm JOIN {$wpdb->posts} p ON pm.post_id = p.ID WHERE p.post_type = %s ORDER BY 1", $this->key ), ARRAY_N );
+			wp_cache_add( $this->key, $result, 'cac_columns', 10 ); // 10 sec.
+		}
+
+		return $result;
     }
 
 	/**

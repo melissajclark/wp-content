@@ -3,8 +3,8 @@ Contributors: msaari
 Donate link: http://www.relevanssi.com/buy-premium/
 Tags: search, relevance, better search
 Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 3.3.7.1
+Tested up to: 4.1
+Stable tag: 3.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -385,6 +385,14 @@ removing those words helps to make the index smaller and searching faster.
 * Mohib Ebrahim for relentless bug hunting.
 
 == Changelog ==
+
+= 3.3.8 =
+* Fixed a bug that caused the results to change depending of the order of words in a multi-word search query.
+* Added `product_categories` and `recent_products` from WooCommerce to the list of blocked shortcodes.
+* There are improvements in excerpt-building and highlighting, especially when fuzzy search is enabled.
+* Fixed a possible (if quite unlikely) XSS vulnerability.
+* Improved search performance (thanks to MikeNGarrett).
+* Sometimes highlights in documents make the document content disappear. I don't know why, but I've added a fix that should make the content visible (without the highlights) if a problem appears.
 
 = 3.3.7.1 =
 * Fixed bbPress compatibility.
@@ -1052,6 +1060,9 @@ removing those words helps to make the index smaller and searching faster.
 * First published version.
 
 == Upgrade notice ==
+
+= 3.3.8 =
+* Bug fixes, fix for a possible XSS vulnerability, improved performance.
 
 = 3.3.7.1 =
 * Improved bbPress compatibility.

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: 		Admin Columns
-Version: 			2.2.8.1
+Version: 			2.3.3
 Description: 		Customize columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 Author: 			AdminColumns.com
 Author URI: 		http://www.admincolumns.com
@@ -26,10 +26,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 // Plugin information
-define( 'CPAC_VERSION', 	 	'2.2.8.1' ); // Current plugin version
+define( 'CPAC_VERSION', 	 	'2.3.3' ); // Current plugin version
 define( 'CPAC_UPGRADE_VERSION', '2.0.0' ); // Latest version which requires an upgrade
 define( 'CPAC_URL', 			plugin_dir_url( __FILE__ ) );
 define( 'CPAC_DIR', 			plugin_dir_path( __FILE__ ) );
@@ -160,19 +163,8 @@ class CPAC {
 			add_action( 'admin_head', array( $this, 'admin_scripts') );
 
 			wp_enqueue_script( 'cpac-admin-columns' );
-			wp_enqueue_script( 'jquery-qtip2' );
 			wp_enqueue_style( 'jquery-qtip2' );
 			wp_enqueue_style( 'cpac-columns' );
-
-			$data = array();
-
-			/*if ( $storage_model = $this->get_current_storage_model() ) {
-				$data['storage_model'] = array(
-					'is_table_header_fixed' => $storage_model->is_table_header_fixed()
-				);
-			}*/
-
-			wp_localize_script( 'cpac-admin-columns', 'CPAC', $data );
 		}
 	}
 

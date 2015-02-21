@@ -208,7 +208,8 @@ h2.cpac-nav-tab-wrapper {
   color: #333333;
 }
 .cpac-column .column-meta table tr td.column_label .inner > a.edit-button,
-.cpac-column .column-meta table tr td.column_label .inner > a.remove-button {
+.cpac-column .column-meta table tr td.column_label .inner > a.remove-button,
+.cpac-column .column-meta table tr td.column_label .inner > a.clone-button {
   display: none;
   color: #a00;
   text-decoration: none;
@@ -218,13 +219,16 @@ h2.cpac-nav-tab-wrapper {
   font-size: 12px;
 }
 .cpac-column .column-meta table tr td.column_label .inner > a.edit-button:hover,
-.cpac-column .column-meta table tr td.column_label .inner > a.remove-button:hover {
+.cpac-column .column-meta table tr td.column_label .inner > a.remove-button:hover,
+.cpac-column .column-meta table tr td.column_label .inner > a.clone-button:hover {
   color: #f00;
 }
-.cpac-column .column-meta table tr td.column_label .inner > a.edit-button {
+.cpac-column .column-meta table tr td.column_label .inner > a.edit-button,
+.cpac-column .column-meta table tr td.column_label .inner > a.clone-button {
   color: #0074a2;
 }
-.cpac-column .column-meta table tr td.column_label .inner > a.edit-button:hover {
+.cpac-column .column-meta table tr td.column_label .inner > a.edit-button:hover,
+.cpac-column .column-meta table tr td.column_label .inner > a.clone-button:hover {
   color: #2ea2cc;
 }
 .cpac-column .column-meta table tr td.column_label .inner .meta {
@@ -272,10 +276,9 @@ h2.cpac-nav-tab-wrapper {
   background: transparent url('../images/arrow.png') no-repeat 23px 18px;
   cursor: pointer;
 }
-.cpac-column .column-meta:hover .column_label .inner > a.remove-button {
-  display: inline-block;
-}
-.cpac-column .column-meta:hover .column_label .inner > a.edit-button {
+.cpac-column .column-meta:hover .column_label .inner > a.remove-button,
+.cpac-column .column-meta:hover .column_label .inner > a.edit-button,
+.cpac-column .column-meta:hover .column_label .inner > a.clone-button {
   display: inline-block;
 }
 .cpac-column .column-meta span.vers {
@@ -413,7 +416,7 @@ h2.cpac-nav-tab-wrapper {
 .cpac-column .column-form table tr.column_image_size td.input .custom_image_size .custom-size-w input[type="text"],
 .cpac-column .column-form table tr.column_image_size td.input .custom_image_size .custom-size-h input[type="text"] {
   margin-right: 3px;
-  width: 30px !important;
+  width: 40px !important;
 }
 .cpac-column .column-form table tr.column_action td {
   background: #f9f9f9;
@@ -684,7 +687,7 @@ h2.cpac-nav-tab-wrapper {
 }
 .columns-right .sidebox#pro-version .inside ul li a {
   display: inline-block;
-  height: 24px;
+  min-height: 24px;
   font-size: 19px;
   line-height: 24px;
   margin-bottom: 1px;

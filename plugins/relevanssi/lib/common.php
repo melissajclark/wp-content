@@ -690,4 +690,12 @@ function relevanssi_get_the_title($post_id) {
 	return $post->post_highlighted_title;
 }
 
+function relevanssi_update_doc_count( $values, $post ) {
+	$D = get_option( 'relevanssi_doc_count');
+	$count = count($values);
+	if ($values && $count > 0) {
+		update_option( 'relevanssi_doc_count', $D + $count);
+	}
+	return $values;
+}
 ?>

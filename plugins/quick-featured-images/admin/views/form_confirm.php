@@ -19,6 +19,7 @@
 			$question = __( 'Should the added featured images be removed from all listed posts?', $this->plugin_slug );
 			break;
 	} // switch()
+	
 ?>
 <h3><?php _e( 'Preview of your selection', $this->plugin_slug ); ?></h3>
 <h4><?php printf( __( '%d matches found', $this->plugin_slug ), sizeof( $results ) ); ?></h4>
@@ -26,12 +27,25 @@
 if ( $results ) { 
 	// translate once for multiple usage and improve performance
 	$label_details 	  = __( 'Details', $this->plugin_slug );
-	$label_no_image   = __( 'No Image' );
 	$label_number 	  = __( 'No.', $this->plugin_slug );
 	$label_current_fi = __( 'Current Featured Image', $this->plugin_slug );
 	$label_future_fi  = __( 'Future Featured Image', $this->plugin_slug );
+	$label_written_on = __( 'written on', $this->plugin_slug );
+	$label_by         = __( 'by', $this->plugin_slug );
+	// WP core labels
+	$text 			  = 'No image set';
+	$label_no_image   = __( $text );
+	$text 			  = 'Status:';
+	$label_status     = __( $text );
+	$text 			  = 'Apply';
+	$label_apply      = __( $text );
+	$text 			  = 'Cancel';
+	$label_cancel     = __( $text );
+	$text             = '(no title)';
+	$default_title    = __( $text );
+
 ?>
-<p><?php _e( 'You can take a view to the post in a new window by clicking on its link in the list.', $this->plugin_slug ); ?></p>
+<p><?php _e( 'The list is in alphabetical order according to post title. You can edit a post in a new window by clicking on its link in the list.', $this->plugin_slug ); ?></p>
 <table class="widefat">
 	<thead>
 		<tr>
@@ -45,15 +59,38 @@ if ( $results ) {
 <?php
 	$c = 1;
 	foreach ( $results as $result ) {
+		// alternating row colors: if $c is divisible by 2 (so the modulo is 0) then set 'alt'-class
+		$class_attrib = 0 == $c % 2 ? ' class="alt"' : '';
+		// post title, else default title
+		$post_title = $result[ 1 ] ? $result[ 1 ] : $default_title;
+		// post date
+		$post_date = sprintf( '%s %s', $label_written_on, $result[ 2 ] );
+		// post author
+		$post_author = sprintf( '%s %s', $label_by, $result[ 3 ] );
+		// post type label
+		$post_type = $result[ 7 ];
+		$post_type_obj = get_post_type_object( $post_type );
+		if ( $post_type_obj ) {
+			$post_type = $post_type_obj->labels->singular_name; // readable name
+		}
+		// post status
+		$post_status = isset( $this->valid_statuses[ $result[ 6 ] ] ) ? $this->valid_statuses[ $result[ 6 ] ] : $result[ 6 ];
 		// check if no featured image for the post, else add default
 		$current_img = $result[ 4 ] ? $result[ 4 ] : $label_no_image;
 		$future_img = $result[ 5 ] ? $result[ 5 ] : $label_no_image;
-		// alternating row colors: if $c is divisible by 2 (so the modulo is 0) then set 'alt'-class
-		$class_attrib = 0 == $c % 2 ? ' class="alt"' : '';
 		// print the table row
 		printf( '<tr%s>', $class_attrib );
 		printf( '<td class="num">%d</td>', $c );
-		printf( '<td><a href="%s" target="_blank">%s</a><br>%s<br>%s</td>', $result[ 0 ], $result[ 1 ], $result[ 2 ], $result[ 3 ] );
+		printf( 
+			'<td><a href="%s" target="_blank">%s</a><br>%s<br>%s<br>%s, %s %s</td>',
+			$result[ 0 ], // edit post link
+			$post_title,
+			$post_date,
+			$post_author,
+			$post_type,
+			$label_status,
+			$post_status
+		);
 		printf( '<td class="num">%s</td>', $current_img );
 		printf( '<td class="num">%s</td>', $future_img );
 		print "</tr>\n";
@@ -99,6 +136,11 @@ foreach ( $this->selected_statuses as $v ) {
 foreach ( $this->selected_post_types as $v ) {
 ?>
 		<input type="hidden" name="post_types[]" value="<?php echo $v; ?>" />
+<?php 
+}
+foreach ( $this->selected_mime_types as $v ) {
+?>
+		<input type="hidden" name="mime_types[]" value="<?php echo $v; ?>" />
 <?php 
 }
 if ( $this->selected_custom_post_types ) {
@@ -178,7 +220,7 @@ if ( $this->selected_date_queries ) {
 }
 ?>
 		<?php wp_nonce_field( 'quickfi_confirm', $this->plugin_slug . '_nonce' ); ?>
-		<input type="submit" class="button-primary" value="<?php _e( 'Yes. Apply now', $this->plugin_slug ); ?>" /> <a class="button" href='<?php echo esc_url( admin_url( sprintf( 'admin.php?page=%s', $this->page_slug ) ) );?>'><?php _e( 'No. Start again', $this->plugin_slug );?></a>
+		<input type="submit" class="button-primary" value="<?php echo $label_apply; ?>" /> <a class="button" href='<?php echo esc_url( admin_url( sprintf( 'admin.php?page=%s', $this->page_slug ) ) );?>'><?php echo $label_cancel;?></a>
 	</p>
 </form>
 <?php

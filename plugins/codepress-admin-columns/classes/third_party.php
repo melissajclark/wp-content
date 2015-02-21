@@ -10,21 +10,31 @@
  * @since 1.4.6
  */
 function cpac_pre_load_wordpress_seo_class_metabox() {
+
+	if ( ! defined('WPSEO_PATH') || ! file_exists( WPSEO_PATH . 'admin/class-metabox.php' ) ) {
+		return;
+	}
+
 	global $pagenow;
 
-	if ( defined('WPSEO_PATH') && file_exists(WPSEO_PATH.'admin/class-metabox.php') ) {
-		if (
-		( isset($_GET['page']) && 'codepress-admin-columns' == $_GET['page'] && 'options-general.php' == $pagenow )
+	// page is a CPAC page or CPAC ajax event
+	if (
+		( isset( $_GET['page'] ) && 'codepress-admin-columns' == $_GET['page'] && 'options-general.php' == $pagenow )
 		||
 		// for when column list is populated through ajax
-		( defined('DOING_AJAX') && DOING_AJAX && ! empty( $_POST['type'] ) )
+		( defined('DOING_AJAX') && DOING_AJAX &&
+			( ! empty( $_POST['type'] )
+				||
+				( ! empty( $_POST['plugin_id'] ) && 'cpac' === $_POST['plugin_id'] ) )
+			)
 		) {
-			require_once WPSEO_PATH.'admin/class-metabox.php';
-			if ( class_exists( 'WPSEO_Metabox' ) ) {
-				new WPSEO_Metabox;
-			}
+
+		require_once WPSEO_PATH . 'admin/class-metabox.php';
+		if ( class_exists( 'WPSEO_Metabox' ) ) {
+			new WPSEO_Metabox;
 		}
 	}
+
 }
 add_action( 'plugins_loaded', 'cpac_pre_load_wordpress_seo_class_metabox', 0 );
 
@@ -72,8 +82,12 @@ add_action( 'cac/set_columns', 'cac_add_wpml_columns' );
  */
 function cpac_remove_acf_from_cpac_post_types( $post_types ) {
 	if ( class_exists('Acf') ) {
-		unset( $post_types['acf'] );
-		unset( $post_types['acf-field-group'] );
+		if ( isset( $post_types['acf'] ) ) {
+			unset( $post_types['acf'] );
+		}
+		if ( isset( $post_types['acf-field-group'] ) ) {
+			unset( $post_types['acf-field-group'] );
+		}
 	}
 
 	return $post_types;
@@ -97,6 +111,24 @@ function cpac_posttypes_remove_bbpress( $post_types ) {
 	return $post_types;
 }
 add_filter( 'cac/post_types', 'cpac_posttypes_remove_bbpress' );
+
+/**
+ * Fix for Ninja Forms
+ *
+ * @since 2.0
+ *
+ * @return array Posttypes
+ */
+function cpac_remove_ninja_forms_from_cpac_post_types( $post_types ) {
+	if ( class_exists('Ninja_Forms') ) {
+		if ( isset( $post_types['nf_sub'] ) ) {
+			unset( $post_types['nf_sub'] );
+		}
+	}
+
+	return $post_types;
+}
+add_filter( 'cac/post_types', 'cpac_remove_ninja_forms_from_cpac_post_types' );
 
 /**
  * Add support for All in SEO columns
@@ -161,5 +193,4 @@ function cpac_wpml_is_cac_screen( $is_columns_screen ) {
 
 	return $is_columns_screen;
 }
-
 add_filter( 'cac/is_cac_screen', 'cpac_wpml_is_cac_screen' );

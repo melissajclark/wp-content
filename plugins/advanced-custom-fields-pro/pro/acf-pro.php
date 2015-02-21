@@ -55,17 +55,46 @@ class acf_pro {
 		add_action('acf/input/admin_enqueue_scripts',			array($this, 'input_admin_enqueue_scripts'));
 		add_action('acf/field_group/admin_enqueue_scripts',		array($this, 'field_group_admin_enqueue_scripts'));
 		add_action('acf/field_group/admin_l10n',				array($this, 'field_group_admin_l10n'));
-		add_action('acf/render_field_settings', 				array($this, 'render_field_settings'));
 		
 		
 		// filters
+		add_filter('acf/get_valid_field',						array($this, 'get_valid_field'), 11, 1);
 		add_filter('acf/update_field',							array($this, 'update_field'), 1, 1);
 		add_filter('acf/prepare_field_for_export', 				array($this, 'prepare_field_for_export'));
 		add_filter('acf/prepare_field_for_import', 				array($this, 'prepare_field_for_import'));
 		
+	}
+	
+	
+	/*
+	*  get_valid_field
+	*
+	*  This function will provide compatibility with ACF4 fields
+	*
+	*  @type	function
+	*  @date	23/04/2014
+	*  @since	5.0.0
+	*
+	*  @param	$field (array)
+	*  @return	$field
+	*/
+	
+	function get_valid_field( $field ) {
 		
-		// add-ons
-		add_filter('acf/is_add_on_active/slug=acf-pro',			'__return_true');
+		// extract old width
+		$width = acf_extract_var( $field, 'column_width' );
+		
+		
+		// if old width, update the new width
+		if( $width ) {
+			
+			$field['wrapper']['width'] = $width;
+		}
+		
+		
+		// return
+		return $field;
+		
 	}
 	
 	
@@ -89,13 +118,13 @@ class acf_pro {
 		
 		
 		// register scripts
-		wp_register_script( 'acf-pro-input', acf_get_dir( "pro/js/pro-input{$min}.js" ), false, acf_get_setting('version') );
-		wp_register_script( 'acf-pro-field-group', acf_get_dir( "pro/js/pro-field-group{$min}.js" ), false, acf_get_setting('version') );
+		wp_register_script( 'acf-pro-input', acf_get_dir( "pro/assets/js/acf-pro-input{$min}.js" ), false, acf_get_setting('version') );
+		wp_register_script( 'acf-pro-field-group', acf_get_dir( "pro/assets/js/acf-pro-field-group{$min}.js" ), false, acf_get_setting('version') );
 		
 		
 		// register styles
-		wp_register_style( 'acf-pro-input', acf_get_dir( 'pro/css/pro-input.css' ), false, acf_get_setting('version') ); 
-		wp_register_style( 'acf-pro-field-group', acf_get_dir( 'pro/css/pro-field-group.css' ), false, acf_get_setting('version') ); 
+		wp_register_style( 'acf-pro-input', acf_get_dir( 'pro/assets/css/acf-pro-input.css' ), false, acf_get_setting('version') ); 
+		wp_register_style( 'acf-pro-field-group', acf_get_dir( 'pro/assets/css/acf-pro-field-group.css' ), false, acf_get_setting('version') ); 
 		
 	}
 	
@@ -116,15 +145,11 @@ class acf_pro {
 	function input_admin_enqueue_scripts() {
 		
 		// scripts
-		wp_enqueue_script(array(
-			'acf-pro-input',	
-		));
+		wp_enqueue_script('acf-pro-input');
 	
 	
 		// styles
-		wp_enqueue_style(array(
-			'acf-pro-input',	
-		));
+		wp_enqueue_style('acf-pro-input');
 		
 	}
 	
@@ -171,15 +196,11 @@ class acf_pro {
 	function field_group_admin_enqueue_scripts() {
 		
 		// scripts
-		wp_enqueue_script(array(
-			'acf-pro-field-group',	
-		));
+		wp_enqueue_script('acf-pro-field-group');
 	
 	
 		// styles
-		wp_enqueue_style(array(
-			'acf-pro-field-group',	
-		));
+		wp_enqueue_style('acf-pro-field-group');
 		
 	}
 	
@@ -187,7 +208,7 @@ class acf_pro {
 	/*
 	*  update_field
 	*
-	*  description
+	*  This function will attempt to modify the $field's parent value from a field_key into a post_id
 	*
 	*  @type	function
 	*  @date	4/11/2013
@@ -199,20 +220,60 @@ class acf_pro {
 	
 	function update_field( $field ) {
 		
-		// don't use acf_get_field. Instead, keep a global record of ID from each update_field and use this to get the parent ID => key 
-		if( $field['parent'] ) {
-		
-			if( acf_is_field_key($field['parent']) ) {
+		// bail ealry if not relevant
+		if( !$field['parent'] || !acf_is_field_key($field['parent']) ) {
 			
-				$parent = acf_get_field( $field['parent'] );
+			return $field;
 				
-				$field['parent'] = $parent['ID'];
-				
-			}
+		}
+			
+		// vars
+		$ref = 0;
+		
+		
+		// create reference
+		if( empty($this->ref) ) {
+			
+			$this->ref = array();
 			
 		}
 		
+		
+		if( isset($this->ref[ $field['parent'] ]) ) {
+			
+			$ref = $this->ref[ $field['parent'] ];
+			
+		} else {
+			
+			// get parent without caching (important not to cache as parent $field will now contain new sub fields)
+			$parent = acf_get_field( $field['parent'], true );
+			
+			
+			// bail ealry if no parent
+			if( !$parent ) {
+				
+				return $field;
+				
+			}
+			
+			
+			// get ref
+			$ref = $parent['ID'] ? $parent['ID'] : $parent['key'];
+			
+			
+			// update ref
+			$this->ref[ $field['parent'] ] = $ref;
+			
+		}
+		
+		
+		// update field's parent
+		$field['parent'] = $ref;
+		
+		
+		// return
 		return $field;
+		
 	}
 	
 	
@@ -384,47 +445,6 @@ class acf_pro {
 		
 		// return
 		return $field;
-		
-	}
-	
-	
-	/*
-	*  render_field_settings
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	15/04/2014
-	*  @since	5.0.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
-	
-	function render_field_settings( $field ) {
-		
-		// bail early if doing ajax
-		/*
-if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			
-			return;
-			
-		}
-		
-		
-*/
-		// vars
-		$setting = array(
-			'label'		=> __('Column Width','acf'),
-			'type'		=> 'number',
-			'name'		=> 'column_width',
-			'append'	=> '%',
-			'disabled'	=> 1
-		);
-		
-		
-		// add setting
-		acf_render_field_setting( $field, $setting );
 		
 	}
 	 

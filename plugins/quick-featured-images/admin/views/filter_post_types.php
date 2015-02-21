@@ -18,6 +18,10 @@ if ( $this->valid_custom_post_types ) {
 <?php
 	}
 } else {
+?>
+</p>
+<p>
+<?php
 	_e( 'There are no custom post types.', $this->plugin_slug );
 }
 ?>

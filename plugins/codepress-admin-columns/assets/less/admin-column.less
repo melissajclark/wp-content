@@ -245,7 +245,8 @@ h2.cpac-nav-tab-wrapper {
 								}
 
 								&.edit-button,
-								&.remove-button {
+								&.remove-button,
+								&.clone-button {
 									display: none;
 									color: #a00;
 									text-decoration: none;
@@ -259,7 +260,8 @@ h2.cpac-nav-tab-wrapper {
 									}
 								}
 
-								&.edit-button {
+								&.edit-button,
+								&.clone-button {
 									color: #0074a2;
 
 									&:hover {
@@ -330,10 +332,9 @@ h2.cpac-nav-tab-wrapper {
 
 		&:hover {
 			.column_label .inner > a {
-				&.remove-button {
-					display: inline-block;
-				}
-				&.edit-button {
+				&.remove-button,
+				&.edit-button,
+				&.clone-button {
 					display: inline-block;
 				}
 			}
@@ -503,7 +504,7 @@ h2.cpac-nav-tab-wrapper {
 
 								input[type="text"] {
 									margin-right: 3px;
-									width: 30px !important;
+									width: 40px !important;
 								}
 							}
 						}
@@ -823,7 +824,7 @@ h2.cpac-nav-tab-wrapper {
 
 						a {
 							display: inline-block;
-							height: 24px;
+							min-height: 24px;
 							font-size: 19px;
 							line-height: 24px;
 							margin-bottom: 1px;

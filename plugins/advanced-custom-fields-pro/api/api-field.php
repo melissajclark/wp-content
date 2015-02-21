@@ -13,26 +13,18 @@
 *  @return	(boolean)
 */
 
-function acf_is_field_key( $field_key = '' ) {
+function acf_is_field_key( $key = '' ) {
 	
-	// validate type
-	if( ! is_string($field_key) ) {
+	// look for 'field_' prefix
+	if( is_string($key) && substr($key, 0, 6) === 'field_' ) {
 		
-		return false;
-		
-	}
-	
-	
-	// search for 'field_'
-	if( substr($field_key, 0, 6) === 'field_' ) {
-	
 		return true;
 		
 	}
 	
 	
-	// allow local field key to not start with 'field_'
-	if( acf_is_local_field($field_key) ) {
+	// allow local field group key to not start with prefix
+	if( acf_is_local_field($key) ) {
 		
 		return true;
 		
@@ -43,6 +35,45 @@ function acf_is_field_key( $field_key = '' ) {
 	return false;
 	
 }
+
+
+/*
+*  acf_get_valid_field_key
+*
+*  This function will return a valid field key starting with 'field_'
+*
+*  @type	function
+*  @date	2/02/2015
+*  @since	5.1.5
+*
+*  @param	$key (string)
+*  @return	$key
+*/
+
+function acf_get_valid_field_key( $key = '' ) {
+	
+	// test if valid
+	if( !acf_is_field_key($key) ) {
+		
+		// empty
+		if( !$key ) {
+			
+			$key =  uniqid();
+			
+		} 
+		
+		
+		// add prefix
+		$key = "field_{$key}";
+		
+	}
+	
+	
+	// return
+	return $key;
+	
+}
+
 
 
 /*
@@ -61,16 +92,18 @@ function acf_is_field_key( $field_key = '' ) {
 function acf_get_valid_field( $field = false ) {
 	
 	// $field must be an array
-	if( !is_array($field) )
-	{
+	if( !is_array($field) ) {
+		
 		$field = array();
+		
 	}
 	
 	
-	// bail ealry if field_name exists (only run this function once)
-	if( !empty($field['_valid']) )
-	{
+	// bail ealry if already valid
+	if( !empty($field['_valid']) ) {
+		
 		return $field;
+		
 	}
 	
 	
@@ -90,8 +123,11 @@ function acf_get_valid_field( $field = false ) {
 		'class'				=> '',
 		'conditional_logic'	=> 0,
 		'parent'			=> 0,
-		//'ancestors'			=> array(),
-		//'field_group'		=> 0,
+		'wrapper'			=> array(
+			'width'				=> '',
+			'class'				=> '',
+			'id'				=> ''
+		),
 		'_name'				=> '',
 		'_input'			=> '',
 		'_valid'			=> 0,
@@ -103,9 +139,10 @@ function acf_get_valid_field( $field = false ) {
 	
 	
 	// translate
-	foreach( array('label', 'instructions') as $s )
-	{
+	foreach( array('label', 'instructions') as $s ) {
+		
 		$field[ $s ] = __($field[ $s ]);
+		
 	}
 	
 	
@@ -139,34 +176,34 @@ function acf_get_valid_field( $field = false ) {
 function acf_prepare_field( $field ) {
 	
 	// _input
-	if( !$field['_input'] )
-	{
+	if( !$field['_input'] ) {
+		
 		$field['_input'] = $field['name'];
 	
 	
 		// _input: key overrides name
-		if( $field['key'] )
-		{
+		if( $field['key'] ) {
+			
 			$field['_input'] = $field['key'];
+			
 		}
 	
 		
 		// _input: prefix prepends name
-		if( $field['prefix'] )
-		{
+		if( $field['prefix'] ) {
+			
 			$field['_input'] = "{$field['prefix']}[{$field['_input']}]";
+			
 		}
+		
 	}
 	
 	
 	// add id (may be custom set)
-	if( !$field['id'] )
-	{
-		$field['id'] = str_replace(
-			array('][', '[', ']'),
-			array('-', '-', ''),
-			$field['_input']
-		);
+	if( !$field['id'] ) {
+		
+		$field['id'] = str_replace(array('][', '[', ']'), array('-', '-', ''), $field['_input']);
+		
 	}
 	
 	
@@ -367,7 +404,7 @@ function acf_get_fields_by_id( $id = 0 ) {
 		'post_type'					=> 'acf-field',
 		'orderby'					=> 'menu_order',
 		'order'						=> 'ASC',
-		'suppress_filters'			=> true, // allows WPML to work
+		'suppress_filters'			=> true, // DO NOT allow WPML to modify the query
 		'post_parent'				=> $id,
 		'post_status'				=> 'publish, trash', // 'any' won't get trashed fields
 		'update_post_meta_cache'	=> false
@@ -405,11 +442,12 @@ function acf_get_fields_by_id( $id = 0 ) {
 *  @date	30/09/13
 *  @since	5.0.0
 *
-*  @param	$selector (mixed)
+*  @param	$selector (mixed) identifyer of field. Can be an ID, key, name or post object
+*  @param	$raw (boolean) return $field in it's raw form without filters or cache
 *  @return	$field (array)
 */
 
-function acf_get_field( $selector = null ) {
+function acf_get_field( $selector = null, $raw = false ) {
 	
 	// vars
 	$field = false;
@@ -418,30 +456,32 @@ function acf_get_field( $selector = null ) {
 	
 	
 	// $post_id or $key
-	if( is_numeric($selector) )
-	{
+	if( is_numeric($selector) ) {
+		
 		$v = $selector;
-	}
-	elseif( is_string($selector) )
-	{
-		if( acf_is_field_key($selector) )
-		{
+		
+	} elseif( is_string($selector) ) {
+		
+		if( acf_is_field_key($selector) ) {
+			
 			$k = 'key';
-		}
-		else
-		{
-			$k = 'name';	
+		
+		} else {
+			
+			$k = 'name';
+				
 		}
 		
 		$v = $selector;
-	}
-	elseif( is_object($selector) )
-	{
+		
+	} elseif( is_object($selector) ) {
+		
 		$v = $selector->ID;
-	}
-	else
-	{
+		
+	} else {
+		
 		return false;
+		
 	}
 	
 	
@@ -453,43 +493,55 @@ function acf_get_field( $selector = null ) {
 	$found = false;
 	$cache = wp_cache_get( $cache_key, 'acf', false, $found );
 	
-	if( $found )
-	{
+	if( $found ) {
+		
 		return $cache;
+		
 	}
 	
 	
 	// get field group from ID or key
-	if( $k == 'ID' )
-	{
+	if( $k == 'ID' ) {
+		
 		$field = _acf_get_field_by_id( $v );
-	}
-	elseif( $k == 'name' )
-	{
+		
+	} elseif( $k == 'name' ) {
+		
 		$field = _acf_get_field_by_name( $v );
-	}
-	else
-	{
+		
+	} else {
+		
 		$field = _acf_get_field_by_key( $v );
+		
 	}
 	
+	
+	// bail ealry if no field
+	if( !$field) {
 		
+		return false;
+		
+	}
+	
+	
+	// bail early if db only value (no need to update cache)
+	if( $raw ) {
+		
+		return $field;
+		
+	}
+	
+
 	// filter for 3rd party customization
 	$field = apply_filters('acf/load_field', $field);
-	
-	
-	// If a field has been found, apply filters
-	if( $field )
-	{
-		$field = apply_filters( "acf/load_field/type={$field['type']}", $field );
-		$field = apply_filters( "acf/load_field/name={$field['name']}", $field );
-		$field = apply_filters( "acf/load_field/key={$field['key']}", $field );
-	}
+	$field = apply_filters( "acf/load_field/type={$field['type']}", $field );
+	$field = apply_filters( "acf/load_field/name={$field['name']}", $field );
+	$field = apply_filters( "acf/load_field/key={$field['key']}", $field );
 	
 
 	// set cache
 	wp_cache_set( $cache_key, $field, 'acf' );
-		
+
 	
 	// return
 	return $field;
@@ -556,9 +608,7 @@ function _acf_get_field_by_id( $post_id = 0 ) {
 		// extract some args
 		$backup = acf_extract_vars($field, array(
 			'ID',
-			'parent',
-			//'ancestors',
-			//'field_group',
+			'parent'
 		));
 		
 
@@ -601,8 +651,8 @@ function _acf_get_field_by_key( $key = '' ) {
 	
 	
 	// try JSON before DB to save query time
-	if( acf_is_local_field( $key ) )
-	{
+	if( acf_is_local_field( $key ) ) {
+		
 		$field = acf_get_local_field( $key );
 		
 		// validate
@@ -610,6 +660,7 @@ function _acf_get_field_by_key( $key = '' ) {
 	
 		// return
 		return $field;
+		
 	}
 	
 	
@@ -629,18 +680,15 @@ function _acf_get_field_by_key( $key = '' ) {
 	
 	
 	// validate
-	if( empty($posts) )
-	{
-		return $field;	
+	if( empty($posts) ) {
+		
+		return $field;
+		
 	}
 	
 	
-	// load from ID
-	$field = _acf_get_field_by_id( $posts[0]->ID );
-	
-		
 	// return
-	return $field;
+	return _acf_get_field_by_id( $posts[0]->ID );
 	
 }
 
@@ -648,7 +696,7 @@ function _acf_get_field_by_key( $key = '' ) {
 /*
 *  _acf_get_field_by_name
 *
-*  This function will get a field via its key
+*  This function will get a field via its name
 *
 *  @type	function
 *  @date	27/02/2014
@@ -659,10 +707,6 @@ function _acf_get_field_by_key( $key = '' ) {
 */
 
 function _acf_get_field_by_name( $name = '' ) {
-	
-	// vars
-	$field = false;	
-	
 	
 	// vars
 	$args = array(
@@ -680,18 +724,15 @@ function _acf_get_field_by_name( $name = '' ) {
 	
 	
 	// validate
-	if( empty($posts) )
-	{
-		return $field;	
+	if( empty($posts) ) {
+		
+		return false;	
+		
 	}
 	
 	
-	// load from ID
-	$field = _acf_get_field_by_id( $posts[0]->ID );
-	
-		
 	// return
-	return $field;
+	return _acf_get_field_by_id( $posts[0]->ID );
 	
 }
 
@@ -894,6 +935,9 @@ function acf_duplicate_fields( $fields, $new_parent = 0 ) {
 	// create new field keys (for conditional logic fixes)
 	foreach( $fields as $field ) {
 		
+		// ensure a delay for unique ID
+		usleep(1);
+		
 		acf_update_setting( 'duplicate_key_' . $field['key'] , uniqid('field_') );
 		
 	}
@@ -1076,6 +1120,11 @@ function acf_delete_field( $selector = 0 ) {
 	// action for 3rd party customisation
 	do_action( "acf/delete_field", $field);
 	do_action( "acf/delete_field/type={$field['type']}", $field );
+	
+	
+	// clear cache
+	wp_cache_delete( "load_field/ID={$field['ID']}", 'acf' );
+	wp_cache_delete( "fields/parent={$field['parent']}", 'acf' );
 	
 	
 	// return
@@ -1390,11 +1439,22 @@ function acf_get_sub_field( $selector, $field ) {
 		
 	} elseif( $field['type'] == 'flexible_content' ) {
 		
+		// vars
 		$layouts = acf_extract_var( $field, 'layouts');
+		$current = get_row_layout();
+		
 		
 		if( !empty($layouts) ) {
 			
 			foreach( $layouts as $layout ) {
+				
+				// skip layout if the current layout key does not match
+				if( $current && $current !== $layout['name'] ) {
+					
+					continue;
+					
+				} 
+				
 				
 				// extract sub fields
 				$sub_fields = acf_extract_var( $layout, 'sub_fields');

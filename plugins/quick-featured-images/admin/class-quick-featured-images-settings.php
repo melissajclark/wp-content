@@ -429,14 +429,20 @@ class Quick_Featured_Images_Settings {
 	* @param   array    $input    Options and their values after submitting the form
 	* 
 	* @return  array              Options and their sanatized values
+	*
+	* @updated 8.3.1: sanitized recognition of key names
+	* @updated 9.1: Fixed warning if $input = null
 	*/
 	public function sanitize_options ( $input ) {
+		// exit with empty array if no option was checked
+		if ( ! $input ) {
+			return array();
+		}
 		$sanitized_input = array();
 		foreach ( $input as $key => $value ) {
 			// checkboxes
-			if ( preg_match( '/^show_.+_images$/', $key ) ) {
+			if ( preg_match( '/^column_thumb_[a-z0-9_\-]+$/', $key ) ) {
 				$sanitized_input[ $key ] = isset( $input[ $key ] ) ? '1' : '0' ;
-				continue;
 			}
 		} // foreach()
 		return $sanitized_input;
@@ -469,21 +475,22 @@ class Quick_Featured_Images_Settings {
 	*
 	* @since   7.0
 	*
+	* @updated 8.3.1: rename keys for column thumb post types
 	*/
 	public function print_columns_options ( $args ) {
 		// define the form sections, order by appereance, with headlines, and options
 		$label_posts = 'Posts';
 		$label_pages = 'Pages';
 		$post_types = array(
-			'show_posts_images' => _x( $label_posts, 'post type general name' ),
-			'show_pages_images' => _x( $label_pages, 'post type general name' ),
+			'column_thumb_post' => _x( $label_posts, 'post type general name' ),
+			'column_thumb_page' => _x( $label_pages, 'post type general name' ),
 		);
 		// get the registered custom post types as objects
         $custom_post_types = get_post_types( array( '_builtin' => false ), 'objects' );
 		// add their names and labels to the standard WP post types
         foreach ( $custom_post_types as $name => $object ) {
             if ( post_type_supports( $name, 'thumbnail' ) ) {
-				$key = sprintf( 'show_%s_images', $name );
+				$key = sprintf( 'column_thumb_%s', $name );
 				$post_types[ $key ] = $object->label; 
             }
 		}
@@ -512,7 +519,7 @@ class Quick_Featured_Images_Settings {
 	* @since   7.0
 	*/
 	public function print_section_1st_section () {
-		printf( "<p>%s</p>\n", __( 'The additional columns give you a quick overview about all used featured images for every post.', $this->plugin_slug ) );
+		printf( "<p>%s</p>\n", __( 'The additional columns give you a quick overview about all used featured images for every post. The Featured Image column is sortable.', $this->plugin_slug ) );
 	}
 
 }

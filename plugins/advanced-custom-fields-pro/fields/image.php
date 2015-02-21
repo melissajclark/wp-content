@@ -102,20 +102,44 @@ class acf_field_image extends acf_field {
 			
 		}
 		
+		
+		// basic?
+		$basic = !current_user_can( 'upload_files' );
+		
+		if( $basic ) {
+			
+			$div_atts['class'] .= ' basic';
+			
+		}
+		
 ?>
 <div <?php acf_esc_attr_e( $div_atts ); ?>>
 	<div class="acf-hidden">
 		<input <?php acf_esc_attr_e( $input_atts ); ?>/>
 	</div>
 	<div class="view show-if-value acf-soh">
+		<img data-name="image" src="<?php echo $url; ?>" alt=""/>
 		<ul class="acf-hl acf-soh-target">
-			<li><a class="acf-icon dark" data-name="edit" href="#"><i class="acf-sprite-edit"></i></a></li>
+			<?php if( !$basic ): ?>
+				<li><a class="acf-icon dark" data-name="edit" href="#"><i class="acf-sprite-edit"></i></a></li>
+			<?php endif; ?>
 			<li><a class="acf-icon dark" data-name="remove" href="#"><i class="acf-sprite-delete"></i></a></li>
 		</ul>
-		<img data-name="image" src="<?php echo $url; ?>" alt=""/>
 	</div>
 	<div class="view hide-if-value">
-		<p><?php _e('No image selected','acf'); ?> <a data-name="add" class="acf-button" href="#"><?php _e('Add Image','acf'); ?></a></p>
+		<?php if( $basic ): ?>
+			
+			<?php if( $field['value'] && !is_numeric($field['value']) ): ?>
+				<div class="acf-error-message"><p><?php echo $field['value']; ?></p></div>
+			<?php endif; ?>
+			
+			<input type="file" name="<?php echo $field['name']; ?>" id="<?php echo $field['id']; ?>" />
+			
+		<?php else: ?>
+			
+			<p style="margin:0;"><?php _e('No image selected','acf'); ?> <a data-name="add" class="acf-button" href="#"><?php _e('Add Image','acf'); ?></a></p>
+			
+		<?php endif; ?>
 	</div>
 </div>
 <?php
@@ -211,59 +235,11 @@ class acf_field_image extends acf_field {
 		// format
 		if( $field['return_format'] == 'url' ) {
 		
-			$value = wp_get_attachment_url( $value );
+			return wp_get_attachment_url( $value );
 			
 		} elseif( $field['return_format'] == 'array' ) {
 			
-			$attachment = get_post( $value );
-			
-			
-			// validate
-			if( !$attachment ) {
-			
-				return false;
-					
-			}
-			
-			
-			// create array to hold value data
-			$src = wp_get_attachment_image_src( $attachment->ID, 'full' );
-			
-			$value = array(
-				'ID'			=> $attachment->ID,
-				'id'			=> $attachment->ID,
-				'alt'			=> get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
-				'title'			=> $attachment->post_title,
-				'caption'		=> $attachment->post_excerpt,
-				'description'	=> $attachment->post_content,
-				'url'			=> $src[0],
-				'width'			=> $src[1],
-				'height'		=> $src[2],
-			);
-			
-			
-			// find all image sizes
-			$image_sizes = get_intermediate_image_sizes();
-			
-			if( $image_sizes ) {
-				
-				$value['sizes'] = array();
-				
-				foreach( $image_sizes as $image_size ) {
-					
-					// find src
-					$src = wp_get_attachment_image_src( $attachment->ID, $image_size );
-					
-					// add src
-					$value['sizes'][ $image_size ] = $src[0];
-					$value['sizes'][ $image_size . '-width' ] = $src[1];
-					$value['sizes'][ $image_size . '-height' ] = $src[2];
-					
-				}
-				// foreach( $image_sizes as $image_size )
-				
-			}
-			// if( $image_sizes )
+			return acf_get_attachment( $value );
 			
 		}
 		
@@ -405,7 +381,7 @@ function image_size_names_choose( $sizes )
 		// array?
 		if( is_array($value) && isset($value['ID']) ) {
 		
-			$value = $value['ID'];	
+			return $value['ID'];	
 			
 		}
 		
@@ -413,7 +389,7 @@ function image_size_names_choose( $sizes )
 		// object?
 		if( is_object($value) && isset($value->ID) ) {
 		
-			$value = $value->ID;
+			return $value->ID;
 			
 		}
 		
