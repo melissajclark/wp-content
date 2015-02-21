@@ -43,3 +43,8 @@ sftp-config.json
 
 ### ignore ###
 node_modules
+
+### Back Up Plugin ###
+
+backupwordpress-965dffb711-backups/
+plugins/backupwordpress-pro-dropbox/
