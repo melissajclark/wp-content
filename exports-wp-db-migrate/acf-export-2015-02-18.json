@@ -1,0 +1,96 @@
+[
+    {
+        "key": "group_54e02da075d6d",
+        "title": "Project Fields",
+        "fields": [
+            {
+                "key": "field_54e02daa1bc24",
+                "label": "Date",
+                "name": "date",
+                "prefix": "",
+                "type": "date_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "display_format": "F j, Y",
+                "return_format": "F j, Y",
+                "first_day": 1
+            },
+            {
+                "key": "field_54e02de91bc25",
+                "label": "Language",
+                "name": "language",
+                "prefix": "",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "choices": {
+                    "English": "English",
+                    "Cantonese": "Cantonese",
+                    "French": "French",
+                    "German": "German",
+                    "Portugese": "Portugese",
+                    "Spanish": "Spanish"
+                },
+                "default_value": [],
+                "allow_null": 0,
+                "multiple": 1,
+                "ui": 1,
+                "ajax": 0,
+                "placeholder": "",
+                "disabled": 0,
+                "readonly": 0
+            },
+            {
+                "key": "field_54e02e471bc26",
+                "label": "Team Members",
+                "name": "team_members",
+                "prefix": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_54e02e681bc27",
+                "label": "City",
+                "name": "city",
+                "prefix": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": "",
+                "readonly": 0,
+                "disabled": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "projects"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "side",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": ""
+    }
+]
