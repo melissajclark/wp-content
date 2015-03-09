@@ -1,83 +1,94 @@
-// Empty object for all code to live on
 
+// empty object for code to live on
 var filterApp = {};
-filterApp.eachItem = "";
 
+// array to store data-attributes on filterable items
+filterApp.dataAttr = ['data-status', 
+					'data-language'];
+
+// array to store selectors used throughout JS
+filterApp.selector  = ['select#audioChoice', 
+						'select#languageChoice', 
+						'article.filterableItem', 
+						'.filterableContent',
+						'form.filterNav'];
+
+// array to store classes added when hiding / showing items
+filterApp.transition = ['hideItemTransition', 
+						'showItemTransition'];
+
+filterApp.values = ['English: ',
+					'All',
+					'French: ',
+					'Tous'];
+						
 // ------------------------------------
 
 filterApp.init = function() { // this function holds everything to start the app
 
-	// ======== functions that need to occur on page load ============
-
-	/**
-	*
-	* Hide legend of results on page load + add active class to all items
-	*
-	**/
-
-	$("section.filterResultsCurrent").hide();
-
-	// ======== End functions that need to occur on page load ===========
-
+$(filterApp.selector[2]).addClass("animated");
 
 	// ============ Function that listens on click & evaluates type data
 
-	$("#filterOptionsTypes a.filterControl").on("click",function(){ 
+	$(filterApp.selector[4]).on("change",function(event){ 
 
-		// finds the value of the user's selection (aka the desired shape to view)
-		filterApp.sortChoiceType = $(this).text().toLowerCase().replace(/\s+/g, '').toString();
+		event.preventDefault(); // prevents page from refreshing
+
+		// finds the value of the user's selection (aka the desired content to view)
+		filterApp.userAudioSelection = $(filterApp.selector[0]).val();
+		filterApp.userLanguageSelection = $(filterApp.selector[1]).val();
+
+		/**
+		*
+		* If Statement: Evaluates English values on submit
+		*
+		**/
 		
-		// displays legend after user clicks on a filter link filterApp.sortChoiceType
-		$("article.filterResultsCurrent").show(); 
+		// checks if Audio = all and language = all
+		if (filterApp.userAudioSelection === filterApp.values[1] && filterApp.userLanguageSelection === filterApp.values[1] || filterApp.userAudioSelection === filterApp.values[3] && filterApp.userLanguageSelection === filterApp.values[3]) {
+			console.log(filterApp.values[0] + 'or' + filterApp.values[2] + ' all audio & languages selected');
 
-		// finds items NOT matching user's selection and hides them
-		$("article.filterableItem").not('[data-status="' + filterApp.sortChoiceType  + '"]').css("display", "none");
+			$(filterApp.selector[2]).show();
 
-		//finds items matching user's selection and shows them
-		$("article.filterableItem").filter('[data-status="' + filterApp.sortChoiceType  + '"]').css("display", "inline-block");
+		// checks if audio = all but languages do not = all
+		} else if (filterApp.userAudioSelection === filterApp.values[1] && filterApp.userLanguageSelection != filterApp.values[1] || filterApp.userAudioSelection === filterApp.values[3] && filterApp.userLanguageSelection != filterApp.values[3]) {
+			console.log(filterApp.values[0] + 'or' + filterApp.values[2] + ' All audio selected But language != All');
 
-		// hides legend if "all" is selected + shows all items when all is selected
-		if (filterApp.sortChoiceType === "all") {
-			$("section.filterResultsCurrent").hide();
-			$("article.filterableItem").css("display", "inline-block");
-		} else {
-			$("section.filterResultsCurrent").show();
-			$("li span.currentChoice").html("Status: " + filterApp.sortChoiceType);
-		}
+			// finds items NOT matching user's selection and hides them
+			// selection: Audio: all | Language != all
+			$(filterApp.selector[2] + '[' + filterApp.dataAttr[1] + ']').not('[' + filterApp.dataAttr[1] + '="' + filterApp.userLanguageSelection + '"]').addClass(filterApp.transition[0]).hide();
+			
+			//finds items matching user's selection and shows them
+			// selection: Audio: all | Language != all
+			$(filterApp.selector[2] + '[' + filterApp.dataAttr[1] + ']').filter('[' + filterApp.dataAttr[1] + '="' + filterApp.userLanguageSelection + '"]').addClass(filterApp.transition[1]).show();
 
-	}); // end function on types select
-	
-	// ============ End function that listens on click & evaluates type data
-	
-	// ============ Function that listens on click & evaluates shape data
+		// checks is languages = all, but audio does not equal all
+		} else if (filterApp.userAudioSelection != filterApp.values[1] && filterApp.userLanguageSelection === filterApp.values[1] || filterApp.userAudioSelection != filterApp.values[3] && filterApp.userLanguageSelection === filterApp.values[3]) {
+			console.log(filterApp.values[0] + 'or' + filterApp.values[2] + ' All languages selected But audio != All'); 
 
-// 	$("#filterOptionsShapes a.filterControl").on("click",function(){ 
+			// finds items NOT matching user's selection and hides them
+			// selection: Audio = !all | Language = all
+			$(filterApp.selector[2] + '[' + filterApp.dataAttr[0] + ']').not('[' + filterApp.dataAttr[0] + '="' + filterApp.userAudioSelection + '"]').addClass(filterApp.transition[0]).hide();
+			
+			//finds items matching user's selection and shows them
+			// selection: Audio = !all | Language = all
+			$(filterApp.selector[2] + '[' + filterApp.dataAttr[0] + ']').filter('[' + filterApp.dataAttr[0] + '="' + filterApp.userAudioSelection + '"]').addClass(filterApp.transition[1]).show();
 
-// 		// finds the value of the user's selection (aka the desired shape to view)
-// 		filterApp.sortChoiceShape = $(this).text();
+		// checks is both audio & language do not equal all
+		}  else if (filterApp.userAudioSelection != filterApp.values[1] && filterApp.userLanguageSelection != filterApp.values[1] || filterApp.userAudioSelection != filterApp.values[3] && filterApp.userLanguageSelection != filterApp.values[3]) {
+			console.log(filterApp.values[0] + 'or' + filterApp.values[2] + ' audio & video both do not equal all'); 
 
-// 		$("section.filterResultsCurrent").show(); // displays legend after user clicks on a filter link
+			// finds items NOT matching user's selection and hides them
+			// selection: Audio = !all | Language = !all
+			$(filterApp.selector[2] + '[' + filterApp.dataAttr[0] + ']' + '[' + filterApp.dataAttr[1] + ']').not('[' + filterApp.dataAttr[0] + '="' + filterApp.userAudioSelection + '"]' + '[' + filterApp.dataAttr[1] + '="' + filterApp.userLanguageSelection + '"]').addClass(filterApp.transition[0]).hide();
+			
+			//finds items matching user's selection and shows them
+			// selection: Audio = !all | Language = !all
+			$(filterApp.selector[2] + '[' + filterApp.dataAttr[0] + ']' + '[' + filterApp.dataAttr[1] + ']').filter('[' + filterApp.dataAttr[0] + '="' + filterApp.userAudioSelection + '"]' + '[' + filterApp.dataAttr[1] + '="' + filterApp.userLanguageSelection + '"]').addClass(filterApp.transition[1]).show();
 
-// 		// finds items NOT matching user's selection and hides them
-// 		$("section.filterableItem").not('[data-shape="' + filterApp.sortChoiceShape + '"]').css("display", "none");
+		} 
 
-// 		//finds items matching user's selection and shows them
-// 		$("section.filterableItem").filter('[data-shape="' + filterApp.sortChoiceShape + '"]').css("display", "inline-block");
-
-
-// 		// hides legend if "all" is selected + shows all items when all is selected
-// 		if (filterApp.sortChoiceShape === "all") {
-// 			$("section.filterResultsCurrent").hide();
-// 			$("section.filterableItem").css("display", "inline-block");
-// 		} else {
-// 			$("section.filterResultsCurrent").show();
-// 			$("li span.currentChoice").html("Shape: " + filterApp.sortChoiceShape);
-// 		}
-
-// 	}); // end function on shapes select
-	
-// 	// ============ End function that listens on click & evaluates shape data
-
+	});  // ============ End function that listens on click & evaluates filterApp.dataAttr[1] 
 
 }; // end filterApp.init
 
@@ -91,6 +102,17 @@ function filterMe() {
   jQuery(document).ready(function($){ // wordpress doc ready
 
     filterApp.init();
-
+    
   }); // end of WordPress doc ready function
 } // end of filterMe
+
+
+/** Pseudo code notes (end of file to preserve spacing to view Diffs of commits)
+
+On "Submit", I want:
+
+- To check which .filterableItems have the data-attributes the user selected
+- To hide the items that don't match the selection
+- To include a CSS transition when this occurs
+
+**/

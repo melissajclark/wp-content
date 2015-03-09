@@ -1,0 +1,229 @@
+# Copyright (C) 2013 Velvet Blues Update URLs
+# This file is distributed under the same license as the Velvet Blues Update URLs package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Velvet Blues Update URLs 3.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/velvet-blues-update-urls\n"
+"POT-Creation-Date: 2013-09-27 14:42:17+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: velvet-blues-update-urls.php:46
+msgid "Content Items (Posts, Pages, Custom Post Types, Revisions)"
+msgstr ""
+
+#: velvet-blues-update-urls.php:47
+msgid "Excerpts"
+msgstr ""
+
+#: velvet-blues-update-urls.php:48
+msgid "Attachments"
+msgstr ""
+
+#: velvet-blues-update-urls.php:49
+msgid "Links"
+msgstr ""
+
+#: velvet-blues-update-urls.php:50
+msgid "Custom Fields"
+msgstr ""
+
+#: velvet-blues-update-urls.php:51
+msgid "GUIDs"
+msgstr ""
+
+#: velvet-blues-update-urls.php:69 velvet-blues-update-urls.php:81
+#: velvet-blues-update-urls.php:122
+msgid "ERROR"
+msgstr ""
+
+#: velvet-blues-update-urls.php:69
+msgid "Please try again."
+msgstr ""
+
+#: velvet-blues-update-urls.php:81 velvet-blues-update-urls.php:107
+#: velvet-blues-update-urls.php:122
+msgid "Your URLs have not been updated."
+msgstr ""
+
+#: velvet-blues-update-urls.php:81
+msgid "Please select at least one checkbox."
+msgstr ""
+
+#: velvet-blues-update-urls.php:97
+msgid "Why do the results show 0 URLs updated?"
+msgstr ""
+
+#: velvet-blues-update-urls.php:97
+msgid ""
+"This happens if a URL is incorrect OR if it is not found in the content. "
+"Check your URLs and try again."
+msgstr ""
+
+#: velvet-blues-update-urls.php:97 velvet-blues-update-urls.php:152
+msgid "Want us to do it for you?"
+msgstr ""
+
+#: velvet-blues-update-urls.php:97 velvet-blues-update-urls.php:152
+msgid "Contact us at"
+msgstr ""
+
+#: velvet-blues-update-urls.php:97
+msgid ""
+"We will backup your website and move it for $65 OR simply update your URLs "
+"for only $29."
+msgstr ""
+
+#: velvet-blues-update-urls.php:107
+msgid "ERROR: Something may have gone wrong."
+msgstr ""
+
+#: velvet-blues-update-urls.php:111
+msgid "Success! Your URLs have been updated."
+msgstr ""
+
+#: velvet-blues-update-urls.php:115
+msgid "Results"
+msgstr ""
+
+#: velvet-blues-update-urls.php:118
+msgid "If you found our plugin useful, %s please consider donating"
+msgstr ""
+
+#: velvet-blues-update-urls.php:118
+msgid "The safer, easier way to pay online!"
+msgstr ""
+
+#: velvet-blues-update-urls.php:122
+msgid "Please enter values for both the old url and the new url."
+msgstr ""
+
+#: velvet-blues-update-urls.php:130
+msgid ""
+"After moving a website, %s lets you fix old URLs in content, excerpts, "
+"links, and custom fields."
+msgstr ""
+
+#: velvet-blues-update-urls.php:130
+msgid "WE RECOMMEND THAT YOU BACKUP YOUR WEBSITE."
+msgstr ""
+
+#: velvet-blues-update-urls.php:130
+msgid ""
+"You may need to restore it if incorrect URLs are entered in the fields below."
+msgstr ""
+
+#: velvet-blues-update-urls.php:131 velvet-blues-update-urls.php:141
+msgid "Step"
+msgstr ""
+
+#: velvet-blues-update-urls.php:131
+msgid "Enter your URLs in the fields below"
+msgstr ""
+
+#: velvet-blues-update-urls.php:133
+msgid "Old URL"
+msgstr ""
+
+#: velvet-blues-update-urls.php:133
+msgid "Old Site Address"
+msgstr ""
+
+#: velvet-blues-update-urls.php:137
+msgid "New URL"
+msgstr ""
+
+#: velvet-blues-update-urls.php:137
+msgid "New Site Address"
+msgstr ""
+
+#: velvet-blues-update-urls.php:141
+msgid "Choose which URLs should be updated"
+msgstr ""
+
+#: velvet-blues-update-urls.php:143
+msgid "URLs in page content"
+msgstr ""
+
+#: velvet-blues-update-urls.php:143
+msgid "posts, pages, custom post types, revisions"
+msgstr ""
+
+#: velvet-blues-update-urls.php:144
+msgid "URLs in excerpts"
+msgstr ""
+
+#: velvet-blues-update-urls.php:145
+msgid "URLs in links"
+msgstr ""
+
+#: velvet-blues-update-urls.php:146
+msgid "URLs for attachments"
+msgstr ""
+
+#: velvet-blues-update-urls.php:146
+msgid "images, documents, general media"
+msgstr ""
+
+#: velvet-blues-update-urls.php:147
+msgid "URLs in custom fields and meta boxes"
+msgstr ""
+
+#: velvet-blues-update-urls.php:148
+msgid "Update ALL GUIDs"
+msgstr ""
+
+#: velvet-blues-update-urls.php:148
+msgid "GUIDs for posts should only be changed on development sites."
+msgstr ""
+
+#: velvet-blues-update-urls.php:148
+msgid "Learn More."
+msgstr ""
+
+#: velvet-blues-update-urls.php:150
+msgid "Update URLs NOW"
+msgstr ""
+
+#: velvet-blues-update-urls.php:152
+msgid "Need help?"
+msgstr ""
+
+#: velvet-blues-update-urls.php:152
+msgid "Get support at the %s plugin page%s."
+msgstr ""
+
+#: velvet-blues-update-urls.php:152
+msgid ""
+"We will backup your website and move it for $65 OR update your URLs for only "
+"$29."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Velvet Blues Update URLs"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid ""
+"http://www.velvetblues.com/web-development-blog/wordpress-plugin-update-urls/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"This plugin <strong>updates all urls in your website</strong> by replacing "
+"old urls with new urls. To get started: 1) Click the \"Activate\" link to "
+"the left of this description, and 2) Go to your <a href=\"options-general."
+"php?page=velvet-blues-update-urls.php\">Update URLs</a> page to use it."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "VelvetBlues.com"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.velvetblues.com/"
+msgstr ""
