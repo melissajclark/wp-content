@@ -1,5 +1,5 @@
 <!-- Individual Article / Project -->
-<article id="post-<?php the_ID(); ?>" data-date="<?php the_field('date'); ?>" data-language="<?php the_field('language'); ?>" data-status="<?php // displays status terms attached to post
+<article id="post-<?php the_ID(); ?>" data-status="<?php // displays status terms attached to post
                                 $terms = get_the_terms( $post->ID, 'status');
                                                         
                                 if ( $terms && ! is_wp_error( $terms ) ) : 
@@ -11,7 +11,7 @@
                                     }
                                                         
                                     $on_status = join(",", $status_links);                                
-                                echo $on_status; ?><?php endif; ?>" data-people="<?php the_field('team_members'); ?>" data-location="<?php the_field('city'); ?>"<?php post_class("filterableItem");  
+                                echo $on_status; ?><?php endif; ?>" <?php post_class("filterableItem");  
     // end article info?>>
 
     <header class="entry-header">
