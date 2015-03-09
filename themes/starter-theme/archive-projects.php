@@ -18,37 +18,16 @@ get_header(); ?>
             get_template_part( 'inc/archive-header' );
         endif; ?>
             
-        <div class="filterControls clearfix">
+     <form class="filterNav">
 
-            <section class="filterResults">
-
-            <?php if(function_exists('show_beautiful_filters')){ show_beautiful_filters(); } ?>
-
-                <ul id="filterOptionsTypes" class="filterNav">
-                <li><span class="legend">View By Status:</span>
+        <li><label for="status"><span class="legend">View By Status:</span>
+                <select>
                     <?php taxonomy_list( 'status' ); // displays list of terms in status taxonomy in list (see functions.php) ?>
-                </li>
-                    <!-- li items appended with jQuery -->
-                </ul>
-             </section>
+                </select>
+            </label>
+        </li>
 
-            <section class="filterResults">
-
-                <ul id="filterOptionsShapes" class="filterNav">
-                    <li><span class="legend">View By Shape:</span></li>
-                    <!-- li items appended with jQuery -->
-                </ul>
-            </section>
-
-            <section class="filterResults filterResultsCurrent">
-
-                <ul id="filterOptionsCurrent" class="filterNav">
-                    <li><span class="legend">Current Filter:</span>
-                    <li><span class="currentChoice"><!-- content appended with jQuery --></span></li>
-                </ul>
-            </section>
-        </div><!-- / section.filterControls -->
-
+    </form><!-- / form.filterNav -->
 
 
         <div class="filterable">
