@@ -1,9 +1,9 @@
  <?php while ( have_posts() ) : the_post(); ?>
         
-       <article id="post-<?php the_ID(); ?>" <?php post_class('filterableItem'); ?> 
-       
+       <article id="post-<?php the_ID(); ?>" 
+
        data-tools="<?php // displays values for custom taxonomy 'tools' language attached to post
-        $terms = get_the_terms( $post->ID, 'language');
+        $terms = get_the_terms( $post->ID, 'tools'); // gets the taxonomy
                                 
         if ( $terms && ! is_wp_error( $terms ) ) : 
 
@@ -14,7 +14,7 @@
             }
                                 
             $on_status = join(",", $status_links);                                
-        echo $on_status; ?><?php endif; ?>">
+        echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
 
            <header class="entry-header">
                <h1 class="entry-title">
