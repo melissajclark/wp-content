@@ -10,7 +10,7 @@
             $status_links = array();
 
             foreach ( $terms as $term ) {
-                $status_links[] = $term->slug;
+                $status_links[] = $term->name;
             }
                                 
             $on_status = join(", ", $status_links);                                
