@@ -10,10 +10,10 @@
             $status_links = array();
 
             foreach ( $terms as $term ) {
-                $status_links[] = $term->name;
+                $status_links[] = $term->slug;
             }
                                 
-            $on_status = join(",", $status_links);                                
+            $on_status = join(", ", $status_links);                                
         echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
 
            <header class="entry-header">
