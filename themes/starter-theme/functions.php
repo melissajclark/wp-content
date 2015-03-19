@@ -109,7 +109,7 @@ if(function_exists('acf_add_options_page')) {
 	acf_add_options_page();
 	// acf_add_options_sub_page('Header');
 	// acf_add_options_sub_page('Footer');
-	acf_add_options_sub_page('Starter_Theme Options');
+	acf_add_options_sub_page('Theme Options');
  
 }
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
@@ -149,6 +149,9 @@ add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
 /* ENQUEUE SCRIPTS & STYLES
  ========================== */
+
+
+ 
 function starter_theme_scripts() {
 
 	// theme style.css file
