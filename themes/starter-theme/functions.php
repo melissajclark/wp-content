@@ -127,23 +127,6 @@ function starter_theme_widgets_init() {
         'before_title' => '<h3 class="widget-title">',
         'after_title' => '</h3>',
     ) );
-    register_sidebar( array(
-        'name' => __( 'Footer Widget Area', 'starter-theme' ),
-        'id' => 'footer-area', 
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget' => '</aside>',
-        'before_title' => '<span style="display:none;">',
-        'after_title' => '</span>',
-    ) );
-
-    register_sidebar( array(
-        'name' => __( 'Blog Page Sidebar', 'starter-theme' ),
-        'id' => 'sidebar-blog', 
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget' => '</aside>',
-        'before_title' => '<span style="display:none;">',
-        'after_title' => '</span>',
-    ) );
 }
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
