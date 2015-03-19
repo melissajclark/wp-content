@@ -13,49 +13,14 @@ Text Domain: themeTextDomain
 
 /* RESET & BASE
 ------------------ */
-// @import "reset";
-@import "mixins";
-@import "variables";
+@import "base/all-base";
 
-/* =FONT SPECIFIC
+
+/* CONTENT
 ------------------ */
-@import "fonts/all";
+@import "content/all-content";
 
-/* =LAYOUTS
+
+/* MODULES
 ------------------ */
-@import "layout";
-@import "header";
-@import "nav";
-@import "footer";
-
-/* =CONTENT
------------------- */
-@import "typography";
-@import "forms";
-
-/* =FilterContent
------------------- */
-@import "filterContent/all-filteredContent";
-
-
-/* =COMPONENTS
------------------- */
-/* Includes password protection for pages and posts, 404 page */
-@import "components";
-
-/* =PROJECT PAGES SPECIFIC
------------------- */
-@import "content";
-@import "pages/all";
-
-/* =BLOG SPECIFIC
------------------- */
-@import "blog/all";
-
-/* =Components
------------------ */
-// @import "components/_jqueryBxslider";
-@import "components/_wooFlexSlider";
-// @import "components/_wallopSlider";
-// @import "components/_glideSlider";
-
+@import "modules/all-modules";

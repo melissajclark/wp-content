@@ -16,3 +16,12 @@
 		width: 75%;
 	}
 }
+
+.page-link {
+	clear: both;
+	display: block;
+	margin: 0 0 1.5em;
+	span {
+		margin-right: 6px;
+	}
+}
