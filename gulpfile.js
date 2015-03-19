@@ -16,12 +16,7 @@ gulp.task('styles', function(){
 });
 
 gulp.task('watch', function() {
-  // Listen on port 35729
-  server.listen(35729, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-  
+  // Listen on port 35729  
       // Watch .scss files
       gulp.watch('themes/starter-theme/scss/*.scss', ['styles']);
       gulp.watch('themes/starter-theme/scss/**/*.scss', ['styles']);
