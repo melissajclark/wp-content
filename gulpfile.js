@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
-    sass = require('gulp-ruby-sass'),
+    sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     newer = require('gulp-newer');
 
