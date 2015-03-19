@@ -16,13 +16,9 @@ gulp.task('styles', function(){
 });
 
 gulp.task('watch', function() {
-  // Listen on port 35729  
       // Watch .scss files
       gulp.watch('themes/starter-theme/scss/*.scss', ['styles']);
       gulp.watch('themes/starter-theme/scss/**/*.scss', ['styles']);
-  
-    });
-
 });
 
 gulp.task('default', ['styles', 'watch']);
