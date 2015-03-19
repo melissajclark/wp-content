@@ -157,7 +157,7 @@ function starter_theme_scripts() {
 	  wp_enqueue_script(
 	    'plugins', //handle
 	    get_template_directory_uri() . '/assets/plugins.js', //source
-	    false, //dependencies
+	    array('juery'), // dependencies
 	    null, // version number
 	    true //load in footer
 	  );
