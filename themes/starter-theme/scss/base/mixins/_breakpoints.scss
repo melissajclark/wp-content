@@ -1,0 +1,69 @@
+/**
+*
+* Media Query Breakpoints
+*
+**/
+
+@mixin breakpoint($point) {
+
+  $bp-giant: "(min-width: 1600px)"; // large desktops
+  $bp-huge: "(max-width: 1600px)";
+  $bp-large: "(max-width: 1300px)";
+  $bp-medium: "(max-width: 1150px)";
+  $bp-little: "(max-width: 800px)";
+  $bp-tiny: "(max-width: 500px)";
+  $bp-mini: "(max-width: 320px)";
+
+  
+  @if $point == giant {
+    @media #{$bp-giant} { @content; }
+  }
+  @elseif $point == huge {
+    @media #{$bp-huge} { @content; }
+  }
+  @else if $point == large {
+    @media #{$bp-large} { @content; }
+  }
+  @else if $point == medium {
+    @media #{$bp-medium}  { @content; }
+  }
+  @else if $point == little {
+    @media #{$bp-little}  { @content; }
+  }
+  @else if $point == tiny {
+    @media #{$bp-tiny}  { @content; }
+  }
+   @else if $point == mini {
+    @media #{$bp-mini}  { @content; }
+  }
+}
+
+// Use like this: 
+// .selector {
+//     @include breakpoint(giant) { /* min-width: 1600px */
+//       width: ;
+//     }
+//     @include breakpoint(huge) { /* max-width: 1600px */
+//       width: ;
+//     }
+
+//     @include breakpoint(large) { /* max-width: 1300px */
+//       width: ;
+//     }
+
+//     @include breakpoint(medium) { /* max-width: 1100px */
+//       width: ;
+//     }
+
+//     @include breakpoint(little) { /* max-width: 800px */
+//       width: ;
+//     }
+
+//     @include breakpoint(tiny) { /* max-width: 500px */
+//       width: ;
+//     }
+
+//     @include breakpoint(mini) { /* max-width: 320px */
+//       width: ;
+//     }
+// }
