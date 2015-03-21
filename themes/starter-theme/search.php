@@ -8,7 +8,7 @@
 get_header(); ?>
 
 <div class="wrapper"> 
-    <div class="container">
+    <div class="container containerWithAside">
     	<div id="primary" role="main"> 
 
     <?php if ( have_posts() ) : ?>
@@ -53,8 +53,10 @@ get_header(); ?>
     <?php endif; ?>
 
         </div><!-- / #primary -->
+
+        <?php get_sidebar(); ?>
+
     </div><!-- / #container -->   
 </div><!-- / #wrapper --> 
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
