@@ -5,6 +5,7 @@
 **/
 
 body, input, textarea {
+	@include normal-font-size;
 	@include body-font;
 	color: $text;
 	word-wrap:break-word;
