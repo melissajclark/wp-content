@@ -4,8 +4,10 @@
 // Sizes
 $width: 95%;
 $width-outer: 100%;
-$mainContent: $width - 25%;
-// $secondary-width: $width-outer - $primary-width - 10%; 
+$mainContent: $width - 20%;
+$primary-width: $mainContent - 15%;
+$secondary-width: $mainContent - $primary-width;
+
  
 // Colors
 $text: #444;
