@@ -14,7 +14,6 @@ font:{
 }
 
 // @mixin second-heading-font {
-//   @include font-smoothing;
 // font:{
 //   family:// fill in;
 //   style: normal;
@@ -22,7 +21,6 @@ font:{
 // }
 
 @mixin body-font {
-  @include font-smoothing;
 font:{
   family: $body-font;
   style: normal;
