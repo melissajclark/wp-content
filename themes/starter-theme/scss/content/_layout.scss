@@ -2,12 +2,9 @@ body {
 	background: $bg;
 	margin: 0;
 	padding: 0;
-	max-width: $width-outer;
+	width: $width-outer;
 }
-#page {
-	width: $width;
-	padding: 0 15px;
-}
+
 #main {
 	clear: both;
 }
