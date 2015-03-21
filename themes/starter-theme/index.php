@@ -8,7 +8,7 @@
 get_header(); ?>
 
 <div class="wrapper"> 
-    <div class="container">
+    <div class="container containerWithAside">
         <div id="primary" role="main">
 
        <?php if ( have_posts() ) : ?>
