@@ -1,0 +1,40 @@
+/**
+*
+* WordPress Resets
+*
+**/
+
+
+/* Images & Alignment */
+
+.aligncenter {
+  display: block;
+  margin: 0 auto;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+img {
+  &.alignleft {
+    margin-right: 1em;
+    margin-bottom: 1.8em;
+  }
+  &.alignright {
+    margin-left: 1em;
+    margin-bottom: 1.8em;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
