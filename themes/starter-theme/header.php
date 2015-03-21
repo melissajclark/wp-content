@@ -37,11 +37,8 @@
         <script src="<?php echo get_template_directory_uri(); ?>/assets/html5.js" type="text/javascript"></script>
     <![endif]-->
 
-    <!-- /*=============================================
-    =            Typekit code                         =
-    =============================================*/ -->
-    <script type="text/javascript" src="//use.typekit.net/qst4kjj.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+   <?php // Google Fonts ?>
+   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600italic,600,300,300italic|Lato:400,400italic,300italic,300,700,700italic' rel='stylesheet' type='text/css'>
 
  
     <?php // Lets other plugins and files tie into our theme's <head>:
