@@ -22,12 +22,22 @@ Text Domain: starter-theme
 /* Colors */
 /* Fonts */
 /* Borders */
-/************************************************************************
- Borrowed from Bourbon: http://bourbon.io/docs/#html5-input-types
-
- Generate a variable ($all-text-inputs) with a list of all html5 input types that have a text-based input, excluding textarea.
- http://diveintohtml5.org/forms.html
-************************************************************************/
+/**
+*
+* Layout Mixins
+*
+**/
+/**
+*
+* Media Query Breakpoints
+*
+**/
+/**
+*
+* Sticky Footer
+*
+**/
+/* / Sticky Footer */
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -234,21 +244,21 @@ body {
   padding: 20px 0 0; }
 
 .entry-content table {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #444;
   margin: 0 0 1.5em;
   width: 100%; }
   .entry-content table td {
-    border-top: 1px solid #000;
+    border-top: 1px solid #444;
     padding: 6px 10px 6px 0; }
 .entry-content #s {
   width: 75%; }
 
 .comment-content table {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #444;
   margin: 0 0 1.5em;
   width: 100%; }
   .comment-content table td {
-    border-top: 1px solid #000;
+    border-top: 1px solid #444;
     padding: 6px 10px 6px 0; }
 .comment-content #s {
   width: 75%; }
@@ -284,7 +294,7 @@ img {
     max-width: 100%;
     height: auto; }
   .wp-caption .wp-caption-text {
-    color: #555;
+    color: #444;
     font-size: 85%;
     margin-bottom: 0.5em;
     padding: 5px 0;
@@ -304,16 +314,23 @@ img {
   width: 23%;
   padding-right: 2%; }
 
-/* Styling starts here */
+/**
+*
+* Typography
+*
+**/
 body, input, textarea {
-  color: #555;
-  font-family: sans-serif;
-  font-size: 1em;
-  line-height: 1.5em;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #444;
   word-wrap: break-word; }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   clear: both; }
 
 hr {
@@ -377,7 +394,7 @@ code, kbd {
   font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace; }
 
 abbr, acronym, dfn {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #444;
   cursor: help; }
 
 address {
@@ -403,7 +420,7 @@ sub {
 
 /* Links */
 a {
-  color: grey;
+  color: rgba(128, 0, 128, 0.5);
   text-decoration: none;
   word-wrap: break-word; }
   a:focus, a:active, a:hover {
@@ -489,7 +506,7 @@ a {
         cursor: pointer; }
         #access ul li a:after {
           content: '/';
-          color: #555; }
+          color: #444; }
         #access ul li a :hover {
           color: navy; }
       #access ul li:last-of-type a:after {
@@ -528,7 +545,11 @@ a {
 /*============================
 =            Blog            =
 ============================*/
-/* Blog Styles */
+/**
+*
+* Blog Styles
+*
+**/
 /* =Pager Navigation
 -------------------------------------------------------------- */
 #content nav {
@@ -564,7 +585,7 @@ a {
   padding: 0 0 20px; }
 
 .widget-title {
-  color: #555;
+  color: #444;
   text-align: left; }
 
 .widget ul {
@@ -589,7 +610,7 @@ a {
   padding: 0 0 2.6em; }
 
 .nopassword, .nocomments {
-  color: #555;
+  color: #444;
   font-size: 24px;
   margin: 26px 0; }
 
@@ -611,7 +632,7 @@ a {
       position: relative; }
 
 article.comment {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #444;
   padding: 10px 0; }
 
 .comment-meta {
@@ -620,7 +641,7 @@ article.comment {
     font-style: normal;
     display: block;
     clear: right;
-    color: #555; }
+    color: #444; }
 
 .avatar {
   float: left;
@@ -634,12 +655,12 @@ article.comment {
 
 /* Post author highlighting */
 .commentlist > li.bypostauthor, .commentlist .children > li.bypostauthor {
-  border: 1px solid #000;
+  border: 1px solid #444;
   padding: 5px 10px; }
 
 .entry-title, .entry-title a {
   clear: both;
-  color: grey;
+  color: rgba(128, 0, 128, 0.5);
   line-height: 1em;
   padding-bottom: 0.5em; }
 
@@ -647,7 +668,7 @@ article.comment {
   clear: both; }
 
 .entry-date {
-  color: LINKCOLOR;
+  color: rgba(128, 0, 128, 0.5);
   font-size: 11px;
   padding-bottom: 2px; }
 
