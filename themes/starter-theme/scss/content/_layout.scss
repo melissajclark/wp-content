@@ -9,6 +9,10 @@ body {
 	clear: both;
 }
 
+.wrapper {
+	width:$width-outer;
+}
+
 .container {
 	margin: 0 auto;
 	max-width: $primary-width;
