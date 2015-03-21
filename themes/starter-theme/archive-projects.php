@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-<section id="primary" role="main">
+<div id="primary" role="main">
 
    <?php if ( have_posts() ) : ?>
         <!-- there IS content for this query -->
@@ -43,6 +43,6 @@ get_header(); ?>
 
     <?php endif; ?>
 
-</section><!-- #primary -->
+</div><!-- / #primary -->
 
 <?php get_footer(); ?>

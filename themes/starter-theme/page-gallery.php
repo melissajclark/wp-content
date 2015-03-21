@@ -10,7 +10,7 @@
 get_header(); ?>
 
 
-<section id="primary" role="main">
+<div id="primary" role="main">
 
     <?php while ( have_posts() ) : the_post(); ?>
 
@@ -48,7 +48,7 @@ get_header(); ?>
 
     <?php endwhile; // end of the loop. ?>
 
-</section><!-- #primary -->
+</div><!-- / #primary -->
 
     
 
