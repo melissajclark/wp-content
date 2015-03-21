@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<div id="primary">
+<div id="primary" role="main">
 
     <?php while ( have_posts() ) : the_post(); ?>
 
