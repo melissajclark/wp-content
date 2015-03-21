@@ -1,0 +1,18 @@
+/**
+*
+* Layout Mixins
+*
+**/
+
+
+@mixin vertical-center-parent {
+  position: relative;
+}
+
+@mixin vertical-center-child {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
