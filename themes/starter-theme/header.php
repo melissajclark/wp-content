@@ -48,7 +48,7 @@
 <body <?php body_class(); ?>>
 <div id="page">
 
-    <header id="site-header" role="banner">            
+    <header id="site-header" role="banner" class="container">            
         <h1>
             <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
                 <?php bloginfo("name"); ?>
