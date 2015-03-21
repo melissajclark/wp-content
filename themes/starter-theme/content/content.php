@@ -7,6 +7,7 @@
     </header><!-- .entry-header -->
 
     <div class="entry-content">
+    <?php echo get_the_post_thumbnail($post_id, 'large') ?>
         <?php the_content(); ?>
         <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
     </div><!-- .entry-content -->
