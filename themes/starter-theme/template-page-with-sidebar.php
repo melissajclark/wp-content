@@ -10,6 +10,7 @@ get_header(); ?>
 
 <div class="wrapper"> 
     <div class="container containerWithAside">
+    
     	<div id="primary" role="main"> 
         <?php while ( have_posts() ) : the_post(); ?>
 
@@ -26,7 +27,11 @@ get_header(); ?>
 
             <?php endwhile; // end of the loop. ?>
         </div><!-- / #primary -->
-        <?php dynamic_sidebar('sidebar-2'); ?>
+
+        <div id="secondary" class="widget-area" role="complementary">
+            <?php dynamic_sidebar( 'sidebar-2' ); ?>
+        </div><!-- #secondary .widget-area -->
+
     </div><!-- / #container -->   
 </div><!-- / #wrapper --> 
 
