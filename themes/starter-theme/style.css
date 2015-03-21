@@ -9,35 +9,16 @@ License: The MIT License (MIT)
 License URI: http://opensource.org/licenses/MIT
 Text Domain: starter-theme
 */
-/* RESET & BASE
------------------- */
 /**
 *
 * Base
 *
 **/
-/* BASE VARIABLES
- *******************/
-/* Sizes */
-/* Colors */
-/* Fonts */
-/* Borders */
 /**
 *
-* Layout Mixins
+* Normalize
 *
 **/
-/**
-*
-* Media Query Breakpoints
-*
-**/
-/**
-*
-* Sticky Footer
-*
-**/
-/* / Sticky Footer */
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -167,12 +148,122 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 * {
   box-sizing: border-box; }
 
+/* / Normalize */
+/**
+*
+* WordPress Generated Styles & Classes
+*
+**/
+/* Images & Alignment */
+.aligncenter {
+  display: block;
+  margin: 0 auto; }
+
+.textcenter {
+  text-align: center; }
+
+.alignleft {
+  float: left; }
+
+.alignright {
+  float: right; }
+
+img.alignleft {
+  margin-right: 1em;
+  margin-bottom: 1.8em; }
+img.alignright {
+  margin-left: 1em;
+  margin-bottom: 1.8em; }
+
+.text-right {
+  text-align: right; }
+
+/* Content Styles */
+.hentry {
+  position: relative;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word; }
+  .page .hentry {
+    border-bottom: none; }
+
+.entry-content, .entry-summary {
+  padding: 20px 0 0; }
+
+.entry-content table {
+  border-bottom: 1px solid #444;
+  margin: 0 0 1.5em;
+  width: 100%; }
+  .entry-content table td {
+    border-top: 1px solid #444;
+    padding: 6px 10px 6px 0; }
+.entry-content #s {
+  width: 75%; }
+
+.comment-content table {
+  border-bottom: 1px solid #444;
+  margin: 0 0 1.5em;
+  width: 100%; }
+  .comment-content table td {
+    border-top: 1px solid #444;
+    padding: 6px 10px 6px 0; }
+.comment-content #s {
+  width: 75%; }
+
+dl.gallery-item {
+  margin: 0; }
+
+/* Images & Embeds */
+embed iframe, object {
+  max-width: 100%; }
+
+img {
+  max-width: 100%; }
+  img[class*="align"], img[class*="wp-image-"], img[class*="attachment-"] {
+    height: auto; }
+  img.size-full, img.size-large {
+    width: auto;
+    /* Prevent stretching of full-size and large-size images with height and width attributes in IE8 */
+    height: auto;
+    /* Make sure images with WordPress-added height and width attributes are scaled correctly */ }
+  img.alignleft, img.alignright, img.aligncenter {
+    margin-bottom: 1.5em; }
+
+/* Captions */
+.wp-caption {
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5em;
+  margin-bottom: 1.5em; }
+  .wp-caption img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto; }
+  .wp-caption .wp-caption-text {
+    color: #444;
+    font-size: 85%;
+    margin-bottom: 0.5em;
+    padding: 5px 0;
+    position: relative; }
+
+/* Galleries */
+.gallery-caption {
+  color: LINKCOLOR;
+  font-size: 10px; }
+
+#content .gallery {
+  margin: 0 auto 1.5em; }
+  #content .gallery a img {
+    border: none; }
+
+#content .gallery-columns-4 .gallery-item {
+  width: 23%;
+  padding-right: 2%; }
+
 /*!
  *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
-/* CONTENT
------------------- */
 /**
 *
 * Content
@@ -454,8 +545,6 @@ a {
   color: TEXTCOLOR; }
 
 /* Search form */
-/* MODULES
------------------- */
 /**
 *
 * Modules
