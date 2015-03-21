@@ -53,7 +53,10 @@ get_header(); ?>
         <?php endif; ?>
 
         </div><!-- / #primary -->
+
+        <?php get_sidebar(); ?>
+        
     </div><!-- / #container -->   
 </div><!-- / #wrapper --> 
-<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>
