@@ -6,7 +6,7 @@
  */
 
 ?>
-<div id="secondary" class="widget-area" role="complementary">
+<div id="secondary" class="secondaryContainer widget-area" role="complementary">
     <?php dynamic_sidebar( 'sidebar-blog' ); ?>
 </div><!-- #secondary .widget-area -->
 
