@@ -17,9 +17,9 @@
         echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
 
            <header class="entry-header">
-               <h1 class="entry-title">
+               <h2 class="entry-title">
                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-               </h1>
+               </h2>
                <span class="entry-date"><?php echo get_the_date(); ?></span>
            </header><!-- .entry-header -->
 
