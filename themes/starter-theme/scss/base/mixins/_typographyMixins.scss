@@ -1,0 +1,49 @@
+// *
+// *
+// * Typography Mixins
+// *
+// *
+
+
+@mixin heading-font {
+font:{
+  family: $heading-font;
+  style: normal;
+  weight: 400;
+  }
+}
+
+// @mixin second-heading-font {
+//   @include font-smoothing;
+// font:{
+//   family:// fill in;
+//   style: normal;
+//   }
+// }
+
+@mixin body-font {
+  @include font-smoothing;
+font:{
+  family: $body-font;
+  style: normal;
+  weight: 400;
+  }
+}
+
+@mixin normal-font-size {
+ font-size: 1.1rem;
+ line-height: 1.8rem;
+ word-wrap:break-word;
+}
+
+@mixin small-font-size {
+ font-size: 1.1rem;
+ line-height: 1.56rem;
+ word-wrap:break-word;
+}
+
+@mixin super-small-font-size {
+ font-size: 0.999rem;
+ line-height: 1.3rem;
+ word-wrap:break-word;
+}
