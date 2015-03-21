@@ -278,7 +278,8 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 70%; }
+  max-width: 70%;
+  padding: 2% 0 0 0; }
   @media (min-width: 1600px) {
     .container {
       /* min-width: 1600px */
@@ -298,6 +299,25 @@ body {
       font-size: 1.1rem;
       line-height: 1.56rem;
       word-wrap: break-word; } }
+  .container.containerWithAside #primary {
+    width: 75%;
+    float: left; }
+    @media (max-width: 1150px) {
+      .container.containerWithAside #primary {
+        width: 65%; } }
+    @media (max-width: 500px) {
+      .container.containerWithAside #primary {
+        width: 95%; } }
+  .container.containerWithAside #secondary {
+    width: 25%;
+    float: left;
+    padding: 0 0 0 5%; }
+    @media (max-width: 1150px) {
+      .container.containerWithAside #secondary {
+        width: 35%; } }
+    @media (max-width: 500px) {
+      .container.containerWithAside #secondary {
+        width: 95%; } }
 
 #content {
   margin: 0;
@@ -748,7 +768,6 @@ article.comment {
   display: inline-block;
   float: left;
   min-width: 20%;
-  margin: 2em;
   position: relative;
   word-wrap: break-word; }
 
