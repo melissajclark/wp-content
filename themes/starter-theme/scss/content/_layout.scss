@@ -15,23 +15,27 @@ body {
 
 .container {
 	margin: 0 auto;
-	max-width: $primary-width;
+	max-width: $mainContent;
 
 	    @include breakpoint(giant) { /* min-width: 1600px */
-	      max-width: $primary-width - 10%; // 70%
+	      max-width: $mainContent - 10%; // 70%
 	    }    
 
 	    @include breakpoint(huge) { /* max-width: 1600px */
-	      max-width: $primary-width + 10%; // 80%
+	      max-width: $mainContent + 10%; // 80%
 	    }	    
 
 	    @include breakpoint(medium) { /* max-width: 1150px */
-	      max-width: $primary-width + 15%; // 85%
+	      max-width: $mainContent + 15%; // 85%
 	    }
 
 	    @include breakpoint(little) { /* max-width: 800px */
 	      max-width: $width;
 	      @include small-font-size;
+	    }
+
+	    #primary {
+
 	    }
 }
 
