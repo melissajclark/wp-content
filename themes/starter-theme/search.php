@@ -48,7 +48,7 @@ get_header(); ?>
 
     <?php else : ?>
 
-        <?php get_template_part( 'content/content', 'content/content-none' ); ?>
+        <?php get_template_part( 'content/content'); ?>
 
     <?php endif; ?>
 
