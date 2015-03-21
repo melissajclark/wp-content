@@ -47,15 +47,16 @@
  
 <body <?php body_class(); ?>>
 <div id="page">
+
     <header id="site-header" role="banner">            
-            <h1>
-                <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
-                    <?php bloginfo("name"); ?>
-                </a>
-            </h1>
-            <nav id="access" role="navigation">
-                <?php wp_nav_menu( array( "theme_location" => "primary" ) ); ?>
-            </nav><!-- #access -->  
+        <h1>
+            <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
+                <?php bloginfo("name"); ?>
+            </a>
+        </h1>
+        <nav id="access" role="navigation">
+            <?php wp_nav_menu( array( "theme_location" => "primary" ) ); ?>
+        </nav><!-- #access -->  
     </header><!-- #branding -->
  
  
