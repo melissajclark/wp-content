@@ -1,8 +1,8 @@
-/**
-*
-* Sticky Footer
-*
-**/
+// *
+// *
+// * Sticky Footer
+// *
+// *
 
 
 @mixin sticky-footer($footer-height, $wrapper-selector: unquote("#wrapper"), $container-selector: unquote("#container"), $footer-selector: unquote("#footer")) {
@@ -35,5 +35,3 @@
     height: 0.1px;
   }
 }
-
-/* / Sticky Footer */
