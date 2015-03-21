@@ -31,9 +31,7 @@
 
 body, input, textarea {
 	color: $text;
-	font-family: $main;
-	font-size: 1em;
-	line-height: 1.5em;
+	font-family: $body-font;
 	word-wrap:break-word;
 }
 
