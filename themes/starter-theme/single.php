@@ -8,7 +8,7 @@
 get_header(); ?>
 
 <div class="wrapper"> 
-    <div class="container">
+    <div class="container containerWithAside">
     	<div id="primary" role="main"> 
 
 	    <?php while ( have_posts() ) : the_post(); ?>
