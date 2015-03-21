@@ -69,8 +69,6 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 		// Enable support for editable menus via Appearance > Menus
 		register_nav_menus( array(
 			'primary' => __( 'Primary Menu', 'starter-theme' ),
-			'footer' => __( 'Footer Menu', 'starter-theme' ),
-			'sidebar-links' => __( 'Sidebar Links', 'starter-theme' ),
 		) );
 		
 		// Add custom image sizes
