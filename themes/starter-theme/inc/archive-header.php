@@ -1,5 +1,5 @@
 <header class="archive-header">
-    <h1 class="archive-title">
+    <h1 class="entry-title">
     <?php
         if ( is_category() ) :
             single_cat_title();
