@@ -1,23 +1,23 @@
-/* BASE VARIABLES
- *******************/
+ // BASE VARIABLES
+ // ******************
 
-/* Sizes */
+// Sizes
 $width: 95%;
 $width-outer: $width + 5%;
 $primary-width: $width - 10%;
 $secondary-width: $width; 
  
-/* Colors */
+// Colors
 $text: #444;
-$links: grey;
+$links: rgba(purple, 0.5);
 $hover: navy;
 
 $bg: rgba(108, 103, 103, 0.12);
 
-/* Fonts */
+// Fonts
 $body-font: 'Source Sans Pro', sans-serif;;
 $heading-font: 'Lato', sans-serif;;
 // $second-heading-font: ;
 
-/* Borders */
+// Borders
 $border: 1px solid #444;
