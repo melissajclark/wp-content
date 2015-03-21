@@ -11,11 +11,6 @@ Text Domain: starter-theme
 */
 /**
 *
-* Base
-*
-**/
-/**
-*
 * Normalize
 *
 **/
@@ -324,93 +319,15 @@ body {
 #colophon {
   height: 100px; }
 
-.hentry {
-  position: relative;
-  -ms-word-wrap: break-word;
-  word-wrap: break-word; }
-  .page .hentry {
-    border-bottom: none; }
-
-.entry-content, .entry-summary {
-  padding: 20px 0 0; }
-
-.entry-content table {
-  border-bottom: 1px solid #444;
-  margin: 0 0 1.5em;
-  width: 100%; }
-  .entry-content table td {
-    border-top: 1px solid #444;
-    padding: 6px 10px 6px 0; }
-.entry-content #s {
-  width: 75%; }
-
-.comment-content table {
-  border-bottom: 1px solid #444;
-  margin: 0 0 1.5em;
-  width: 100%; }
-  .comment-content table td {
-    border-top: 1px solid #444;
-    padding: 6px 10px 6px 0; }
-.comment-content #s {
-  width: 75%; }
-
-dl.gallery-item {
-  margin: 0; }
-
-/* Images & Embeds */
-embed iframe, object {
-  max-width: 100%; }
-
-img {
-  max-width: 100%; }
-  img[class*="align"], img[class*="wp-image-"], img[class*="attachment-"] {
-    height: auto; }
-  img.size-full, img.size-large {
-    width: auto;
-    /* Prevent stretching of full-size and large-size images with height and width attributes in IE8 */
-    height: auto;
-    /* Make sure images with WordPress-added height and width attributes are scaled correctly */ }
-  img.alignleft, img.alignright, img.aligncenter {
-    margin-bottom: 1.5em; }
-
-/* Captions */
-.wp-caption {
-  max-width: 100%;
-  height: auto;
-  margin-top: 0.5em;
-  margin-bottom: 1.5em; }
-  .wp-caption img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto; }
-  .wp-caption .wp-caption-text {
-    color: #444;
-    font-size: 85%;
-    margin-bottom: 0.5em;
-    padding: 5px 0;
-    position: relative; }
-
-/* Galleries */
-.gallery-caption {
-  color: LINKCOLOR;
-  font-size: 10px; }
-
-#content .gallery {
-  margin: 0 auto 1.5em; }
-  #content .gallery a img {
-    border: none; }
-
-#content .gallery-columns-4 .gallery-item {
-  width: 23%;
-  padding-right: 2%; }
-
 /**
 *
 * Typography
 *
 **/
 body, input, textarea {
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+  word-wrap: break-word;
   font-family: 'Source Sans Pro', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -423,6 +340,30 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
   font-weight: 400;
   clear: both; }
+
+h1 {
+  font-size: 2.2rem;
+  line-height: 3rem; }
+
+h2 {
+  font-size: 1.9rem;
+  line-height: 2.7rem; }
+
+h3 {
+  font-size: 1.7rem;
+  line-height: 2.5rem; }
+
+h4 {
+  font-size: 1.5rem;
+  line-height: 2rem; }
+
+h5 {
+  font-size: 1.3rem;
+  line-height: 1.8rem; }
+
+h6 {
+  font-size: 1.2rem;
+  line-height: 1.9rem; }
 
 hr {
   background-color: #ccc;
@@ -749,17 +690,10 @@ article.comment {
 
 .entry-title, .entry-title a {
   clear: both;
-  color: rgba(128, 0, 128, 0.5);
-  line-height: 1em;
-  padding-bottom: 0.5em; }
+  color: rgba(128, 0, 128, 0.5); }
 
 .entry-meta {
   clear: both; }
-
-.entry-date {
-  color: rgba(128, 0, 128, 0.5);
-  font-size: 11px;
-  padding-bottom: 2px; }
 
 /* Handle sticky posts */
 /* Set to whatever width your actual thumbs are */
