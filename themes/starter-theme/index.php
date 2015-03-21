@@ -29,6 +29,7 @@ get_header(); ?>
                     </header><!-- .entry-header -->
 
                     <?php the_content(); ?>
+                    <hr>
 
                 </article><!-- #post-<?php the_ID(); ?> -->
 
