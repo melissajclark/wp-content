@@ -12,15 +12,16 @@
  
 </div><!-- #page -->
  
-<footer id="colophon" role="contentinfo">
+<footer id="colophon" role="contentinfo" class="wrapper">
 
+	<div class="container">
+		<?php get_template_part ('inc/social-media-fields') // grabs theme's social media content - [TO DO] update icon assets in final theme?>
 
-<?php get_template_part ('inc/social-media-fields') // grabs theme's social media content - [TO DO] update icon assets in final theme?>
-
-	<div id="copyright">
-		&copy; <?php echo date("Y"); ?> <?php echo bloginfo( "name" ); ?><br>
-		<a href="http://melissajclark.ca" rel="nofollow">theme by Melissa</a>
-	</div>
+		<div id="copyright">
+			&copy; <?php echo date("Y"); ?> <?php echo bloginfo( "name" ); ?><br>
+			<a href="http://melissajclark.ca" rel="nofollow">theme by Melissa</a>
+		</div> 
+	</div><!-- / container -->
 
 </footer><!-- #colophon -->
 
