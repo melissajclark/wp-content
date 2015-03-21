@@ -19,12 +19,20 @@ get_header(); ?>
                 // if so, print the archive title before the loop begins
                 get_template_part( 'inc/archive-header' );
             endif; ?>
-            
-          <!-- Begin Grid Archive -->
 
-          <?php get_template_part( 'inc/grid-archive-loop'); ?>
+            <?php /* Start the Loop */ ?>
+            <?php while ( have_posts() ) : the_post(); ?>
 
-          <!-- End of Grid Archive -->
+                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                    <header class="entry-header">
+                        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                    </header><!-- .entry-header -->
+
+                    <?php the_excerpt(); ?>
+
+                </article><!-- #post-<?php the_ID(); ?> -->
+
+            <?php endwhile; ?>
 
             <nav id="nav-below">
                 <div class="nav-previous"><?php next_posts_link( __( "Older posts", "starter-theme" ) ); ?></div>
