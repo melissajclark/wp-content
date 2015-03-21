@@ -1,0 +1,23 @@
+Simone
+====================================
+Simone WordPress Theme, Copyright 2014 Morten Rand-Hendriksen.
+Simone is distributed under the terms of the GNU GPL.
+
+Licenses and External Assets
+====================================
+
+Simone is distributed under the terms of the GNU GPL v2
+
+Simone's code base started out as _s (http://underscores.me) as it were on February 6, 2014.
+
+The theme features three custom fonts: 
+Lato: http://www.google.com/fonts/specimen/Lato SIL Open Font Licence 1.1 http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+PT Serif: http://www.google.com/fonts/specimen/PT+Serif SIL Open Font Licence 1.1 http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+FontAwesome: Published under various licenses http://fortawesome.github.io/Font-Awesome/license/
+
+The accessible main menu is powered by Superfish. MIT License https://github.com/joeldbirch/superfish/blob/master/MIT-LICENSE.txt
+Responsive triggers for Superfish and Masonry powered by Enquire.js. MIT Licence http://wicky.nillia.ms/enquire.js/#license
+
+Images used in screenshot are by the theme author and published under the CC by-nc-nd 2.0 license:
+Background: Cherry Blossom Tree - https://www.flickr.com/photos/mor10/13933662411/
+On-device grabs: Distressed Mailboxes, New Orleans - https://www.flickr.com/photos/mor10/5874760659/
