@@ -27,7 +27,7 @@ get_header(); ?>
                     <header class="entry-header">
                         <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                     </header><!-- .entry-header -->
-
+                    <?php echo the_post_thumbnail($postID, 'large'); ?>
                     <?php the_content(); ?>
                     <hr>
 
