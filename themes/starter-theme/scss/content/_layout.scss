@@ -13,9 +13,10 @@ body {
 	width:$width-outer;
 }
 
-.container {
+.container { 
 	margin: 0 auto;
 	max-width: $mainContent;
+	padding:2% 0 0 0;
 
 	    @include breakpoint(giant) { /* min-width: 1600px */
 	      max-width: $mainContent - 10%; // 70%
@@ -34,9 +35,31 @@ body {
 	      @include small-font-size;
 	    }
 
-	    #primary {
+	    &.containerWithAside { // styles widths of layouts with a sidebar
 
-	    }
+    	    #primary {
+    			width:$primary-width;
+    			@include breakpoint(medium){
+    				width:$primary-width - 10%;
+    			}
+    			@include breakpoint(tiny){
+    				width:$width;
+    			}
+    			float:left;
+    	    }
+    	    #secondary {
+    			width:$secondary-width;
+    			@include breakpoint(medium){
+    				width:$secondary-width + 10%;
+    			}
+    			@include breakpoint(tiny){
+    				width:$width;
+    			}
+    			float:left;
+    			padding:0 0 0 5%;
+    	    }
+
+	    } // containerWithAside
 }
 
 #content {
