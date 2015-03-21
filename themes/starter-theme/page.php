@@ -10,7 +10,8 @@
 get_header(); ?>
 
 <div id="primary" role="main">
-    <div class="container">
+    <div class="wrapper"> 
+        <div class="container"> 
         <?php while ( have_posts() ) : the_post(); ?>
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -25,7 +26,8 @@ get_header(); ?>
             </article><!-- #post-<?php the_ID(); ?> -->
 
             <?php endwhile; // end of the loop. ?>
-    </div><!-- / container -->
+        </div><!-- / container -->
+    </div><!-- / wrapper -->   
 </div><!-- / #primary -->
 
 <?php get_footer(); ?>
