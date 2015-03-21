@@ -8,6 +8,8 @@
 get_header(); ?>
 
 <div id="primary" role="main">
+    <div class="wrapper"> 
+        <div class="container"> 
 
     <?php if ( have_posts() ) : ?>
 
@@ -50,6 +52,8 @@ get_header(); ?>
 
     <?php endif; ?>
 
+        </div><!-- / container -->
+    </div><!-- / wrapper -->   
 </div><!-- / #primary -->
 
 <?php get_sidebar(); ?>
