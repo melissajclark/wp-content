@@ -7,9 +7,9 @@
 
 get_header(); ?>
 
-<div id="primary" role="main">
-    <div class="wrapper"> 
-        <div class="container"> 
+<div class="wrapper"> 
+    <div class="container">
+    	<div id="primary" role="main"> 
 
 	    <?php while ( have_posts() ) : the_post(); ?>
 
@@ -21,8 +21,8 @@ get_header(); ?>
 
 	    <?php endwhile; // end of the loop. ?>
 
-        </div><!-- / container -->
-    </div><!-- / wrapper -->   
-</div><!-- / #primary -->
+        </div><!-- / #primary -->
+    </div><!-- / #container -->   
+</div><!-- / #wrapper --> 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

@@ -60,4 +60,4 @@
     </header><!-- #branding -->
  
  
-    <div id="main" role="main">
+    <div id="main">

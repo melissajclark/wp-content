@@ -52,8 +52,8 @@ get_header(); ?>
 
         <?php endif; ?>
 
-        </div><!-- / container -->
-    </div><!-- / wrapper -->   
-</div><!-- / #primary -->
+        </div><!-- / #primary -->
+    </div><!-- / #container -->   
+</div><!-- / #wrapper --> 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

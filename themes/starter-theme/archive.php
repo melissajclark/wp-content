@@ -7,9 +7,9 @@
 
 get_header(); ?>
 
-<div id="primary" role="main">
-    <div class="wrapper"> 
-        <div class="container"> 
+<div class="wrapper"> 
+    <div class="container">
+    	<div id="primary" role="main"> 
 
        <?php if ( have_posts() ) : ?>
             <!-- there IS content for this query -->
@@ -44,8 +44,8 @@ get_header(); ?>
 
         <?php endif; ?>
 
-        </div><!-- / container -->
-    </div><!-- / wrapper -->   
-</div><!-- / #primary -->
+        </div><!-- / #primary -->
+    </div><!-- / #container -->   
+</div><!-- / #wrapper --> 
 
 <?php get_footer(); ?>
