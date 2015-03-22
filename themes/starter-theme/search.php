@@ -13,28 +13,34 @@ get_header(); ?>
 
         <?php if ( have_posts() ) : ?>
 
-                <header class="archive-header">
-                    <h1 class="entry-title">
-                        <?php printf( __( 'Search Results for: %s', 'starter-theme' ), '<span>' . get_search_query() . '</span>' ); ?>
-                    </h1>
-                </header>
+            <header class="archive-header">
+            
+                <?php
+                global $wp_query;
+                $total_results = $wp_query->found_posts;
+                ?>
+                <h1 class="entry-title"><?php _e('Search Results') ?></h1>
 
-                <?php /* Start the Loop */ ?>
-                <?php while ( have_posts() ) : the_post(); ?>
+                <h2><?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h2>
 
-                    <?php
-                        get_template_part( 'content');
-                    ?>
+            </header>
 
-                <?php endwhile; ?>
+            <?php /* Start the Loop */ ?>
+            <?php while ( have_posts() ) : the_post(); ?>
 
-                <?php get_template_part( 'inc/pagination' ); ?>
+                <?php
+                    get_template_part( 'content');
+                ?>
 
-            <?php else : ?>
+            <?php endwhile; ?>
 
-                <?php get_template_part( 'content', 'none' ); ?>
+            <?php get_template_part( 'inc/pagination' ); ?>
 
-            <?php endif; ?>
+        <?php else : ?>
+
+            <?php get_template_part( 'content', 'none' ); ?>
+
+        <?php endif; ?>
 
         </div><!-- / #primary -->
 
