@@ -4,6 +4,11 @@
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
         </h1>
         <span class="entry-date"><?php echo get_the_date(); ?></span>
+
+       <?php if ( is_single() ) {
+             the_author_posts_link();
+        }?>
+        
     </header><!-- .entry-header -->
 
     <div class="entry-content">
