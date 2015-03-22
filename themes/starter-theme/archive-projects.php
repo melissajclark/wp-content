@@ -21,16 +21,11 @@ get_header(); ?>
                 get_template_part( 'inc/archive-header' );
             endif; ?>
             
-          <!-- Begin Grid Archive -->
+            <?php // display the items ?>
+            <?php get_template_part( 'content', 'project'); ?>
 
-          <?php get_template_part( 'content/content-project'); ?>
+            <?php get_template_part('inc/pagination'); ?>
 
-          <!-- End of Grid Archive -->
-
-            <nav id="nav-below">
-                <div class="nav-previous"><?php next_posts_link( __( "Older posts", "starter-theme" ) ); ?></div>
-                <div class="nav-next"><?php previous_posts_link( __( "Newer posts", "starter-theme" ) ); ?></div>
-            </nav><!-- #nav-above -->
 
         <?php else : ?>
             <!-- there IS NOT content for this query -->
