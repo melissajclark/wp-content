@@ -14,6 +14,8 @@
 
     <footer class="entry-meta">
 
+        <?php the_category(', '); ?>
+
         <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
 
         <div class="comments-link">
