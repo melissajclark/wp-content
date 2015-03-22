@@ -5,10 +5,19 @@
         </h1>
         <span class="entry-date"><?php echo get_the_date(); ?></span>
 
-       <span class="entry-meta"><?php _e('By: '); ?>
-           <span itemprop="author"><?php if ( is_single() ) {
-                 the_author_posts_link();
-             }?>
+       <span class="entry-meta">
+           <span itemprop="author">
+
+            <?php 
+
+            if (is_single() ) : 
+                the_author_posts_link();
+
+            elseif ( is_home() ) :
+                the_author_posts_link(); 
+            
+            endif;
+            ?>
             </span>
         </span>
         
