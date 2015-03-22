@@ -11,46 +11,28 @@ get_header(); ?>
     <div class="container containerWithAside">
     	<div id="primary" role="main"> 
 
-    <?php if ( have_posts() ) : ?>
+        <?php if ( have_posts() ) : ?>
 
-        <header class="archive-header">
-        
-            <!-- option 1 -->
-            <!-- normal format (search results for: .....) -->
+            <header class="page-header">
+                <h1 class="entry-title"><?php printf( __( 'Search Results for: %s', 'themeTextDomain' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+            </header>
 
-            <!-- <h1 class="archive-title">
-                <?php printf( __( 'Search Results for: %s', 'starter-theme' ), '<span>' . get_search_query() . '</span>' ); ?>
-            </h1> -->
-            
-            <!-- option 2 -->
-            <!-- fancier format: displays search term in quotes + number of results -->
+            <?php /* Start the Loop */ ?>
+            <?php while ( have_posts() ) : the_post(); ?>
 
-            <?php
-            global $wp_query;
-            $total_results = $wp_query->found_posts;
-            ?>
+                <?php
+                    get_template_part( 'content/content');
+                ?>
 
-            <h1>Search Results</h1>
-            <h2><?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h2>
+            <?php endwhile; ?>
 
-        </header>
+            <?php get_template_part( 'inc/pagination' ); ?>
 
-        <?php /* Start the Loop */ ?>
-        <?php while ( have_posts() ) : the_post(); ?>
+        <?php else : ?>
 
-            <?php
-                get_template_part( 'content/content');
-            ?>
+            <?php get_template_part( 'content/content-none' ); ?>
 
-        <?php endwhile; ?>
-
-        <?php get_template_part( 'inc/pagination' ); ?>
-
-    <?php else : ?>
-
-        <?php get_template_part( 'content/content'); ?>
-
-    <?php endif; ?>
+        <?php endif; ?>
 
         </div><!-- / #primary -->
 
