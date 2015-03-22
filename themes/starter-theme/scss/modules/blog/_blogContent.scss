@@ -1,7 +1,14 @@
-.entry-title,
+// .entry-title,
 .entry-title a {
 	clear: both;
 	color: $links;
+}
+
+.entry-title a {
+	&:focus, 
+	&:hover {
+		color:$hover;
+	}
 }
 .entry-meta {
 	clear: both;
