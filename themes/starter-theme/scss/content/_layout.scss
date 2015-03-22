@@ -42,7 +42,7 @@ body {
     			@include breakpoint(medium){
     				width:$primary-width - 10%;
     			}
-    			@include breakpoint(tiny){
+    			@include breakpoint(little){
     				width:$width;
     			}
     			float:left;
@@ -52,7 +52,7 @@ body {
     			@include breakpoint(medium){
     				width:$secondary-width + 10%;
     			}
-    			@include breakpoint(tiny){
+    			@include breakpoint(little){
     				width:$width;
     			}
     			float:left;
