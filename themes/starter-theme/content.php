@@ -7,7 +7,7 @@
 
        <span class="entry-meta"><?php _e('By: '); ?>
        <?php if ( is_single() ) {
-             the_author_posts_link();
+             the_author();
          }?>
         </span>
         
