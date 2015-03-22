@@ -6,9 +6,10 @@
         <span class="entry-date"><?php echo get_the_date(); ?></span>
 
        <span class="entry-meta"><?php _e('By: '); ?>
-       <?php if ( is_single() ) {
-             the_author();
-         }?>
+           <span itemprop="author"><?php if ( is_single() ) {
+                 the_author_posts_link();
+             }?>
+            </span>
         </span>
         
     </header><!-- .entry-header -->
