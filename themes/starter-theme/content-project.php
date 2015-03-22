@@ -32,13 +32,6 @@
 
                <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
 
-               <div class="comments-link">
-                   <?php comments_popup_link( 
-                        __( 'Leave a comment', 'starter-theme' ), 
-                        __( '1 comment', 'starter-theme' ), 
-                        __( '% comments', 'starter-theme' ) ); 
-                   ?>
-               </div>
            </footer><!-- #entry-meta -->
        </article><!-- #post-<?php the_ID(); ?> -->
 
