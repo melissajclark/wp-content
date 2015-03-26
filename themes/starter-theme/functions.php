@@ -151,7 +151,8 @@ add_filter( 'wp_title', 'mayer_wp_title', 10, 2 );
 /**
 *
 * Adds the post thumbnail to content in an RSS feed
-*
+* 
+* Read more: http://code.tutsplus.com/tutorials/50-filters-of-wordpress-filters-21-30--cms-21298
 **/
 
 add_filter( 'the_content_feed', 'the_content_feed_rss' );
