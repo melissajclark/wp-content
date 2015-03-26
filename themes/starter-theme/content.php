@@ -10,13 +10,7 @@
 
             <?php 
 
-            if (is_single() ) : 
-                the_author_posts_link();
-
-            elseif ( is_home() ) : // is_home = blog archive page
-                the_author_posts_link();
-
-            elseif ( is_archive() ) :
+            if (is_single() || is_home() || is_archive() ) : 
                 the_author_posts_link();
 
             else : 
