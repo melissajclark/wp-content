@@ -104,11 +104,7 @@ update_option('image_default_link_type','none');
 // enables ACF Options Page
 if(function_exists('acf_add_options_page')) { 
  
-	acf_add_options_page();
-	// acf_add_options_sub_page('Header');
-	// acf_add_options_sub_page('Footer');
-	acf_add_options_sub_page('Theme Options');
- 
+	acf_add_options_page('Theme Options');
 }
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
