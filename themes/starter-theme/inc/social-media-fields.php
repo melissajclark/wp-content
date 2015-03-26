@@ -2,12 +2,16 @@
 
 		 <!-- [TO DO] Important: Update links to assets before using! -->
 
+<?php // method for accessible icon fonts: http://www.filamentgroup.com/lab/bulletproof_icon_fonts.html ?>
+
 <?php if ( get_field( 'behance', 'options' ) ) : // <!-- behance --> ?>
 <a href="<?php the_field( 'behance', 'options' ); ?>" target="_blank" class="social-link" alt="behance-profile">
-    <span class="fa fa-behance fa-1x" alt="behance" class="social"></span>
-    </a>
+    <span class="icon-fallback-text">
+        <span class="fa fa-behance fa-1x" alt="behance" class="social" aria-hidden="true"></span>
+        <span class="text">Behance</span>
+    </span>
+</a>
 <?php endif; ?>
-
 
 <?php if ( get_field( 'bitbucket', 'options' ) ) : // <!-- bitbucket --> ?>
 <a href="<?php the_field( 'bitbucket', 'options' ); ?>" target="_blank" class="social-link" alt="bitbucket-profile">
