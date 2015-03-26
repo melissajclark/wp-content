@@ -167,6 +167,26 @@ function the_content_feed_rss( $content ) {
 }
 
 
+/**
+*
+* Allows user to select custom image sizes in the editor
+* 
+* [To Do]: Update with Specific Image Size
+*
+**/
+
+// add_filter( 'image_size_names_choose', 'image_size_names_choose_example' );
+ 
+// function image_size_names_choose_example( $sizes ) {
+//     return array_merge( $sizes, array(
+//         'golden-ratio-thumb' => __( 'Golden Ratio Thumbnail' )
+//     ) );
+// }
+ 
+// Example source: http://codex.wordpress.org/Plugin_API/Filter_Reference/image_size_names_choose
+
+
+
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
 
