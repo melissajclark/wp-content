@@ -37,3 +37,21 @@
 .invisible {
 	visibility: hidden;
 }
+
+/**
+*
+* Accessible Icon Fonts
+* See: http://www.filamentgroup.com/lab/bulletproof_icon_fonts.html
+**/
+
+// hides description for sighted users and leaves it available for screenreaders
+
+.icon-fallback-text .icon-text {
+	clip: rect(0 0 0 0);
+	    overflow: hidden;
+	    position: absolute;
+	    height: 1px;
+	    width: 1px;
+
+}
+
