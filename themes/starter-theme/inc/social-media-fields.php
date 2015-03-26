@@ -59,21 +59,21 @@
 <?php endif; ?>
 
 <?php if ( get_field( 'github', 'options' ) ) : // <!-- github --> ?>
-<a href="<?php the_field( 'github', 'options' ); ?>" target="_blank" class="social-link" alt="github-profile">
-<span class="icon-fallback-text"> 
-    <span class="fa fa-github fa-1x" alt="github" class="social" aria-hidden="true"></span>
-<span class="icon-text"><?php _e('Github'); ?></span>
-</span>
-</a>
+    <a href="<?php the_field( 'github', 'options' ); ?>" target="_blank" class="social-link" alt="github-profile">
+        <span class="icon-fallback-text"> 
+            <span class="fa fa-github fa-1x" alt="github" class="social" aria-hidden="true"></span>
+            <span class="icon-text"><?php _e('Github'); ?></span>
+        </span>
+    </a>
 <?php endif; ?>
 
 <?php if ( get_field( 'goodreads', 'options' ) ) : // <!-- Good Reads --> ?>
-<a href="<?php the_field( 'goodreads', 'options' ); ?>" target="_blank" class="social-link" alt="good-reads-profile">
-<span class="icon-fallback-text"> 
-    <span class="fa fa-book fa-1x" alt="goodreads" class="social" aria-hidden="true"></span>
-<span class="icon-text"><?php _e('Goodreads'); ?></span>
-</span>
-</a>
+    <a href="<?php the_field( 'goodreads', 'options' ); ?>" target="_blank" class="social-link" alt="good-reads-profile">
+        <span class="icon-fallback-text"> 
+            <span class="fa fa-book fa-1x" alt="goodreads" class="social" aria-hidden="true"></span>
+            <span class="icon-text"><?php _e('Goodreads'); ?></span>
+        </span>
+    </a>
 <?php endif; ?>
 
 <?php if ( get_field( 'google_plus', 'options' ) ) : // <!-- Google Plus --> ?>
@@ -118,7 +118,7 @@
             <span class="fa fa-slideshare fa-1x" alt="slideshare" class="social" aria-hidden="true"></span>
             <span class="icon-text"><?php _e('Slideshare'); ?></span>
         </span>
-</a>
+    </a>
 <?php endif; ?>
 
 <?php if ( get_field( 'tumblr', 'options' ) ) : // <!-- Tumblr --> ?>
@@ -141,19 +141,19 @@
 
 
 <?php if ( get_field( 'vine', 'options' ) ) : // <!-- vine --> ?>
-<a href="<?php the_field( 'vine', 'options' ); ?>" target="_blank" class="social-link" alt="vine-profile">
-    <span class="icon-fallback-text"> 
-        <span class="fa fa-vine fa-1x" alt="vine" class="social" aria-hidden="true"></span>
-        <span class="icon-text"><?php _e('Vine'); ?></span>
-    </span>
-</a>
+    <a href="<?php the_field( 'vine', 'options' ); ?>" target="_blank" class="social-link" alt="vine-profile">
+        <span class="icon-fallback-text"> 
+            <span class="fa fa-vine fa-1x" alt="vine" class="social" aria-hidden="true"></span>
+            <span class="icon-text"><?php _e('Vine'); ?></span>
+        </span>
+    </a>
 <?php endif; ?>
 
 <?php if ( get_field( 'youtube', 'options' ) ) : // <!-- Youtube --> ?>
     <a href="<?php the_field( 'youtube', 'options' ); ?>" target="_blank" class="social-link" alt="youtube-profile">
-    <span class="icon-fallback-text"> 
-        <span class="fa fa-youtube fa-1x" alt="youtube" class="social" aria-hidden="true"></span>
-        <span class="icon-text"><?php _e('Youtube'); ?></span>
-    </span>
+        <span class="icon-fallback-text"> 
+            <span class="fa fa-youtube fa-1x" alt="youtube" class="social" aria-hidden="true"></span>
+            <span class="icon-text"><?php _e('Youtube'); ?></span>
+        </span>
     </a>
 <?php endif; ?>
