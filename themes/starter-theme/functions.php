@@ -185,7 +185,16 @@ function the_content_feed_rss( $content ) {
  
 // Example source: http://codex.wordpress.org/Plugin_API/Filter_Reference/image_size_names_choose
 
+/**
+*
+* Enable Custom Editor Styles
+*
+**/
 
+function starter_theme_add_editor_styles() {
+	add_editor_style('custom-editor-style.css')
+}
+add_action('admin_init', 'starter_theme_add_editor_styles');
 
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
@@ -308,4 +317,3 @@ function taxonomy_list( $taxonomy ) {
                         
     //$on_status = join(",", $status_links);
    // <?php echo $on_status;
-
