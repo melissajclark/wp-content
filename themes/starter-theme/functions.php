@@ -147,6 +147,25 @@ function mayer_wp_title( $title, $sep ) {
 } // end mayer_wp_title
 add_filter( 'wp_title', 'mayer_wp_title', 10, 2 );
 
+
+/**
+*
+* Adds the post thumbnail to content in an RSS feed
+*
+**/
+
+add_filter( 'the_content_feed', 'the_content_feed_rss' );
+ 
+function the_content_feed_rss( $content ) {
+    $featured_image = '';
+    $featured_image = get_the_post_thumbnail( get_the_ID(), 'thumbnail', array( 'style' => 'float:left;margin-right:.75em;' ) );
+    $content = get_the_excerpt() . ' <a href="'. get_permalink() .'">' . __( 'Read More' ) . '</a>';
+    if( '' != $featured_image )
+        $content = '<div>' . $featured_image . $content . '<br style="clear:both;" /></div>';
+    return $content;
+}
+
+
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
 
