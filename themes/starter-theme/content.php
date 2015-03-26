@@ -17,7 +17,10 @@
                 the_author_posts_link();
 
             elseif ( is_archive() ) :
-                the_author_posts_link(); 
+                the_author_posts_link();
+
+            else : 
+                // do not display date
             
             endif; ?>
             </span>
