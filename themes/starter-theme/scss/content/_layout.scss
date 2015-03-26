@@ -39,25 +39,28 @@ body {
 
     	    #primary {
     			width:$primary-width;
+    			float:left;
+
     			@include breakpoint(medium){
     				width:$primary-width - 10%;
     			}
     			@include breakpoint(little){
     				width:$width;
-    			}
-    			float:left;
-    	    }
+    			}    			
+    	    } // #primary
+
     	    #secondary {
     			width:$secondary-width;
+    			float:left;
+    			padding:0 0 0 5%;
+
     			@include breakpoint(medium){
     				width:$secondary-width + 10%;
     			}
     			@include breakpoint(little){
     				width:$width;
     			}
-    			float:left;
-    			padding:0 0 0 5%;
-    	    }
+    	    } // #secondary
 
 	    } // containerWithAside
 }
