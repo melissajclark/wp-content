@@ -204,6 +204,22 @@ function starter_theme_add_editor_fonts(){
 }
 add_action('after_theme_setup', 'starter_theme_add_editor_fonts');
 
+/**
+*
+* Customize the Excerpt
+*
+**/
+
+function custom_excerpt_length($length) {
+	return 75;
+}
+add_filter('excerpt_length', 'custom_excerpt_length', 999);
+
+function new_excerpt_more($more){
+	return ' <a class="read-more" href="' . get_permalink( get_the_ID() ) .'">' . __('Read More', 'starter-theme') . '</a>';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
 
