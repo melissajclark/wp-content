@@ -190,11 +190,19 @@ function the_content_feed_rss( $content ) {
 * Enable Custom Editor Styles
 *
 **/
-
+// adds CSS
 function starter_theme_add_editor_styles() {
-	add_editor_style( 'custom-editor-style.css' );
+	add_editor_style( 'editor-style.css' );
 }
 add_action( 'admin_init', 'starter_theme_add_editor_styles' );
+
+// adds custom fonts
+// [TO DO] - update with correct typography for new projects
+function starter_theme_add_editor_fonts(){
+	$font_url = str_replace(',', '%2C', 'fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600italic,600,300,300italic|Lato:400,400italic,300italic,300,700,700italic');
+	add_editor_style($font_url);
+}
+add_action('after_theme_setup', 'starter_theme_add_editor_fonts');
 
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
