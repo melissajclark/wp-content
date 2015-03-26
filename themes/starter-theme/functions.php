@@ -192,9 +192,9 @@ function the_content_feed_rss( $content ) {
 **/
 
 function starter_theme_add_editor_styles() {
-	add_editor_style('custom-editor-style.css')
+	add_editor_style( 'custom-editor-style.css' );
 }
-add_action('admin_init', 'starter_theme_add_editor_styles');
+add_action( 'admin_init', 'starter_theme_add_editor_styles' );
 
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
