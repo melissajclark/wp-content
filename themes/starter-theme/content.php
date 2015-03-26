@@ -1,8 +1,14 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <header class="entry-header">
-        <h1 class="entry-title">
-            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </h1>
+
+        <?php 
+        if ( is_single() ) : // no link around title if it is a single post?>
+            <h1 class="entry-title"><?php the_title(); ?></h1>
+        <?php else : ?>     
+            <h2 class="entry-title">
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            </h2>
+        <?php endif; ?>
         <span class="entry-date"><?php echo get_the_date(); ?></span>
 
        <span class="entry-meta">
