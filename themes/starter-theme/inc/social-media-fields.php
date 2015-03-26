@@ -8,7 +8,7 @@
     <a href="<?php the_field( 'behance', 'options' ); ?>" target="_blank" class="social-link" alt="behance-profile">
         <span class="icon-fallback-text">
             <span class="fa fa-behance fa-1x" alt="behance" class="social" aria-hidden="true"></span>
-            <span class="icon-text"><?php e_('Behance'); ?></span>
+            <span class="icon-text"><?php _e('Behance'); ?></span>
         </span>
     </a>
 <?php endif; ?>
@@ -134,7 +134,7 @@
     <a href="<?php the_field( 'twitter', 'options' ); ?>" target="_blank" class="social-link" alt="twitter-link" >
         <span class="icon-fallback-text"> 
             <span class="fa fa-twitter fa-1x" alt="twitter" class="social" aria-hidden="true"></span>
-            <span class="icon-text"><?php _e(''); ?></span>
+            <span class="icon-text"><?php _e('Twitter'); ?></span>
         </span>
     </a>
 <?php endif; ?>
