@@ -52,3 +52,6 @@ plugins/backupwordpress-pro-dropbox/
 ### Premium Plugins ###
 
 plugins/advanced-custom-fields-pro
+plugins/backupwordpress-pro-dropbox
+plugins/wp-migrate-db-pro
+plugins/wp-migrate-db-pro-media-files
