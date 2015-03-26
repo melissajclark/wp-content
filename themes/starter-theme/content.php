@@ -19,8 +19,7 @@
             elseif ( is_archive() ) :
                 the_author_posts_link(); 
             
-            endif;
-            ?>
+            endif; ?>
             </span>
         </span>
         
@@ -28,7 +27,16 @@
 
     <div class="entry-content">
     <?php echo get_the_post_thumbnail($post_id, 'large') ?>
-        <?php the_content(); ?>
+    
+        <?php // displays the excerpt if it is an archive, otherwise shows the full content
+
+        if (is_archive() ) : 
+            the_excerpt();
+
+        else :
+            the_content();
+        endif; ?>
+
         <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
     </div><!-- .entry-content -->
 
