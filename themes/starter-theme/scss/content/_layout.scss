@@ -60,6 +60,16 @@ body {
     			@include breakpoint(little){
     				width:$width;
     				padding: 0;
+    				// display sidebar content in columns at little breakpoint
+    				column-count:2;
+
+    				.widget {
+    					width:100%;
+    					display:inline-block;
+    				}
+    			}
+    			@include breakpoint(tiny){
+    				column-count:1;
     			}
     	    } // #secondary
 
