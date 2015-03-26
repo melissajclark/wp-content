@@ -270,8 +270,6 @@ add_filter( 'pre_get_posts', 'starter_theme_custom_query' );
 
 
 
-/*-----  End of Custom Taxonomy: Statuses  ------*/
-
 /**
 *
 * Function to display terms in a taxonomy from: http://wordpress.stackexchange.com/questions/23606/how-do-i-list-custom-taxonomy-terms-without-the-links
