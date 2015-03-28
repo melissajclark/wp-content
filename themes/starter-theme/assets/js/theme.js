@@ -17,12 +17,12 @@ $(document).ready(function(){
     	// alignment of cells, 'center', 'left', or 'right'
     	// or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right)
 
-    	imagesLoaded:true,
+    	imagesLoaded:false,
 
     	cellSelector: '.gallerySlide',
     	// specify selector for cell elements
 
-    	contain: true,
+    	contain: false,
     	// will contain cells to container
     	// so no excess scroll at beginning or end
     	// has no effect if wrapAround is enabled
@@ -30,7 +30,7 @@ $(document).ready(function(){
     	draggable: false,
     	// enables dragging & flicking
 
-    	freeScroll: false,
+    	freeScroll: true,
     	// enables content to be freely scrolled and flicked
     	// without aligning cells
 
@@ -51,7 +51,7 @@ $(document).ready(function(){
     	pageDots: false,
     	// create and enable page dots
 
-    	resize: true,
+    	resize: false,
     	// listens to window resize events to adjust size & positions
 
     	rightToLeft: false,
