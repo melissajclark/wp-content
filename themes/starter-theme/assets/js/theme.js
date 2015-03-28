@@ -34,14 +34,14 @@ $(document).ready(function(){
     	draggable: false,
     	// enables dragging & flicking
 
-    	freeScroll: true,
+    	freeScroll: false,
     	// enables content to be freely scrolled and flicked
     	// without aligning cells
 
     	friction: 0.3,
     	// smaller number = easier to flick farther
 
-    	initialIndex: 2,
+    	// initialIndex: 2,
     	// zero-based index of the initial selected cell
 
     	percentPosition: true,
@@ -58,7 +58,7 @@ $(document).ready(function(){
     	resize: true,
     	// listens to window resize events to adjust size & positions
 
-    	rightToLeft: true,
+    	rightToLeft: false,
     	// enables right-to-left layout
 
     	setGallerySize: false,
