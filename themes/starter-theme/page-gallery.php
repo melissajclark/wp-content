@@ -21,23 +21,23 @@ get_header(); ?>
                 </header><!-- .entry-header -->
 
                 <div class="entry-content">
-
-                <?php the_content(); ?>
-
+                
                 <?php // gallery content begins here
 
                 $images = get_field('gallery');
 
                 if( $images ): ?>
-                <div class="gallery" style="background-color:grey; padding:1em;"> 
+                <div class="gallery"> 
                     <?php foreach( $images as $image ): ?>
                         <div class="cell"> 
-                            <img style="padding:0 2% 0 2%;" src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
+                            <img src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
                             <p><?php echo $image['caption']; ?></p>
                         </div>
                     <?php endforeach; ?>
                 </div>
                 <?php endif; ?>
+
+                <?php the_content(); ?>
 
                     <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
                 </div><!-- .entry-content -->
