@@ -5,7 +5,7 @@ $(document).ready(function(){
     //   smoothHeight: true
     // });
 
-    var flky = new Flickity('.gallery', {
+    var flky = new Flickity('.mainGallery', {
     	// options, defaults listed
 
     	accessibility: true,
