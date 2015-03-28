@@ -17,11 +17,13 @@ $(document).ready(function(){
     	// or set time between advances in milliseconds
     	// i.e. `autoPlay: 1000` will advance every 1 second
 
-    	cellAlign: 'left',
+    	cellAlign: 'center',
     	// alignment of cells, 'center', 'left', or 'right'
     	// or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right)
 
-    	cellSelector: undefined,
+    	imagesLoaded:true,
+
+    	// cellSelector: undefined,
     	// specify selector for cell elements
 
     	contain: true,
@@ -29,7 +31,7 @@ $(document).ready(function(){
     	// so no excess scroll at beginning or end
     	// has no effect if wrapAround is enabled
 
-    	draggable: true,
+    	draggable: false,
     	// enables dragging & flicking
 
     	freeScroll: true,
@@ -39,7 +41,7 @@ $(document).ready(function(){
     	friction: 0.3,
     	// smaller number = easier to flick farther
 
-    	initialIndex: 0,
+    	initialIndex: 2,
     	// zero-based index of the initial selected cell
 
     	percentPosition: true,
@@ -50,13 +52,13 @@ $(document).ready(function(){
     	prevNextButtons: true,
     	// creates and enables buttons to click to previous & next cells
 
-    	pageDots: false,
+    	pageDots: true,
     	// create and enable page dots
 
     	resize: true,
     	// listens to window resize events to adjust size & positions
 
-    	rightToLeft: false,
+    	rightToLeft: true,
     	// enables right-to-left layout
 
     	setGallerySize: false,
