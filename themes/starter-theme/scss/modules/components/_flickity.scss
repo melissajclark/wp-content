@@ -8,6 +8,15 @@ http://flickity.metafizzy.co
   padding:0 0.4em 0 0.4em;
 }
 
+span.overlay {
+  position:absolute;
+  z-index:10;
+  width:100%;
+  translateY:50%;
+  top:50%;
+  text-align:center;
+}
+
 /*==========  Customizations  ==========*/
 
 
