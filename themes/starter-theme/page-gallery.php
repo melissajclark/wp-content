@@ -29,10 +29,10 @@ get_header(); ?>
                 $images = get_field('gallery');
 
                 if( $images ): ?>
-                <div class="gallery"> 
+                <div class="gallery" style="background-color:grey; padding:1em;"> 
                     <?php foreach( $images as $image ): ?>
                         <div class="cell"> 
-                            <img src="<?php echo $image['sizes']['gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
+                            <img style="padding:0 2% 0 2%;" src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
                             <p><?php echo $image['caption']; ?></p>
                         </div>
                     <?php endforeach; ?>
