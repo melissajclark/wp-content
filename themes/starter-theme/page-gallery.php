@@ -31,7 +31,7 @@ get_header(); ?>
                     <?php foreach( $images as $image ): ?>
                         <div class="cell"> 
                             <img src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
-                            <p><?php echo $image['caption']; ?></p>
+                            <p class="imageCaption"><?php echo $image['caption']; ?></p>
                         </div>
                     <?php endforeach; ?>
                 </div>
