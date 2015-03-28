@@ -32,7 +32,7 @@ get_header(); ?>
                 <div class="gallery"> 
                     <?php foreach( $images as $image ): ?>
                         <div class="cell"> 
-                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                            <img src="<?php echo $image['sizes']['gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
                             <p><?php echo $image['caption']; ?></p>
                         </div>
                     <?php endforeach; ?>
