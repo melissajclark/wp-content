@@ -2,7 +2,7 @@
     <header class="entry-header">
 
         <?php 
-        if ( is_single() ) : // no link around title if it is a single post?>
+        if ( is_single() || is_page() ) : // no link around title if it is a single post?>
             <h1 class="entry-title"><?php the_title(); ?></h1>
         <?php else : ?>     
             <h2 class="entry-title">
