@@ -75,7 +75,7 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
         	// add_image_size( &#039;name&#039;, 500, 300, true );
 		// custom image size for slider
 		add_image_size( 'flickity_gallery', 900, 600, true );
-		add_image_size( 'flickity_preview', 150, 100, true );
+		add_image_size( 'flickity_preview', 200, 150, true );
 	}
 endif; // starter_theme_setup
 add_action( 'after_setup_theme', 'starter_theme_setup' );
