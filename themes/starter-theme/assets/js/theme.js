@@ -1,10 +1,6 @@
-// flexslider setup
+// flickity setup
 $(document).ready(function(){
-    // $('.flexslider').flexslider({
-    //   animation: "fade",
-    //   smoothHeight: true
-    // });
-
+ 
     var flky = new Flickity('.mainGallery', {
     	// options, defaults listed
 
