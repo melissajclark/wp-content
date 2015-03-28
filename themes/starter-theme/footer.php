@@ -25,16 +25,6 @@
 
 </footer><!-- #colophon -->
 
-
-<?php if ( is_page_template( 'page-gallery.php' ) ) : ?>   
-
-<script>     
-    simpleWooSlider(); // calls slider function in theme.js for wooSlider
-</script>
-
-<?php endif; ?>
-
- 
 <?php wp_footer(); ?> 
 </body>
 </html>
