@@ -8,7 +8,7 @@
 $images = get_field('gallery');
 
 if( $images ): ?>
-    <div class="gallery"> 
+    <div class="mainGallery"> 
         <?php foreach( $images as $image ): ?>
             <div class="gallerySlide"> 
                 <img src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
