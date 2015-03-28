@@ -9,22 +9,18 @@
                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
             </h2>
         <?php endif; ?>
-        <span class="entry-date"><?php echo get_the_date(); ?></span>
-
-       <span class="entry-meta">
-           <span itemprop="author">
-
-            <?php 
-
-            if (is_single() || is_home() || is_archive() ) : 
-                the_author_posts_link();
-            else : 
-                // do not display date
-            
-            endif; ?>
-            </span>
-        </span>
         
+        <?php // conditional statement displays entry-meta on apropriate templates (not pages) 
+            if (is_single() || is_home() || is_archive() ) : ?>
+
+            <span class="entry-meta">
+                <span class="entry-date"><?php echo get_the_date(); ?></span>
+                <span itemprop="author"><?php the_author_posts_link(); ?></span>  
+            </span><!-- / entry-meta -->
+
+            <?php else :  // do not display date ?>
+               
+        <?php endif; ?>
     </header><!-- .entry-header -->
 
     <div class="entry-content">
