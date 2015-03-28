@@ -2,9 +2,18 @@
 http://flickity.metafizzy.co
 ---------------------------------------------- */
 
+/*==========  Customizations  ==========*/
+
+.gallery .cell {
+  padding:0 0.4em 0 0.4em;
+}
+
+/*==========  Customizations  ==========*/
+
+
 .flickity-enabled {
   position: relative;
-  max-width:1600px;
+  width:100%;
   margin:0 auto;
 }
 
