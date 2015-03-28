@@ -1288,7 +1288,7 @@ html[xmlns] .slides {
 http://flickity.metafizzy.co
 ---------------------------------------------- */
 /*==========  Customizations  ==========*/
-.gallery .gallerySlide {
+.mainGallery .gallerySlide {
   padding: 0 0.4em 0 0.4em; }
 
 span.overlay {
