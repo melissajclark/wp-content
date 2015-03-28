@@ -29,18 +29,14 @@ get_header(); ?>
                 $images = get_field('gallery');
 
                 if( $images ): ?>
-                <section class="wooSliderContainer">
-                    <section class="flexslider">
-                        <ul class="slides">
-                            <?php foreach( $images as $image ): ?>
-                                <li>
-                                    <img class="flexSliderImage" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
-                                    <p><?php echo $image['caption']; ?></p>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </section>
-                </section>
+                <div class="gallery"> 
+                    <?php foreach( $images as $image ): ?>
+                        <div class="cell"> 
+                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                            <p><?php echo $image['caption']; ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
                 <?php endif; ?>
 
                     <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
