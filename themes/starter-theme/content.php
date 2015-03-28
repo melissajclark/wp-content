@@ -37,6 +37,7 @@
             the_excerpt();
 
         else :
+            get_template_part('inc/gallery');
             the_content();
         endif; ?>
 
