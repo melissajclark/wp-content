@@ -112,6 +112,8 @@ input[type=checkbox], input[type=radio] {
 
 input[type=search] {
   -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
   box-sizing: content-box; }
 
 input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
@@ -141,6 +143,8 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   height: 0; }
 
 * {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 /* / Normalize */
@@ -365,17 +369,13 @@ body {
       .container.containerWithAside #secondary {
         width: 95%;
         padding: 0;
-        -webkit-column-count: 2;
-           -moz-column-count: 2;
-                column-count: 2; }
+        column-count: 2; }
         .container.containerWithAside #secondary .widget {
           width: 100%;
           display: inline-block; } }
     @media (max-width: 500px) {
       .container.containerWithAside #secondary {
-        -webkit-column-count: 1;
-           -moz-column-count: 1;
-                column-count: 1; } }
+        column-count: 1; } }
 
 #content {
   margin: 0;
@@ -574,13 +574,19 @@ input[type="search"]::-webkit-search-decoration {
   display: none; }
 
 input:invalid, button:invalid, a.button:invalid, select:invalid, textarea:invalid {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none; }
 
 input:focus, button:focus, a.button:focus, select:focus, textarea:focus {
+  -webkit-box-shadow: #0066ff 0 0 5px 0;
+  -moz-box-shadow: #0066ff 0 0 5px 0;
   box-shadow: #0066ff 0 0 5px 0;
   z-index: 1; }
 
 input[type="file"]:focus, input[type="file"]:active, input[type="radio"]:focus, input[type="radio"]:active, input[type="checkbox"]:focus, input[type="checkbox"]:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none; }
 
 button, a.button, input[type="reset"], input[type="submit"], input[type="button"] {
@@ -607,7 +613,11 @@ button:hover, a.button:hover, input[type="reset"]:hover, input[type="submit"]:ho
 button:active, a.button:active, input[type="reset"]:active, input[type="submit"]:active, input[type="button"]:active {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(100%, #eeeeee));
   background-image: -webkit-linear-gradient(#dddddd, #eeeeee);
+  background-image: -moz-linear-gradient(#dddddd, #eeeeee);
+  background-image: -o-linear-gradient(#dddddd, #eeeeee);
   background-image: linear-gradient(#dddddd, #eeeeee);
+  -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+  -moz-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
   box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
   border-color: #999999 #bbbbbb #dddddd; }
 
@@ -623,8 +633,16 @@ button {
   *padding-bottom: 1px; }
 
 textarea, select, input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
   background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
   border-radius: 0;
   -webkit-appearance: none;
   background-color: white;
@@ -645,12 +663,13 @@ textarea[disabled], select[disabled], input[type="date"][disabled], input[type="
   background-color: #eeeeee; }
 
 button[disabled], input[disabled], select[disabled], select[disabled] option, select[disabled] optgroup, textarea[disabled], a.button_disabled {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none;
   -moz-user-select: -moz-none;
   -webkit-user-select: none;
   -khtml-user-select: none;
-  -ms-user-select: none;
-      user-select: none;
+  user-select: none;
   color: #888888;
   cursor: default; }
 
@@ -680,6 +699,7 @@ select[size="0"], select[size="1"] {
     background-position: right center;
     padding-right: 20px; }
   ::-webkit-validation-bubble-message {
+    -webkit-box-shadow: none;
     box-shadow: none;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #666666), color-stop(1, black));
     border: 0;
@@ -690,6 +710,7 @@ select[size="0"], select[size="1"] {
     text-shadow: black 0 0 1px;
     min-height: 16px; }
   ::-webkit-validation-bubble-arrow, ::-webkit-validation-bubble-top-outer-arrow, ::-webkit-validation-bubble-top-inner-arrow {
+    -webkit-box-shadow: none;
     box-shadow: none;
     background: #666666;
     border-color: #666666; } }
@@ -1122,12 +1143,17 @@ html[xmlns] .slides {
 .flexslider {
   margin: 1em;
   position: relative;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
   border-radius: 4px;
   zoom: 1; }
 
 .flex-viewport {
   max-height: 2000px;
   -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
   transition: all 1s ease; }
 
 .loading .flex-viewport {
@@ -1158,6 +1184,7 @@ html[xmlns] .slides {
   color: rgba(0, 0, 0, 0.8);
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
   -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
   transition: all .3s ease; }
 
 .flex-direction-nav .flex-prev {
@@ -1240,7 +1267,12 @@ html[xmlns] .slides {
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   text-indent: -9999px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -o-border-radius: 20px;
   border-radius: 20px;
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
   -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3); }
 
