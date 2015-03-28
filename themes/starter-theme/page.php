@@ -20,6 +20,7 @@ get_header(); ?>
                 </header><!-- .entry-header -->
 
                 <div class="entry-content">
+                    <?php get_template_part('inc/gallery'); ?>
                     <?php the_content(); ?>
                     <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
                 </div><!-- .entry-content -->
