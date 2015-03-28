@@ -23,7 +23,7 @@ $(document).ready(function(){
 
     	imagesLoaded:true,
 
-    	// cellSelector: undefined,
+    	cellSelector: '.gallerySlide',
     	// specify selector for cell elements
 
     	contain: true,
@@ -41,10 +41,10 @@ $(document).ready(function(){
     	friction: 0.3,
     	// smaller number = easier to flick farther
 
-    	// initialIndex: 2,
+    	initialIndex: 1,
     	// zero-based index of the initial selected cell
 
-    	percentPosition: true,
+    	percentPosition: false,
     	// sets positioning in percent values, rather than pixels
     	// Enable if items have percent widths
     	// Disable if items have pixel widths, like images
@@ -52,7 +52,7 @@ $(document).ready(function(){
     	prevNextButtons: true,
     	// creates and enables buttons to click to previous & next cells
 
-    	pageDots: true,
+    	pageDots: false,
     	// create and enable page dots
 
     	resize: true,
