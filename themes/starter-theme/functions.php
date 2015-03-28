@@ -74,7 +74,7 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 		// Add custom image sizes
         	// add_image_size( &#039;name&#039;, 500, 300, true );
 		// custom image size for slider
-		// add_image_size( 'slider', 550, 550 ); // 550 pixels wide by 550 pixels tall, soft proportional crop mode
+		add_image_size( 'gallery', 900, true ); // 550 pixels wide by 550 pixels tall, soft proportional crop mode
 	}
 endif; // starter_theme_setup
 add_action( 'after_setup_theme', 'starter_theme_setup' );
@@ -84,7 +84,7 @@ add_filter( 'image_size_names_choose', 'my_custom_sizes' );
 
 function my_custom_sizes( $sizes ) {
     return array_merge( $sizes, array(
-        'slider' => __( 'Slider' ),
+        'gallery' => __( 'gallery' ),
     ) );
 }
 
