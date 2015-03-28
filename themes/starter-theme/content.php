@@ -24,39 +24,49 @@
     </header><!-- .entry-header -->
 
     <div class="entry-content">
-    <?php echo get_the_post_thumbnail($post_id, 'large') ?>
     
         <?php // displays the excerpt if it is an archive, otherwise shows the full content
 
-        if (is_archive() ) : 
-            the_excerpt();
+            if (is_archive() ) : // checks if its an archive and shows content accordingly ?>
+                <?php echo get_the_post_thumbnail($post_id, 'large') ?>
+                <?php the_excerpt(); ?>
 
-        else :
-            get_template_part('inc/gallery');
-            the_content();
-        endif; ?>
+            <?php else : // for all other templates, show this content ?>
 
-        <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
+                <?php get_template_part('inc/gallery'); ?>   
+                <?php the_content(); ?>
+
+        <?php endif; ?>
+
+        <?php if ( is_page() ) : // include the page-links if it is a page ?>
+
+            <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
+
+        <?php endif; ?>
+
     </div><!-- .entry-content -->
 
-    <?php 
+    <?php // display the footer entry-meta on apropriate templates (blog feed, single posts)
       if ( is_single() || is_home() ) : ?>
-            <footer class="entry-meta">
+
+        <footer class="entry-meta">
 
             <p><?php _e('Category: '); ?><?php the_category(', '); ?></p>
 
-                <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
+            <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
 
-                <div class="comments-link">
-                    <?php comments_popup_link( 
-                         __( 'Leave a comment', 'starter-theme' ), 
-                         __( '1 comment', 'starter-theme' ), 
-                         __( '% comments', 'starter-theme' ) ); 
-                    ?>
-                </div>
-            </footer><!-- #entry-meta -->
-        <?php else : ?>
-            <?php // nothing ?>
-    <?php endif; ?>
+            <div class="comments-link">
+                <?php comments_popup_link( 
+                     __( 'Leave a comment', 'starter-theme' ), 
+                     __( '1 comment', 'starter-theme' ), 
+                     __( '% comments', 'starter-theme' ) ); 
+                ?>
+            </div>
+            
+        </footer><!-- #entry-meta -->
+
+        <?php else : // doesn't match? don't show anything! ?>
+
+    <?php endif; // end footer entry-meta conditional ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
