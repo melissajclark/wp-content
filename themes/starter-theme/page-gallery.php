@@ -1,51 +1,19 @@
-<?php
+<?php 
 /**
- * Template Name: Gallery
- *
- * This is the template that displays all gallery pages by default.
- *
- * @package Starter_Theme
- */
+*
+* Gallery Module
+*
+**/
 
-get_header(); ?>
+$images = get_field('gallery');
 
-
-<div class="wrapper"> 
-    <div class="container">
-    	<div id="primary" role="main"> 
-        <?php while ( have_posts() ) : the_post(); ?>
-
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
-                </header><!-- .entry-header -->
-
-                <div class="entry-content">
-                
-                <?php // gallery content begins here
-
-                $images = get_field('gallery');
-
-                if( $images ): ?>
-                <div class="gallery"> 
-                    <?php foreach( $images as $image ): ?>
-                        <div class="cell"> 
-                            <img src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
-                            <p class="imageCaption"><?php echo $image['caption']; ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
-
-                <?php the_content(); ?>
-
-                    <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'themeTextDomain' ) . '</span>', 'after' => '</div>' ) ); ?>
-                </div><!-- .entry-content -->
-            </article><!-- #post-<?php the_ID(); ?> -->
-
-        <?php endwhile; // end of the loop. ?>
-        </div><!-- / container -->
-    </div><!-- / wrapper -->  
-</div><!-- / #primary -->
-
-<?php get_footer(); ?>
+if( $images ): ?>
+    <div class="gallery"> 
+        <?php foreach( $images as $image ): ?>
+            <div class="gallerySlide"> 
+                <img src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
+                <span class="overlay"><?php echo $image['caption']; ?></span>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
