@@ -16,8 +16,8 @@
 <?php elseif (is_home() || is_archive() ) : ?>
 
 	<nav id="nav-below">
-	    <div class="nav-previous"><?php previous_posts_link( __( 'Older', 'starter-theme' ) ); ?></div>
 	    <div class="nav-next"><?php next_posts_link( __( 'Newer', 'starter-theme' ) ); ?></div>
+	    <div class="nav-previous"><?php previous_posts_link( __( 'Older', 'starter-theme' ) ); ?></div>
 	</nav>
 
 <?php endif; ?>
