@@ -1,7 +1,8 @@
 // flickity setup
 $(document).ready(function(){
  
-    var flky = new Flickity('.mainGallery', {
+ $(".mainGallery").flickity({
+
     	// options, defaults listed
 
     	accessibility: true,
@@ -69,7 +70,7 @@ $(document).ready(function(){
 
     	wrapAround: true
     	// at end of cells, wraps-around to first for infinite scrolling
-    });
 
-});
+     }); // end flickity
+}); // end doc ready
 
