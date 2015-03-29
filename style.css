@@ -1078,23 +1078,21 @@ a.filterControl {
 http://flickity.metafizzy.co
 ---------------------------------------------- */
 /*==========  Customizations  ==========*/
-.mainGallery .gallerySlide {
-  padding: 0 0.4em 0 0.4em;
-  position: relative; }
+.galleryContainer {
+  height: 600px;
+  padding: 0 0 1% 0;
+  margin: 0 0 3% 0; }
+  @media (max-width: 800px) {
+    .galleryContainer {
+      height: 400px; } }
 
-span.overlay {
-  position: absolute;
-  z-index: 10;
-  width: 100%;
-  transform: translateY(-50%);
-  top: 50%;
-  text-align: center; }
+.galleryContainer .gallerySlide {
+  padding: 0 0.4em 0 0.4em;
+  height: 100%; }
 
 /*==========  Customizations  ==========*/
 .flickity-enabled {
-  position: relative;
-  width: 100%;
-  margin: 0 auto; }
+  position: relative; }
 
 .flickity-enabled:focus {
   outline: none; }
@@ -1102,7 +1100,8 @@ span.overlay {
 .flickity-viewport {
   overflow: hidden;
   position: relative;
-  height: 600px; }
+  height: 100%;
+  width: 100%; }
 
 .flickity-slider {
   position: absolute;
