@@ -6,7 +6,7 @@ $(document).ready(function(){
     	accessibility: true,
     	autoPlay: false,
         setGallerySize:false,
-        // cellSelector: '.gallerySlide',
+        cellSelector: '.gallerySlide',
         initalIndex:1,
         cellAlign: 'center',
         wrapAround:true,
