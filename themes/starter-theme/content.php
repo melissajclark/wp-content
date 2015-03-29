@@ -1,29 +1,24 @@
-<?php // appends data-attributes of custom taxonomy to article element if it is the 'projects' post type
-    if ( is_singular('projects') ) : ?>
+<?php if ( is_singular('projects') ) :  // Article element around content: if it's the 'projects' post_type: append taxonomy data-attributes to element  ?>
 
     <article id="post-<?php the_ID(); ?>" 
 
-     data-tools="<?php // displays values for custom taxonomy 'tools' language attached to post
-      $terms = get_the_terms( $post->ID, 'tools'); // gets the taxonomy
-                              
-      if ( $terms && ! is_wp_error( $terms ) ) : 
+         data-tools="<?php // displays values for custom taxonomy 'tools' language attached to post
+          $terms = get_the_terms( $post->ID, 'tools'); // gets the taxonomy
+                                  
+          if ( $terms && ! is_wp_error( $terms ) ) : 
+              $status_links = array();
 
-          $status_links = array();
+              foreach ( $terms as $term ) {
+                  $status_links[] = $term->name;
+              }                                  
+              $on_status = join(", ", $status_links);                                
+          echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
 
-          foreach ( $terms as $term ) {
-              $status_links[] = $term->name;
-          }
-                              
-          $on_status = join(", ", $status_links);                                
-      echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
-
-    <?php else : ?>
+<?php else : // Article element around content: not a 'project'? Set up the <article> as normal ?>
 
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     
-<?php endif; ?>
-
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php endif; // End of conditional statement for setting up article element ?>
     
     <header class="entry-header">
 
