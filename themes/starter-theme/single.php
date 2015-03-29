@@ -17,8 +17,8 @@ get_header(); ?>
 
 	        <?php comments_template( '', true ); ?>
 
-	        <!-- You could also put some between-post links here (next post, previous post) -->
-
+			<?php get_template_part( 'inc/pagination' ); ?>
+			
 	    <?php endwhile; // end of the loop. ?>
 
         </div><!-- / #primary -->
