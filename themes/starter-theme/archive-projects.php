@@ -1,8 +1,6 @@
 <?php
-
-/** * 
-* Template Name: Project Archive  
-* This file is used to display a page when nothing more specific matches a query. 
+/**
+* Template Name: Projects
 * Learn more: http://codex.wordpress.org/Template_Hierarchy 
 * * @package Starter_Theme */
 
