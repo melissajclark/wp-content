@@ -15,6 +15,8 @@ get_header(); ?>
 
 	        <?php get_template_part( 'content' ); ?>
 
+	        <?php get_template_part( 'inc/pagination' ); ?>
+
 	    <?php endwhile; // end of the loop. ?>
 
         </div><!-- / #primary -->
