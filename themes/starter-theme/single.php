@@ -18,7 +18,7 @@ get_header(); ?>
 	        <?php comments_template( '', true ); ?>
 
 			<?php get_template_part( 'inc/pagination' ); ?>
-			
+
 	    <?php endwhile; // end of the loop. ?>
 
         </div><!-- / #primary -->
