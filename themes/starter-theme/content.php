@@ -1,24 +1,41 @@
-<?php if ( is_singular('projects') || is_archive('projects') ) :  // Article element around content: if it's the 'projects' post_type: append taxonomy data-attributes to element  ?>
+<?php 
+/**
+ *
+ * Article: Custom taxonomy + classes are created for 'Projects' post_type
+ *          - Otherwise, the article element is created as usual   
+ *
+ **/ ?>
 
-    <article id="post-<?php the_ID(); ?>" 
+    <?php if ( is_singular('projects') || is_archive('projects') ) :  // Article element around content: if it's the 'projects' post_type: append taxonomy data-attributes to element  ?>
 
-         data-tools="<?php // displays values for custom taxonomy 'tools' language attached to post
-          $terms = get_the_terms( $post->ID, 'tools'); // gets the taxonomy
-                                  
-          if ( $terms && ! is_wp_error( $terms ) ) : 
-              $status_links = array();
+        <article id="post-<?php the_ID(); ?>" 
 
-              foreach ( $terms as $term ) {
-                  $status_links[] = $term->name;
-              }                                  
-              $on_status = join(", ", $status_links);                                
-          echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
+             data-tools="<?php // displays values for custom taxonomy 'tools' language attached to post
+              $terms = get_the_terms( $post->ID, 'tools'); // gets the taxonomy
+                                      
+              if ( $terms && ! is_wp_error( $terms ) ) : 
+                  $status_links = array();
 
-<?php else : // Article element around content: not a 'project'? Set up the <article> as normal ?>
+                  foreach ( $terms as $term ) {
+                      $status_links[] = $term->name;
+                  }                                  
+                  $on_status = join(", ", $status_links);                                
+              echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
 
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    
-<?php endif; // End of conditional statement for setting up article element ?>
+    <?php else : // Article element around content: not a 'project'? Set up the <article> as normal ?>
+
+        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+        
+    <?php endif; // End of conditional statement for setting up article element ?>
+
+<?php 
+/**
+*
+* Entry-Header: If statement outputs linked H2s for feed templates (archives, index, etc)
+*             - On singular templates non-linked H2s are used
+*             - Entry-meta - author & date are output on non-static content 
+*
+**/ ?>
     
     <header class="entry-header">
 
@@ -31,18 +48,30 @@
             </h2>
         <?php endif; ?>
         
-        <?php // conditional statement displays entry-meta on apropriate templates (not pages) 
-            if (is_single() || is_home() || is_archive() ) : ?>
+        <?php // conditional statement displays entry-meta on apropriate templates (not pages or projects) 
+            if ( is_singular('projects') ) : ?>
+
+            <?php // do not display anything ?>
+
+        <?php 
+            elseif (is_single() || is_home() || is_archive() && ! is_archive('projects') ) : ?>
 
             <span class="entry-meta">
                 <span class="entry-date"><?php echo get_the_date(); ?></span>
                 <span itemprop="author"><?php the_author_posts_link(); ?></span>  
             </span><!-- / entry-meta -->
 
-            <?php else :  // do not display date ?>
+        <?php else :  // do not display date ?>
                
         <?php endif; ?>
     </header><!-- .entry-header -->
+
+<?php 
+/**
+ *
+ * Entry-Content: If statement outputs content or excerpt, or custom fields depending on the template in use
+ *
+ **/ ?>
 
     <div class="entry-content">
     
@@ -67,27 +96,37 @@
 
     </div><!-- .entry-content -->
 
-    <?php // display the footer entry-meta on apropriate templates (blog feed, single posts)
-      if ( is_single() || is_home() ) : ?>
+<?php 
+/**
+ *
+ * Footer Entry Meta: If statement displays it on single blog posts or the blog feed (index.php)
+ *
+ **/ ?>
 
-        <footer class="entry-meta">
+        <?php // display the footer entry-meta on apropriate templates (blog feed, single posts)
+            if ( is_singular('projects') ) : ?>
 
-            <p><?php _e('Category: '); ?><?php the_category(', '); ?></p>
+        <?php 
+          elseif ( is_single() || is_home() ) : ?>
 
-            <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
+            <footer class="entry-meta">
 
-            <div class="comments-link">
-                <?php comments_popup_link( 
-                     __( 'Leave a comment', 'starter-theme' ), 
-                     __( '1 comment', 'starter-theme' ), 
-                     __( '% comments', 'starter-theme' ) ); 
-                ?>
-            </div>
-            
-        </footer><!-- #entry-meta -->
+                <p><?php _e('Category: '); ?><?php the_category(', '); ?></p>
 
-        <?php else : // doesn't match? don't show anything! ?>
+                <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
 
-    <?php endif; // end footer entry-meta conditional ?>
+                <div class="comments-link">
+                    <?php comments_popup_link( 
+                         __( 'Leave a comment', 'starter-theme' ), 
+                         __( '1 comment', 'starter-theme' ), 
+                         __( '% comments', 'starter-theme' ) ); 
+                    ?>
+                </div>
+                
+            </footer><!-- #entry-meta -->
+
+            <?php else : // doesn't match? don't show anything! ?>
+
+        <?php endif; // end footer entry-meta conditional ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
