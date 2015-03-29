@@ -82,10 +82,18 @@ class CPAC_Column {
 			$options['date_format'] = trim( $options['date_format'] );
 		}
 
+		if ( isset( $options['width'] ) ) {
+			$options['width'] = trim( $options['width'] );
+			if ( ! is_numeric( $options['width'] ) ) {
+				$options['width'] = '';
+			}
+		}
+
 		return $options;
 	}
 
 	/**
+	 * Overwrite this function in child class.
 	 * Determine whether this column type should be available
 	 *
 	 * @since 2.2
@@ -96,6 +104,14 @@ class CPAC_Column {
 
 		return true;
 	}
+
+	/**
+	 * Overwrite this function in child class.
+	 * Adds (optional) scripts to the listings screen.
+	 *
+	 * @since 2.3.4
+	 */
+	public function scripts() {}
 
 	/**
 	 * An object copy (clone) is created for creating multiple column instances.
@@ -151,6 +167,7 @@ class CPAC_Column {
 			'before'	=> '', // Before field
 			'after'		=> '', // After field
 			'width'		=> null, // Width for this column.
+			'width_unit'=> '%', // Unit for width; pecentage (%) or pixels (px).
 			'state'		=> 'off' // Active state for this column.
 		);
 
@@ -159,15 +176,19 @@ class CPAC_Column {
 		 *
 		 * @since 2.2
 		 * @param array $default_options Default column options
-		 * @param CPAC_Column $column_instance Column class instance
+		 * @param CPAC_Storage_Model $storage_model Storage Model class instance
 		 */
-		$default_options = apply_filters( 'cac/column/default_options', $default_options, $this );
+		$default_options = apply_filters( 'cac/column/default_options', $default_options ); // do not pass $this because object is not ready
 
 		foreach ( $default_options as $option => $value ) {
 			$this->options[ $option ] = $value;
 		}
 	}
 
+	/**
+	 * After Setup
+	 *
+	 */
 	public function after_setup() {
 
 		// Column name defaults to column type
@@ -184,9 +205,9 @@ class CPAC_Column {
 		 *
 		 * @since 2.0
 		 * @param array $properties Column properties
-		 * @param CPAC_Column $column_instance Column class instance
+		 * @param CPAC_Storage_Model $storage_model Storage Model class instance
 		 */
-		$this->properties = apply_filters( 'cac/column/properties', $this->properties, $this );
+		$this->properties = apply_filters( 'cac/column/properties', $this->properties ); // do not pass $this because object is not ready
 
 		/**
 		 * Filter the properties of a column type for a specific storage model
@@ -195,7 +216,7 @@ class CPAC_Column {
 		 * @since 2.0
 		 * @see Filter cac/column/properties
 		 */
-		$this->properties = apply_filters( "cac/column/properties/storage_key={$this->storage_model->key}", $this->properties, $this );
+		$this->properties = apply_filters( "cac/column/properties/storage_key={$this->storage_model->key}", $this->properties ); // do not pass $this because object is not ready
 
 		// Column label defaults to column type label
 		if ( ! isset( $this->options['label'] ) ) {
@@ -272,16 +293,47 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 3.2.1
+	 * Get the type of the column.
+	 *
+	 * @since 2.3.4
 	 */
 	public function get_type() {
 		return $this->properties->type;
 	}
 
 	/**
+	 * Get the name of the column.
+	 *
+	 * @since 2.3.4
+	 */
+	public function get_name() {
+		return $this->properties->name;
+	}
+
+	/**
+	 * Get the column options set by the user
+	 *
+	 * @since 2.3.4
+	 * @return object Column options set by user
+	 */
+	public function get_options() {
+		return $this->options;
+	}
+
+	/**
+	 * Get a single column option
+	 *
+	 * @since 2.3.4
+	 * @return array Column options set by user
+	 */
+	public function get_option( $name ) {
+		return isset( $this->options->{$name} ) ? $this->options->{$name} : false;
+	}
+
+	/**
 	 * Checks column type
 	 *
-	 * @since 3.2.1
+	 * @since 2.3.4
 	 * @param string $type Column type. Also work without the 'column-' prefix. Example 'column-meta' or 'meta'.
 	 * @return bool Matches column type
 	 */
@@ -294,6 +346,27 @@ class CPAC_Column {
 	 */
 	public function get_post_type() {
 		return $this->storage_model->get_post_type();
+	}
+
+	/**
+	 * @since 2.3.4
+	 */
+	public function get_storage_model() {
+		return $this->storage_model;
+	}
+
+	/**
+	 * @since 2.3.4
+	 */
+	public function get_storage_model_type() {
+		return $this->storage_model->get_type();
+	}
+
+	/**
+	 * @since 2.3.4
+	 */
+	public function get_storage_model_meta_type() {
+		return $this->storage_model->get_meta_type();
 	}
 
 	/**
@@ -317,7 +390,7 @@ class CPAC_Column {
 	 * @return array Column options
 	 */
 	public function read() {
-		$options = (array) get_option( "cpac_options_{$this->storage_model->key}" );
+		$options = (array) $this->storage_model->get_database_columns();
 
 		if ( empty( $options[ $this->properties->name ] ) ) {
 			return array();
@@ -525,6 +598,10 @@ class CPAC_Column {
 	 * @since 2.2.6
 	 */
 	public function get_terms_for_display( $term_ids, $taxonomy ) {
+		if ( empty( $term_ids ) ) {
+			return false;
+		}
+
 		$values = array();
 		$term_ids = (array) $term_ids;
 		if ( $term_ids && ! is_wp_error( $term_ids ) ) {
@@ -823,20 +900,29 @@ class CPAC_Column {
 			return false;
 		}
 
-		// some plugins store dates in a jquery timestamp format, format is in ms since The Epoch
+		// some plugins store dates in a jquery timestamp format, format is in ms since The Epoch.
 		// See http://api.jqueryui.com/datepicker/#utility-formatDate
 		// credits: nmarks
-		if ( is_numeric( $date ) && 13 === strlen( trim( $date ) ) ) {
-			$date = substr( $date, 0, -3 );
+		if ( is_numeric( $date ) ) {
+			$length = strlen( trim( $date ) );
+
+			// Dates before / around September 8th, 2001 are saved as 9 numbers * 1000 resulting in 12 numbers to store the time.
+			// Dates after September 8th are saved as 10 numbers * 1000, resulting in 13 numbers.
+			// For example the ACF Date and Time Picker uses this format.
+			// credits: Ben C
+			if ( 12 === $length || 13 === $length ) {
+				$date = round( $date / 1000 ); // remove the ms
+			}
+
+			// Date format: yyyymmdd ( often used by ACF ) must start with 19xx or 20xx and is 8 long
+			// @todo: in theory a numeric string of 8 can also be a unixtimestamp; no conversion would be needed
+			if ( 8 === $length && ( strpos( $date, '20' ) === 0 || strpos( $date, '19' ) === 0  ) ) {
+				$date = strtotime( $date );
+			}
 		}
 
-		// Parse with strtotime if it's:
-		// - not numeric ( like a unixtimestamp )
-		// - date format: yyyymmdd ( format used by ACF ) must start with 19xx or 20xx and is 8 long
-
-		// @todo: in theory a numeric string of 8 can also be a unixtimestamp.
-		// we need to replace this with an option to mark a date as unixtimestamp.
-		if ( ! is_numeric( $date ) || ( is_numeric( $date ) && strlen( trim( $date ) ) == 8 && ( strpos( $date, '20' ) === 0 || strpos( $date, '19' ) === 0  ) ) ) {
+		// Parse with strtotime if it's not numeric
+		else {
 			$date = strtotime( $date );
 		}
 
@@ -925,7 +1011,6 @@ class CPAC_Column {
 		<td class="label">
 			<label for="<?php $this->attr_id( $pointer ); ?>">
 				<?php echo stripslashes( $label ); ?>
-
 				<?php if( $description ) : ?><p class="description"><?php echo $description; ?></p><?php endif; ?>
 			</label>
 		</td>
@@ -1016,20 +1101,8 @@ class CPAC_Column {
 	 * @since 2.1.1
 	 */
 	public function display_field_before_after() {
-		?>
-		<tr class="column_before">
-			<?php $this->label_view( __( "Before", 'cpac' ), __( 'This text will appear before the custom field value.', 'cpac' ), 'before' ); ?>
-			<td class="input">
-				<input type="text" class="cpac-before" name="<?php $this->attr_name( 'before' ); ?>" id="<?php $this->attr_id( 'before' ); ?>" value="<?php echo esc_attr( stripslashes( $this->options->before ) ); ?>"/>
-			</td>
-		</tr>
-		<tr class="column_after">
-			<?php $this->label_view( __( "After", 'cpac' ), __( 'This text will appear after the custom field value.', 'cpac' ), 'after' ); ?>
-			<td class="input">
-				<input type="text" class="cpac-after" name="<?php $this->attr_name( 'after' ); ?>" id="<?php $this->attr_id( 'after' ); ?>" value="<?php echo esc_attr( stripslashes( $this->options->after ) ); ?>"/>
-			</td>
-		</tr>
-<?php
+		$this->display_field_text( 'before', __( "Before", 'cpac' ), __( 'This text will appear before the custom field value.', 'cpac' ) );
+		$this->display_field_text( 'after', __( "After", 'cpac' ), __( 'This text will appear after the custom field value.', 'cpac' ) );
 	}
 
 	/**
@@ -1048,15 +1121,45 @@ class CPAC_Column {
 			'first_last_name'	=> __( 'First and Last Name', 'cpac' ),
 		);
 
+		$this->display_field_select( 'display_author_as', __( 'Display format', 'cpac' ), $nametypes, __( 'This is the format of the author name.', 'cpac' ) );
+	}
+
+	/**
+	 * @since 2.3.4
+	 * @param string $name Name of the column option
+	 * @return string $label Label
+	 * @return array $options Select options
+	 * @return strong $description (optional) Description below the label
+	 */
+	public function display_field_select( $name, $label, $options = array(), $description = '' ) {
+		$current = $this->get_option( $name );
 		?>
-		<tr class="column-author-name">
-			<?php $this->label_view( __( 'Display format', 'cpac' ), __( 'This is the format of the author name.', 'cpac' ), 'display_author_as' ); ?>
+		<tr class="column-<?php echo $name; ?>">
+			<?php $this->label_view( $label, $description, $name ); ?>
 			<td class="input">
-				<select name="<?php $this->attr_name( 'display_author_as' ); ?>" id="<?php $this->attr_id( 'display_author_as' ); ?>">
-				<?php foreach ( $nametypes as $key => $label ) : ?>
-					<option value="<?php echo $key; ?>"<?php selected( $key, $this->options->display_author_as ) ?>><?php echo $label; ?></option>
+				<select name="<?php $this->attr_name( $name ); ?>" id="<?php $this->attr_id( $name ); ?>">
+				<?php foreach ( $options as $key => $label ) : ?>
+					<option value="<?php echo $key; ?>"<?php selected( $key, $current ); ?>><?php echo $label; ?></option>
 				<?php endforeach; ?>
 				</select>
+			</td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * @since 2.3.4
+	 * @param string $name Name of the column option
+	 * @return string $label Label
+	 * @return array $options Select options
+	 * @return strong $description (optional) Description below the label
+	 */
+	public function display_field_text( $name, $label, $description = '' ) {
+		?>
+		<tr class="column-<?php echo $name; ?>">
+			<?php $this->label_view( $label, $description, $name ); ?>
+			<td class="input">
+				<input type="text" name="<?php $this->attr_name( $name ); ?>" id="<?php $this->attr_id( $name ); ?>" value="<?php echo esc_attr( stripslashes( $this->get_option( $name ) ) ); ?>"/>
 			</td>
 		</tr>
 		<?php
@@ -1130,6 +1233,10 @@ class CPAC_Column {
 								<div class="inner">
 									<div class="meta">
 
+										<span title="<?php echo esc_attr( __( 'width', 'cpac' ) ); ?>" class="width" data-indicator-id="">
+											<?php echo ! empty( $this->options->width ) ? $this->options->width . $this->options->width_unit : ''; ?>
+										</span>
+
 										<?php
 										/**
 										 * Fires in the meta-element for column options, which is displayed right after the column label
@@ -1170,7 +1277,7 @@ class CPAC_Column {
 				<table class="widefat">
 					<tbody>
 						<tr class="column_type">
-							<?php $this->label_view( __( 'Type', 'cpac' ), __( 'Choose a column type.', 'cpac' ) . '<em>' . __('ID','cpac') . ': ' . $this->properties->type . '</em>', 'type' ); ?>
+							<?php $this->label_view( __( 'Type', 'cpac' ), __( 'Choose a column type.', 'cpac' ) . '<em>' . __( 'Type', 'cpac' ) . ': ' . $this->properties->type . '</em><em>' . __( 'Name', 'cpac' ) . ': ' . $this->properties->name . '</em>', 'type' ); ?>
 							<td class="input">
 								<select name="<?php $this->attr_name( 'type' ); ?>" id="<?php $this->attr_id( 'type' ); ?>">
 									<?php echo $column_list; ?>
@@ -1189,11 +1296,22 @@ class CPAC_Column {
 						<tr class="column_width">
 							<?php $this->label_view( __( 'Width', 'cpac' ), '', 'width' ); ?>
 							<td class="input">
-								<div class="description width-decription" title="<?php _e( 'default', 'cpac' ); ?>">
-									<?php echo $this->options->width > 0 ? $this->options->width . '%' : __( 'default', 'cpac' ); ?>
+								<div class="description" title="<?php _e( 'default', 'cpac' ); ?>">
+									<input class="width" type="text" placeholder="<?php _e( 'auto', 'cpac' ); ?>" name="<?php $this->attr_name( 'width' ); ?>" id="<?php $this->attr_id( 'width' ); ?>" value="<?php echo $this->options->width; ?>" />
+									<span class="unit"><?php echo $this->options->width_unit; ?></span>
 								</div>
-								<div class="input-width-range"></div>
-								<input type="hidden" class="input-width" name="<?php $this->attr_name( 'width' ); ?>" id="<?php $this->attr_id( 'width' ); ?>" value="<?php echo $this->options->width; ?>" />
+								<div class="width-slider"></div>
+
+								<div class="unit-select">
+									<label for="<?php $this->attr_id( 'width_unit_px' ); ?>">
+										<input type="radio" class="unit" name="<?php $this->attr_name( 'width_unit' ); ?>" id="<?php $this->attr_id( 'width_unit_px' ); ?>" value="px"<?php checked( $this->options->width_unit, 'px' ); ?>/>
+										px
+									</label>
+									<label for="<?php $this->attr_id( 'width_unit_perc' ); ?>">
+										<input type="radio" class="unit" name="<?php $this->attr_name( 'width_unit' ); ?>" id="<?php $this->attr_id( 'width_unit_perc' ); ?>" value="%"<?php checked( $this->options->width_unit, '%' ); ?>/>
+										%
+									</label>
+								</div>
 
 							</td>
 						</tr><!--.column_width-->

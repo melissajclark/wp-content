@@ -163,6 +163,114 @@ function hmbkp_update() {
 
 	}
 
+	// update to 3.1.4
+	if ( get_option( 'hmbkp_plugin_version' ) && version_compare( '3.1.4', get_option( 'hmbkp_plugin_version' ), '>' ) ) {
+
+		$old_option_names = array(
+			'HM\BackUpWordPressDropbox\Dropbox_Service'    => 'dropbox',
+			'HMBKP_DX_Backup_Service'                      => 'dropbox',
+			'HM\BackUpWordPressFTP\FTP_Backup_Service'     => 'ftp',
+			'HMBKP_FTP_Backup_Service'                     => 'ftp',
+			'HM\BackUpWordPressGDrive\Google_Drive_BackUp' => 'google-drive',
+			'HMBKP_GDV_Backup_Service'                     => 'google-drive',
+			'HM\BackUpWordPressRackspace\RackSpace_BackUp' => 'rackspace-cloud',
+			'HMBKP_RSC_Backup_Service'                     => 'rackspace-cloud',
+			'HM\BackUpWordPressS3\S3_Backup'               => 's3',
+			'HMBKP_S3_Backup_Service'                      => 's3',
+			'HM\BackUpWordPressWinAzure\WinAzure_Backup'   => 'azure',
+			'HMBKP_WAZ_Backup_Service'                     => 'azure',
+			'HM\BackUpWordPress\Email_Service'             => 'email',
+		);
+
+		global $wpdb;
+
+		// Get all schedule options with a SELECT query and delete them.
+		$schedules = $wpdb->get_col( $wpdb->prepare( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s", 'hmbkp_schedule_%' ) );
+
+		if ( 0 < count( $schedules ) ) {
+
+			// Access each schedules settings to see if the addon settings names need to be be updated to the new naming convention which uses the service slug generated from the $name property.
+			foreach ( $schedules as $schedule_id ) {
+
+				// Load the settings for this schedule into an array
+				// so we can loop through the different service settings
+				$schedule_settings = get_option( $schedule_id );
+
+				// Iterate over each schedule setting for this schedule and check its name against our array.
+				foreach ( $schedule_settings as $key => $val ) {
+					// Find the current element key in our control array and get its value. Set a new element in the settings array with the found value as its key. Aka rename the element key
+					if ( array_key_exists( $key, $old_option_names ) ) {
+
+						// move the value to our new key
+						$schedule_settings[ $old_option_names[ $key ] ] = $schedule_settings[ $key ];
+
+						unset( $schedule_settings[ $key ] );
+
+					}
+				}
+
+				// Save back to the DB
+				update_option( $schedule_id, $schedule_settings );
+			}
+		}
+
+
+	}
+
+	// Update to 3.1.5
+	if ( get_option( 'hmbkp_plugin_version' ) && version_compare( '3.1.5', get_option( 'hmbkp_plugin_version' ), '>' ) ) {
+
+		// Delete all transients
+		$transients = array(
+			'hmbkp_plugin_data',
+			'hmbkp_directory_filesizes',
+			'hmbkp_directory_filesizes_running',
+			'hmbkp_wp_cron_test_beacon',
+			'hm_backdrop',
+		);
+
+		array_map( 'delete_transient', $transients );
+
+		// Clear duplicate schedules on multisite
+		if ( is_multisite() ) {
+
+			// get current blogs from DB
+			$blogs = wp_get_sites();
+
+			foreach ( $blogs as $blog ) {
+
+				switch_to_blog( get_current_blog_id() );
+
+				if ( is_main_site( get_current_blog_id() ) ) {
+					continue;
+				}
+
+				global $wpdb;
+
+				// Get the schedule options
+				$schedules = $wpdb->get_col( $wpdb->prepare( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s", 'hmbkp_schedule_%' ) );
+
+				// clear schedules
+				foreach ( array_map( function ( $item ) {
+					return ltrim( $item, 'hmbkp_schedule_' );
+				}, $schedules ) as $item ) {
+					wp_clear_scheduled_hook( 'hmbkp_schedule_hook', array( 'id' => $item ) );
+				}
+
+				// delete options
+				array_map( 'delete_option', $schedules );
+
+				array_map( 'delete_option', array( 'hmbkp_enable_support', 'hmbkp_plugin_version', 'hmbkp_path', 'hmbkp_default_path', 'hmbkp_upsell' ) );
+
+				// Delete all transients
+				array_map( 'delete_transient', array( 'hmbkp_plugin_data', 'hmbkp_directory_filesizes', 'hmbkp_directory_filesize_running', 'timeout_hmbkp_wp_cron_test_beacon', 'hmbkp_wp_cron_test_beacon' ) );
+
+			}
+			
+			restore_current_blog();
+		}
+	}
+
 	// Every update
 	if ( get_option( 'hmbkp_plugin_version' ) && version_compare( HM\BackUpWordPress\Plugin::PLUGIN_VERSION, get_option( 'hmbkp_plugin_version' ), '>' ) ) {
 

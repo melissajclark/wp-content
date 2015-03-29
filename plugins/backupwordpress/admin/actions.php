@@ -62,7 +62,7 @@ add_action( 'admin_post_hmbkp_request_delete_schedule', 'hmbkp_request_delete_sc
  */
 function hmbkp_request_do_backup() {
 
-	if ( empty( $_GET['hmbkp_schedule_id'] ) ) {
+	if ( empty( $_POST['hmbkp_schedule_id'] ) ) {
 		die;
 	}
 
@@ -72,60 +72,36 @@ function hmbkp_request_do_backup() {
 		check_admin_referer( 'hmbkp_run_schedule', 'hmbkp_run_schedule_nonce' );
 	}
 
-	// Fixes an issue on servers which only allow a single session per client
-	session_write_close();
-
-	// We want to display any fatal errors in this ajax request so we can catch them on the other side.
-	error_reporting( E_ERROR | E_USER_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR );
-	@ini_set( 'display_errors', 'On' );
-	@ini_set( 'html_errors', 'Off' );
-
-	// Force a memory error for testing purposes
-	//ini_set( 'memory_limit', '2M' );
-	//function a() { a(); } a();
-
-	// Force a 500 error for testing purposes
-	//header( 'HTTP/1.1 500 Internal Server Error' );
-
-	ignore_user_abort( true );
-
 	HM\BackUpWordPress\Path::get_instance()->cleanup();
 
-	$schedule = new HM\BackUpWordPress\Scheduled_Backup( sanitize_text_field( urldecode( $_GET['hmbkp_schedule_id'] ) ) );
-
-	$schedule->run();
-
-	HM\BackUpWordPress\Notices::get_instance()->clear_all_notices();
-
-	$errors = array_merge( $schedule->backup->get_errors(), $schedule->backup->get_warnings() );
-
-	$error_message = '';
-
-	foreach ( $errors as $error_set ) {
-		$error_message .= implode( "\n\r", $error_set );
-	}
-
-	if ( $error_message && file_exists( $schedule->backup->get_archive_filepath() ) && defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-		$error_message .= ' HMBKP_SUCCESS';
-	}
-
-	if ( trim( $error_message ) && defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-		echo $error_message;
-	}
-
-	if ( trim( $error_message ) && defined( 'DOING_AJAX' ) ) {
-		wp_die( $error_message );
-	}
-
-	if ( ! defined( 'DOING_AJAX' ) ) {
-		wp_safe_redirect( hmbkp_get_settings_url(), '303' );
-	}
+	// Fixes an issue on servers which only allow a single session per client
+	session_write_close();
+	
+	$schedule_id = sanitize_text_field( urldecode( $_POST['hmbkp_schedule_id'] ) );
+	$task = new \HM\Backdrop\Task( 'hmbkp_run_schedule_async', $schedule_id );
+	$task->schedule();
 
 	die;
 
 }
 add_action( 'wp_ajax_hmbkp_run_schedule', 'hmbkp_request_do_backup' );
-add_action( 'admin_post_hmbkp_run_schedule', 'hmbkp_request_do_backup' );
+
+function hmbkp_run_schedule_async( $schedule_id ) {
+
+	$schedule = new HM\BackUpWordPress\Scheduled_Backup( $schedule_id );
+
+	$schedule->run();
+
+	$errors = array_merge( $schedule->backup->get_errors(), $schedule->backup->get_warnings() );
+
+	$notices = array();
+
+	foreach ( $errors as $key => $error ) {
+		$notices[] = implode( ', ', $error );
+	}
+
+	\HM\BackUpWordPress\Notices::get_instance()->set_notices( 'backup_errors', $notices );
+}
 
 /**
  * Send the download file to the browser and then redirect back to the backups page
@@ -217,8 +193,6 @@ function hmbkp_edit_schedule_services_submit() {
 
 	$schedule = new HM\BackUpWordPress\Scheduled_Backup( sanitize_text_field( $_POST['hmbkp_schedule_id'] ) );
 
-	hmbkp_clear_settings_errors();
-
 	$errors = array();
 
 	// Save the service options
@@ -254,8 +228,6 @@ function hmbkp_edit_schedule_submit() {
 	}
 
 	$schedule = new HM\BackUpWordPress\Scheduled_Backup( sanitize_text_field( $_POST['hmbkp_schedule_id'] ) );
-
-	hmbkp_clear_settings_errors();
 
 	$errors = array();
 
@@ -311,7 +283,7 @@ function hmbkp_edit_schedule_submit() {
 
 	}
 
-	if ( isset( $_POST['hmbkp_schedule_recurrence']['hmbkp_schedule_start_day_of_month'] ) ) {
+	if ( ( 'hmbkp_monthly' === $schedule_recurrence_type ) && isset( $_POST['hmbkp_schedule_recurrence']['hmbkp_schedule_start_day_of_month'] ) ) {
 
 		$day_of_month = absint( $_POST['hmbkp_schedule_recurrence']['hmbkp_schedule_start_day_of_month'] );
 
@@ -460,7 +432,7 @@ function hmbkp_add_exclude_rule() {
 
 	$schedule = new HM\BackUpWordPress\Scheduled_Backup( sanitize_text_field( $_GET['hmbkp_schedule_id'] ) );
 
-	$exclude_rule = str_ireplace( $schedule->backup->get_root(), '', sanitize_text_field( $_GET['hmbkp_exclude_pathname'] ) );
+	$exclude_rule = sanitize_text_field( $_GET['hmbkp_exclude_pathname'] );
 
 	$schedule->set_excludes( $exclude_rule, true );
 

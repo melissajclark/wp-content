@@ -11,10 +11,10 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 	 *
 	 * @since 2.2.6
 	 *
-	 * @param int $item_id Item ID to get the list of actions for.
+	 * @param int $id Item ID to get the list of actions for.
 	 * @return array List of actions ([action name] => [action link]).
 	 */
-	abstract public function get_actions( $item_id );
+	abstract public function get_actions( $id );
 
 	/**
 	 * @see CPAC_Column::init()
@@ -36,9 +36,9 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 	 * @see CPAC_Column::get_value()
 	 * @since 2.2.6
 	 */
-	public function get_value( $post_id ) {
+	public function get_value( $id ) {
 
-		$actions = $this->get_raw_value( $post_id );
+		$actions = $this->get_raw_value( $id );
 
 		if ( ! empty( $this->options->use_icons ) ) {
 			return implode( '', $this->convert_actions_to_icons( $actions ) );
@@ -59,7 +59,7 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 	 * @see CPAC_Column::get_value()
 	 * @since 2.2.6
 	 */
-	public function get_raw_value( $post_id ) {
+	public function get_raw_value( $id ) {
 
 		/**
 		 * Filter the action links for the actions column
@@ -68,8 +68,9 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 		 *
 		 * @param array $actions List of actions ([action name] => [action link]).
 		 * @param CPAC_Column_Actions $column_instance Column object.
+		 * @param int $id Post/User/Comment ID
 		 */
-		return apply_filters( 'cac/column/actions/action_links', $this->get_actions( $post_id ), $this );
+		return apply_filters( 'cac/column/actions/action_links', $this->get_actions( $id ), $this, $id );
 	}
 
 	/**
@@ -120,14 +121,21 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 		$icons = $this->get_actions_icons();
 
 		foreach ( $actions as $action => $link ) {
-			if ( isset( $icons[ $action ] ) ) {
+			$action1 = $action;
+			$spacepos = $spacepos = strpos( $action1, ' ' );
+
+			if ( $spacepos !== false ) {
+				$action1 = substr( $action1, 0, $spacepos );
+			}
+
+			if ( isset( $icons[ $action1 ] ) ) {
 				// Add mandatory "class" HTML attribute
 				if ( strpos( $link, 'class=' ) === false ) {
 					$link = str_replace( '<a ', '<a class="" ', $link );
 				}
 
 				// Add icon and tooltip classes
-				$link = preg_replace( '/class=["\'](.*?)["\']/', 'class="$1 cpac-tip button cpac-button-action dashicons hide-content dashicons-' . $icons[ $action ] . '"', $link, 1 );
+				$link = preg_replace( '/class=["\'](.*?)["\']/', 'class="$1 cpac-tip button cpac-button-action dashicons hide-content dashicons-' . $icons[ $action1 ] . '"', $link, 1 );
 
 				// Add tooltip title
 				$link = preg_replace_callback( '/>(.*?)<\/a>/', array( $this, 'add_link_tooltip' ), $link );
@@ -166,8 +174,15 @@ abstract class CPAC_Column_Actions extends CPAC_Column {
 			'trash' => 'trash',
 			'delete' => 'trash',
 			'untrash' => 'undo',
+			'unspam' => 'undo',
 			'view' => 'visibility',
-			'inline hide-if-no-js' => 'welcome-write-blog'
+			'inline' => 'welcome-write-blog',
+			'quickedit' => 'welcome-write-blog',
+			'approve' => 'yes',
+			'unapprove' => 'no',
+			'reply' => 'testimonial',
+			'trash' => 'trash',
+			'spam' => 'welcome-comments'
 		);
 	}
 

@@ -1,0 +1,3 @@
+3196233 (HEAD, origin/master, origin/HEAD, master) Fix incorrect filename
+68b87f1 Remove commented admin_post hook
+16a6b3a Update plugin version class constant

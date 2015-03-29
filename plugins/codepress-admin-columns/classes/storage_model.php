@@ -13,6 +13,11 @@ abstract class CPAC_Storage_Model {
 	public $label;
 
 	/**
+	 * @since 2.3.5
+	 */
+	public $singular_label;
+
+	/**
 	 * Identifier for Storage Model; Posttype etc.
 	 *
 	 * @since 2.0
@@ -45,6 +50,14 @@ abstract class CPAC_Storage_Model {
 	 * @var string
 	 */
 	public $page;
+
+	/**
+	 * Uses PHP export to display settings
+	 *
+	 * @since 2.0
+	 * @var string
+	 */
+	private $php_export = false;
 
 	/**
 	 * @since 2.0.1
@@ -134,8 +147,9 @@ abstract class CPAC_Storage_Model {
 
 		$fields = $this->get_meta();
 
-		if ( is_wp_error( $fields ) || empty( $fields ) )
+		if ( is_wp_error( $fields ) || empty( $fields ) ) {
 			$keys = false;
+		}
 
 		if ( $fields ) {
 			foreach ( $fields as $field ) {
@@ -473,8 +487,25 @@ abstract class CPAC_Storage_Model {
 		return get_option( "cpac_options_{$this->key}" );
 	}
 
+	/**
+	 * Set stopred column by 3rd party plugins
+	 *
+	 * @since 2.3
+	 */
 	public function set_stored_columns( $columns ) {
 		$this->stored_columns = $columns;
+
+		// columns settings are set by external plugin
+		$this->php_export = true;
+	}
+
+	/**
+	 * Are column set by third party plugin
+	 *
+	 * @since 2.3.4
+	 */
+	public function is_using_php_export() {
+		return $this->php_export;
 	}
 
 	/**
@@ -482,6 +513,20 @@ abstract class CPAC_Storage_Model {
 	 */
 	public function get_post_type() {
 		return isset( $this->post_type ) ? $this->post_type : false;
+	}
+
+	/**
+	 * @since 2.3.4
+	 */
+	public function get_type() {
+		return $this->type;
+	}
+
+	/**
+	 * @since 2.3.4
+	 */
+	public function get_meta_type() {
+		return $this->meta_type;
 	}
 
 	/**
@@ -500,7 +545,6 @@ abstract class CPAC_Storage_Model {
 
 	/**
 	 * @since 2.0.2
-	 * @param bool $ignore_check This will allow (3rd party plugins) to populate columns outside the approved screens.
 	 */
 	public function set_columns() {
 
@@ -563,14 +607,20 @@ abstract class CPAC_Storage_Model {
 	 * @since 2.0.2
 	 */
 	public function get_registered_columns() {
-
 		$types = array();
-
 		foreach ( $this->column_types as $grouptypes ) {
 			$types = array_merge( $types, $grouptypes );
 		}
-
 		return $types;
+	}
+
+	/**
+	 * @since 2.3.4
+	 * @param string Column Type
+	 */
+	public function get_registered_column( $column_type ) {
+		$columns = $this->get_registered_columns();
+		return isset( $columns[ $column_type ] ) ? $columns[ $column_type ] : false;
 	}
 
 	/**
@@ -608,8 +658,12 @@ abstract class CPAC_Storage_Model {
 				$column = clone $registered_columns[ $options['type'] ];
 				$column->set_clone( $options['clone'] );
 
+				// preload options when php export is being used
+				$preload = $this->is_using_php_export() ? $options : false;
+
 				// repopulate the options, so they contains the right stored options
-				$column->populate_options();
+				$column->populate_options( $preload );
+
 				$column->sanitize_label();
 
 				$columns[ $name ] = $column;
@@ -677,7 +731,7 @@ abstract class CPAC_Storage_Model {
 	 */
 	public function add_headings( $columns ) {
 
-		// only add headings on overview screens, to prevent deactivating columns in the Storage Model.
+		// only add headings on overview screens, to prevent deactivating columns on the column settings screen
 		if ( ! $this->is_columns_screen() ) {
 			return $columns;
 		}
@@ -696,8 +750,11 @@ abstract class CPAC_Storage_Model {
 		// add active stored headings
 		foreach ( $stored_columns as $column_name => $options ) {
 
+			// Label needs stripslashes() for HTML tagged labels, like icons and checkboxes
+			$label = stripslashes( $options['label'] );
+
 			/**
-			 * Filter the column headers label for use in a WP_List_Table
+			 * Filter the stored column headers label for use in a WP_List_Table
 			 * Label needs stripslashes() for HTML tagged labels, like icons and checkboxes
 			 *
 			 * @since 2.0
@@ -706,7 +763,7 @@ abstract class CPAC_Storage_Model {
 			 * @param array $options Column options
 			 * @param CPAC_Storage_Model $storage_model Storage model class instance
 			 */
-			$label = apply_filters( 'cac/headings/label', stripslashes( $options['label'] ), $column_name, $options, $this );
+			$label = apply_filters( 'cac/headings/label', $label, $column_name, $options, $this );
 			$label = str_replace( '[cpac_site_url]', site_url(), $label );
 
 			$column_headings[ $column_name ] = $label;
@@ -715,23 +772,11 @@ abstract class CPAC_Storage_Model {
 		// Add 3rd party columns that have ( or could ) not been stored.
 		// For example when a plugin has been activated after storing column settings.
 		// When $diff contains items, it means an available column has not been stored.
-		if ( $diff = array_diff( array_keys( $columns ), $this->get_default_stored_columns() ) ) {
+		if ( ! $this->is_using_php_export() && ( $diff = array_diff( array_keys( $columns ), $this->get_default_stored_columns() ) ) ) {
 			foreach ( $diff as $column_name ) {
 				$column_headings[ $column_name ] = $columns[ $column_name ];
 			}
 		}
-
-		// Remove 3rd party columns that have been deactivated.
-		// While the column settings have not been stored yet.
-		// When $diff contains items, it means the default stored columns are not available anymore.
-		// @todo: check if working properly. cuurently issues with woocommerce columns
-		/*
-		if ( $diff = array_diff( $this->get_default_stored_columns(), array_keys( $columns ) ) ) {
-			foreach ( $diff as $column_name ) {
-				if( isset( $column_headings[ $column_name ] ) )
-					unset( $column_headings[ $column_name ] );
-			}
-		}*/
 
 		return $column_headings;
 	}
@@ -742,7 +787,7 @@ abstract class CPAC_Storage_Model {
 	 */
 	protected function get_screen_link() {
 
-		return admin_url( $this->page . '.php' );
+		return is_network_admin() ? network_admin_url( $this->page . '.php' ) : admin_url( $this->page . '.php' );
 	}
 
 	/**
@@ -750,7 +795,9 @@ abstract class CPAC_Storage_Model {
 	 */
 	public function screen_link() {
 
-		echo '<a href="' . $this->get_screen_link() . '" class="add-new-h2">' . __('View', 'cpac') . '</a>';
+		if ( $link = $this->get_screen_link() ) {
+			echo '<a href="' . $link . '" class="add-new-h2">' . __('View', 'cpac') . '</a>';
+		}
 	}
 
 	/**
@@ -769,15 +816,8 @@ abstract class CPAC_Storage_Model {
      * @return boolean
 	 */
 	public function is_doing_ajax() {
-		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
-			return false;
-		}
 
-		if ( ( isset( $_POST['plugin_id'] ) && 'cpac' == $_POST['plugin_id'] ) || ( isset( $_GET['plugin_id'] ) && 'cpac' == $_GET['plugin_id'] ) ) {
-			return true;
-		}
-
-		return false;
+		return cac_is_doing_ajax();
 	}
 
 	/**
@@ -810,6 +850,11 @@ abstract class CPAC_Storage_Model {
 			if ( $this->taxonomy != $taxonomy ) {
 				return false;
 			}
+		}
+
+		// users
+		if ( 'wp-users' == $this->key && is_network_admin() ) {
+			return false;
 		}
 
 		return true;

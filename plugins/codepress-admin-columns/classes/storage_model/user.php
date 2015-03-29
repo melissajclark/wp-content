@@ -9,12 +9,13 @@ class CPAC_Storage_Model_User extends CPAC_Storage_Model {
 	 */
 	function __construct() {
 
-		$this->key 		 = 'wp-users';
-		$this->label 	 = __( 'Users' );
-		$this->type 	 = 'user';
-		$this->meta_type = 'user';
-		$this->page 	 = 'users';
-		$this->menu_type = 'other';
+		$this->key 		 		= 'wp-users';
+		$this->label 	 		= __( 'Users' );
+		$this->singular_label 	= __( 'User' );
+		$this->type 	 		= 'user';
+		$this->meta_type 		= 'user';
+		$this->page 	 		= 'users';
+		$this->menu_type 		= 'other';
 
 		// headings
 		add_filter( "manage_{$this->page}_columns",  array( $this, 'add_headings' ), 100 );
@@ -62,13 +63,11 @@ class CPAC_Storage_Model_User extends CPAC_Storage_Model {
 	 * @param int $user_id
 	 * @param string $value
 	 */
-	function manage_value( $column_name, $user_id, $value = '' ) {
+	public function manage_value( $column_name, $user_id, $value = '' ) {
 
-		// get column instance
-		$column = $this->get_column_by_name( $column_name );
-
-		if ( ! $column )
+		if ( ! ( $column = $this->get_column_by_name( $column_name ) ) ) {
 			return $value;
+		}
 
 		// get value
 		$custom_value = $column->get_value( $user_id );

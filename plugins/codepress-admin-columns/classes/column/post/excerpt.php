@@ -27,7 +27,7 @@ class CPAC_Column_Post_Excerpt extends CPAC_Column {
 	 * @see CPAC_Column::get_value()
 	 * @since 2.0
 	 */
-	function get_value( $post_id ) {
+	public function get_value( $post_id ) {
 
 		return $this->get_post_excerpt( $post_id, $this->options->excerpt_length );
 	}
@@ -36,7 +36,7 @@ class CPAC_Column_Post_Excerpt extends CPAC_Column {
 	 * @see CPAC_Column::get_raw_value()
 	 * @since 2.0.3
 	 */
-	function get_raw_value( $post_id ) {
+	public function get_raw_value( $post_id ) {
 
 		return get_post_field( 'post_excerpt', $post_id, 'raw' );
 	}
@@ -45,7 +45,7 @@ class CPAC_Column_Post_Excerpt extends CPAC_Column {
 	 * @see CPAC_Column::display_settings()
 	 * @since 2.0
 	 */
-	function display_settings() {
+	public function display_settings() {
 
 		$this->display_field_excerpt_length();
 	}

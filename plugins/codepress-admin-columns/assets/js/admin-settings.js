@@ -96,7 +96,7 @@ jQuery.fn.column_bind_remove = function() {
 /**
  * Column: bind clone events
  *
- * @since NEWVERSION
+ * @since 2.3.4
  */
 jQuery.fn.column_bind_clone = function() {
 
@@ -215,32 +215,57 @@ jQuery.fn.column_bind_events = function() {
 		jQuery(this).closest('.cpac-column').find( 'td.column_label .inner > a.toggle' ).text( value );
 	});
 
-	/** width slider */
-	column.find('.input-width-range').each( function(){
+	/** width */
 
-		var input				= jQuery(this).closest('td').find('.input-width');
-		var descr				= jQuery(this).closest('td').find('.width-decription');
-		var input_default		= jQuery(input)[0].defaultValue;
-		var translation_default = descr.attr('title');
+	// slider
+	column.column_width_slider();
 
-		// add slider
-		jQuery(this).slider({
-			range:	'min',
-			min:	0,
-			max:	100,
-			value:	input_default,
-			slide: function( event, ui ) {
+	// indicator
+	var width_indicator = column.find('.column-meta span.width');
+	width_indicator.on( 'update', function(){
+		var _width = column.find('input.width').val();
+		var _unit = column.find('input.unit').filter(':checked').val();
+		if  ( _width > 0 ) {
+			jQuery(this).text( _width + _unit );
+		} else {
+			jQuery(this).text('');
+		}
+	});
 
-				// set default
-				var descr_value = ui.value > 0 ? ui.value + '%' : translation_default;
+	// unit selector
+	var width_unit_select = column.find('.column_width .unit-select label');
+	width_unit_select.on( 'click', function(){
 
-				// set input value
-				jQuery(input).val( ui.value );
+		column.find('span.unit').text( jQuery(this).find('input').val() );
+		column.column_width_slider(); // re-init slider
+		width_indicator.trigger('update'); // update indicator
+	});
 
-				// set description
-				jQuery(descr).text( descr_value );
-			}
-		});
+	// width_input
+	var width_input = column.find('input.width')
+	.on( 'keyup', function() {
+		column.column_width_slider(); // re-init slider
+		jQuery(this).trigger('validate'); // validate input
+		width_indicator.trigger('update'); // update indicator
+	})
+
+	// width_input:validate
+	.on( 'validate', function() {
+		var _width = width_input.val();
+		var _new_width = jQuery.trim( _width );
+
+		if ( ! jQuery.isNumeric( _new_width ) ) {
+			_new_width = _new_width.replace(/\D/g,'');
+		}
+		if ( _new_width.length > 3 ) {
+			_new_width = _new_width.substring(0, 3);
+		}
+		if ( _new_width <= 0 ) {
+			_new_width = '';
+		}
+		if ( _new_width !== _width ) {
+			width_input.val( _new_width );
+		}
 	});
 
 	/** display custom image size */
@@ -260,10 +285,10 @@ jQuery.fn.column_bind_events = function() {
 	});
 
 	/**	tooltip */
-	column.find('.column-form .label label').hover(function(){
-		jQuery(this).find('p.description').show();
+	column.find('.column-form .label label, .column-form .label .info').hover(function(){
+		jQuery(this).parents( '.label' ).find('p.description').show();
 	},function(){
-		jQuery(this).find('p.description').hide();
+		jQuery(this).parents( '.label' ).find('p.description').hide();
 	});
 
 	if ( column.find( '.column_type select' ).val() == 'column-meta' ) {
@@ -285,9 +310,46 @@ jQuery.fn.column_remove = function() {
 };
 
 /*
+ * Column: remove from DOM
+ *
+ * @since 2.0
+ */
+jQuery.fn.column_width_slider = function() {
+
+	var column_width = jQuery(this).find('.column_width');
+
+	var input_width = column_width.find('input.width'),
+		input_unit = column_width.find('input.unit'),
+		unit = input_unit.filter(':checked').val(),
+		width = input_width.val(),
+		slider = column_width.find('.width-slider'),
+		indicator = jQuery(this).find('.column-meta span.width');
+
+	// width
+	if ( '%' == unit && width > 100 ) {
+		width = 100;
+	}
+
+	input_width.val( width );
+
+	slider.slider({
+		range:	'min',
+		min:	0,
+		max:	'%' == unit ? 100 : 500,
+		value:	width,
+		slide: function( event, ui ) {
+
+			input_width.val( ui.value );
+			indicator.trigger('update');
+			input_width.trigger('validate');
+		}
+	});
+};
+
+/*
  * Column: clone
  *
- * @since NEWVERSION
+ * @since 2.3.4
  */
 jQuery.fn.column_clone = function() {
 
@@ -370,6 +432,14 @@ jQuery.fn.cpac_update_clone_id = function( storage_model ) {
 	if ( 0 === id )
 		return;
 
+	// get original clone ID
+	var clone_id = el.attr( 'data-clone' );
+	var clone_suffix = '';
+
+	if ( clone_id ) {
+		clone_suffix = '-' + clone_id;
+	}
+
 	// set clone ID
 	el.attr( 'data-clone', id );
 	el.find( 'input.clone' ).val( id );
@@ -383,17 +453,17 @@ jQuery.fn.cpac_update_clone_id = function( storage_model ) {
 
 		// name
 		if( jQuery(v).attr( 'name' ) ) {
-			jQuery(v).attr( 'name', jQuery(v).attr( 'name' ).replace( type, new_name) );
+			jQuery(v).attr( 'name', jQuery(v).attr( 'name' ).replace( type + clone_suffix, new_name) );
 		}
 
 		// for
 		if( jQuery(v).attr( 'for' ) ) {
-			jQuery(v).attr( 'for', jQuery(v).attr( 'for' ).replace( type, new_name ) );
+			jQuery(v).attr( 'for', jQuery(v).attr( 'for' ).replace( type + clone_suffix, new_name ) );
 		}
 
 		// id
 		if( jQuery(v).attr( 'id' ) ) {
-			jQuery(v).attr( 'id', jQuery(v).attr( 'id' ).replace( type, new_name ) );
+			jQuery(v).attr( 'id', jQuery(v).attr( 'id' ).replace( type + clone_suffix, new_name ) );
 		}
 	});
 };
