@@ -9,11 +9,12 @@ class CPAC_Storage_Model_Link extends CPAC_Storage_Model {
 	 */
 	function __construct() {
 
-		$this->key 		= 'wp-links';
-		$this->label 	= __( 'Links' );
-		$this->type 	= 'link';
-		$this->page 	= 'link-manager';
-		$this->menu_type = 'other';
+		$this->key 				= 'wp-links';
+		$this->label 			= __( 'Links' );
+		$this->singular_label 	= __( 'Link' );
+		$this->type 			= 'link';
+		$this->page 			= 'link-manager';
+		$this->menu_type 		= 'other';
 
 		// headings
 		add_filter( "manage_{$this->page}_columns",  array( $this, 'add_headings' ), 100 );
@@ -67,12 +68,11 @@ class CPAC_Storage_Model_Link extends CPAC_Storage_Model {
 	 */
 	public function manage_value( $column_name, $link_id ) {
 
-		$value = '';
-
-		// get column instance
-		if ( $column = $this->get_column_by_name( $column_name ) ) {
-			$value = $column->get_value( $link_id );
+		if ( ! ( $column = $this->get_column_by_name( $column_name ) ) ) {
+			return false;
 		}
+
+		$value = $column->get_value( $link_id );
 
 		// add hook
 		$value = apply_filters( "cac/column/value", $value, $link_id, $column, $this->key );

@@ -2,8 +2,8 @@
 Contributors: humanmade, willmot, pauldewouters, joehoyle, mattheu, tcrsavage, cuvelier
 Tags: back up, backup, backups, database, zip, db, files, archive, wp-cli, humanmade
 Requires at least: 3.9
-Tested up to: 4.2-alpha
-Stable tag: 3.1.3
+Tested up to: 4.2-beta
+Stable tag: 3.2.2
 
 Simple automated backups of your WordPress powered website.
 
@@ -118,10 +118,14 @@ You can also tweet <a href="http://twitter.com/humanmadeltd">@humanmadeltd</a> o
 
 == Upgrade Notice ==
 
+= 3.2.1 =
+
+* Important bug fixes. Please upgrade to this version to avoid incomplete or broken backups.
+
 = 3.1.3 =
 
   * Fixes backwards compatibility for add-ons and avoids a Fatal Error. Please upgrade straight to this version before upgrading your add-ons.
-
+  
 = 3.0.4 =
 
   * Fixes a few minor bugs. Immediate update is recommended.
@@ -136,9 +140,107 @@ You can also tweet <a href="http://twitter.com/humanmadeltd">@humanmadeltd</a> o
 
 == Changelog ==
 
-### 3.1.3 / 2015-02-06
+### 3.2.2 / 2015-03-25
 
-* Introduces a deprecated.php file to contain any deprecated classes / functions for backwards compat and avoid fatal errors.
+* Fixes error in manual backups, caused by incorrect plugin version number in class, which is used for the JS script version.
+
+### 3.2.1 / 2015-03-25
+
+* Check if shell_exec is available before running command
+* Only validate day of month if this is the schedule type
+* Make FS optional and fix the DB connect method
+* (issue-770) Exclude the folder, not the wildcard
+* (issue-751) Rename plugin
+
+### 3.2 / 2015-03-16
+
+* (issue-698) skip mySql bug
+* Use shell_exec
+* Remove use statement
+* Revert to using shell_exec
+* Remove Process
+* (cool-runnings-757) Add back session_write_close
+* (issue-479) Hide hours and minutes for hourly backups
+* (backupception) Only load if main site on multisite
+* (all-paths-lead-to-rome) Set plugin path to main plugin file to avoid relative paths
+* (socket-to-me-one-more-time) Fix paths
+* Use socket if available
+* Display errors
+* Put the db dump in the archive first - fixes issue with large archive
+* Dont wait for response
+* Run schedule as a Backdrop task
+* Pass array directly to function
+* (issue-759) Fix require paths
+* check PHP version before anything else
+* Move plugin class to own file
+* Skip mysql bug error
+* Delete all BWP options
+* Start the process
+* Return and check WP_Error
+* (what-time-is-backup) Extract hours and minutes from the date as an array for display
+* Change plugin description if multisite
+* Use wp_get_sites
+* Add a comment
+* We check for this on plugin instantiation
+* Revert to clearing schedule and rescheduling
+* Delete schedules and leftover options from subsites
+* Ensure plugin only runs on main site
+* Fix Too Many Schedules
+* Use Symfony Process
+* (fix-incorrect-type-error) File is an SPL object so get path
+* Set root as default param
+* Delete backdrop transient
+* Force directory sizes recalculation
+* Define VCS abbr
+* Hide exclude patterns from Excludes list.
+* Check if user can connect
+* Test that the mysqldump command works
+* Add a couple of mysql versions
+* Automatically exclude VCS folders
+* Calculate Root size correctly
+* Get default rules from backup object
+* Do not auto ignore dot files
+* Count excluded
+* Do not count excluded
+* If its the root then return its size directly
+* Fix typo in transient names
+* Set and return class property instead
+* List default excludes as such
+* Require symfony finder
+* Clear transients on deactivate
+* Get list of files with Finder
+* Load composer packages
+* These are alredy filtered
+* Add some default excludes
+* Use absolute path for excludes added via UI
+* Fix tests
+* Fix conditional
+* Fix syntax error in travis YML
+* Run codesniffer only on pull requests
+* Update tested WP versions
+* Change min WP version required to match travis CI
+* Fix readme changelog placement
+* Add condtion for Cron and Ajax
+* Fix deactivate logic
+* Fixes recursive exclusion of files
+
+
+### 3.1.4 / 2015-02-24
+
+* (upgrade-options) Bump version
+* strtolower is redundant
+* Upgrade routine - renames service settings to avoid backslashes.
+* Use the Service name as the setting name
+* Clear settings for schedule settings
+* Fixes bug in displaying settings error notices
+* Update version number
+* Merge pull request #726 from humanmade/fix-fatal-error-missing-class-addons
+* Leave bare minimum to avoid fatal error
+* remove old main plugin class
+
+### 3.1.3 / 2015-02-04
+
+* Keep deprecated classes in a deprecated.php file to avoid Fatal Error in addons during upgrade.
 
 ### 3.1.2 / 2015-02-03
 

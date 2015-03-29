@@ -65,6 +65,7 @@ class CPAC_Settings {
 		 */
 		$settings_urls = apply_filters( 'cac/settings/settings_urls', array(
 			'admin' 		=> admin_url( 'options-general.php?page=codepress-admin-columns' ),
+			'settings' 		=> admin_url( 'options-general.php?page=codepress-admin-columns&tab=settings' ),
 			'info' 			=> admin_url( 'options-general.php?page=codepress-admin-columns&info=' ),
 			'upgrade' 		=> admin_url( 'options-general.php?page=cpac-upgrade' )
 		), $this );
@@ -600,6 +601,11 @@ class CPAC_Settings {
 			'addons'	=> __( 'Add-ons', 'cpac' )
 		);
 
+		/**
+		 * Filter the tabs on the settings screen
+		 *
+		 * @param array $tabs Available tabs
+		 */
 		$tabs = apply_filters( 'cac/settings/tabs', $tabs );
 
 		$current_tab = ( empty( $_GET['tab'] ) ) ? 'general' : sanitize_text_field( urldecode( $_GET['tab'] ) );
@@ -641,7 +647,7 @@ class CPAC_Settings {
 									</h2>
 								</div>
 
-								<?php if ( $storage_model->stored_columns !== NULL ) : ?>
+								<?php if ( $storage_model->is_using_php_export() ) : ?>
 									<div class="error below-h2">
 										<p><?php printf( __( 'The columns for %s are set up via PHP and can therefore not be edited in the admin panel.', 'cpac' ), '<strong>' . $storage_model->label . '</strong>' ); ?></p>
 									</div>
@@ -650,7 +656,7 @@ class CPAC_Settings {
 
 							<div class="columns-right">
 								<div class="columns-right-inside">
-									<?php if ( $storage_model->stored_columns === NULL ) : ?>
+									<?php if ( ! $storage_model->is_using_php_export() ) : ?>
 										<div class="sidebox" id="form-actions">
 											<h3>
 												<?php _e( 'Store settings', 'cpac' ) ?>
@@ -807,7 +813,7 @@ class CPAC_Settings {
 
 							<div class="columns-left">
 								<div class="cpac-boxes">
-									<?php if ( $storage_model->stored_columns === NULL ) : ?>
+									<?php if ( ! $storage_model->is_using_php_export() ) : ?>
 										<div class="cpac-columns">
 
 											<form method="post" action="">
@@ -861,8 +867,13 @@ class CPAC_Settings {
 					//$this->tab_addons();
 					break;
 				default:
-					echo apply_filters( 'cac/settings/tab_contents/tab=' . $current_tab, apply_filters( 'cac/settings/tab_contents', '', $current_tab ) );
-					break;
+
+					/**
+					 * Action to add tab contents
+					 *
+					 */
+					do_action( 'cac/settings/tab_contents/tab=' . $current_tab );
+
 			endswitch;
 			?>
 		</div><!--.wrap-->

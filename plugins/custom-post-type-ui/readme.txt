@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: custom post types, CPT, CMS, post, types, post type, cck, taxonomy, tax, custom
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2
 
 Admin UI for creating custom post types and custom taxonomies in WordPress
@@ -36,6 +36,13 @@ Implied credit to:
 9. Help/support screen.
 
 == Changelog ==
+
+= 1.0.5 =
+* Explicitly set the post type and taxonomy rewrite slugs as the registered slug if no custom ones provided.
+* Prevent cptui.js from loading where it is not needed.
+* Fixed undefined index notice for post type rewrite_withfront.
+* Repopulated labels when none provided and post type or taxonomy mentioned in default label.
+* Fix for import/export get code tab and hierarchical taxonomies
 
 = 1.0.4 =
 * Fixed incorrect boolean order for hierarchical taxonomies and default value.
@@ -218,6 +225,13 @@ Implied credit to:
 * First beta release
 
 == Upgrade Notice ==
+
+= 1.0.5 =
+* Explicitly set the post type and taxonomy rewrite slugs as the registered slug if no custom ones provided.
+* Prevent cptui.js from loading where it is not needed.
+* Fixed undefined index notice for post type rewrite_withfront.
+* Repopulated labels when none provided and post type or taxonomy mentioned in default label.
+* Fix for import/export get code tab and hierarchical taxonomies
 
 = 1.0.4 =
 * Fixed incorrect boolean order for hierarchical taxonomies and default value.

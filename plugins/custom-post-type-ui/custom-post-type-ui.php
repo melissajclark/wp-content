@@ -4,9 +4,10 @@ Plugin Name: Custom Post Type UI
 Plugin URI: https://github.com/WebDevStudios/custom-post-type-ui/
 Description: Admin panel for creating custom post types and custom taxonomies in WordPress
 Author: WebDevStudios
-Version: 1.0.4
+Version: 1.0.5
 Author URI: http://webdevstudios.com/
 Text Domain: cpt-plugin
+Domain Path: /languages
 License: GPLv2
 */
 
@@ -15,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CPT_VERSION', '1.0.4' );
+define( 'CPT_VERSION', '1.0.5' );
 define( 'CPTUI_WP_VERSION', get_bloginfo( 'version' ) );
 
 /**
@@ -139,9 +140,13 @@ function cptui_register_single_post_type( $post_type = array() ) {
 		'singular_name'      => $post_type['singular_label']
 	);
 
+	$preserved = cptui_get_preserved_keys( 'post_types' );
 	foreach( $post_type['labels'] as $key => $label ) {
+
 		if ( !empty( $label ) ) {
 			$labels[ $key ] = $label;
+		} elseif ( empty( $label ) && in_array( $key, $preserved ) ) {
+			$labels[ $key ] = cptui_get_preserved_label( 'post_types', $key, $post_type['label'], $post_type['singular_label'] );
 		}
 	}
 
@@ -159,11 +164,8 @@ function cptui_register_single_post_type( $post_type = array() ) {
 	if ( false !== $rewrite ) {
 		//Core converts to an empty array anyway, so safe to leave this instead of passing in boolean true.
 		$rewrite = array();
-		if ( !empty( $post_type['rewrite_slug'] ) ) {
-			$rewrite['slug'] = $post_type['rewrite_slug'];
-		}
-
-		$rewrite['with_front'] = ( 'false' === disp_boolean( $post_type['rewrite_withfront'] ) && ! empty( $post_type['rewrite_withfront'] ) ) ? false : true;
+		$rewrite['slug'] = ( !empty( $post_type['rewrite_slug'] ) ) ? $post_type['rewrite_slug'] : $post_type['name'];
+		$rewrite['with_front'] = ( ! empty( $post_type['rewrite_withfront'] ) && 'false' === disp_boolean( $post_type['rewrite_withfront'] ) ) ? false : true;
 	}
 
 	$menu_icon = ( !empty( $post_type['menu_icon'] ) ) ? $post_type['menu_icon'] : null;
@@ -246,21 +248,21 @@ function cptui_register_single_taxonomy( $taxonomy = array() ) {
 		'singular_name'      => $taxonomy['singular_label']
 	);
 
+	$preserved = cptui_get_preserved_keys( 'taxonomies' );
 	foreach( $taxonomy['labels'] as $key => $label ) {
+
 		if ( !empty( $label ) ) {
 			$labels[ $key ] = $label;
+		} elseif ( empty( $label ) && in_array( $key, $preserved ) ) {
+			$labels[ $key ] = cptui_get_preserved_label( 'taxonomies', $key, $taxonomy['label'], $taxonomy['singular_label'] );
 		}
 	}
 
 	$rewrite = get_disp_boolean( $taxonomy['rewrite'] );
 	if ( false !== get_disp_boolean( $taxonomy['rewrite'] ) ) {
 		$rewrite = array();
-		if ( !empty( $taxonomy['rewrite_slug'] ) ) {
-			$rewrite['slug'] = $taxonomy['rewrite_slug'];
-		}
-
+		$rewrite['slug'] = ( !empty( $taxonomy['rewrite_slug'] ) ) ? $taxonomy['rewrite_slug'] : $taxonomy['name'];
 		$rewrite['with_front'] = ( ! empty( $taxonomy['rewrite_withfront'] ) && 'false' === disp_boolean( $taxonomy['rewrite_withfront'] ) ) ? false : true;
-
 		$rewrite['hierarchical'] = ( ! empty( $taxonomy['rewrite_hierarchical'] ) && 'true' === disp_boolean( $taxonomy['rewrite_hierarchical'] ) ) ? true : false;
 	}
 
@@ -678,4 +680,88 @@ function cptui_admin_notices( $action = '', $object_type = '', $success = true ,
 	}
 
 	return false;
+}
+
+/**
+ * Return array of keys needing preserved.
+ *
+ * @since 1.0.5
+ *
+ * @param string $type Type to return. Either 'post_types' or 'taxonomies'.
+ *
+ * @return array Array of keys needing preservered for the requested type.
+ */
+function cptui_get_preserved_keys( $type = '' ) {
+
+	$preserved_labels = array(
+		'post_types' => array(
+			'add_new_item',
+			'edit_item',
+			'new_item',
+			'view_item',
+			'all_items',
+			'search_items',
+			'not_found',
+			'not_found_in_trash'
+		),
+		'taxonomies' => array(
+			'search_items',
+			'popular_items',
+			'all_items',
+			'parent_item',
+			'parent_item_colon',
+			'edit_item',
+			'update_item',
+			'add_new_item',
+			'new_item_name',
+			'separate_items_with_commas',
+			'add_or_remove_items',
+			'choose_from_most_used'
+		)
+	);
+	return ( !empty( $type ) ) ? $preserved_labels[ $type ] : array();
+}
+
+/**
+ * Return label for the requested type and label key.
+ *
+ * @since 1.0.5
+ *
+ * @param string $type Type to return. Either 'post_types' or 'taxonomies'.
+ * @param string $key Requested label key.
+ * @param string $plural Plural verbiage for the requested label and type.
+ * @param string $singular Singular verbiage for the requested label and type.
+ *
+ * @return string Internationalized default label.
+ */
+function cptui_get_preserved_label( $type = '', $key = '', $plural = '', $singular = '' ) {
+
+	$preserved_labels = array(
+		'post_types' => array(
+			'add_new_item'       => sprintf( __( 'Add new %s', 'cpt-plugin' ), $singular ),
+			'edit_item'          => sprintf( __( 'Edit %s', 'cpt-plugin' ), $singular ),
+			'new_item'           => sprintf( __( 'New %s', 'cpt-plugin' ), $singular ),
+			'view_item'          => sprintf( __( 'View %s', 'cpt-plugin' ), $singular ),
+			'all_items'          => sprintf( __( 'All %s', 'cpt-plugin' ), $plural ),
+			'search_items'       => sprintf( __( 'Search %s', 'cpt-plugin' ), $plural ),
+			'not_found'          => sprintf( __( 'No %s found.', 'cpt-plugin' ), $plural ),
+			'not_found_in_trash' => sprintf( __( 'No %s found in trash.', 'cpt-plugin' ), $plural )
+		),
+		'taxonomies' => array(
+			'search_items'               => sprintf( __( 'Search %s', 'cpt-plugin' ), $plural ),
+			'popular_items'              => sprintf( __( 'Popular %s', 'cpt-plugin' ), $plural ),
+			'all_items'                  => sprintf( __( 'All %s', 'cpt-plugin' ), $plural ),
+			'parent_item'                => sprintf( __( 'Parent %s', 'cpt-plugin' ), $singular ),
+			'parent_item_colon'          => sprintf( __( 'Parent %s:', 'cpt-plugin' ), $singular ),
+			'edit_item'                  => sprintf( __( 'Edit %s', 'cpt-plugin' ), $singular ),
+			'update_item'                => sprintf( __( 'Update %s', 'cpt-plugin' ), $singular ),
+			'add_new_item'               => sprintf( __( 'Add new %s', 'cpt-plugin' ), $singular ),
+			'new_item_name'              => sprintf( __( 'New %s name', 'cpt-plugin' ), $singular ),
+			'separate_items_with_commas' => sprintf( __( 'Separate %s with commas', 'cpt-plugin' ), $plural ),
+			'add_or_remove_items'        => sprintf( __( 'Add or remove %s', 'cpt-plugin' ), $plural ),
+			'choose_from_most_used'      => sprintf( __( 'Choose from the most used %s', 'cpt-plugin' ), $plural )
+		)
+	);
+
+	return $preserved_labels[ $type ][ $key ];
 }

@@ -11,18 +11,36 @@ class CPAC_Storage_Model_Comment extends CPAC_Storage_Model {
 
 		$this->key 		 = 'wp-comments';
 		$this->label 	 = __( 'Comments' );
+		$this->singular_label = __( 'Comment' );
 		$this->type 	 = 'comment';
 		$this->meta_type = 'comment';
 		$this->page 	 = 'edit-comments';
 		$this->menu_type = 'other';
 
 		// headings
-		add_filter( "manage_{$this->page}_columns",  array( $this, 'add_headings' ), 100 );
+		add_filter( "manage_{$this->page}_columns",  array( $this, 'add_headings' ), 100 ); // Filter is located in get_column_headers().
 
 		// values
 		add_action( 'manage_comments_custom_column', array( $this, 'manage_value' ), 100, 2 );
 
 		parent::__construct();
+	}
+
+	/**
+	 * @since 2.3.4
+	 * @see CPAC_Storage_Model::is_columns_screen()
+	 */
+	public function is_columns_screen() {
+
+		$is_columns_screen = parent::is_columns_screen();
+
+		if ( ! $is_columns_screen ) {
+			if ( ! empty( $_REQUEST['_ajax_nonce-replyto-comment'] ) && wp_verify_nonce( $_REQUEST['_ajax_nonce-replyto-comment'], 'replyto-comment' ) ) {
+				$is_columns_screen = true;
+			}
+		}
+
+		return $is_columns_screen;
 	}
 
 	/**
@@ -35,7 +53,9 @@ class CPAC_Storage_Model_Comment extends CPAC_Storage_Model {
 	 */
 	public function get_default_columns() {
 
-		if ( ! function_exists('_get_list_table') ) return array();
+		if ( ! function_exists('_get_list_table') ) {
+			return array();
+		}
 
 		// You can use this filter to add thirdparty columns by hooking into this.
 		// See classes/third_party.php for an example.
@@ -78,14 +98,13 @@ class CPAC_Storage_Model_Comment extends CPAC_Storage_Model {
 	 */
 	public function manage_value( $column_name, $comment_id ) {
 
-		$value = '';
-
-		// get column instance
-		if ( $column = $this->get_column_by_name( $column_name ) ) {
-			$value = $column->get_value( $comment_id );
+		if ( ! ( $column = $this->get_column_by_name( $column_name ) ) ) {
+			return false;
 		}
 
-		// filters
+		$value = $column->get_value( $comment_id );
+
+		// hook
 		$value = apply_filters( "cac/column/value", $value, $comment_id, $column, $this->key );
 		$value = apply_filters( "cac/column/value/{$this->type}", $value, $comment_id, $column, $this->key );
 
