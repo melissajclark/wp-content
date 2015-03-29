@@ -10,8 +10,9 @@ $(document).ready(function(){
         initalIndex:1,
         cellAlign: 'center',
         wrapAround:true,
-        pagedots:false,
-        freeScroll:true
+        pageDots:false,
+        freeScroll:true,
+        resize:true
 
      }); // end flickity
 
