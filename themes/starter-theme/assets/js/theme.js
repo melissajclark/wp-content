@@ -7,13 +7,13 @@ $(document).ready(function(){
     	autoPlay: false,
         setGallerySize:false,
         cellSelector: '.gallerySlide',
-        initalIndex:1,
+        initalIndex:2,
         cellAlign: 'center',
-        wrapAround:true,
-        pageDots:false,
-        // freeScroll:true,
+        pageDots:true,
+        freeScroll:true,
         resize:true,
-        draggable:false
+        draggable:false,
+        contain:true
 
      }); // end flickity
 
