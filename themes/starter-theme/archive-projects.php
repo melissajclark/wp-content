@@ -22,7 +22,7 @@ get_header(); ?>
 
                 <?php while ( have_posts() ) : the_post(); // displays project items ?>
 
-                <?php get_template_part('content', 'project'); ?>
+                <?php get_template_part('content'); ?>
 
                 <?php endwhile; ?>
 
