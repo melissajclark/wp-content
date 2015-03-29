@@ -6,13 +6,14 @@ $(document).ready(function(){
     	accessibility: true,
     	autoPlay: false,
         setGallerySize:false,
-        cellSelector: '.gallerySlide',
+        // cellSelector: '.gallerySlide',
         initalIndex:1,
         cellAlign: 'center',
         wrapAround:true,
         pageDots:false,
-        freeScroll:true,
-        resize:true
+        // freeScroll:true,
+        resize:true,
+        draggable:false
 
      }); // end flickity
 
