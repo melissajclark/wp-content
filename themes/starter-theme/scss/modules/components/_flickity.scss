@@ -6,6 +6,8 @@ http://flickity.metafizzy.co
  
 .galleryContainer {
   height:600px;
+  padding:0 0 1% 0;
+  margin: 0 0 3% 0;
 
   @include breakpoint(little){
     height:400px;
