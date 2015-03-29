@@ -18,9 +18,13 @@ Text Domain: starter-theme
 
 // CONTENT
 // ------------------
-@import "content/all-content";
+// @import "content/all-content";
 
 
 // MODULES
 // ------------------
-@import "modules/all-modules";
+// @import "modules/all-modules";
+
+// MODULES
+// ------------------
+@import "modules/components/flickity";
