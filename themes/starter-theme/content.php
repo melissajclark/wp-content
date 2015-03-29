@@ -1,4 +1,4 @@
-<?php if ( is_singular('projects') ) :  // Article element around content: if it's the 'projects' post_type: append taxonomy data-attributes to element  ?>
+<?php if ( is_singular('projects') || is_archive('projects') ) :  // Article element around content: if it's the 'projects' post_type: append taxonomy data-attributes to element  ?>
 
     <article id="post-<?php the_ID(); ?>" 
 
