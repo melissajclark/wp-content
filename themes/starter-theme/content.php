@@ -1,5 +1,5 @@
-<?php 
-    if ( is_singular('projects') || is_custom_post_type_archive('projects') ) : ?>
+<?php // appends data-attributes of custom taxonomy to article element if it is the 'projects' post type
+    if ( is_singular('projects') ) : ?>
 
     <article id="post-<?php the_ID(); ?>" 
 
@@ -22,6 +22,8 @@
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     
 <?php endif; ?>
+
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     
     <header class="entry-header">
 
