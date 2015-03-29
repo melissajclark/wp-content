@@ -13,4 +13,5 @@ if( $images ): ?>
                 <img class="gallerySlide" src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
         <?php endforeach; ?>
     </div>
+	
 <?php endif; ?>
