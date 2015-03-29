@@ -12,7 +12,6 @@ if( $images ): ?>
         <?php foreach( $images as $image ): ?>
             <div class="gallerySlide"> 
                 <img src="<?php echo $image['sizes']['flickity_gallery']; ?>" alt="<?php echo $image['alt']; ?>" />
-                <span class="overlay"><?php echo $image['caption']; ?></span>
             </div>
         <?php endforeach; ?>
     </div>
