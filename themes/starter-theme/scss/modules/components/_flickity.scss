@@ -4,19 +4,26 @@ http://flickity.metafizzy.co
 
 /*==========  Customizations  ==========*/
 
-// .mainGallery .gallerySlide {
-//   padding:0 0.4em 0 0.4em;
-//   position:relative;
-// }
+.galleryContainer {
+  height:600px;
+  padding-bottom:5%;
+}
 
-// span.overlay {
-//   position:absolute;
-//   z-index:10;
-//   width:100%;
-//   transform:translateY(-50%);
-//   top:50%;
-//   text-align:center;
-// }
+.galleryContainer .gallerySlide {
+  padding:0 0.4em 0 0.4em;
+  height:100%;
+}
+
+.gallerySlide span.overlay {
+  position:absolute;
+  z-index:10;
+  width:100%;
+  transform:translateY(-50%);
+  top:50%;
+  text-align:center;
+}
+
+
 
 /*==========  Customizations  ==========*/
 
@@ -31,6 +38,7 @@ http://flickity.metafizzy.co
   overflow: hidden;
   position: relative;
   height: 100%;
+  width:100%;
 }
 
 .flickity-slider {
