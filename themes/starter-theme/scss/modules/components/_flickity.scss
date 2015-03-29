@@ -3,10 +3,13 @@ http://flickity.metafizzy.co
 ---------------------------------------------- */
 
 /*==========  Customizations  ==========*/
-
+ 
 .galleryContainer {
   height:600px;
-  padding-bottom:5%;
+
+  @include breakpoint(little){
+    height:400px;
+  }
 }
 
 .galleryContainer .gallerySlide {
