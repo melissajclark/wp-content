@@ -47,7 +47,9 @@ node_modules
 ### Back Up Plugin ###
 
 backupwordpress-965dffb711-backups/
+backupwordpress-965dffb711-backups/
 plugins/backupwordpress-pro-dropbox/
+exports-wp-db-migrate/
 
 ### Premium Plugins ###
 
