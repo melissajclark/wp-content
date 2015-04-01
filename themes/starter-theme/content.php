@@ -57,7 +57,6 @@
 
             <?php else : // for all other templates, show this content ?>
 
-                <?php get_template_part('inc/gallery'); ?>   
                 <?php the_content(); ?>
 
         <?php endif; ?>
