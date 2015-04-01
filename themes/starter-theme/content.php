@@ -76,30 +76,27 @@
  *
  **/ ?>
 
-        <?php // display the footer entry-meta on apropriate templates (blog feed, single posts)
-            if ( is_singular('projects') ) : ?>
+    <?php 
+      if ( is_single() || is_home() ) : ?>
 
-        <?php 
-          elseif ( is_single() || is_home() ) : ?>
+        <footer class="entry-meta">
 
-            <footer class="entry-meta">
+            <p><?php _e('Category: '); ?><?php the_category(', '); ?></p>
 
-                <p><?php _e('Category: '); ?><?php the_category(', '); ?></p>
+            <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
 
-                <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
+            <div class="comments-link">
+                <?php comments_popup_link( 
+                     __( 'Leave a comment', 'starter-theme' ), 
+                     __( '1 comment', 'starter-theme' ), 
+                     __( '% comments', 'starter-theme' ) ); 
+                ?>
+            </div>
+            
+        </footer><!-- #entry-meta -->
 
-                <div class="comments-link">
-                    <?php comments_popup_link( 
-                         __( 'Leave a comment', 'starter-theme' ), 
-                         __( '1 comment', 'starter-theme' ), 
-                         __( '% comments', 'starter-theme' ) ); 
-                    ?>
-                </div>
-                
-            </footer><!-- #entry-meta -->
+        <?php else : // doesn't match? don't show anything! ?>
 
-            <?php else : // doesn't match? don't show anything! ?>
-
-        <?php endif; // end footer entry-meta conditional ?>
+    <?php endif; // end footer entry-meta conditional ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
