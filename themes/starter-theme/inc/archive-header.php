@@ -7,9 +7,6 @@
         elseif ( is_tag() ) :
             single_tag_title();
 
-        elseif ( is_archive('projects') ) :
-            post_type_archive_title();
-
         elseif ( is_author() ) :
             printf( __( 'Author: %s', 'starter-theme' ), '<span>' . get_the_author() . '</span>' );
 
