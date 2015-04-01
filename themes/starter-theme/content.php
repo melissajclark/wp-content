@@ -26,14 +26,9 @@
                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
             </h2>
         <?php endif; ?>
-        
-        <?php // conditional statement displays entry-meta on apropriate templates (not pages or projects) 
-            if ( is_singular('projects') ) : ?>
-
-            <?php // do not display anything ?>
 
         <?php 
-            elseif (is_single() || is_home() || is_archive() && ! is_archive('projects') ) : ?>
+            elseif (is_single() || is_home() || is_archive() ) : ?>
 
             <span class="entry-meta">
                 <span class="entry-date"><?php echo get_the_date(); ?></span>
