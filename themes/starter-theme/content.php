@@ -1,33 +1,12 @@
 <?php 
 /**
  *
- * Article: Custom taxonomy + classes are created for 'Projects' post_type
- *          - Otherwise, the article element is created as usual   
+ * Article: wraps around all content
  *
  **/ ?>
-
-    <?php if ( is_singular('projects') || is_archive('projects') ) :  // Article element around content: if it's the 'projects' post_type: append taxonomy data-attributes to element  ?>
-
-        <article id="post-<?php the_ID(); ?>" 
-
-             data-tools="<?php // displays values for custom taxonomy 'tools' language attached to post
-              $terms = get_the_terms( $post->ID, 'tools'); // gets the taxonomy
-                                      
-              if ( $terms && ! is_wp_error( $terms ) ) : 
-                  $status_links = array();
-
-                  foreach ( $terms as $term ) {
-                      $status_links[] = $term->name;
-                  }                                  
-                  $on_status = join(", ", $status_links);                                
-              echo $on_status; ?><?php endif; ?>" <?php post_class('filterableItem'); ?>>
-
-    <?php else : // Article element around content: not a 'project'? Set up the <article> as normal ?>
-
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+   
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         
-    <?php endif; // End of conditional statement for setting up article element ?>
-
 <?php 
 /**
 *
