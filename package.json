@@ -4,9 +4,7 @@
     "gulp-sass": "*",
     "gulp-autoprefixer": "*",
     "gulp-newer": "*",
-    "gulp-imagemin": "*",
-    "tiny-lr": "*",
-    "gulp-livereload": "*",
+    "gulp-uglifyjs": "*",
     "gulp-plumber": "*"
   }
 }
