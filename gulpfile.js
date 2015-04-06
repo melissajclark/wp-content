@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
+    uglify = require('gulp-uglifyjs'),
     newer = require('gulp-newer');
 
 gulp.task('styles', function(){
@@ -21,4 +22,13 @@ gulp.task('watch', function() {
       gulp.watch('themes/starter-theme/scss/**/*.scss', ['styles']);
 });
 
-gulp.task('default', ['styles', 'watch']);
+gulp.task('uglify', function() {
+  gulp.src('./wp-content/themes/starter-theme/assets/js/**/*.js')
+    .pipe(uglify('./wp-content/themes/starter-theme/assets/js/scripts.min.js', {
+      outSourceMap: false
+    }))
+    .pipe(gulp.dest(''))
+});
+
+
+gulp.task('default', ['styles', 'uglify', 'watch', ]);
