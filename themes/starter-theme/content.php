@@ -28,7 +28,7 @@
         <?php endif; ?>
 
         <?php 
-            elseif (is_single() || is_home() || is_archive() ) : ?>
+            if ( is_single() || is_home() || is_archive() ) : ?>
 
             <span class="entry-meta">
                 <span class="entry-date"><?php echo get_the_date(); ?></span>
