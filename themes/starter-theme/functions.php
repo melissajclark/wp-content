@@ -273,17 +273,9 @@ function starter_theme_scripts() {
 	  );
 
 	  wp_enqueue_script(
-	    'plugins', //handle
-	    get_template_directory_uri() . '/assets/js/plugins.js', //source
-	    array('jquery'), // dependencies
-	    null, // version number
-	    true //load in footer
-	  );
-
-	  wp_enqueue_script(
 	    'scripts', //handle
-	    get_template_directory_uri() . '/assets/js/theme.js', //source
-	    array( 'jquery', 'plugins' ), //dependencies
+	    get_template_directory_uri() . '/assets/js/script.min.js', //source
+	    array( 'jquery' ), //dependencies
 	    null, // version number
 	    true //load in footer
 	  );
