@@ -23,8 +23,8 @@ gulp.task('watch', function() {
 });
 
 gulp.task('uglify', function() {
-  gulp.src('./wp-content/themes/starter-theme/assets/js/**/*.js')
-    .pipe(uglify('./wp-content/themes/starter-theme/assets/js/scripts.min.js', {
+  gulp.src('themes/starter-theme/assets/js/*.js')
+    .pipe(uglify('themes/starter-theme/assets/js/scripts.min.js', {
       outSourceMap: false
     }))
     .pipe(gulp.dest(''))
