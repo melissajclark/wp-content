@@ -26,7 +26,7 @@ endif;
 // Comments & pingbacks display template
 include('inc/functions/comments.php');
 
-// include custom widget file
+// include custom widget file: [TO DO]: customize or remove for new projects
 include_once( 'inc/widget.php' );
 
 
