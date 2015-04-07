@@ -274,7 +274,7 @@ function starter_theme_scripts() {
 
 	  wp_enqueue_script(
 	    'scripts', //handle
-	    get_template_directory_uri() . '/assets/js/script.min.js', //source
+	    get_template_directory_uri() . '/assets/js/scripts.min.js', //source
 	    array( 'jquery' ), //dependencies
 	    null, // version number
 	    true //load in footer
