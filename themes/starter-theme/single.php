@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<div class="wrapper"> 
+<div class="contentWrapper"> 
     <div class="container containerWithAside">
     	<div id="primary" role="main"> 
 
@@ -26,6 +26,6 @@ get_header(); ?>
         <?php get_sidebar(); ?>
         
     </div><!-- / #container -->   
-</div><!-- / #wrapper --> 
+</div><!-- / #contentWrapper --> 
 
 <?php get_footer(); ?>

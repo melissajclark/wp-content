@@ -12,7 +12,7 @@
  
 </div><!-- #page -->
  
-<footer id="colophon" role="contentinfo" class="wrapper">
+<footer id="colophon" role="contentinfo" class="contentWrapper">
 
 	<div class="container">
 		

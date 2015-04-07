@@ -9,7 +9,7 @@
 
 get_header(); ?>
 
-<div class="wrapper"> 
+<div class="contentWrapper"> 
     <div class="container">
     	<div id="primary" role="main"> 
         <?php while ( have_posts() ) : the_post(); ?>
@@ -19,6 +19,6 @@ get_header(); ?>
             <?php endwhile; // end of the loop. ?>
         </div><!-- / #primary -->
     </div><!-- / #container -->   
-</div><!-- / #wrapper --> 
+</div><!-- / #contentWrapper --> 
 
 <?php get_footer(); ?>
