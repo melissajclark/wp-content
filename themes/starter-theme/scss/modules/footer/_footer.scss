@@ -1,3 +1,21 @@
-#copyright {
+// #copyright {
 	
+// }
+
+.fa.touch-icon {
+	width:30px;
+	height:30px;
+	font-size:1.15em;
+	line-height:1;
 }
+
+@include breakpoint(little){
+
+	.fa.touch-icon {
+		width:44px;
+		height:44px;
+		font-size:1.3em;
+		line-height:1;
+	}
+}
+
