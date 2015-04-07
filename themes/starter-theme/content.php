@@ -20,10 +20,10 @@
 
         <?php 
         if ( is_single() || is_page() ) : // no link around title if it is a single post?>
-            <h1 class="entry-title"><?php the_title(); ?></h1>
+            <h1 class="entry-title" itemprop="name"><?php the_title(); ?></h1>
         <?php else : ?>     
-            <h2 class="entry-title">
-                <a href="<?php the_permalink(); ?>"><span itemprop="name"><?php the_title(); ?></span></a>
+            <h2 class="entry-title" itemprop="name">
+                <a itemprop="url" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
             </h2>
         <?php endif; ?>
 
@@ -53,7 +53,7 @@
 
             if (is_archive() ) : // checks if its an archive and shows content accordingly ?>
                 <?php echo get_the_post_thumbnail($post_id, 'large') ?>
-                <?php the_excerpt(); ?>
+                <span itemprop="description"><?php the_excerpt(); ?></span>
 
             <?php else : // for all other templates, show this content ?>
 
