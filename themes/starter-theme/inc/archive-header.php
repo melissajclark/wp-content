@@ -24,4 +24,4 @@
         endif;
     ?>
     </h1>
-</header><!-- .page-header -->
+</header>
