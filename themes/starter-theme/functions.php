@@ -107,12 +107,12 @@ if(function_exists('acf_add_options_page')) {
 }
 
 
-
 /**
 *
 * Enable Custom Editor Styles
 *
 **/
+
 // adds CSS
 function starter_theme_add_editor_styles() {
 	add_editor_style( 'editor-style.css' );
@@ -121,6 +121,7 @@ add_action( 'admin_init', 'starter_theme_add_editor_styles' );
 
 // adds custom fonts
 // [TO DO] - update with correct typography for new projects
+
 function starter_theme_add_editor_fonts(){
 	$font_url = str_replace(',', '%2C', 'fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600italic,600,300,300italic|Lato:400,400italic,300italic,300,700,700italic');
 	add_editor_style($font_url);
@@ -170,11 +171,10 @@ function starter_theme_widgets_init() {
 }
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
+
 /* ENQUEUE SCRIPTS & STYLES
  ========================== */
 
-
- 
 function starter_theme_scripts() {
 
 	// theme style.css file
@@ -204,55 +204,3 @@ function starter_theme_scripts() {
 	}
     
 add_action('wp_enqueue_scripts', 'starter_theme_scripts');
-
-
-// adjusts for paging on Grid Archive pages
-
-function starter_theme_custom_query( $query ) {
-    if ( is_category( 'Recipes' ) && !is_admin() ) {
-         $query->set( 'posts_per_page', 18 );
-    }
-    return $query;
-}
-add_filter( 'pre_get_posts', 'starter_theme_custom_query' );
-
-
-
-/**
-*
-* Function to display terms in a taxonomy from: http://wordpress.stackexchange.com/questions/23606/how-do-i-list-custom-taxonomy-terms-without-the-links
-* REALLY USEFUL: displays all terms in the taxonomy - not post specific!
-*
-**/
-
-
-function taxonomy_list( $taxonomy ) {
-    $args = array('order'=>'ASC','hide_empty'=>false);
-    $terms = get_terms( $taxonomy, $args );
-    if ( $terms ) {
-        printf( '', esc_attr( $taxonomy ) );
-        foreach ( $terms as $term ) {
-        	printf( '<option><value="%s">%s</option>', esc_html( $term->name ) );
-        }
-        print( '' );
-    }
-}
-
-/**
-*
-* Useful function: Displays list of terms attached to a post.
-*
-**/
-
-// $terms = get_the_terms( $post->ID, 'TAXONOMY');
-                        
-//if ( $terms && ! is_wp_error( $terms ) ) : 
-
-    // $status_links = array();
-
-   // foreach ( $terms as $term ) {
-        // $status_links[] = $term->slug;
-   // }
-                        
-    //$on_status = join(",", $status_links);
-   // <?php echo $on_status;
