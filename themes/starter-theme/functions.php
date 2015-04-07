@@ -74,20 +74,18 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 		// Add custom image sizes
         	// add_image_size( &#039;name&#039;, 500, 300, true );
 		// custom image size for slider
-		add_image_size( 'flickity_gallery', 900, 600, true );
-		add_image_size( 'flickity_preview', 200, 150, true );
 	}
 endif; // starter_theme_setup
 add_action( 'after_setup_theme', 'starter_theme_setup' );
 
 
-add_filter( 'image_size_names_choose', 'my_custom_sizes' );
+// add_filter( 'image_size_names_choose', 'my_custom_sizes' );
 
-function my_custom_sizes( $sizes ) {
-    return array_merge( $sizes, array(
-        'flickity_gallery' => __( 'Gallery' ),
-    ) );
-}
+// function my_custom_sizes( $sizes ) {
+//     return array_merge( $sizes, array(
+//         'name' => __( 'Name' ),
+//     ) );
+// }
 
 /*================================================================
 =            Useful Functions to Override WP Defaults            =
