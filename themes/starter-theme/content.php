@@ -16,7 +16,7 @@
 *
 **/ ?>
     
-    <header class="entry-header">
+    <header class="entry-header" itemscope itemtype="http://schema.org/Article">
 
         <?php 
         if ( is_single() || is_page() ) : // no link around title if it is a single post?>
@@ -31,8 +31,8 @@
             if ( is_single() || is_home() || is_archive() ) : ?>
 
             <span class="entry-meta">
-                <span class="entry-date"><?php echo get_the_date(); ?></span>
-                <span itemprop="author"><?php the_author_posts_link(); ?></span>  
+                <span class="entry-date" itemprop="datePublished" content="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></span>
+                <span itemprop="author" itemscope itemtype="http://schema.org/Person"><?php the_author_posts_link(); ?></span>  
             </span><!-- / entry-meta -->
 
         <?php else :  // do not display date ?>
