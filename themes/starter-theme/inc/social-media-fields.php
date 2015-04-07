@@ -31,15 +31,6 @@
     </a>
 <?php endif; ?>
 
-<?php if ( get_field( 'dribble', 'options' ) ) : // <!-- dribble --> ?>
-    <a href="<?php the_field( 'dribble', 'options' ); ?>" target="_blank" class="social-link" alt="dribble-profile">
-        <span class="icon-fallback-text"> 
-            <span class="fa fa-dribble fa-1x touch-icon" alt="dribble" aria-hidden="true"></span>
-        <span class="icon-text"><?php _e('Dribble'); ?></span>
-        </span>
-    </a>
-<?php endif; ?>
-
 <?php if ( get_field( 'email', 'options' ) ) : // <!-- Email --> ?>
      <a href="mailto:<?php the_field( 'email', 'options' ); ?>" target="_blank" class="social-link" alt="email-link">
         <span class="icon-fallback-text"> 
