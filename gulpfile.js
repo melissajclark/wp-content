@@ -11,7 +11,6 @@ gulp.task('styles', function(){
             {base: 'themes/starter-theme/scss/'} )
       .pipe(plumber())
         .pipe(sass({ style: 'expanded' }))
-        .pipe(gulp.dest(''))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(gulp.dest('themes/starter-theme'));
 });
@@ -27,7 +26,6 @@ gulp.task('uglify', function() {
     .pipe(uglify('themes/starter-theme/assets/js/scripts.min.js', {
       outSourceMap: false
     }))
-    .pipe(gulp.dest(''))
 });
 
 
