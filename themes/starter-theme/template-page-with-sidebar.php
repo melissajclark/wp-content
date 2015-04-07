@@ -9,7 +9,7 @@
 get_header(); ?>
 
 <div class="contentWrapper"> 
-    <div class="container containerWithAside">
+    <div class="contentContainer contentWithAside">
     
     	<div id="primary" role="main"> 
         <?php while ( have_posts() ) : the_post(); ?>
@@ -23,7 +23,7 @@ get_header(); ?>
             <?php dynamic_sidebar( 'sidebar-2' ); ?>
         </div><!-- #secondary .widget-area -->
 
-    </div><!-- / #container -->   
+    </div><!-- / #contentContainer -->   
 </div><!-- / #contentWrapper --> 
 
 <?php get_footer(); ?>

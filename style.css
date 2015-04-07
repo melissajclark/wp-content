@@ -323,58 +323,58 @@ body {
 #main {
   clear: both; }
 
-.wrapper {
+.contentWrapper {
   width: 100%; }
 
-.container {
+.contentContainer {
   margin: 0 auto;
   max-width: 70%;
   padding: 2% 0 0 0; }
   @media (min-width: 1600px) {
-    .container {
+    .contentContainer {
       /* min-width: 1600px */
       max-width: 60%; } }
   @media (max-width: 1600px) {
-    .container {
+    .contentContainer {
       /* max-width: 1600px */
       max-width: 80%; } }
   @media (max-width: 1150px) {
-    .container {
+    .contentContainer {
       /* max-width: 1150px */
       max-width: 85%; } }
   @media (max-width: 800px) {
-    .container {
+    .contentContainer {
       /* max-width: 800px */
       max-width: 95%;
       font-size: 1.1rem;
       line-height: 1.56rem;
       word-wrap: break-word; } }
-  .container.containerWithAside #primary {
+  .contentContainer.contentWithAside #primary {
     width: 75%;
     float: left; }
     @media (max-width: 1150px) {
-      .container.containerWithAside #primary {
+      .contentContainer.contentWithAside #primary {
         width: 65%; } }
     @media (max-width: 800px) {
-      .container.containerWithAside #primary {
+      .contentContainer.contentWithAside #primary {
         width: 95%; } }
-  .container.containerWithAside #secondary {
+  .contentContainer.contentWithAside #secondary {
     width: 25%;
     float: left;
     padding: 0 0 0 5%; }
     @media (max-width: 1150px) {
-      .container.containerWithAside #secondary {
+      .contentContainer.contentWithAside #secondary {
         width: 35%; } }
     @media (max-width: 800px) {
-      .container.containerWithAside #secondary {
+      .contentContainer.contentWithAside #secondary {
         width: 95%;
         padding: 0;
         column-count: 2; }
-        .container.containerWithAside #secondary .widget {
+        .contentContainer.contentWithAside #secondary .widget {
           width: 100%;
           display: inline-block; } }
     @media (max-width: 500px) {
-      .container.containerWithAside #secondary {
+      .contentContainer.contentWithAside #secondary {
         column-count: 1; } }
 
 #content {

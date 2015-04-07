@@ -48,7 +48,7 @@
 <body <?php body_class(); ?>>
 <div id="page">
 
-    <header id="site-header" role="banner" class="container">
+    <header id="site-header" role="banner" class="contentContainer">
     <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _e('Skip to content'); ?></a>            
         <h1>
             <a href="<?php echo esc_url( home_url( "/" ) ); ?>">

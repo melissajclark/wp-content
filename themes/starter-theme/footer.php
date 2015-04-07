@@ -14,14 +14,14 @@
  
 <footer id="colophon" role="contentinfo" class="contentWrapper">
 
-	<div class="container">
+	<div class="contentContainer">
 		
 		<div id="copyright">
 		<?php get_template_part ('inc/social-media-fields') // grabs theme's social media content - [TO DO] update icon assets in final theme?>
 			&copy; <?php echo date("Y"); ?> <?php echo bloginfo( "name" ); ?>
 			<a href="http://melissajclark.ca" rel="bookmark">theme by Melissa</a>
 		</div> 
-	</div><!-- / container -->
+	</div><!-- / contentContainer -->
 
 </footer><!-- #colophon -->
 

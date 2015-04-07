@@ -8,7 +8,7 @@
 get_header(); ?>
 
 <div class="contentWrapper"> 
-    <div class="container">
+    <div class="contentContainer">
     	<div id="primary" role="main"> 
 
 	    <article id="post-0" class="post error404 not-found">
@@ -25,7 +25,7 @@ get_header(); ?>
 	    </article><!-- #post-0 -->
 
         </div><!-- / #primary -->
-    </div><!-- / #container -->   
+    </div><!-- / #contentContainer -->   
 </div><!-- / #contentWrapper --> 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>?>
