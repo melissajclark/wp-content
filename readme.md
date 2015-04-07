@@ -9,7 +9,5 @@
 - Development plugins (What the File, Theme Check, WP Accessibility, etc)
 - Functions.php with useful functions (ie. remove `<p>` tags around images, set images not to link automatically, enable Options Page for Advanced Custom Fields)
 
-More info coming soon! 
-
-- <em>April 6, 2015</em>
+More info coming soon! - <em>April 6, 2015</em>
 
