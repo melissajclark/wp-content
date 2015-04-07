@@ -1,27 +1,3 @@
-// testing sections
-
-// .contentWrapper {
-// 	background-color:rgba(pink,0.5);
-// }
-// .container {
-// 	background-color:rgba(red,0.5);
-// }
-
-// .container #primary{
-// 	background-color:rgba(yellow,0.5);
-// }
-
-// .containerWithAside {
-// 	background-color:rgba(purple,0.3);
-// }
-// .containerWithAside #primary {
-// 	background-color:rgba(green,0.4);
-// }
-// .containerWithAside #secondary {
-// 	background-color:rgba(blue,0.4);
-// }
-
-
 body {
 	background: $bg;
 	margin: 0;
@@ -117,3 +93,26 @@ body {
 }
 /* Sticky footer */
 @include sticky-footer(100px, '#page','#main','#colophon');
+
+// testing sections
+
+// .contentWrapper {
+// 	background-color:rgba(pink,0.5);
+// }
+// .container {
+// 	background-color:rgba(red,0.5);
+// }
+
+// .container #primary{
+// 	background-color:rgba(yellow,0.5);
+// }
+
+// .containerWithAside {
+// 	background-color:rgba(purple,0.3);
+// }
+// .containerWithAside #primary {
+// 	background-color:rgba(green,0.4);
+// }
+// .containerWithAside #secondary {
+// 	background-color:rgba(blue,0.4);
+// }
