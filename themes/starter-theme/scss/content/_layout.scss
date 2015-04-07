@@ -13,7 +13,7 @@ body {
 	width:$width-outer;
 }
 
-.container { 
+.contentContainer { 
 	margin: 0 auto;
 	max-width: $mainContent;
 	padding:2% 0 0 0;
@@ -35,7 +35,7 @@ body {
 	      @include small-font-size;
 	    }
 
-	    &.containerWithAside { // styles widths of layouts with a sidebar
+	    &.contentWithAside { // styles widths of layouts with a sidebar
 
     	    #primary {
     			width:$primary-width;
