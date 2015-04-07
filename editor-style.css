@@ -140,7 +140,7 @@ a {
   text-decoration: none;
   word-wrap: break-word; }
   a:focus, a:active, a:hover {
-    color: red;
+    color: #B10808;
     word-wrap: break-word; }
 
 /* Assistive text */
