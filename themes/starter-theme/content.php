@@ -5,7 +5,7 @@
  *
  **/ ?>
    
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/Article">
         
 <?php 
 /**
@@ -16,7 +16,7 @@
 *
 **/ ?>
     
-    <header class="entry-header" itemscope itemtype="http://schema.org/Article">
+    <header class="entry-header">
 
         <?php 
         if ( is_single() || is_page() ) : // no link around title if it is a single post?>
