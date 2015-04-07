@@ -19,7 +19,7 @@ get_header(); ?>
                 global $wp_query;
                 $total_results = $wp_query->found_posts;
                 ?>
-                <h1 class="entry-title"><?php _e('Search Results') ?></h1>
+                <h1 class="entry-title"><?php _e('Search Results', 'starter-theme'); ?></h1>
 
                 <h2><?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h2>
 
