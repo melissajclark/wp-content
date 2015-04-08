@@ -72,26 +72,17 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 		register_nav_menus( array(
 			'primary' => __( 'Primary Menu', 'starter-theme' ),
 		) );
-		
-		// Add custom image sizes
-        	// add_image_size( &#039;name&#039;, 500, 300, true );
-		// custom image size for slider
+
 	}
 endif; // starter_theme_setup
 add_action( 'after_setup_theme', 'starter_theme_setup' );
 
 
-// add_filter( 'image_size_names_choose', 'my_custom_sizes' );
-
-// function my_custom_sizes( $sizes ) {
-//     return array_merge( $sizes, array(
-//         'name' => __( 'Name' ),
-//     ) );
-// }
-
-/*================================================================
-=            Useful Functions to Override WP Defaults            =
-================================================================*/
+/**
+*
+* Useful Function to override WordPress defaults
+*
+**/
 
 // function to remove <p> tags on images
 function filter_ptags_on_images($content){
@@ -108,12 +99,7 @@ if(function_exists('acf_add_options_page')) {
 	acf_add_options_page('Theme Options');
 }
 
-
-/**
-*
-* Enable Custom Editor Styles
-*
-**/
+// enable custom editor styles
 
 // adds CSS
 function starter_theme_add_editor_styles() {
@@ -146,11 +132,14 @@ function new_excerpt_more($more){
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 
+
 /*-----  End of Useful Functions to Override WP Defaults  ------*/
 
 
 /**
+ *
  * Register sidebars and widgetized areas
+ *
  */
 function starter_theme_widgets_init() {
     register_sidebar( array(
@@ -174,8 +163,12 @@ function starter_theme_widgets_init() {
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
 
-/* ENQUEUE SCRIPTS & STYLES
- ========================== */
+/**
+*
+* Enqueue Scripts & Styles
+*
+**/
+
 
 function starter_theme_scripts() {
 
