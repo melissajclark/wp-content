@@ -49,12 +49,15 @@
 <div id="page">
 
     <header id="site-header" role="banner" class="contentContainer">
-    <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _e('Skip to content', 'starter-theme'); ?></a>            
+    <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _e('Skip to content', 'starter-theme'); ?></a>
+    
         <h1>
             <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
+                <img src="<?php echo get_theme_mod('header_image'); ?>">
                 <?php bloginfo("name"); ?>
             </a>
         </h1>
+
         <nav id="access" role="navigation">
             <?php wp_nav_menu( array( "theme_location" => "primary" ) ); ?>
         </nav><!-- #access -->  
