@@ -771,39 +771,79 @@ optgroup::-moz-focus-inner {
     height: auto; }
 
 #access {
-  margin: 0; }
-  #access div {
-    float: left;
-    overflow: hidden;
-    position: relative;
-    width: 100%; }
-  #access ul {
-    clear: left;
-    float: left;
-    position: relative;
-    left: 50%;
-    padding-left: 0;
-    margin: 0 !important;
-    list-style: none; }
-    #access ul li {
-      position: relative;
-      display: block;
-      float: left;
-      position: relative;
-      right: 50%; }
-      #access ul li a {
-        letter-spacing: 0.15em;
-        display: block;
-        padding: 3px 0 3px 10px;
-        margin: 2px 0;
-        text-decoration: none;
-        cursor: pointer; }
-        #access ul li a:after {
-          color: #222; }
-        #access ul li a :hover {
-          color: #B10808; }
-      #access ul li:last-of-type a:after {
-        content: none; }
+  float: left;
+  margin: 1.5% 0 0 3%; }
+
+.menu, .menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+/* Top level nav */
+.menu {
+  float: left;
+  margin: 0 auto; }
+
+/* Dropdowns */
+.menu ul {
+  position: absolute;
+  top: 2.5em;
+  left: -9999px;
+  opacity: 0;
+  -webkit-transition: 0.1s linear opacity;
+  width: 130px;
+  background: rgba(177, 8, 8, 0.9); }
+
+.menu li {
+  float: left;
+  position: relative; }
+
+/* Top level nav items */
+.menu li > a {
+  float: left;
+  padding: 10px 10px;
+  color: #222;
+  text-decoration: none;
+  width: 130px;
+  text-align: center; }
+
+/* Top level hover state, preserve hover state when hovering dropdown  */
+.menu li > a:hover, .menu li > a:focus, .menu li:focus > a, .menu li:hover > a {
+  background: rgba(177, 8, 8, 0.9);
+  outline: 0;
+  color: #fff;
+  min-width: 130px; }
+
+/* Rounded corners for first top level nav item */
+.menu > li:first-child > a {
+  border-left: 0; }
+
+/* Rounded corners for last top level nav item */
+.menu > li:last-child > a {
+  border-right: 0; }
+
+.menu li:hover ul, .menu li:focus ul, ul.show-menu {
+  left: 0;
+  opacity: 0.99; }
+
+.menu ul li {
+  float: none;
+  position: static; }
+
+.menu ul a {
+  float: none;
+  display: block;
+  color: #fff;
+  -webkit-transition: 0.1s linear all;
+  text-align: left; }
+
+.menu ul a:hover, .menu ul a:focus {
+  background: #fff;
+  color: #222;
+  text-shadow: none; }
+
+p {
+  clear: both; }
 
 /*-----  End of Navigation  ------*/
 /*=============================
