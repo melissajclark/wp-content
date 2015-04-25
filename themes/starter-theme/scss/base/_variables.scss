@@ -15,11 +15,12 @@ $links: blue;
 $hover: #B10808;
 $white: #fff;
 
+
 $bg: $white;
 
 // navigation
-$navDropdown-bg : $hover;
-$navItem-width: 15%;
+$navDropdown-bg : rgba($hover,0.9);
+$navItem-width: 130px;
 
 
 // Fonts
