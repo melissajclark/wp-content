@@ -40,6 +40,7 @@ sftp-config.json
 
 .sass-cache
 *.css.map
+.DS_Store
 
 ### ignore ###
 node_modules
