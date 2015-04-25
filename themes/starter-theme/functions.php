@@ -105,9 +105,17 @@ function starter_theme_scripts() {
 	  );
 
 	  wp_enqueue_script(
-	    'scripts', //handle
-	    get_template_directory_uri() . '/assets/js/scripts.min.js', //source
+	    'plugins', //handle
+	    get_template_directory_uri() . '/assets/js/plugins.js', //source
 	    array( 'jquery' ), //dependencies
+	    null, // version number
+	    true //load in footer
+	  );
+
+	  wp_enqueue_script(
+	    'theme', //handle
+	    get_template_directory_uri() . '/assets/js/theme.js', //source
+	    array( 'jquery', 'plugins' ), //dependencies
 	    null, // version number
 	    true //load in footer
 	  );
