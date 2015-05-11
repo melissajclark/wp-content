@@ -24,6 +24,7 @@ get_header(); ?>
 
     <?php get_sidebar(); ?>
     
-</div><!-- / #contentContainer -->   
+</div><!-- / .contentContainer -->   
+   
 
 <?php get_footer(); ?>

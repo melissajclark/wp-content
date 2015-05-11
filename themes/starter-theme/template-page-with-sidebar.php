@@ -26,6 +26,7 @@ get_header(); ?>
         
     </div><!-- #secondary .widget-area -->
 
-</div><!-- / #contentContainer -->   
+</div><!-- / .contentContainer -->   
+   
 
 <?php get_footer(); ?>

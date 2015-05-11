@@ -25,7 +25,8 @@ get_header(); ?>
 	    </article><!-- #post-0 -->
 
         </div><!-- / #primary -->
-    </div><!-- / #contentContainer -->   
+    </div><!-- / .contentContainer -->   
+   
 </div><!-- / #contentWrapper --> 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>?>

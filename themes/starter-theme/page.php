@@ -17,6 +17,7 @@ get_header(); ?>
 
         <?php endwhile; // end of the loop. ?>
     </div><!-- / #primary -->
-</div><!-- / #contentContainer -->   
+</div><!-- / .contentContainer -->   
+   
 
 <?php get_footer(); ?>
