@@ -26,14 +26,12 @@
 	// function to set default image link to none
 	update_option('image_default_link_type','none');
 
-	// enables ACF Options Page
-	if(function_exists('acf_add_options_page')) { 
-	 
-		acf_add_options_page('Theme Options');
-	}
-
-	// enable custom editor styles
-
+	/**
+	*
+	* Enable Custom Editor styles
+	*
+	**/
+	
 	// adds CSS
 	function starter_theme_add_editor_styles() {
 		add_editor_style( 'editor-style.css' );
