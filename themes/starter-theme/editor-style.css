@@ -12,7 +12,7 @@ body, input, textarea {
   font-size: 1.15rem;
   line-height: 1.8rem;
   word-wrap: break-word;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-style: normal;
   font-weight: 400;
   color: #222;
@@ -20,7 +20,7 @@ body, input, textarea {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
   clear: both; }
@@ -121,7 +121,8 @@ ins {
   background: #fff9c0;
   text-decoration: none; }
 
-sup, sub {
+sup,
+sub {
   font-size: 10px;
   height: 0;
   line-height: 1;
@@ -139,7 +140,9 @@ a {
   color: blue;
   text-decoration: none;
   word-wrap: break-word; }
-  a:focus, a:active, a:hover {
+  a:focus,
+  a:active,
+  a:hover {
     color: #B10808;
     word-wrap: break-word; }
 
@@ -150,7 +153,8 @@ a {
   /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px); }
 
-#access a.assistive-text:active, #access a.assistive-text:focus {
+#access a.assistive-text:active,
+#access a.assistive-text:focus {
   clip: auto !important;
   font-size: 12px;
   position: absolute;
