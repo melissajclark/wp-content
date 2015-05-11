@@ -1,0 +1,15 @@
+/* simple styles for  +/- links */
+
+.expand_link a{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	margin:0 0 0 10px;
+	text-indent: -9999px;
+	background: url(../images/plus.png) no-repeat top left transparent;
+	padding:2px;
+}
+
+.expand_link a.minus{
+	background: url(../images/minus.png) no-repeat top left transparent;
+}
