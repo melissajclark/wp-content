@@ -8,22 +8,20 @@
 
 get_header(); ?>
 
-<div class="contentWrapper"> 
-    <div class="contentContainer contentWithAside">
-    
-    	<div id="primary" role="main"> 
-        <?php while ( have_posts() ) : the_post(); ?>
+<div class="contentContainer contentWithAside">
 
-            <?php get_template_part('content'); ?>
+	<div id="primary" role="main"> 
+    <?php while ( have_posts() ) : the_post(); ?>
 
-            <?php endwhile; // end of the loop. ?>
-        </div><!-- / #primary -->
+        <?php get_template_part('content'); ?>
 
-        <div id="secondary" class="widget-area" role="complementary">
-            <?php dynamic_sidebar( 'sidebar-2' ); ?>
-        </div><!-- #secondary .widget-area -->
+        <?php endwhile; // end of the loop. ?>
+    </div><!-- / #primary -->
 
-    </div><!-- / #contentContainer -->   
-</div><!-- / #contentWrapper --> 
+    <div id="secondary" class="widget-area" role="complementary">
+        <?php dynamic_sidebar( 'sidebar-2' ); ?>
+    </div><!-- #secondary .widget-area -->
+
+</div><!-- / #contentContainer -->   
 
 <?php get_footer(); ?>
