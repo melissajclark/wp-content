@@ -13,8 +13,15 @@ $secondary-width: 25%;
 $text: #222;
 $links: blue;
 $hover: #B10808;
+$white: #fff;
 
-$bg: #fff;
+
+$bg: $white;
+
+// navigation
+$navDropdown-bg : rgba($hover,0.9);
+$navItem-width: 130px;
+
 
 // Fonts
 $body-font: 'Source Sans Pro', sans-serif;;

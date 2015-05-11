@@ -34,12 +34,13 @@ languages/
 
 # sftp configuration file
 sftp-config.json
-
+.DS_Store
 
 ###SASS###
 
 .sass-cache
 *.css.map
+.DS_Store
 
 ### ignore ###
 node_modules
