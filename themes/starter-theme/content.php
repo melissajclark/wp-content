@@ -81,7 +81,7 @@
 
         <footer class="entry-meta">
 
-            <p><?php _e('Category: '); ?><?php the_category(', '); ?></p>
+            <p><?php _e('Category: ', 'starter-theme'); ?><?php the_category(', '); ?></p>
 
             <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
 
