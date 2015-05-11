@@ -122,3 +122,15 @@ function starter_theme_scripts() {
 	}
     
 add_action('wp_enqueue_scripts', 'starter_theme_scripts');
+
+
+
+/**
+*
+* Enable ACF Options Page
+*
+**/
+
+if(function_exists('acf_add_options_page')) { 
+	acf_add_options_page('Theme Options');
+}
