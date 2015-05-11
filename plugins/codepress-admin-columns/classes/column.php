@@ -429,11 +429,12 @@ class CPAC_Column {
 
 		if ( ! empty( $options['label'] ) ) {
 
-			// Label can not contains the character ':', because
+			// Label can not contains the character ":"" and "'", because
 			// CPAC_Column::get_sanitized_label() will return an empty string
 			// and make an exception for site_url()
 			if ( false === strpos( $options['label'], site_url() ) ) {
 				$options['label'] = str_replace( ':', '', $options['label'] );
+				$options['label'] = str_replace( "'", '', $options['label'] );
 			}
 		}
 
@@ -552,8 +553,22 @@ class CPAC_Column {
 		if ( ! $name ) {
 			return false;
 		}
-
 		return sprintf( "<img alt='' src='%s' title='%s'/>", CPAC_URL . "assets/images/{$name}", esc_attr( $title ) );
+	}
+
+	/**
+	 * @since 3.4.4
+	 */
+	public function get_user_postcount( $user_id, $post_type ) {
+		global $wpdb;
+		$sql = "
+			SELECT COUNT(ID)
+			FROM {$wpdb->posts}
+			WHERE post_status = 'publish'
+			AND post_author = %d
+			AND post_type = %s
+		";
+		return $wpdb->get_var( $wpdb->prepare( $sql, $user_id, $post_type ) );
 	}
 
 	/**
@@ -934,7 +949,7 @@ class CPAC_Column {
 	 * @param string $date
 	 * @return string Formatted date
 	 */
-	protected function get_date( $date, $format = '' ) {
+	public function get_date( $date, $format = '' ) {
 
 		if ( ! $date = $this->get_timestamp( $date ) ) {
 			return false;
