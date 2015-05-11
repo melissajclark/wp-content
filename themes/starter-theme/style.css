@@ -1,5 +1,5 @@
 /*!
-Theme Name: Starter-Theme
+Theme Name: Starter Theme
 Theme URI: themeURI
 Author: Melissa Jean Clark
 Author URI: http://melissajclark.ca
@@ -868,8 +868,7 @@ optgroup::-moz-focus-inner {
     height: auto; }
 
 #access {
-  float: left;
-  margin: 1.5% 0 0 3%; }
+  float: left; }
 
 .menu,
 .menu ul {
@@ -889,8 +888,8 @@ optgroup::-moz-focus-inner {
   left: -9999px;
   opacity: 0;
   -webkit-transition: 0.1s linear opacity;
-  width: 130px;
-  background: rgba(177, 8, 8, 0.9); }
+  min-width: 130px;
+  background: #B10808; }
 
 .menu li {
   float: left;
@@ -902,7 +901,7 @@ optgroup::-moz-focus-inner {
   padding: 10px 10px;
   color: #222;
   text-decoration: none;
-  width: 130px;
+  min-width: 130px;
   text-align: center; }
 
 /* Top level hover state, preserve hover state when hovering dropdown  */
@@ -910,7 +909,7 @@ optgroup::-moz-focus-inner {
 .menu li > a:focus,
 .menu li:focus > a,
 .menu li:hover > a {
-  background: rgba(177, 8, 8, 0.9);
+  background: #B10808;
   outline: 0;
   color: #fff;
   min-width: 130px; }
