@@ -1,6 +1,5 @@
 #access {
 	float:left;
-	margin:1.5% 0 0 3%;
 }
 
 .menu,
@@ -23,7 +22,7 @@
 	left: -9999px;
 	opacity: 0;
 	-webkit-transition: 0.1s linear opacity;
-	width:$navItem-width;
+	min-width:$navItem-width;
 	background: $navDropdown-bg;
 }
 
@@ -38,7 +37,7 @@
 	padding: 10px 10px;
 	color: $text;
 	text-decoration: none;
-	width:$navItem-width;
+	min-width:$navItem-width;
 	text-align:center;
 }
 
