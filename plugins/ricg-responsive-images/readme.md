@@ -7,6 +7,10 @@ Bringing automatic default responsive images to WordPress.
 
 This plugin works by including all available image sizes for each image upload. Whenever WordPress outputs the image through the media uploader, or whenever a featured image is generated, those sizes will be included in the image tag via the [srcset](http://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/) attribute.
 
+##Contribution Guidelines
+
+Please submit pull requests to our dev branch. If your contribution requires such, please aim to include appropriate tests with your pr as well.
+
 ##Documentation
 
 ###For General Users
@@ -16,6 +20,19 @@ No configuration is needed! Just install the plugin and enjoy automatic responsi
 ###For Theme Developers
 
 This plugin includes several functions that can be used by theme and plugin developers in templates.
+
+###Advanced Image Compression
+
+**This is an experimental feature, if used, please provide us with feedback!**
+
+This feature turns on advanced compression, which will deliver higher quality images at a smaller file size. To enable, place the following code in your `functions.php` file - 
+```
+function custom_theme_setup() {
+	add_theme_support( 'advanced-image-compression' );
+}
+add_action( 'after_setup_theme', 'custom_theme_setup' );
+```
+---
 
 ####tevkori_get_sizes( $id, $size, $args )
 
@@ -80,17 +97,16 @@ Returns an array of image source candidates for use in a 'srcset' attribute. The
 ***Usage Example***
 
 ```
-
 $sources = tevkori_get_srcset_array( 11, 'medium' );
 
-$srcset = array();
-foreach( $srcset as $source ) {
- if ( false === strpos(' 900w', $source) {
-  $srcset[] = $source;
- }
+// Optionally remove a specific source from the srcset list.
+foreach( $sources as $key => $source ) {
+	if ( strpos( $source, '300w' ) ) {
+		unset( $s[$key] );
+	}
 }
 
-<img src="myimg.png" srcset="<?php implode( ', ', $srcset ); ?>" >
+<img src="myimg.png" srcset="<?php implode( ', ', $sources ); ?>" >
 ```
 
 ---
@@ -107,15 +123,34 @@ Returns A full 'srcset' attribute. The parameters include the ID of the image an
 
 **Dependencies**
 
-The only external dependency included in this plugin is Picturefill - v2.3.0. If you would like to remove Picturefill, add the following line to your functions.php file: ```wp_dequeue_script('picturefill')```
+The only external dependency included in this plugin is [Picturefill](http://scottjehl.github.io/picturefill/) - v2.3.0. If you would like to remove Picturefill (see notes about [browser support](http://scottjehl.github.io/picturefill/#support)), add the following to your functions.php file:
+
+    function mytheme_dequeue_scripts() {
+      wp_dequeue_script('picturefill');
+    }
+
+    add_action('wp_enqueue_scripts', 'mytheme_dequeue_scripts');
+
+We use a hook because if you attempt to dequeue a script before it's enqueued, wp_dequeue_script has no effect. (If it's still being loaded, you may need to specify a [priority](http://codex.wordpress.org/Function_Reference/add_action).)
 
 ##Version
 
-2.2.1
+2.3.0
 
 ##Changelog
 
-- JS patch for wordpress
+- Improved performance of `get_srcset_array`
+- Added advanced image compression option (available by adding hook to functions.php)
+- Duplicate entires now filtered out from srcset array
+- Upgrade Picturefill to 2.3.1
+- Refactoring plugin JS, including a switch to ajax for updating the srcset value when the image is changed in the editor
+- Now using wp_get_attachment_image_attributes filter for post thumbnails
+- Readme and other general code typo fixes
+- Gallery images will now contain a srcset attribute
+
+**2.2.1**
+
+- JS patch for WordPress
 
 **2.2.0**
 
