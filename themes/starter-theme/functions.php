@@ -123,7 +123,31 @@ function starter_theme_scripts() {
     
 add_action('wp_enqueue_scripts', 'starter_theme_scripts');
 
+/**
+ *
+ * Register sidebars and widgetized areas
+ *
+ */
+function starter_theme_widgets_init() {
+    register_sidebar( array(
+        'name' => __( 'Blog Sidebar', 'starter-theme' ),
+        'id' => 'sidebar-1', // ID to use when including sidebar in other templates
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget' => '</aside>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
+    ) );    
 
+    register_sidebar( array(
+        'name' => __( 'Page Sidebar', 'starter-theme' ),
+        'id' => 'sidebar-2', // ID to use when including sidebar in other templates
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget' => '</aside>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
+    ) );
+}
+add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
 /**
 *
