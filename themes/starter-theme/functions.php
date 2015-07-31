@@ -149,6 +149,45 @@ function starter_theme_widgets_init() {
 }
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
 
+
+/**
+*
+* Enable Custom Editor styles
+*
+**/
+
+// adds CSS
+function starter_theme_add_editor_styles() {
+	add_editor_style( 'editor-style.css' );
+}
+add_action( 'admin_init', 'starter_theme_add_editor_styles' );
+
+// adds custom fonts
+// [TO DO] - update with correct typography for new projects
+function starter_theme_add_editor_fonts(){
+	$font_url = str_replace(',', '%2C', 'fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600italic,600,300,300italic|Lato:400,400italic,300italic,300,700,700italic');
+	add_editor_style($font_url);
+}
+add_action('after_theme_setup', 'starter_theme_add_editor_fonts');
+
+
+/**
+*
+* Customize the Excerpt
+*
+**/
+
+function custom_excerpt_length($length) {
+	return 75;
+}
+add_filter('excerpt_length', 'custom_excerpt_length', 999);
+
+function new_excerpt_more($more){
+	return ' <a class="read-more" href="' . get_permalink( get_the_ID() ) .'">' . __('Read More', 'starter-theme') . '</a>';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
+
 /**
 *
 * Enable ACF Options Page
