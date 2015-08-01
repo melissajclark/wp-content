@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Admin Post Navigation
- * Version:     1.9
+ * Version:     1.9.1
  * Plugin URI:  http://coffee2code.com/wp-plugins/admin-post-navigation/
  * Author:      Scott Reilly
  * Author URI:  http://coffee2code.com/
@@ -11,7 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Description: Adds links to navigate to the next and previous posts when editing a post in the WordPress admin.
  *
- * Compatible with WordPress 3.0 through 4.1+.
+ * Compatible with WordPress 3.0 through 4.2+.
  *
  * =>> Read the accompanying readme.txt file for instructions and documentation.
  * =>> Also, visit the plugin's homepage for additional information and updates.
@@ -19,7 +19,7 @@
  *
  * @package Admin_Post_Navigation
  * @author  Scott Reilly
- * @version 1.9
+ * @version 1.9.1
  */
 
 /*
@@ -69,7 +69,7 @@ class c2c_AdminPostNavigation {
 	 * @since 1.7
 	 */
 	public static function version() {
-		return '1.9';
+		return '1.9.1';
 	}
 
 	/**
@@ -120,7 +120,6 @@ class c2c_AdminPostNavigation {
 			foreach( $post_statuses as $i => $v ) { $GLOBALS['wpdb']->escape_by_ref( $v ); $post_statuses[ $i ] = $v; }
 			self::$post_statuses_sql = "'" . implode( "', '", $post_statuses ) . "'";
 		}
-		$label = self::_get_post_type_label( $post_type );
 
 		if ( in_array( $post->post_status, $post_statuses ) ) {
 			add_meta_box(
@@ -138,7 +137,7 @@ class c2c_AdminPostNavigation {
 	 * Adds the content for the post navigation meta_box.
 	 *
 	 * @param object $object
-	 * @param array $box
+	 * @param array  $box
 	 */
 	public static function add_meta_box( $object, $box ) {
 		$display = '';
@@ -215,7 +214,7 @@ HTML;
 		echo <<<JS
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			$('#admin-post-nav').appendTo($('h2:first'));
+			$('#admin-post-nav').appendTo($('#wpbody-content .wrap:first h2:first'));
 			$('#adminpostnav, label[for="adminpostnav-hide"]').hide();
 		});
 		</script>

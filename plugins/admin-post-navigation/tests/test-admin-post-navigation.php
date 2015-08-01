@@ -68,7 +68,16 @@ class Admin_Post_Navigation_Test extends WP_UnitTestCase {
 		$this->assertEquals( 'post', $post_type );
 		$this->assertTrue( is_a( $post, 'WP_Post' ) );
 
+		// Add a post status.
 		$post_statuses[] = 'trash';
+
+		// Remove post status.
+		$post_statuses_to_remove = array( 'draft' );
+		foreach ( $post_statuses_to_remove as $remove ) {
+			if ( false !== $index = array_search( $remove, $post_statuses ) ) {
+				unset( $post_statuses[ $index ] );
+			}
+		}
 
 		return $post_statuses;
 	}
@@ -94,7 +103,7 @@ class Admin_Post_Navigation_Test extends WP_UnitTestCase {
 	}
 
 	function test_version() {
-		$this->assertEquals( '1.9', c2c_AdminPostNavigation::version() );
+		$this->assertEquals( '1.9.1', c2c_AdminPostNavigation::version() );
 	}
 
 	/*
@@ -209,7 +218,7 @@ class Admin_Post_Navigation_Test extends WP_UnitTestCase {
 		$this->assertEquals( 10, has_action( 'do_meta_boxes', array( 'c2c_AdminPostNavigation', 'do_meta_box' ) ) );
 	}
 
-	function test_filter_c2c_admin_post_navigation_post_statuses() {
+	function test_filter_c2c_admin_post_navigation_post_statuses_when_adding_post_status() {
 		add_filter( 'c2c_admin_post_navigation_post_statuses', array( $this, 'c2c_admin_post_navigation_post_statuses' ), 10, 3 );
 
 		$posts = $this->create_posts();
@@ -221,6 +230,20 @@ class Admin_Post_Navigation_Test extends WP_UnitTestCase {
 		$next_post = c2c_AdminPostNavigation::next_post();
 
 		$this->assertEquals( $posts[3], $next_post->ID );
+	}
+
+	function test_filter_c2c_admin_post_navigation_post_statuses_when_removing_post_status() {
+		add_filter( 'c2c_admin_post_navigation_post_statuses', array( $this, 'c2c_admin_post_navigation_post_statuses' ), 10, 3 );
+
+		$posts = $this->create_posts();
+
+		$post = get_post( $posts[3] );
+		$post->post_status = 'draft';
+		wp_update_post( $post );
+		$post = get_post( $posts[2] );
+
+		$next_post = c2c_AdminPostNavigation::next_post();
+		$this->assertEquals( $posts[4], $next_post->ID );
 	}
 
 	function test_filter_c2c_admin_post_navigation_orderby() {
