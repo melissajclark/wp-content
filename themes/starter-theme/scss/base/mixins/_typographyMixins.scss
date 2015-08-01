@@ -5,36 +5,51 @@
 // *
 
 
+// function - converts px to em
+// Source: https://css-tricks.com/snippets/sass/px-to-em-functions/
+$browser-context: 16; // Default
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+// Example of PX to EM Usage:
+// h1 {
+//   font-size: em(32);
+// }
+
+// heading font family
+// ---------------
 @mixin heading-font {
 font:{
-  family: $heading-font;
+  family: $headingFont;
   style: normal;
   weight: 400;
   }
 }
 
+// body font family
+// ---------------
 @mixin body-font {
 font:{
-  family: $body-font;
+  family: $bodyFont;
   style: normal;
   weight: 400;
   }
 }
 
+// body font Sizing
+// ---------------
 @mixin normal-font-size {
  font-size: 1.15rem;
  line-height: 1.8rem;
  word-wrap:break-word;
 }
 
+// body font Sizing for mobile devices
+// ---------------
 @mixin small-font-size {
  font-size: 1.1rem;
  line-height: 1.56rem;
- word-wrap:break-word;
-}
-
-@mixin super-small-font-size {
- font-size: 0.999rem;
- line-height: 1.3rem;
  word-wrap:break-word;
 }
