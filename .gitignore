@@ -56,9 +56,3 @@ exports-wp-db-migrate/
 plugins/advanced-custom-fields-pro
 plugins/wp-migrate-db-pro
 plugins/wp-migrate-db-pro-media-files
-
-### CSS ###
-themes/starter-theme/editor-style.css
-themes/starter-theme/style.css
-themes/starter-theme/assets/style.css.map
-themes/starter-theme/assets/css/
