@@ -26,9 +26,6 @@
     <!-- favicon & links -->
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" />
     <link rel="pingback" href="<?php bloginfo( "pingback_url" ); ?>" />
- 
-    <!-- stylesheet -->
-    <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( "stylesheet_url" ); ?>" />
     
     <!-- Font Awesome -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
