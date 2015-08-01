@@ -23,6 +23,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 		$this->properties['label']	 		= __( 'Custom Field', 'cpac' );
 		$this->properties['classes']		= 'cpac-box-metafield';
 		$this->properties['is_cloneable']	= true;
+		$this->properties['group']			= 'custom-field';
 
 		// Options
 		$this->options['field']				= '';

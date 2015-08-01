@@ -3,8 +3,8 @@ Contributors: codepress, tschutter, davidmosterd, engelen
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.5
-Tested up to: 4.2.1
-Stable tag: 2.4.3
+Tested up to: 4.2.2
+Stable tag: 2.4.5
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -211,6 +211,18 @@ You can find a list of the available actions and filters (and examples on how to
 8. Posts Screen with custom fields.
 
 == Changelog ==
+
+= 2.4.5 =
+* [Fixed] Estimate Time Reading column will not display a value when there is no content
+* [Fixed] When updating there was a possbile change on a "Cannot modify header information"
+
+= 2.4.4 =
+* [Fixed] Support for custom post statuses
+* [Fixed] Page Order column is now available on all hierarchical post types
+* [Added] WordPress Default columns has it's own menu group
+* [Added] Columns set by plugins has it's own menu group
+* [Added] Custom Field column has it's own menu group
+* [Update] Updated all languages from Transifex
 
 = 2.4.3 =
 * [Fixed] Comment bubble icon is fixed
