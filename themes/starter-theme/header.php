@@ -49,7 +49,7 @@
             </a>
         </h1>
 
-        <nav id="access" role="navigation">
+        <nav class="access" role="navigation">
             <?php wp_nav_menu( array( "theme_location" => "primary", 'container' => '' ) ); ?>
         </nav><!-- #access -->  
     </header><!-- #site-header .contentContainer -->
