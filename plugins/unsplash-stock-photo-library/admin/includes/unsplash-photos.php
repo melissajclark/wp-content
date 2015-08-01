@@ -63,7 +63,7 @@
 	      usp_pages = Math.round(usp_photos_length / usp_load); // Generate the # of pages
          get_photos();  // Get the photos now :)                      
       }).error(function() { 
-         alert("<?php _e('Error loading Unsplash JSON feed.', USP_NAME); ?>")
+         console.log("<?php _e('Error loading Unsplash JSON feed from https://unsplash.it/list.', USP_NAME); ?>")
       });
       
       function get_photos(){

@@ -236,32 +236,11 @@
   box-sizing: border-box;
   padding: 15px !important;
 }
-
-a.button.thickbox.unsplash{
-   background: #aa85d3;
-   color: #fff;
-   -webkit-box-shadow: 0 1px 0 #aa85d3 inset, 0 1px 0 rgba(0, 0, 0, 0.08);
-   -moz-box-shadow: 0 1px 0 #aa85d3 inset, 0 1px 0 rgba(0, 0, 0, 0.08);
-   box-shadow: 0 1px 0 #aa85d3 inset, 0 1px 0 rgba(0, 0, 0, 0.08);
-   border-color: #9066bf;
-}
-   a.button.thickbox.unsplash:hover{
-      border-color: #573879;
-   }
-   a.button.thickbox.unsplash:focus{
-      background-color: #9d76c8;
-      -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.08);
-      -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.08);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.08);
-   }
-   a.button.thickbox.unsplash:hover span{
-      color: #573879;
-   }
 a.button.thickbox.unsplash span{
    position: relative;
-   top: 4px;
+   top: 3px;
    left: -2px;
-   color: #573879;
+   color: #999;
 }
 
 

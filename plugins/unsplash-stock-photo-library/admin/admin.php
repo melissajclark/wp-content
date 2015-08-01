@@ -38,7 +38,7 @@ function usp_admin_vars() { ?>
 
 add_action( 'admin_menu', 'usp_admin_menu' );
 function usp_admin_menu() {  
-   $usp_settings_page = add_submenu_page( 'options-general.php', 'Unsplash WP', 'Unsplash WP', 'edit_theme_options', 'unsplash', 'usp_settings_page'); 	
+   $usp_settings_page = add_submenu_page( 'upload.php', 'Unsplash WP', 'Unsplash WP', 'edit_theme_options', 'unsplash', 'usp_settings_page'); 	
    
    //Add our admin scripts
    add_action( 'load-' . $usp_settings_page, 'usp_load_admin_scripts' );
@@ -94,7 +94,7 @@ function usp_media_popup($context) {
   //append the icon
   $context .= "<a href='#TB_inline?width=1200&height=800%&inlineId=popup_container'
     class='button thickbox unsplash' title='Unsplash WP - Click photos to upload directly to your media library'>
-    <span class='dashicons dashicons-format-gallery'></span> Unsplash Uploader</a>";
+    <span class='dashicons dashicons-format-gallery'></span> Unsplash WP</a>";
 
   return $context;
 }

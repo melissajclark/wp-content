@@ -88,6 +88,9 @@ How to install Ajax Load More.
 
 == Changelog ==
 
+= 1.1.1 =
+* Replacing alert warning with console.log msg if Unsplash API feed is down. 
+
 = 1.1 =
 * Improved error and success handling
 * Replacing file_get_contents with cURL for image handling.
