@@ -1,24 +1,11 @@
-/* See _mixins.scss for more on this method for handling HTML5 elements */
-// #{$all-text-inputs}, 
-// textarea {
-// 	border: $border;
-// 	padding: 4px 10px;
-// 	-webkit-appearance: none;
-// }
-// #{$all-text-inputs-focus},
-// textarea:focus {
-// 	color: $text;
-// }
-// input[type=submit] {
-// 	-webkit-appearance: none;
-// }
+/**
+*
+* Formalize Me:
+* http://formalize.me/
+*
+* Sets up forms for similar cross-browser styling
+**/
 
-// /* Placeholders */
-// ::placeholder {
-// 	color: TEXTCOLOR;
-// }
-
-// http://formalize.me/
 
 /* Search form */
 input#s {
@@ -177,7 +164,7 @@ input[type="week"] {
   margin:0 0 5px 0;
   text-align: left;
   font-size: inherit;
-  font-family: $body-font, Arial, "Liberation Sans", FreeSans, sans-serif;
+  font-family: $bodyFont, Arial, "Liberation Sans", FreeSans, sans-serif;
   // height: 1.8em;
   vertical-align: top;
   // *padding-top: 2px;
@@ -312,7 +299,7 @@ optgroup::-moz-focus-inner {
   border-color: #dddddd #bbbbbb #999999;
   cursor: pointer;
   color: #333333;
-  font: bold 12px/1.2 $body-font, Arial, sans-serif;
+  font: bold 12px/1.2 $bodyFont, Arial, sans-serif;
   padding: 2px 10px 0;
   text-decoration: none;
   overflow: visible;
@@ -340,7 +327,7 @@ optgroup::-moz-focus-inner {
   color: black;
   padding: 2px 3px 1px;
   font-size: 16px;
-  font-family: $body-font, Arial, sans-serif;
+  font-family: $bodyFont, Arial, sans-serif;
   vertical-align: top;
 }
 
@@ -357,4 +344,3 @@ optgroup::-moz-focus-inner {
 .ie6_input_disabled {
   background: #eeeeee;
 }
-
