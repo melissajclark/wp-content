@@ -86,16 +86,16 @@ add_action( 'after_setup_theme', 'starter_theme_setup' );
 
 
 function starter_theme_scripts() {
-
-	// theme style.css file
-    wp_enqueue_style( 'starter-theme-style', get_stylesheet_uri() );
+	
+    wp_enqueue_style( 'starter-theme-style', get_stylesheet_uri() ); // theme style.css file
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-		//Don't use WordPress' local copy of jquery, load our own version from a CDN instead
-		wp_deregister_script('jquery');
+	//Don't use WordPress' local copy of jquery, load our own version from a CDN instead
+	wp_deregister_script('jquery');
+
 	  wp_enqueue_script(
 	  	'jquery',
 	  	"http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",
