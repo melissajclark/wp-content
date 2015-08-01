@@ -3,7 +3,7 @@
 Plugin Name: WP Accessibility
 Plugin URI: http://www.joedolson.com/wp-accessibility/
 Description: Provides options to improve accessibility in your WordPress site, including removing title attributes.
-Version: 1.4.0
+Version: 1.4.2
 Author: Joe Dolson
 Text Domain: wp-accessibility
 Author URI: http://www.joedolson.com/
@@ -37,7 +37,7 @@ function add_wpa_admin_menu() {
 
 // ACTIVATION
 function wpa_install() {
-	$wpa_version = '1.4.0';
+	$wpa_version = '1.4.2';
 	if ( get_option( 'wpa_installed' ) != 'true' ) {
 		add_option( 'rta_from_nav_menu', 'on' );
 		add_option( 'rta_from_page_lists', 'on' );
@@ -171,6 +171,17 @@ function wpa_enqueue_scripts() {
 			$wpa_comp = false;
 		}
 		wp_localize_script( 'wpa-complementary', 'wpaComplementary', $wpa_comp );
+	}
+	if ( get_option( 'wpa_labels' ) == 'on' ) {
+		wp_enqueue_script( 'wpa-labels', plugins_url( 'js/wpa.labels.js', __FILE__ ), array( 'jquery' ), '1.0', true );
+		$labels = array( 
+			's' => __( 'Search', 'wp-accessibility' ),
+			'author' => __( 'Name', 'wp-accessibility' ),
+			'email' => __( 'Email', 'wp-accessibility' ),
+			'url' => __( 'Website', 'wp-accessibility' ),
+			'comment' => __( 'Comment', 'wp-accessibility' )
+		);
+		wp_localize_script( 'wpa-labels', 'wpalabels', $labels );
 	}
 	if ( get_option( 'wpa_toolbar' ) == 'on' ) {
 		add_action( 'wp_footer', 'wpa_toolbar_js' );
@@ -320,14 +331,14 @@ function wpa_jquery_asl() {
 	// attach language to html element
 	if ( get_option( 'wpa_lang' ) == 'on' ) {
 		$lang    = get_bloginfo( 'language' );
-		$dir     = get_bloginfo( 'text_direction' );
+		$dir     =  ( is_rtl() ) ? 'rtl' : 'ltr';
 		$lang_js = "$('html').attr( 'lang','$lang' ); $('html').attr( 'dir','$dir' )";
 	}
 	// force links to open in the same window
 	$targets    = ( get_option( 'wpa_target' ) == 'on' ) ? "$('a').removeAttr('target');" : '';
 	$tabindex   = ( get_option( 'wpa_tabindex' ) == 'on' ) ? "$('input,a,select,textarea,button').removeAttr('tabindex');" : '';
 	$underlines = ( get_option( 'wpa_underline' ) == 'on' ) ? "$('a').css( 'text-decoration','underline' );$('a').on( 'focusin mouseenter', function() { $(this).css( 'text-decoration','none' ); });$('a').on( 'focusout mouseleave', function() { $(this).css( 'text-decoration','underline' ); } );" : '';
-
+	
 	$display = ( $skiplinks_js || $targets || $lang_js || $tabindex || $longdesc ) ? true : false;
 	if ( $display ) {
 		$script = "
@@ -576,6 +587,7 @@ function wpa_update_settings() {
 		if ( isset( $_POST['action'] ) && $_POST['action'] == 'misc' ) {
 			$wpa_lang                    = ( isset( $_POST['wpa_lang'] ) ) ? 'on' : '';
 			$wpa_target                  = ( isset( $_POST['wpa_target'] ) ) ? 'on' : '';
+			$wpa_labels                  = ( isset( $_POST['wpa_labels'] ) ) ? 'on' : '';
 			$wpa_search                  = ( isset( $_POST['wpa_search'] ) ) ? 'on' : '';
 			$wpa_tabindex                = ( isset ( $_POST['wpa_tabindex'] ) ) ? 'on' : '';
 			$wpa_underline               = ( isset ( $_POST['wpa_underline'] ) ) ? 'on' : '';
@@ -596,6 +608,7 @@ function wpa_update_settings() {
 			$wpa_complementary_container = ( isset( $_POST['wpa_complementary_container'] ) ) ? str_replace( '#', '', $_POST['wpa_complementary_container'] ) : '';
 			update_option( 'wpa_lang', $wpa_lang );
 			update_option( 'wpa_target', $wpa_target );
+			update_option( 'wpa_labels', $wpa_labels );
 			update_option( 'wpa_search', $wpa_search );
 			update_option( 'wpa_tabindex', $wpa_tabindex );
 			update_option( 'wpa_underline', $wpa_underline );
@@ -832,26 +845,26 @@ function wpa_admin_menu() {
 								<li><label
 										for="asl_content"><?php _e( 'Skip to Content link target (ID of your main content container)', 'wp-accessibility' ); ?></label>
 									<input type="text" id="asl_content" name="asl_content"
-									       value="<?php echo esc_attr( get_option( 'asl_content' ) ); ?>"/></li>
+									       value="<?php esc_attr_e( get_option( 'asl_content' ) ); ?>"/></li>
 								<li><label
 										for="asl_navigation"><?php _e( 'Skip to Navigation link target (ID of your main navigation container)', 'wp-accessibility' ); ?></label>
 									<input type="text" id="asl_navigation" name="asl_navigation"
-									       value="<?php echo esc_attr( get_option( 'asl_navigation' ) ); ?>"/></li>
+									       value="<?php esc_attr_e( get_option( 'asl_navigation' ) ); ?>"/></li>
 								<li><label
 										for="asl_sitemap"><?php _e( 'Site Map link target (URL for your site map)', 'wp-accessibility' ); ?></label><input
 										type="text" id="asl_sitemap" name="asl_sitemap" size="44"
-										value="<?php echo esc_attr( get_option( 'asl_sitemap' ) ); ?>"/></li>
+										value="<?php esc_attr_e( get_option( 'asl_sitemap' ) ); ?>"/></li>
 								<li><label
 										for="asl_extra_target"><?php _e( 'Add your own link (link or container ID)', 'wp-accessibility' ); ?></label>
 									<input type="text" id="asl_extra_target" name="asl_extra_target"
-									       value="<?php echo esc_attr( get_option( 'asl_extra_target' ) ); ?>"/> <label
+									       value="<?php esc_attr_e( get_option( 'asl_extra_target' ) ); ?>"/> <label
 										for="asl_extra_text"><?php _e( 'Link text for your link', 'wp-accessibility' ); ?></label>
 									<input type="text" id="asl_extra_text" name="asl_extra_text"
-									       value="<?php echo esc_attr( get_option( 'asl_extra_text' ) ); ?>"/></li>
+									       value="<?php esc_attr_e( get_option( 'asl_extra_text' ) ); ?>"/></li>
 								<li><label
 										for="asl_styles_focus"><?php _e( 'Styles for Skiplinks when they have focus', 'wp-accessibility' ); ?></label><br/>
 									<textarea name='asl_styles_focus' id='asl_styles_focus' cols='60'
-									          rows='4'><?php echo stripslashes( get_option( 'asl_styles_focus' ) ); ?></textarea>
+									          rows='4'><?php esc_attr_e( stripslashes( get_option( 'asl_styles_focus' ) ) ); ?></textarea>
 								</li>
 								<?php if ( get_option( 'asl_visible' ) != 'on' ) {
 									$disabled = " disabled='disabled' style='background: #eee;'";
@@ -902,7 +915,7 @@ function wpa_admin_menu() {
 									<label
 										for="wpa_continue"><?php _e( 'Continue reading text', 'wp-accessibility' ); ?></label>
 									<input type="text" id="wpa_continue" name="wpa_continue"
-									       value="<?php echo esc_attr( get_option( 'wpa_continue' ) ); ?>"/></li>
+									       value="<?php esc_attr_e( get_option( 'wpa_continue' ) ); ?>"/></li>
 										   								<li><input type="checkbox" id="wpa_insert_roles"
 								           name="wpa_insert_roles" <?php if ( get_option( 'wpa_insert_roles' ) == "on" ) {
 										echo 'checked="checked" ';
@@ -910,10 +923,13 @@ function wpa_admin_menu() {
 										for="wpa_insert_roles"><?php _e( 'Add landmark roles to HTML5 structural elements', 'wp-accessibility' ); ?></label><br/><label
 										for="wpa_complementary_container"><?php _e( 'ID for complementary role', 'wp-accessibility' ); ?></label><input
 										type="text" id="wpa_complementary_container" name="wpa_complementary_container"
-										value="#<?php echo esc_attr( get_option( 'wpa_complementary_container' ) ); ?>"/>
+										value="#<?php esc_attr_e( get_option( 'wpa_complementary_container' ) ); ?>"/>
+								</li>
+								<li>
+									<input type="checkbox" id="wpa_labels" name="wpa_labels" <?php checked( get_option( 'wpa_labels'), 'on' ); ?> /> <label for='wpa_labels'><?php _e( 'Automatically Label WordPress search form and comment forms', 'wp-accessibility' ); ?></label>
 								</li>
 								<?php } else { ?>
-									<li><?php _e( '<strong>Three disabled features:</strong> Site language, continue reading text, and landmark roles are defined by your <code>accessibility-ready</code> theme.', 'wp-accessibility' ); ?></li>
+									<li><?php _e( '<strong>Four disabled features:</strong> Site language, continue reading text, landmark roles and standard form labels are defined in your <code>accessibility-ready</code> theme.', 'wp-accessibility' ); ?></li>
 								<?php } ?>
 								<li><input type="checkbox" id="wpa_target"
 								           name="wpa_target" <?php if ( get_option( 'wpa_target' ) == "on" ) {
@@ -1021,7 +1037,7 @@ function wpa_admin_menu() {
 									<label
 										for="wpa_focus_color"><?php _e( 'Outline color (hexadecimal, optional)', 'wp-accessibility' ); ?></label><input
 										type="text" id="wpa_focus_color" name="wpa_focus_color"
-										value="#<?php echo esc_attr( get_option( 'wpa_focus_color' ) ); ?>"/></li>
+										value="#<?php esc_attr_e( get_option( 'wpa_focus_color' ) ); ?>"/></li>
 							</ul>
 						</fieldset>
 						<p>
@@ -1088,13 +1104,13 @@ function wpa_admin_menu() {
 									<div id="fore"></div>
 									<label
 										for="color1"><?php _e( 'Foreground color', 'wp-accessibility' ); ?></label><br/><input
-										type="text" name="color" value="#<?php echo $hex1; ?>" size="34" id="color1"/>
+										type="text" name="color" value="#<?php esc_attr_e( $hex1 ); ?>" size="34" id="color1"/>
 								</li>
 								<li class='back'>
 									<div id="back"></div>
 									<label
 										for="color2"><?php _e( 'Background color', 'wp-accessibility' ); ?></label><br/><input
-										type="text" name="color2" value="#<?php echo $hex2; ?>" size="34" id="color2"/>
+										type="text" name="color2" value="#<?php esc_attr_e( $hex2 ); ?>" size="34" id="color2"/>
 								</li>
 							</ul>
 						</fieldset>
@@ -1363,13 +1379,13 @@ class WP_Widget_Recent_Posts_No_Title_Attributes extends WP_Widget {
 		?>
 		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-			       name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
+			       name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php esc_attr_e( $title ); ?>"/>
 		</p>
 
 		<p><label
 				for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show:' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'number' ); ?>"
-			       name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>"
+			       name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php esc_attr_e( $number ); ?>"
 			       size="3"/></p>
 	<?php
 	}
@@ -1644,7 +1660,7 @@ add_filter( 'image_send_to_editor', 'longdesc_add_attr', 10, 8 );
 function wpa_accessible_theme() {
 	$theme = wp_get_theme();
 	$tags = $theme->get( 'Tags' );
-	if ( in_array( 'accessibility-ready', $tags ) ) {
+	if ( is_array( $tags ) && in_array( 'accessibility-ready', $tags ) ) {
 		return true;
 	}
 	return false;
@@ -1694,7 +1710,7 @@ function wpa_media_value( $column, $id ) {
 				}
 				break;
 			default: 
-					echo '<span class="non-image">' . __( 'N/A', 'wp-accessibility' ) . '</span>';
+				echo '<span class="non-image">' . __( 'N/A', 'wp-accessibility' ) . '</span>';
 				break;
 		}
 	}
@@ -1734,16 +1750,21 @@ function wpa_alt_attribute( $html, $id, $caption, $title, $align, $url, $size, $
 	$noalt = get_post_meta( $id, '_no_alt', true );
 	/* Get the original title to compare to alt */
 	$title = get_the_title( $id );
-	$warning = '';
+	$warning = false;
 	if ( $noalt == 1 ) {
 		$html = str_replace( 'alt="'.$alt.'"', 'alt=""', $html );
 	}
 	if ( ( $alt == '' || $alt == $title ) && $noalt != 1 ) {
-		$warning = __( 'This image requires an <code>alt</code> attribute.', 'wp-accessibility' );
+		if ( $alt == $title ) {
+			$warning = __( 'The alt text for this image is the same as the title. In most cases, that means that the alt attribute has been automatically provided from the image file name.', 'wp-accessibility' );
+			$image = 'alt-same.png';
+		} else {
+			$warning = __( 'This image requires alt text, but the alt text is currently blank. Either add alt text or mark the image as decorative.', 'wp-accessibility' );
+			$image = 'alt-missing.png';
+		}
 	}
 	if ( $warning ) {
-		$html = str_replace( 'alt="'.$alt.'"', 'alt=""', $html );
-		return "<div class='wpa-image-missing-alt'>" . $html . '<br />' . $warning . "</div>";
+		return "<img class='wpa-image-missing-alt size-" . esc_attr( $size ) . ' ' . esc_attr( $align ) . "' src='" . plugins_url( "imgs/$image", __FILE__ ) . "' alt='" . esc_attr( $warning ) . "' />";
 	}
 	return $html;
 }
