@@ -12,7 +12,12 @@ body, input, textarea {
 }
 
 /* Headings */
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	@include heading-font;
 	clear: both;
 }
@@ -44,6 +49,17 @@ h5 {
 h6 {
 	font-size:1.2rem;
 	line-height:1.9rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	&a {
+		color:$linkColour;
+	}
 }
 
 
@@ -143,20 +159,18 @@ sub {
 }
 
 
-
 /* Links */
 a {
-	color: $links;
+	color: $linkColour;
 	text-decoration: none;
 	word-wrap:break-word;
 	&:focus,
 	&:active,
 	&:hover {
-		color: $hover;
+		color: $hoverColour;
 		word-wrap:break-word;
 	}
 }
-
 
 /* Assistive text */
 .assistive-text {
