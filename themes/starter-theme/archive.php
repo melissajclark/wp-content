@@ -15,22 +15,17 @@ get_header(); ?>
 
    <?php if ( have_posts() ) : // display the content _if_ there are posts ?>
 
-        <?php // check if we're on an archive page
-        if ( is_archive() ) :
-            // if so, print the archive title before the loop begins
-            get_template_part( 'inc/archive-header' );
-        endif; ?>
+        <?php  if ( is_archive() ) : // print the archive header if its an archive template?>
+            <?php get_template_part( 'inc/archive-header' );  ?>
+        <?php endif; ?>
 
-        <?php /* Start the Loop */ ?>
-        <?php while ( have_posts() ) : the_post(); ?>
-        
+        <?php while ( have_posts() ) : the_post(); // start the loop ?>
             <?php get_template_part('content'); ?>
-
         <?php endwhile; ?>
 
-            <?php get_template_part('inc/pagination'); ?>
+        <?php get_template_part('inc/pagination'); ?>
 
-    <?php else : // no content here! ?>
+    <?php else : // display an error message if there are no posts found ?>
 
         <article id="post-0" class="hentry post no-results not-found">
             <header class="entry-header">
@@ -41,7 +36,6 @@ get_header(); ?>
         </article><!-- #post-0 -->
 
     <?php endif; ?>
-
     </div><!-- / #primary -->
 
     <?php get_sidebar(); // #secondary div ?>
