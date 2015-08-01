@@ -13,13 +13,13 @@
 	</div><!-- #main -->
 </div><!-- #page -->
  
-<footer id="colophon" role="contentinfo" class="contentWrapper">	
-	<div id="copyright" class="contentContainer">
+<footer id="colophon" role="contentinfo" class="wrapper">	
+	<div id="copyright" class="container">
 		<?php get_template_part ('inc/social-media-fields') // grabs theme's social media content - [TO DO] update icon assets in final theme?>
 			&copy; <?php echo date("Y"); ?> <?php echo bloginfo( "name" ); ?>
 
 		<a href="http://melissajclark.ca" rel="bookmark">theme by Melissa</a>
-	</div><!-- / #copyright .contentContainer -->
+	</div><!-- / #copyright .container -->
 </footer><!-- #colophon -->
 
 <?php // Load external scripts in the footer ?>

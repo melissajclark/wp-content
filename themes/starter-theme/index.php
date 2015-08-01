@@ -11,7 +11,7 @@
 
 get_header(); ?>
 
-<div class="contentContainer contentWithAside">
+<div class="container contentWithAside">
     <div id="primary" role="main">
 
    <?php if ( have_posts() ) : // display the content _if_ there are posts ?>
@@ -43,6 +43,6 @@ get_header(); ?>
     </div><!-- / #primary -->
 
     <?php get_sidebar(); ?>
-</div><!-- / .contentContainer -->   
+</div><!-- / .container -->   
 
 <?php get_footer(); ?>

@@ -39,7 +39,7 @@
 <body <?php body_class(); ?>>
 <div id="page">
 
-    <header id="site-header" role="banner" class="contentContainer">
+    <header id="site-header" role="banner" class="container">
         <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _e('Skip to content', 'starter-theme'); ?></a>
         
         <h1>
@@ -52,6 +52,6 @@
         <nav class="access" role="navigation">
             <?php wp_nav_menu( array( "theme_location" => "primary", 'container' => '' ) ); ?>
         </nav><!-- #access -->  
-    </header><!-- #site-header .contentContainer -->
+    </header><!-- #site-header .container -->
 
     <div id="main">

@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<div class="contentContainer contentWithAside">
+<div class="container contentWithAside">
 	<div id="primary" role="main"> 
     <?php while ( have_posts() ) : the_post(); ?>
         <?php get_template_part( 'content' ); ?>
@@ -17,6 +17,6 @@ get_header(); ?>
     </div><!-- / #primary -->
 
     <?php get_sidebar(); ?>
-</div><!-- / .contentContainer -->   
+</div><!-- / .container -->   
    
 <?php get_footer(); ?>
