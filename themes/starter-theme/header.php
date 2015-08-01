@@ -27,16 +27,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" />
     <link rel="pingback" href="<?php bloginfo( "pingback_url" ); ?>" />
     
-    <!-- Font Awesome -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- scripts -->
     <!--[if lt IE 9]>
         <script src="<?php echo get_template_directory_uri(); ?>/assets/js/html5shiv.min.js" type="text/javascript"></script>
     <![endif]-->
-
-   <?php // Google Fonts ?>
-   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600italic,600,300,300italic|Lato:400,400italic,300italic,300,700,700italic' rel='stylesheet' type='text/css'>
-
  
     <?php // Lets other plugins and files tie into our theme's <head>:
     wp_head(); ?>
@@ -46,21 +40,18 @@
 <div id="page">
 
     <header id="site-header" role="banner" class="contentContainer">
-
         <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _e('Skip to content', 'starter-theme'); ?></a>
         
-            <h1>
-                <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
-                    <img src="<?php echo get_theme_mod('header_image'); ?>">
-                    <?php bloginfo("name"); ?>
-                </a>
-            </h1>
+        <h1>
+            <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
+                <img src="<?php echo get_theme_mod('header_image'); ?>">
+                <?php bloginfo("name"); ?>
+            </a>
+        </h1>
 
-            <nav id="access" role="navigation">
-                <?php wp_nav_menu( array( "theme_location" => "primary", 'container' => '' ) ); ?>
-            </nav><!-- #access -->  
-
+        <nav id="access" role="navigation">
+            <?php wp_nav_menu( array( "theme_location" => "primary", 'container' => '' ) ); ?>
+        </nav><!-- #access -->  
     </header><!-- #site-header .contentContainer -->
 
- 
     <div id="main">
