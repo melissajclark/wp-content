@@ -62,7 +62,6 @@
 **/ ?>
 
 <?php if ( is_single() || is_home() ) : ?>
-
     <footer class="entry-meta">
         <p><?php _e('Category: ', 'starter-theme'); ?><?php the_category(', '); ?></p>
         <p><?php the_tags( '<div class="post-tags">' . __( 'Tags: ', 'starter-theme' ) , ', ', '</div>' ); ?></p>
@@ -75,8 +74,6 @@
             ?>
         </div>
     </footer><!-- #entry-meta -->
-
-    <?php else : // doesn't match? don't show anything! ?>
 <?php endif; // end footer entry-meta conditional ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
