@@ -327,73 +327,63 @@ body {
 #main {
   clear: both; }
 
-.contentWrapper {
+.wrapper {
   width: 100%; }
 
-.contentContainer {
+.container {
   margin: 0 auto;
   max-width: 70%;
   padding: 2% 0 0 0; }
   @media (min-width: 1600px) {
-    .contentContainer {
+    .container {
       /* min-width: 1600px */
       max-width: 60%; } }
   @media (max-width: 1600px) {
-    .contentContainer {
+    .container {
       /* max-width: 1600px */
       max-width: 80%; } }
   @media (max-width: 1150px) {
-    .contentContainer {
+    .container {
       /* max-width: 1150px */
       max-width: 85%; } }
   @media (max-width: 800px) {
-    .contentContainer {
+    .container {
       /* max-width: 800px */
       max-width: 95%;
       font-size: 1.1rem;
       line-height: 1.56rem;
       word-wrap: break-word; } }
-  .contentContainer.contentWithAside #primary {
+  .container.contentWithAside #primary {
     width: 75%;
     float: left; }
     @media (max-width: 1150px) {
-      .contentContainer.contentWithAside #primary {
+      .container.contentWithAside #primary {
         width: 65%; } }
     @media (max-width: 800px) {
-      .contentContainer.contentWithAside #primary {
+      .container.contentWithAside #primary {
         width: 95%; } }
-  .contentContainer.contentWithAside #secondary {
+  .container.contentWithAside #secondary {
     width: 25%;
     float: left;
     padding: 0 0 0 5%; }
     @media (max-width: 1150px) {
-      .contentContainer.contentWithAside #secondary {
+      .container.contentWithAside #secondary {
         width: 35%; } }
     @media (max-width: 800px) {
-      .contentContainer.contentWithAside #secondary {
+      .container.contentWithAside #secondary {
         width: 95%;
         padding: 0;
         -webkit-column-count: 2;
            -moz-column-count: 2;
                 column-count: 2; }
-        .contentContainer.contentWithAside #secondary .widget {
+        .container.contentWithAside #secondary .widget {
           width: 100%;
           display: inline-block; } }
-    @media (max-width: 500px) {
-      .contentContainer.contentWithAside #secondary {
+    @media (max-width: 600px) {
+      .container.contentWithAside #secondary {
         -webkit-column-count: 1;
            -moz-column-count: 1;
                 column-count: 1; } }
-
-#content {
-  margin: 0;
-  width: 100%;
-  float: left; }
-
-#primary.full-width,
-#primary.full-width #content {
-  width: 100%;
-  float: none; }
 
 #colophon {
   clear: both;
@@ -434,7 +424,12 @@ body, input, textarea {
   word-wrap: break-word; }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -463,6 +458,14 @@ h5 {
 h6 {
   font-size: 1.2rem;
   line-height: 1.9rem; }
+
+h1a,
+h2a,
+h3a,
+h4a,
+h5a,
+h6a {
+  color: blue; }
 
 hr {
   background-color: #ccc;
@@ -577,7 +580,13 @@ a {
   top: 0;
   left: 7.6%; }
 
-/* See _mixins.scss for more on this method for handling HTML5 elements */
+/**
+*
+* Formalize Me:
+* http://formalize.me/
+*
+* Sets up forms for similar cross-browser styling
+**/
 /* Search form */
 .input_full_wrap {
   display: block;
@@ -863,7 +872,7 @@ optgroup::-moz-focus-inner {
   #site-header img {
     height: auto; }
 
-#access {
+.access {
   float: left; }
 
 .menu,
