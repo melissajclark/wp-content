@@ -13,7 +13,6 @@
 * Entry-Header: If statement outputs linked H2s for feed templates (archives, index, etc)
 *             - On singular templates non-linked H2s are used
 *             - Entry-meta - author & date are output on non-static content 
-*
 **/ ?>
     
 <header class="entry-header">
@@ -26,24 +25,20 @@
         </h2>
     <?php endif; ?>
 
-    <?php if ( is_single() || is_home() || is_archive() ) : // display entra meta on post / blog templates ?>
-
+    <?php if ( is_single() || is_home() || is_archive() ) : // display entra meta only on post & blog templates ?>
         <span class="entry-meta">
             <span class="entry-date" itemprop="datePublished" content="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></span>
             <span itemprop="author" itemscope itemtype="http://schema.org/Person"><?php the_author_posts_link(); ?></span>  
-        </span><!-- / entry-meta -->
-
-    <?php else :  // do not display date ?>
-           
+        </span><!-- / entry-meta -->   
     <?php endif; ?>
 </header><!-- .entry-header -->
 
 <?php 
 /**
- *
- * Entry-Content: If statement outputs content or excerpt, or custom fields depending on the template in use
- *
- **/ ?>
+*
+* Entry-Content: If statement outputs content or excerpt, or custom fields depending on the template in use
+*
+**/ ?>
 
 <div class="entry-content">
     <?php if (is_archive() ) : // displays the excerpt if it is an archive, otherwise shows the full content ?>
@@ -51,24 +46,20 @@
         <p itemprop="description"><?php the_excerpt(); ?></p>
 
     <?php else : // for all other templates, show this content ?>
-
         <?php the_content(); ?>
-
     <?php endif; ?>
 
     <?php if ( is_page() ) : // include the page-links if it is a page ?>
-
         <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
-
     <?php endif; ?>
 </div><!-- .entry-content -->
 
 <?php 
 /**
- *
- * Footer Entry Meta: If statement displays it on single blog posts or the blog feed (index.php)
- *
- **/ ?>
+*
+* Footer Entry Meta: If statement displays it on single blog posts or the blog feed (index.php)
+*
+**/ ?>
 
 <?php if ( is_single() || is_home() ) : ?>
 
@@ -86,7 +77,6 @@
     </footer><!-- #entry-meta -->
 
     <?php else : // doesn't match? don't show anything! ?>
-
 <?php endif; // end footer entry-meta conditional ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
