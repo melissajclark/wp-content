@@ -1,17 +1,13 @@
-/*!
- *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
+// 
+// List Any custom fonts below
+// 
 
-@import "font-awesome-scss/variables";
-// @import "font-awesome-scss/mixins";
-// @import "font-awesome-scss/path";
-// @import "font-awesome-scss/core";
-// @import "font-awesome-scss/larger";
-// @import "font-awesome-scss/fixed-width";
-// @import "font-awesome-scss/list";
-// @import "font-awesome-scss/bordered-pulled";
-// @import "font-awesome-scss/spinning";
-// @import "font-awesome-scss/rotated-flipped";
-// @import "font-awesome-scss/stacked";
-// @import "font-awesome-scss/icons";
+
+// Mark up for custom fonts: https://css-tricks.com/snippets/css/using-font-face/
+
+// @font-face {
+//   font-family: 'MyWebFont';
+//   src: url('myfont.woff2') format('woff2'),
+//        url('myfont.woff') format('woff'),
+//        url('myfont.ttf') format('truetype');
+// }
