@@ -1,4 +1,4 @@
-#access {
+.access {
 	float:left;
 }
 
@@ -22,8 +22,8 @@
 	left: -9999px;
 	opacity: 0;
 	-webkit-transition: 0.1s linear opacity;
-	min-width:$navItem-width;
-	background: $navDropdown-bg;
+	min-width:$navItemWidth;
+	background: $NavdropdownColour;
 }
 
 .menu li {
@@ -37,7 +37,7 @@
 	padding: 10px 10px;
 	color: $text;
 	text-decoration: none;
-	min-width:$navItem-width;
+	min-width:$navItemWidth;
 	text-align:center;
 }
 
@@ -46,10 +46,10 @@
 .menu li > a:focus,
 .menu li:focus > a,
 .menu li:hover > a {
-	background: $navDropdown-bg;
+	background: $NavdropdownColour;
 	outline: 0;
 	color:$white;
-	min-width:$navItem-width;
+	min-width:$navItemWidth;
 }
 
 /* Rounded corners for first top level nav item */
