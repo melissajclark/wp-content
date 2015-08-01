@@ -24,9 +24,7 @@ get_header(); ?>
 
         <?php /* Start the Loop */ ?>
         <?php while ( have_posts() ) : the_post(); ?>
-
             <?php get_template_part('content'); ?>
-
         <?php endwhile; ?>
 
         <?php get_template_part('inc/pagination'); ?>
@@ -42,12 +40,9 @@ get_header(); ?>
         </article><!-- #post-0 -->
 
     <?php endif; ?>
-
     </div><!-- / #primary -->
 
     <?php get_sidebar(); ?>
-    
 </div><!-- / .contentContainer -->   
-   
 
 <?php get_footer(); ?>
