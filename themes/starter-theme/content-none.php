@@ -1,13 +1,12 @@
 <?php
 /**
- * The template used for displaying blank page content in page.php
+ * The template used for displaying content when nothing more specific matches the query
  *
  * @package Starter_Theme
  */
 ?>
 
 <article class="post no-results not-found">
-
     <header class="entry-header">
         <h1 class="entry-title"><?php _e( 'Nothing Found', 'starter-theme' ); ?></h1>
     </header><!-- .entry-header -->
@@ -30,5 +29,4 @@
 
         <?php endif; ?>
     </div><!-- .entry-content -->
-    
 </article>

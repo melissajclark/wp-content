@@ -13,28 +13,19 @@ get_header(); ?>
     <?php if ( have_posts() ) : ?>
 
         <header class="archive-header">
-        
-            <?php
-            global $wp_query;
-            $total_results = $wp_query->found_posts;
-            ?>
-            <h1 class="entry-title"><?php _e('Search Results', 'starter-theme'); ?></h1>
-
-            <h2><?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h2>
-
+            <?php global $wp_query;
+            $total_results = $wp_query->found_posts; ?>
+            <h1 class="entry-title"><?php _e('Search Results', 'starter-theme'); ?> <?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h1>
         </header>
 
-        <?php /* Start the Loop */ ?>
-        <?php while ( have_posts() ) : the_post(); ?>
+        <?php while ( have_posts() ) : the_post(); // start the loop ?>
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <header class="entry-header">
                     <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                 </header><!-- .entry-header -->
-                <?php echo the_post_thumbnail($postID, 'large'); ?>
+                <?php echo the_post_thumbnail('large'); ?>
                 <?php the_excerpt(); ?>
-                <hr>
-
             </article><!-- #post-<?php the_ID(); ?> -->
 
         <?php endwhile; ?>
@@ -46,12 +37,10 @@ get_header(); ?>
         <?php get_template_part( 'content', 'none' ); ?>
 
     <?php endif; ?>
-
     </div><!-- / #primary -->
 
     <?php get_sidebar(); ?>
 
 </div><!-- / .contentContainer -->   
    
-
 <?php get_footer(); ?>
