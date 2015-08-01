@@ -5,7 +5,7 @@
 // *
 
 
-@mixin sticky-footer($footer-height, $contentWrapper-selector: unquote("#contentWrapper"), $container-selector: unquote("#container"), $footer-selector: unquote("#footer")) {
+@mixin sticky-footer($footer-height, $wrapper-selector: unquote("#wrapper"), $container-selector: unquote("#container"), $footer-selector: unquote("#footer")) {
   html, body {
     height: 100%;
   }
@@ -13,7 +13,7 @@
     margin: 0px;
     padding: 0px;
   }
-  #{$contentWrapper-selector} {
+  #{$wrapper-selector} {
     min-height: 100%;
     height: auto !important;
     height: 100%;

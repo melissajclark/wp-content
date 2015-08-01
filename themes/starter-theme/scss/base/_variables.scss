@@ -9,24 +9,48 @@ $primary-width: 75%;
 $secondary-width: 25%;
 
  
-// Colors
-$text: #222;
-$links: blue;
-$hover: #B10808;
-$white: #fff;
+// Website Colour Palette
+// --------------------
+
+$almostBlack: 	#222;
+$blue: 			blue;
+$red:	 		#B10808;
+$white: 		#fff;
+$purple:		purple;
+// more colours here
 
 
-$bg: $white;
+// Colour Usage:
+// ------------
 
-// navigation
-$navDropdown-bg : $hover;
-$navItem-width: 130px;
+$text:			$almostBlack;
+$linkColour: 	$blue;
+$hoverColour: 	$red;
+$colour1: 		$purple;
+// $colour2: ;
+// $colour3: ;
+// $colour4: ;
+// $colour5: ;
+// $colour6: ;
+// $colour7: ;
+// $colour8: ;
+// $colour9: ;
+// $colour10: ;
 
+// -----------------
+
+$backgroundColour: $white;
+
+// Navigation Variables
+// -------------------
+$NavdropdownColour: $hoverColour;
+$navItemWidth: 		130px;
 
 // Fonts
-$body-font: 'Source Sans Pro', sans-serif;
-$heading-font: 'Lato', sans-serif;
-// $second-heading-font: ;
+// -----
+$bodyFont: 		'Source Sans Pro', sans-serif;
+$headingFont: 	'Lato', sans-serif;
 
 // Borders
-$border: 1px solid #444;
+// -------
+$border: 		1px solid #444;

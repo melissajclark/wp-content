@@ -63,7 +63,7 @@ input[type="button"] {
   // background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dddddd));
   // background-image: linear-gradient(#ffffff, #dddddd);
   border: 2px solid;
-  border-color: $links;
+  border-color: $linkColour;
   background:#fff;
   cursor: pointer;
   color: #333333;
@@ -91,7 +91,7 @@ input[type="button"]:hover {
   // background-image: -o-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
   // background-image: linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
   text-decoration: none;
-  background-color:$links;
+  background-color:$linkColour;
   color:white;
 }
 button:active,
