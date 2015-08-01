@@ -19,7 +19,7 @@
     <header class="entry-header">
 
         <?php 
-        if ( is_single() || is_page() ) : // no link around title if it is a single post?>
+        if ( is_single() || is_page() ) : // no link around title if it is a single post ?>
             <h1 class="entry-title" itemprop="name"><?php the_title(); ?></h1>
         <?php else : ?>     
             <h2 class="entry-title" itemprop="name">
@@ -52,7 +52,7 @@
         <?php // displays the excerpt if it is an archive, otherwise shows the full content
 
             if (is_archive() ) : // checks if its an archive and shows content accordingly ?>
-                <?php echo get_the_post_thumbnail($post_id, 'large') ?>
+                <?php echo get_the_post_thumbnail('large') ?>
                 <span itemprop="description"><?php the_excerpt(); ?></span>
 
             <?php else : // for all other templates, show this content ?>
@@ -80,10 +80,8 @@
       if ( is_single() || is_home() ) : ?>
 
         <footer class="entry-meta">
-
             <p><?php _e('Category: ', 'starter-theme'); ?><?php the_category(', '); ?></p>
-
-            <?php the_tags( '<div class="post-tags">' . __( 'Tagged: ', 'starter-theme' ) , ', ', '</div>' ); ?>
+            <p><?php the_tags( '<div class="post-tags">' . __( 'Tags: ', 'starter-theme' ) , ', ', '</div>' ); ?></p>
 
             <div class="comments-link">
                 <?php comments_popup_link( 
@@ -92,7 +90,6 @@
                      __( '% comments', 'starter-theme' ) ); 
                 ?>
             </div>
-            
         </footer><!-- #entry-meta -->
 
         <?php else : // doesn't match? don't show anything! ?>
