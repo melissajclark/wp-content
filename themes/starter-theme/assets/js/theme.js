@@ -3,8 +3,17 @@ $(document).ready(function(){
 
 	/**
 	*
+	* Fit Vid any videos
+	*
+	**/
+
+	$("#page").fitVids();
+
+	/**
+	*
+	* Below = JS for keyboard-accessible menu 
+	*
 	* JS copied from: http://examples.simplyaccessible.com/css-menu/option-3.html (see source file navigation-option-3.js)
-	* (accessible nav)
 	*
 	**/
 
@@ -44,6 +53,4 @@ $(document).ready(function(){
 		});
 	}
  
-
 }); // end doc ready
-
