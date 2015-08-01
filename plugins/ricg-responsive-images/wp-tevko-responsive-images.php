@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
  * Plugin Name:       RICG Responsive Images
  * Plugin URI:        http://www.smashingmagazine.com/2015/02/24/ricg-responsive-images-for-wordpress/
  * Description:       Bringing automatic default responsive images to wordpress
- * Version:           2.3.0
+ * Version:           2.3.1
  * Author:            The RICG
  * Author URI:        http://responsiveimages.org/
  * License:           GPL-2.0+
@@ -153,6 +153,11 @@ function tevkori_get_srcset_array( $id, $size = 'thumbnail' ) {
 	// Break image data into url, width, and height.
 	list( $img_url, $img_width, $img_height ) = $img;
 
+	// If we have no width to work with, we should bail (see issue #118).
+	if ( 0 == $img_width ) {
+		return false;
+	}
+
 	// Get the image meta data.
 	$img_meta = wp_get_attachment_metadata( $id );
 
@@ -163,8 +168,11 @@ function tevkori_get_srcset_array( $id, $size = 'thumbnail' ) {
 	$img_sizes['full'] = array(
 		'width'  => $img_meta['width'],
 		'height' => $img_meta['height'],
-		'file'   => substr( $img_meta['file'], strrpos( $img_meta['file'], '/' ) + 1 )
+		'file'   => $img_meta['file'] 
 	);
+	if ( strrpos( $img_meta['file'], '/' ) !== false ) {
+		$img_sizes['full']['file'] = substr( $img_meta['file'], strrpos( $img_meta['file'], '/' ) + 1 );
+	}
 
 	// Get the image base url.
 	$img_base_url = substr( $img_url, 0, strrpos( $img_url, '/' ) + 1 );

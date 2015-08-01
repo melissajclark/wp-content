@@ -135,9 +135,16 @@ We use a hook because if you attempt to dequeue a script before it's enqueued, w
 
 ##Version
 
-2.3.0
+2.3.1
 
 ##Changelog
+
+- First char no longer stripped from file name if there's no slash
+- Adding test for when uploads directory not organized by date
+- Don't calculate a srcset when the image data returns no width
+- Add test for image_downsize returning 0 as a width
+
+**2.3.0**
 
 - Improved performance of `get_srcset_array`
 - Added advanced image compression option (available by adding hook to functions.php)
