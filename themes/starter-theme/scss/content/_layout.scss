@@ -1,5 +1,5 @@
 body {
-	background: $bg;
+	background: $backgroundColour;
 	margin: 0;
 	padding: 0;
 	width: $width-outer;
@@ -76,16 +76,6 @@ body {
 	    } // contentWithAside
 }
 
-#content {
-	margin: 0;
-	width: 100%;
-	float: left;
-}
-#primary.full-width,
-#primary.full-width #content {
-	width: 100%;
-	float: none;
-}
 
 #colophon {
 	clear: both;
@@ -93,26 +83,3 @@ body {
 }
 /* Sticky footer */
 @include sticky-footer(100px, '#page','#main','#colophon');
-
-// testing sections
-
-// .contentWrapper {
-// 	background-color:rgba(pink,0.5);
-// }
-// .contentContainer {
-// 	background-color:rgba(red,0.5);
-// }
-
-// .contentContainer #primary{
-// 	background-color:rgba(yellow,0.5);
-// }
-
-// .contentWithAside {
-// 	background-color:rgba(purple,0.3);
-// }
-// .contentWithAside #primary {
-// 	background-color:rgba(green,0.4);
-// }
-// .contentWithAside #secondary {
-// 	background-color:rgba(blue,0.4);
-// }
