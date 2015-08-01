@@ -6,13 +6,15 @@
 
 @mixin breakpoint($point) {
 
-  $bp-giant: "(min-width: 1600px)"; // large desktops
-  $bp-huge: "(max-width: 1600px)";
-  $bp-large: "(max-width: 1300px)";
-  $bp-medium: "(max-width: 1150px)";
-  $bp-little: "(max-width: 800px)";
-  $bp-tiny: "(max-width: 500px)";
-  $bp-mini: "(max-width: 320px)";
+  $bp-giant:      "(min-width: 1600px)"; // large desktops
+  $bp-huge:       "(max-width: 1600px)";
+  $bp-large:      "(max-width: 1300px)";
+  $bp-medium:     "(max-width: 1150px)";
+  $bp-little:     "(max-width: 800px)";
+  $bp-tinyPlus:   "(min-width: 800px)";
+  $bp-tiny:       "(max-width: 600px)";
+  $bp-miniPlus:   "(min-width: 350px)";
+  $bp-mini:       "(max-width: 350px)";
 
   
   @if $point == giant {
@@ -30,10 +32,16 @@
   @else if $point == little {
     @media #{$bp-little}  { @content; }
   }
+  @else if $point == tinyPlus {
+    @media #{$bp-tinyPlus}  { @content; }
+  }  
   @else if $point == tiny {
     @media #{$bp-tiny}  { @content; }
   }
-   @else if $point == mini {
+   @else if $point == miniPlus {
+    @media #{$bp-miniPlus}  { @content; }
+  }   
+  @else if $point == mini {
     @media #{$bp-mini}  { @content; }
   }
 }
