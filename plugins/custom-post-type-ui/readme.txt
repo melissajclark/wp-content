@@ -3,8 +3,8 @@ Contributors: williamsba1, tw2113, webdevstudios
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3084056
 Tags: custom post types, CPT, CMS, post, types, post type, cck, taxonomy, tax, custom
 Requires at least: 3.8
-Tested up to: 4.2
-Stable tag: 1.1.1
+Tested up to: 4.3
+Stable tag: 1.1.2
 License: GPLv2
 
 Admin UI for creating custom post types and custom taxonomies in WordPress
@@ -25,17 +25,23 @@ Implied credit to:
 
 == Screenshots ==
 
-1. Landing page screen.
-2. Add new post type screen and tab.
-3. Edit post type screen and tab.
-4. Add new taxonomy screen and tab.
-5. Edit taxonomy screen and tab.
-6. Export post types screen and tab.
-7. Export taxonomies screen and tab.
-8. Get code screen and tab.
-9. Help/support screen.
+1. Add new post type screen and tab.
+2. Edit post type screen and tab.
+3. Add new taxonomy screen and tab.
+4. Edit taxonomy screen and tab.
+5. Registered post types and taxonomies from CPTUI
+6. Import/Export screen.
+7. Help/support screen.
+8. Update Information/Donate screen.
 
 == Changelog ==
+
+= 1.1.2 =
+* Change export value to plural label for taxonomies.
+* Properly select a post type or taxonomy after deleting an existing value.
+* Updated screenshots
+* Added target="_blank" attribute to one of the inline help links for Menu position. Thanks @JulieKuehl
+* Fixed potential XSS issue.
 
 = 1.1.1 =
 * Re-add post type and taxonomy select buttons and only display for non-js users.
@@ -254,6 +260,13 @@ Implied credit to:
 * First beta release
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+* Change export value to plural label for taxonomies.
+* Properly select a post type or taxonomy after deleting an existing value.
+* Updated screenshots
+* Added target="_blank" attribute to one of the inline help links for Menu position. Thanks @JulieKuehl
+* Fixed potential XSS issue.
 
 = 1.1.1 =
 * Re-add post type and taxonomy select buttons and only display for non-js users.

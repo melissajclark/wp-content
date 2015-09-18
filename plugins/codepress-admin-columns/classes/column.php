@@ -489,7 +489,7 @@ class CPAC_Column {
 	/**
 	 * @since 1.3
 	 */
-	protected function strip_trim( $string ) {
+	public function strip_trim( $string ) {
 		return trim( strip_tags( $string ) );
 	}
 
@@ -1175,6 +1175,32 @@ class CPAC_Column {
 			<?php $this->label_view( $label, $description, $name ); ?>
 			<td class="input">
 				<input type="text" name="<?php $this->attr_name( $name ); ?>" id="<?php $this->attr_id( $name ); ?>" value="<?php echo esc_attr( stripslashes( $this->get_option( $name ) ) ); ?>"/>
+			</td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * @since NEWVERSION
+	 *
+	 * @param string $name Name of the column option
+	 * @return string $label Label
+	 * @return array $options Select options
+	 * @return strong $description (optional) Description below the label
+	 */
+	public function display_field_radio( $name, $label, $options = array(), $description = '' ) {
+		$current = $this->get_option( $name );
+		?>
+		<tr class="column-<?php echo $name; ?>">
+			<?php $this->label_view( $label, $description, $name ); ?>
+			<td class="input">
+				<?php foreach ( $options as $key => $label ) : ?>
+					<label>
+						<input type="radio" name="<?php $this->attr_name( $name ); ?>" id="<?php $this->attr_id( $name . '-' . $key ); ?>" value="<?php echo $key; ?>"<?php checked( $key, $current ); ?>>
+						<?php echo $label; ?>
+					</label>
+				<?php endforeach; ?>
+				</select>
 			</td>
 		</tr>
 		<?php

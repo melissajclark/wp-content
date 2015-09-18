@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Admin Post Navigation
- * Version:     1.9.1
+ * Version:     1.9.2
  * Plugin URI:  http://coffee2code.com/wp-plugins/admin-post-navigation/
  * Author:      Scott Reilly
  * Author URI:  http://coffee2code.com/
@@ -11,7 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Description: Adds links to navigate to the next and previous posts when editing a post in the WordPress admin.
  *
- * Compatible with WordPress 3.0 through 4.2+.
+ * Compatible with WordPress 3.0 through 4.3+.
  *
  * =>> Read the accompanying readme.txt file for instructions and documentation.
  * =>> Also, visit the plugin's homepage for additional information and updates.
@@ -19,7 +19,7 @@
  *
  * @package Admin_Post_Navigation
  * @author  Scott Reilly
- * @version 1.9.1
+ * @version 1.9.2
  */
 
 /*
@@ -69,7 +69,7 @@ class c2c_AdminPostNavigation {
 	 * @since 1.7
 	 */
 	public static function version() {
-		return '1.9.1';
+		return '1.9.2';
 	}
 
 	/**
@@ -211,10 +211,12 @@ HTML;
 	 * navigation links can be found there.
 	 */
 	public static function add_js() {
+		$tag = version_compare( $GLOBALS['wp_version'], '4.3', '>=' ) ? 'h1' : 'h2';
+
 		echo <<<JS
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			$('#admin-post-nav').appendTo($('#wpbody-content .wrap:first h2:first'));
+			$('#admin-post-nav').appendTo($('#wpbody-content .wrap:first {$tag}:first'));
 			$('#adminpostnav, label[for="adminpostnav-hide"]').hide();
 		});
 		</script>

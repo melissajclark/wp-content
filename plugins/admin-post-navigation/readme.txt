@@ -5,8 +5,8 @@ Tags: admin, navigation, post, next, previous, edit, post types, coffee2code
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.0
-Tested up to: 4.2
-Stable tag: 1.9.1
+Tested up to: 4.3
+Stable tag: 1.9.2
 
 Adds links to navigate to the next and previous posts when editing a post in the WordPress admin.
 
@@ -227,6 +227,10 @@ add_filter( 'c2c_admin_post_navigation_display', 'override_apn_display' );
 
 == Changelog ==
 
+= 1.9.2 (2015-08-19) =
+* Bugfix: Fix so navigation links appear in WordPress 4.3 (by targeting h1 instead of h2). Backwards compatibility maintained.
+* Update: Note compatibility through WP 4.3+
+
 = 1.9.1 (2015-07-08) =
 * Bugfix: Fix JS placement of navigation links to target the desired h2, which may not always be the first on the page
 * Update: Add additional unit test using example for customizing post status navigation
@@ -363,6 +367,9 @@ add_filter( 'c2c_admin_post_navigation_display', 'override_apn_display' );
 
 
 == Upgrade Notice ==
+
+= 1.9.2 =
+Bugfix: fix to display navigation links in WordPress 4.3; noted compatibility through WP 4.3+
 
 = 1.9.1 =
 Minor bugfix: fix to more reliably ensure the navigation links appear in certain situations; fix incorrect example code for excluding post statuses; noted compatibility through WP 4.2+

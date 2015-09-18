@@ -103,7 +103,7 @@ class Admin_Post_Navigation_Test extends WP_UnitTestCase {
 	}
 
 	function test_version() {
-		$this->assertEquals( '1.9.1', c2c_AdminPostNavigation::version() );
+		$this->assertEquals( '1.9.2', c2c_AdminPostNavigation::version() );
 	}
 
 	/*
