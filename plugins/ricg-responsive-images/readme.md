@@ -1,7 +1,7 @@
 RICG-responsive-images
 ---
 
-![Build Status](https://travis-ci.org/ResponsiveImagesCG/wp-tevko-responsive-images.svg)
+[![Build Status](https://travis-ci.org/ResponsiveImagesCG/wp-tevko-responsive-images.svg?branch=dev)](https://travis-ci.org/ResponsiveImagesCG/wp-tevko-responsive-images)
 
 Bringing automatic default responsive images to WordPress.
 
@@ -139,9 +139,36 @@ The only external dependency included in this plugin is [Picturefill](http://sco
 We use a hook because if you attempt to dequeue a script before it's enqueued, wp_dequeue_script has no effect. (If it's still being loaded, you may need to specify a [priority](http://codex.wordpress.org/Function_Reference/add_action).)
 
 ## Version
-2.4.0
+
+2.5.2
 
 ## Changelog
+
+- Numerous performance and usability improvements
+- Pass height and width to `tevkori_get_sizes()
+- Improved regex in display filter
+- Avoid calling `wp_get_attachment_image_src()` in srcset functions
+- Improved coding standards
+- Removed second regular expression in content filter
+- Improved cache warning function
+- Change default `$size` value for all function to 'medium'
+
+**2.5.1**
+
+- Query all images in single request before replacing
+- Minor fix to prevent a potential undefined variable notice
+- Remove third fallback query from the display filter
+
+**2.5.0**
+
+- Responsify all post images by adding `srcset` and `sizes` through a display filter.
+- Improve method used to build paths in `tevkori_get_srcset_array()`
+- Adds linthub config files
+- Returns single source arrays in `tevkori_get_srcset_array()`
+- Add tests for PHP7 to our Travis matrix
+- Add test coverage for `tevkori_filter_attachment_image_attributes()`
+
+**2.4.0**
 
 - Added filter for tevkori_get_sizes, with tests
 - Added Composer support

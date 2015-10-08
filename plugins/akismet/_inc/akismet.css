@@ -63,6 +63,15 @@ span.comment-link:after {
     border-radius: 6px;
     -webkit-border-radius: 6px;
 }
+.akismet-mshot {
+    position: absolute;
+    z-index: 100;
+}
+.akismet-mshot .mshot-image {
+    margin: 0;
+    height: 338px;
+    width: 450px;
+}
 h2.ak-header {
     padding: 30px;
     background: #649316 url('img/logo-full-2x.png') no-repeat 20px center;
