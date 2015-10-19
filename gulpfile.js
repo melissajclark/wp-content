@@ -8,9 +8,9 @@ var gulp = require('gulp'),
 // output minifined version of SCSS to theme
 // ----------------------------------------
 gulp.task('styles-min', function(){
-  return gulp.src(['themes/starter-theme/scss/*.scss',
-                   'themes/starter-theme/scss/**/*.scss'], 
-            {base: 'themes/starter-theme/scss/'} )
+  return gulp.src(['themes/starter-theme/assets/scss/*.scss',
+                   'themes/starter-theme/assets/scss/**/*.scss'], 
+            {base: 'themes/starter-theme/assets/scss/'} )
       .pipe(plumber())
         .pipe(sass({ style: 'expanded' }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
@@ -21,13 +21,13 @@ gulp.task('styles-min', function(){
 // output regular version of CSS to assets
 // --------------------------------------
 gulp.task('styles', function(){
-  return gulp.src(['themes/starter-theme/scss/*.scss',
-                   'themes/starter-theme/scss/**/*.scss'], 
-            {base: 'themes/starter-theme/scss/'} )
+  return gulp.src(['themes/starter-theme/assets/scss/*.scss',
+                   'themes/starter-theme/assets/scss/**/*.scss'], 
+            {base: 'themes/starter-theme/assets/scss/'} )
       .pipe(plumber())
         .pipe(sass({ style: 'expanded' }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(gulp.dest('themes/starter-theme/assets/css/'));
+        .pipe(gulp.dest('themes/starter-theme/assets/assets/css/'));
 });
 
 gulp.task('watch', function() {
