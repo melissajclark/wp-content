@@ -26,13 +26,13 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 		// Headings
 
 		// Since 3.1
-		add_filter( "manage_{$post_type}_posts_columns", array( $this, 'add_headings' ), 100, 1 );
+		add_filter( "manage_{$post_type}_posts_columns", array( $this, 'add_headings' ), 100 );
 
 		// Deprecated ( as of 3.1 ) Note: This one is still used by woocommerce.
 		// Priority set to 100 top make sure the WooCommerce headings are overwritten by CAC
 		// Filter is located in get_column_headers().
 		// @todo_minor check compatibility issues for this deprecated filter
-		add_filter( "manage_{$this->page}-{$post_type}_columns",  array( $this, 'add_headings' ), 100, 1 );
+		add_filter( "manage_{$this->page}-{$post_type}_columns",  array( $this, 'add_headings' ), 100 );
 
 		// values
 		add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_value_callback' ), 100, 2 );
@@ -56,7 +56,7 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 	/**
 	 * Get post ID's
 	 *
-	 * @since NEWVERSION
+	 * @since 2.4.7
 	 *
 	 * @param array $args
 	 * @return array Posts
@@ -134,10 +134,26 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 	 * @since 2.4.4
 	 */
 	public function get_default_column_names() {
-		if ( ! in_array( $this->post_type, array( 'post', 'page' ) ) ) {
-			return false;
+
+		$defaults = array( 'date' );
+
+		if ( post_type_supports( $this->post_type, 'title' ) ) {
+			$defaults[] = 'title';
 		}
-		return array( 'author', 'cb', 'categories', 'comments', 'date', 'parent', 'tags', 'title' );
+		if ( post_type_supports( $this->post_type, 'comments' ) ) {
+			$defaults[] = 'comments';
+		}
+
+		if ( in_array( $this->post_type, array( 'post', 'page' ) ) ) {
+			$defaults[] = 'cb';
+			$defaults[] = 'author';
+			$defaults[] = 'categories';
+			$defaults[] = 'comments';
+			$defaults[] = 'parent';
+			$defaults[] = 'tags';
+		}
+
+		return $defaults;
 	}
 
 	/**
