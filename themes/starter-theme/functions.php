@@ -45,11 +45,10 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
-
-		// Enable support for Post Thumbnails on posts and pages
-		add_theme_support( 'post-thumbnails' );
-
+		add_theme_support( 'post-thumbnails' ); // Enable support for Post Thumbnails on posts and pages
 		add_theme_support( 'title-tag' );
+		add_theme_support( 'custom-header' );
+		add_theme_support( 'custom-background' );
 
 		// Enable support for Post Formats.
 		add_theme_support( 'post-formats', array( 
@@ -70,7 +69,8 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 
 		// Enable support for editable menus via Appearance > Menus
 		register_nav_menus( array(
-			'primary' => __( 'Primary Menu', 'starter-theme' ),
+			'primary' => 	__( 'Primary Menu', 'starter-theme' ),
+			'footer' => 	__( 'Footer Menu', 'starter-theme' ),
 		) );
 
 	}

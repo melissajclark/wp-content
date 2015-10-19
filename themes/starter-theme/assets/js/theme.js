@@ -18,7 +18,7 @@ $(document).ready(function(){
 	**/
 
 	$(function(){
-		$('.menu').setup_navigation();
+		$('.siteMenu').setup_navigation();
 	});
 
 	$.fn.setup_navigation = function(settings) {

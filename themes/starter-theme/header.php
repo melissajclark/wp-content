@@ -39,7 +39,7 @@
 <body <?php body_class(); ?>>
 <div id="page">
 
-    <header id="site-header" role="banner" class="container">
+    <header id="top" role="banner" class="site-header container">
         <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _e('Skip to content', 'starter-theme'); ?></a>
         
         <h1>
@@ -49,9 +49,11 @@
             </a>
         </h1>
 
-        <nav class="access" role="navigation">
-            <?php wp_nav_menu( array( "theme_location" => "primary", 'container' => '' ) ); ?>
-        </nav><!-- #access -->  
-    </header><!-- #site-header .container -->
+        <nav class="siteNavigation" role="navigation">
+            <ul class="siteMenu" role="menu">
+                <?php wp_nav_menu( array( "theme_location" => "primary", "container" => '', 'items_wrap'=> '%3$s' ) ); ?>
+            </ul><!-- .menu -->
+        </nav><!-- siteNavigation -->  
+    </header><!--  .container -->
 
-    <div id="main">
+    <main id="main">

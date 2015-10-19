@@ -8,78 +8,16 @@ body {
 	background: $backgroundColour;
 	margin: 0;
 	padding: 0;
-	width: $width-outer;
 }
 
 #main {
 	clear: both;
 }
 
-.wrapper {
-	width:$width-outer;
-}
-
 .container { 
-	margin: 0 auto;
-	max-width: $mainContent;
-	padding:2% 0 0 0;
-
-    @include breakpoint(giant) { /* min-width: 1600px */
-      max-width: $mainContent - 10%; // 70%
-    }    
-
-    @include breakpoint(huge) { /* max-width: 1600px */
-      max-width: $mainContent + 10%; // 80%
-    }	    
-
-    @include breakpoint(medium) { /* max-width: 1150px */
-      max-width: $mainContent + 15%; // 85%
-    }
-
-    @include breakpoint(little) { /* max-width: 800px */
-      max-width: $width;
-      @include small-font-size;
-    }
-
-    &.contentWithAside { // styles widths of layouts with a sidebar
-
-	    #primary {
-			width:$primary-width;
-			float:left;
-
-			@include breakpoint(medium){
-				width:$primary-width - 10%;
-			}
-			@include breakpoint(little){
-				width:$width;
-			}    			
-	    } // #primary
-
-	    #secondary {
-			width:$secondary-width;
-			float:left;
-			padding:0 0 0 5%;
-
-			@include breakpoint(medium){
-				width:$secondary-width + 10%;
-			}
-			@include breakpoint(little){
-				width:$width;
-				padding: 0;
-				// display sidebar content in columns at little breakpoint
-				column-count:2;
-
-				.widget {
-					width:100%;
-					display:inline-block;
-				}
-			}
-			@include breakpoint(tiny){
-				column-count:1;
-			}
-	    } // #secondary
-    } // contentWithAside
-
+	max-width:$mainContent;
+	width:$width;
+	margin:0 auto;
 } // .container
 
 
@@ -87,5 +25,8 @@ body {
 	clear: both;
 	overflow: hidden;
 }
-/* Sticky footer */
-@include sticky-footer(100px, '#page','#main','#colophon');
+
+@include breakpoint(tiny){
+	/* Sticky footer */
+	@include sticky-footer(100px, '#page','#main','#colophon');
+}

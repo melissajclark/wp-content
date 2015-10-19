@@ -1,21 +1,21 @@
-// #copyright {
-	
-// }
+/**
+ *
+ * Footer
+ *
+ */
 
-.fa.touch-icon {
-	width:30px;
-	height:30px;
-	font-size:1.15em;
-	line-height:1;
-}
+ .siteMenu--Footer {
+ 	display:flex;
+ 	flex-direction:column;
+ 	justify-content:space-between;
+ 	align-items:center;
+ 	flex-wrap:wrap;
+ 	list-style:none;
+ 	margin:0;
+ 	padding:0;
 
-@include breakpoint(little){
-
-	.fa.touch-icon {
-		width:44px;
-		height:44px;
-		font-size:1.3em;
-		line-height:1;
-	}
-}
+ 	@include breakpoint(tiny){
+ 		flex-direction:row;
+ 	}
+ }
 

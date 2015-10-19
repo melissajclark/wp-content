@@ -1,24 +1,24 @@
-.access {
+.siteNavigation {
 	float:left;
 }
 
-.menu,
-.menu ul {
+.siteMenu,
+.siteMenu ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
 /* Top level nav */
-.menu {
+.siteMenu {
 	float: left;
 	margin: 0 auto;
 }
 
 /* Dropdowns */
-.menu ul {
+.siteMenu ul {
 	position: absolute;
-	top: 2.5em;
+	top: 2em;
 	left: -9999px;
 	opacity: 0;
 	-webkit-transition: 0.1s linear opacity;
@@ -26,13 +26,13 @@
 	background: $NavdropdownColour;
 }
 
-.menu li {
+.siteMenu li {
 	float: left;
 	position: relative;
 }
 
 /* Top level nav items */
-.menu li > a {
+.siteMenu li > a {
 	float: left;
 	padding: 10px 10px;
 	color: $text;
@@ -42,10 +42,10 @@
 }
 
 /* Top level hover state, preserve hover state when hovering dropdown  */
-.menu li > a:hover,
-.menu li > a:focus,
-.menu li:focus > a,
-.menu li:hover > a {
+.siteMenu li > a:hover,
+.siteMenu li > a:focus,
+.siteMenu li:focus > a,
+.siteMenu li:hover > a {
 	background: $NavdropdownColour;
 	outline: 0;
 	color:$white;
@@ -53,28 +53,28 @@
 }
 
 /* Rounded corners for first top level nav item */
-.menu > li:first-child > a {
+.siteMenu > li:first-child > a {
 	border-left: 0;
 }
 
 /* Rounded corners for last top level nav item */
-.menu > li:last-child > a {
+.siteMenu > li:last-child > a {
 	border-right: 0;
 }
 
-.menu li:hover ul,
-.menu li:focus ul,
+.siteMenu li:hover ul,
+.siteMenu li:focus ul,
 ul.show-menu {
 	left: 0;
 	opacity: 0.99;
 }
 
-.menu ul li {
+.siteMenu ul li {
 	float: none;
 	position: static;
 }
 
-.menu ul a {
+.siteMenu ul a {
 	float: none;
 	display: block;
 	color: $white;
@@ -82,8 +82,8 @@ ul.show-menu {
 	text-align:left;
 }
 
-.menu ul a:hover,
-.menu ul a:focus {
+.siteMenu ul a:hover,
+.siteMenu ul a:focus {
 	background: $white;
 	color: $text;
 	text-shadow: none;
