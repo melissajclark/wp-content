@@ -5,21 +5,6 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     newer = require('gulp-newer');
 
-// output minifined version of SCSS to theme
-// ----------------------------------------
-gulp.task('styles-min', function(){
-  return gulp.src(['themes/starter-theme/assets/scss/*.scss',
-                   'themes/starter-theme/assets/scss/**/*.scss'], 
-            {base: 'themes/starter-theme/assets/scss/'} )
-      .pipe(plumber())
-        .pipe(sass({ style: 'expanded' }))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(minifycss())
-        .pipe(gulp.dest('themes/starter-theme/'));
-});
-
-// output regular version of CSS to assets
-// --------------------------------------
 gulp.task('styles', function(){
   return gulp.src(['themes/starter-theme/assets/scss/*.scss',
                    'themes/starter-theme/assets/scss/**/*.scss'], 
@@ -27,12 +12,14 @@ gulp.task('styles', function(){
       .pipe(plumber())
         .pipe(sass({ style: 'expanded' }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(gulp.dest('themes/starter-theme/assets/assets/css/'));
+        .pipe(minifycss())
+        .pipe(gulp.dest('themes/starter-theme'));
 });
+
 
 gulp.task('watch', function() {
-      gulp.watch('themes/starter-theme/**/*.scss', ['styles']);
+      gulp.watch('themes/starter-theme/assets/scss/*.scss', ['styles']);
+      gulp.watch('themes/starter-theme/assets/scss/**/*.scss', ['styles']);
 });
 
-
-gulp.task('default', ['styles', 'styles-min', 'watch']);
+gulp.task('default', ['styles', 'watch' ]);
