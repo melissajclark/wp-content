@@ -7,6 +7,12 @@
         elseif ( is_tag() ) :
             single_tag_title( _e('Tag: ', 'starter-theme'));
 
+        elseif ( is_tax() ) :
+            single_term_title( _e('Taxonomy: ', 'starter-theme') );
+
+        elseif ( is_post_type_archive() ) :
+            post_type_archive_title();
+
         elseif ( is_author() ) :
             printf( __( 'Author: %s', 'starter-theme' ), '<span>' . get_the_author() . '</span>' );
 
