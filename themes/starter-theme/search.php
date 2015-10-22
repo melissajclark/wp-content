@@ -15,7 +15,7 @@ get_header(); ?>
         <header class="archive-header">
             <?php global $wp_query;
             $total_results = $wp_query->found_posts; ?>
-            <h1 class="entry-title"><?php _esc_html_e('Search Results', 'starter-theme'); ?> <?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h1>
+            <h1 class="entry-title"><?php esc_html_e('Search Results', 'starter-theme'); ?> <?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h1>
         </header>
 
         <?php while ( have_posts() ) : the_post(); // start the loop ?>

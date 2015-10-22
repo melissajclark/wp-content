@@ -16,7 +16,7 @@ function starter_theme_comment( $comment, $args, $depth ) {
         case 'trackback' :
     ?>
     <li class="post pingback">
-        <p><?php _esc_html_e( 'Pingback:', 'starter-theme' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'starter-theme' ), '<span class="edit-link">', '</span>' ); ?></p>
+        <p><?php esc_html_e( 'Pingback:', 'starter-theme' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'starter-theme' ), '<span class="edit-link">', '</span>' ); ?></p>
     <?php
             break;
         default :
@@ -44,7 +44,7 @@ function starter_theme_comment( $comment, $args, $depth ) {
                 </div><!-- .comment-author .vcard -->
 
                 <?php if ( $comment->comment_approved == '0' ) : ?>
-                    <em class="comment-awaiting-moderation"><?php _esc_html_e( 'Your comment is awaiting moderation.', 'starter-theme' ); ?></em>
+                    <em class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'starter-theme' ); ?></em>
                     <br />
                 <?php endif; ?>
             </header>

@@ -63,7 +63,7 @@
 
 <?php if ( is_single() || is_home() ) : ?>
     <footer class="entry-meta">
-        <p><?php _esc_html_e('Category: ', 'starter-theme'); ?><?php the_category(', '); ?></p>
+        <p><?php esc_html_e('Category: ', 'starter-theme'); ?><?php the_category(', '); ?></p>
         <p><?php the_tags( '<div class="post-tags">' . __( 'Tags: ', 'starter-theme' ) , ', ', '</div>' ); ?></p>
 
         <div class="comments-link">
