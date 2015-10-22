@@ -2,22 +2,29 @@
 /**
  * Archive pagination
  *
- * @package themeHandle
+ * @package Starter_Theme
  */
 ?>
 
 <?php if ( is_singular() ) : ?>
 
-	<nav id="nav-below">
-	    <div class="nav-previous"><?php previous_post_link( '%link', __( 'Previous', 'starter-theme' ) ); ?></div>
-	    <div class="nav-next"><?php next_post_link( '%link', __( 'Next', 'starter-theme' ) ); ?></div>
-	</nav>
-	
-<?php elseif (is_home() || is_archive() ) : ?>
+	<nav class="pagination">
+	    <div class="paginationItem pagination--previous"><?php previous_post_link('&laquo; %link'); ?></div>
+	    <div class="paginationItem pagination--next"><?php next_post_link('%link &raquo;'); ?></div>
+	</nav><!-- .pagination -->
 
-	<nav id="nav-below">
-	    <div class="nav-next"><?php next_posts_link( __( 'Newer', 'starter-theme' ) ); ?></div>
-	    <div class="nav-previous"><?php previous_posts_link( __( 'Older', 'starter-theme' ) ); ?></div>
-	</nav>
+<?php elseif ( is_home() || is_archive() ) : ?>
+
+	<nav class="pagination">
+	    <div class="paginationItem pagination--previous"><?php previous_posts_link( '&laquo; Newer Posts ' ); ?></div>
+		<div class="paginationItem pagination--next"><?php next_posts_link( 'Older Posts &raquo; ' ); ?></div>
+	</nav><!-- .pagination -->
+
+<?php elseif ( is_search() ) : ?>
+
+	<nav class="pagination">
+	    <div class="paginationItem pagination--previous"><?php previous_posts_link( 'Newer Search Results' ); ?></div>
+		<div class="paginationItem pagination--next"><?php next_posts_link( 'Older Search Results', '' ); ?></div>
+	</nav><!-- .pagination -->
 
 <?php endif; ?>

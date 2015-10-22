@@ -1,0 +1,23 @@
+/**
+ *
+ * Pagination
+ *
+ */
+
+ .pagination {
+ 	padding:2em 0 0 0;
+ 	display:flex;
+ 	flex-direction:column;
+ 	flex-wrap:wrap;
+ 	justify-content:space-between;
+ 	align-items:center;
+
+ 	&Item {
+ 		max-width:50%;
+ 		padding:0.5em 0 0 0;
+ 	}
+
+ 	@include breakpoint(tiny){
+ 		flex-direction:row;
+ 	}
+ } // pagination 
