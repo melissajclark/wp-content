@@ -8,7 +8,7 @@
 <div id="comments">
     <?php 
     if ( post_password_required() ) : ?>
-        <p class="nopassword"><?php _e( 'This post is password protected. Enter the password to view any comments.', 'starter-theme' ); ?></p>
+        <p class="nopassword"><?php _esc_html_e( 'This post is password protected. Enter the password to view any comments.', 'starter-theme' ); ?></p>
     </div><!-- #comments -->
     <?php return;
     endif;
@@ -25,7 +25,7 @@
 
         <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
         <nav id="comment-nav-below">
-            <h1 class="assistive-text"><?php _e( 'Comment navigation', 'starter-theme' ); ?></h1>
+            <h1 class="assistive-text"><?php _esc_html_e( 'Comment navigation', 'starter-theme' ); ?></h1>
             <div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'starter-theme' ) ); ?></div>
             <div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'starter-theme' ) ); ?></div>
         </nav>
@@ -34,7 +34,7 @@
     <?php
         elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
     ?>
-        <p class="nocomments"><?php _e( 'Comments are closed.', 'starter-theme' ); ?></p>
+        <p class="nocomments"><?php _esc_html_e( 'Comments are closed.', 'starter-theme' ); ?></p>
     <?php endif; ?>
 
     <?php 

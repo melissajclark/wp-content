@@ -10,11 +10,11 @@ get_header(); ?>
 <div id="primary" role="main"> 
     <article id="post-0" class="post error404 not-found">
 	    <header class="entry-header">
-	        <h1 class="entry-title"><?php _e( 'Uh oh!', 'starter-theme' ); ?></h1>
+	        <h1 class="entry-title"><?php _esc_html_e( 'Uh oh!', 'starter-theme' ); ?></h1>
 	    </header>
 
 	    <div class="entry-content">
-	        <p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps a search would help?', 'starter-theme' ); ?></p>
+	        <p><?php _esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps a search would help?', 'starter-theme' ); ?></p>
 	        <?php get_search_form(); ?>
 	    </div><!-- .entry-content -->
 	</article><!-- #post-0 -->

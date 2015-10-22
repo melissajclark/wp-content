@@ -40,7 +40,7 @@
 <div id="page">
 
     <header id="top" role="banner" class="site-header container">
-        <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _e('Skip to content', 'starter-theme'); ?></a>
+        <a href="#main" class="visuallyhidden focusable" id="skiptomain"><?php _esc_html_e('Skip to content', 'starter-theme'); ?></a>
         
         <h1>
             <a href="<?php echo esc_url( home_url( "/" ) ); ?>">

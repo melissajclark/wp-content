@@ -10,10 +10,8 @@
 
 get_header(); ?>
 
-<div class="container contentWithAside">
-	<div id="primary" role="main"> 
-
-   <?php if ( have_posts() ) : // display the content _if_ there are posts ?>
+<div id="primary" role="main" class="container"> 
+    <?php if ( have_posts() ) : // display the content _if_ there are posts ?>
 
         <?php  if ( is_archive() ) : // print the archive header if its an archive template?>
             <?php get_template_part( 'inc/archive-header' );  ?>
@@ -29,17 +27,15 @@ get_header(); ?>
 
         <article id="post-0" class="hentry post no-results not-found">
             <header class="entry-header">
-                <h1><?php _e( "Oops!", "starter-theme" ); ?></h1>
+                <h1><?php _esc_html_e( "Oops!", "starter-theme" ); ?></h1>
             </header><!-- .entry-header -->
 
-            <p><?php _e( "We can&#039;t find content for this page!", "starter-theme" ); ?></p>
+            <p><?php _esc_html_e( "We can&#039;t find content for this page!", "starter-theme" ); ?></p>
         </article><!-- #post-0 -->
 
     <?php endif; ?>
-    </div><!-- / #primary -->
 
     <?php get_sidebar(); // #secondary div ?>
-
 </div><!-- / .container -->   
 
 <?php get_footer(); ?>
