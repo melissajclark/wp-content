@@ -16,19 +16,17 @@ $blue: 			blue;
 $red:	 		#B10808;
 $white: 		#fff;
 $purple:		purple;
+$gray:			#888888;
 // more colours here
 
 
-// Colour Usage:
+// Colour Setup:
 // ------------
 
-$text:			$almostBlack;
-$linkColour: 	$blue;
-$hoverColour: 	$red;
 $colour1: 		$purple;
-// $colour2: ;
-// $colour3: ;
-// $colour4: ;
+$colour2: 		$red;
+$colour3:		$blue;	
+$colour4: 		$gray;
 // $colour5: ;
 // $colour6: ;
 // $colour7: ;
@@ -38,7 +36,15 @@ $colour1: 		$purple;
 
 // -----------------
 
+
+// Colour Usage:
+// ------------
+
+
 $backgroundColour: $white;
+$text:			$almostBlack;
+$linkColour: 	$colour1;
+$hoverColour: 	$colour2;
 
 // Navigation Variables
 // -------------------
