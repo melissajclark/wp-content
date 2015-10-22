@@ -4,8 +4,16 @@
  * Article: wraps around all content
  *
  **/ ?>
+
+ <?php if ( is_singular('post') ) : ?>
    
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/Article">
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting">
+
+<?php else : ?>
+
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+<?php endif; ?>
         
 <?php 
 /**
@@ -17,7 +25,7 @@
     
 <header class="entry-header">
 
-    <?php if ( is_single() || is_page() ) : // no link around title if it is a single post ?>
+    <?php if ( is_singular() ) : // no link around title if it is a single post ?>
         <h1 class="entry-title" itemprop="name"><?php the_title(); ?></h1>
     <?php else : ?>     
         <h2 class="entry-title" itemprop="name">
@@ -25,10 +33,20 @@
         </h2>
     <?php endif; ?>
 
-    <?php if ( is_single() || is_home() || is_archive() ) : // display entra meta only on post & blog templates ?>
+    <?php if ( is_singular('post') || is_home() || is_archive() ) : // display entra meta only on post & blog templates ?>
         <span class="entry-meta">
             <span class="entry-date" itemprop="datePublished" content="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></span>
             <span itemprop="author" itemscope itemtype="http://schema.org/Person"><?php the_author_posts_link(); ?></span>  
+
+            <?php if ( has_category() && !has_tag() ) : ?>
+                <span><?php esc_html_e('Category: ', 'starter-theme'); ?><?php the_category(', '); // comma only to remove usual bulleted list of terms ?></span>
+
+            <?php elseif ( has_category() && has_tag() ) : ?>
+                <span><?php esc_html_e('Category: ', 'starter-theme'); ?><?php the_category(', '); // comma only to remove usual bulleted list of terms ?> <?php esc_html_e('Tagged: ', 'starter-theme'); ?><?php the_tags(''); // comma only to remove usual "Tags" before list of terms ?></span>
+
+            <?php elseif ( !has_category() && has_tag() ) : ?>
+                <span><?php esc_html_e('Tagged: ', 'starter-theme'); ?><?php the_tags(''); // comma only to remove usual "Tags" before list of terms ?></span>
+            <?php endif; ?>
         </span><!-- / entry-meta -->   
     <?php endif; ?>
 </header><!-- .entry-header -->
@@ -40,9 +58,8 @@
 *
 **/ ?>
 
-<div class="entry-content">
+<section class="entry-content">
     <?php if (is_archive() ) : // displays the excerpt if it is an archive, otherwise shows the full content ?>
-        <?php echo get_the_post_thumbnail('large') ?>
         <p itemprop="description"><?php the_excerpt(); ?></p>
 
     <?php else : // for all other templates, show this content ?>
@@ -52,7 +69,7 @@
     <?php if ( is_page() ) : // include the page-links if it is a page ?>
         <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
     <?php endif; ?>
-</div><!-- .entry-content -->
+</section><!-- .entry-content -->
 
 <?php 
 /**
@@ -61,11 +78,8 @@
 *
 **/ ?>
 
-<?php if ( is_single() || is_home() ) : ?>
+<?php if ( is_singular() && !is_page() ) : ?>
     <footer class="entry-meta">
-        <p><?php esc_html_e('Category: ', 'starter-theme'); ?><?php the_category(', '); ?></p>
-        <p><?php the_tags( '<div class="post-tags">' . __( 'Tags: ', 'starter-theme' ) , ', ', '</div>' ); ?></p>
-
         <div class="comments-link">
             <?php comments_popup_link( 
                  __( 'Leave a comment', 'starter-theme' ), 

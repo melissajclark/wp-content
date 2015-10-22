@@ -10,7 +10,7 @@ jQuery(function($) {
 	$("#page").fitVids();
 
 	
-	$(".siteNavigation").accessibleMegaMenu({
+	$(".siteNavigation--Main").accessibleMegaMenu({
 	    /* prefix for generated unique id attributes, which are required 
 	       to indicate aria-owns, aria-controls and aria-labelledby */
 	    uuidPrefix: "accessible-megamenu",

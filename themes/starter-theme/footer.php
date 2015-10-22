@@ -14,7 +14,7 @@
 </div><!-- #page -->
  
 <footer id="colophon" role="contentinfo" class="siteFooter container">	
-	<nav class="siteNavigation" role="navigation">
+	<nav class="siteNavigation--Footer" role="navigation">
 	    <ul class="siteMenu--Footer" role="menu">
 	    	<li>&copy; <?php echo date("Y"); ?> <?php echo bloginfo( "name" ); ?></a></li>
 	        <?php wp_nav_menu( array( "theme_location" => "footer", "container" => '', 'items_wrap'=> '%3$s' ) ); ?>
