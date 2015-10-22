@@ -7,16 +7,20 @@
 
 get_header(); ?>
 
-<div class="container contentWithAside">
-	<div id="primary" role="main"> 
-
+<div id="primary" role="main"> 
     <?php if ( have_posts() ) : ?>
 
-        <header class="archive-header">
+        <header class="entry-header">
             <?php global $wp_query;
             $total_results = $wp_query->found_posts; ?>
-            <h1 class="entry-title"><?php esc_html_e('Search Results', 'starter-theme'); ?> <?php echo $total_results; ?> results found for &#8220;<?php echo get_search_query(); ?>&#8221;</h1>
-        </header>
+            <h1 class="entry-title">
+                <?php esc_html_e('Search Results:', 'starter-theme'); ?> 
+                <?php echo $total_results; ?> 
+                <?php esc_html_e('results found for &#8220;', 'starter-theme'); ?>
+                <?php echo get_search_query(); ?>
+                <?php esc_html('&#8221;', 'starter-theme'); ?>
+            </h1>
+        </header><!-- .entry-header -->
 
         <?php while ( have_posts() ) : the_post(); // start the loop ?>
 
@@ -37,10 +41,9 @@ get_header(); ?>
         <?php get_template_part( 'content', 'none' ); ?>
 
     <?php endif; ?>
-    </div><!-- / #primary -->
+</div><!-- / #primary -->
 
     <?php get_sidebar(); ?>
-
-</div><!-- / .container -->   
+ 
    
 <?php get_footer(); ?>
