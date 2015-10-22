@@ -24,6 +24,10 @@
 
         elseif ( is_year() ) :
             printf( __( 'Year: %s', 'starter-theme' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'starter-theme' ) ) . '</span>' );
+
+        elseif( is_404() ) :
+            esc_html_e('Nothing Found', 'starter-theme');
+        
         else :
             _e( 'Archives', 'starter-theme' );
 
