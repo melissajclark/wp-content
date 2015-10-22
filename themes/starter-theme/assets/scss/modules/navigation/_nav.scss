@@ -1,92 +1,78 @@
-.siteNavigation {
-	float:left;
-}
-
-.siteMenu,
-.siteMenu ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-/* Top level nav */
+/* mega menu list */
 .siteMenu {
-	float: left;
-	margin: 0 auto;
+    display: block;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 15;
 }
 
-/* Dropdowns */
-.siteMenu ul {
-	position: absolute;
-	top: 2em;
-	left: -9999px;
-	opacity: 0;
-	-webkit-transition: 0.1s linear opacity;
-	min-width:$navItemWidth;
-	background: $NavdropdownColour;
+/* a top level navigation item in the mega menu */
+.menu-item {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
 }
 
-.siteMenu li {
-	float: left;
-	position: relative;
+/* first descendant link within a top level navigation item */
+.menu-item > a {
+    position: relative;
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0 0 -1px 0;
+    border: 1px solid transparent;
 }
 
-/* Top level nav items */
-.siteMenu li > a {
-	float: left;
-	padding: 10px 10px;
-	color: $text;
-	text-decoration: none;
-	min-width:$navItemWidth;
-	text-align:center;
+/* focus/open states of first descendant link within a top level 
+   navigation item */
+.menu-item > a:focus,
+.menu-item > a.open {
+    border: 1px solid $colour4;
 }
 
-/* Top level hover state, preserve hover state when hovering dropdown  */
-.siteMenu li > a:hover,
-.siteMenu li > a:focus,
-.siteMenu li:focus > a,
-.siteMenu li:hover > a {
-	background: $NavdropdownColour;
-	outline: 0;
-	color:$white;
-	min-width:$navItemWidth;
+/* open state of first descendant link within a top level 
+   navigation item */
+.menu-item > a.open {
+    /* background-color: #fff; */
+    border-bottom: none;
+    z-index: 1;
 }
 
-/* Rounded corners for first top level nav item */
-.siteMenu > li:first-child > a {
-	border-left: 0;
+/* sub-navigation panel */
+.sub-menu {
+    position: absolute;
+    display: none;
+    top: 2.6em;
+    margin-top: -1px;
+    padding: 0.5em 1em;
+    border: 1px solid $colour4;
+    background-color: $white;
 }
 
-/* Rounded corners for last top level nav item */
-.siteMenu > li:last-child > a {
-	border-right: 0;
+/* sub-navigation panel open state */
+.sub-menu.open {
+    display: block;
 }
 
-.siteMenu li:hover ul,
-.siteMenu li:focus ul,
-ul.show-menu {
-	left: 0;
-	opacity: 0.99;
+/* list of items within sub-navigation panel */
+.sub-menu ul {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 1em 0 0;
+    padding: 0;
 }
 
-.siteMenu ul li {
-	float: none;
-	position: static;
-}
+/* list item within sub-navigation panel */
+.sub-menu li {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0; 
 
-.siteMenu ul a {
-	float: none;
-	display: block;
-	color: $white;
-	-webkit-transition: 0.1s linear all;
-	text-align:left;
-}
-
-.siteMenu ul a:hover,
-.siteMenu ul a:focus {
-	background: $white;
-	color: $text;
-	text-shadow: none;
-}
-
-p { clear: both; }
+    a:focus,
+    a:hover {
+    	border:$border;
+    }
+} 

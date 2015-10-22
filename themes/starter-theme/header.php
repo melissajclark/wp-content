@@ -50,7 +50,7 @@
         </h1>
 
         <nav class="siteNavigation" role="navigation">
-            <ul class="siteMenu" role="menu">
+            <ul class="siteMenu">
                 <?php wp_nav_menu( array( "theme_location" => "primary", "container" => '', 'items_wrap'=> '%3$s' ) ); ?>
             </ul><!-- .menu -->
         </nav><!-- siteNavigation -->  

@@ -1,5 +1,5 @@
 // theme js
-$(document).ready(function(){
+jQuery(function($) {
 
 	/**
 	*
@@ -9,48 +9,32 @@ $(document).ready(function(){
 
 	$("#page").fitVids();
 
-	/**
-	*
-	* Below = JS for keyboard-accessible menu 
-	*
-	* JS copied from: http://examples.simplyaccessible.com/css-menu/option-3.html (see source file navigation-option-3.js)
-	*
-	**/
+	
+	$(".siteNavigation").accessibleMegaMenu({
+	    /* prefix for generated unique id attributes, which are required 
+	       to indicate aria-owns, aria-controls and aria-labelledby */
+	    uuidPrefix: "accessible-megamenu",
 
-	$(function(){
-		$('.siteMenu').setup_navigation();
+	    /* css class used to define the megamenu styling */
+	    menuClass: "nav-menu",
+
+	    /* css class for a top-level navigation item in the megamenu */
+	    topNavItemClass: "menu-item",
+
+	    /* css class for a megamenu panel */
+	    panelClass: "sub-menu",
+
+	    /* css class for a group of items within a megamenu panel */
+	    panelGroupClass: "sub-nav-group",
+
+	    /* css class for the hover state */
+	    hoverClass: "hover",
+
+	    /* css class for the focus state */
+	    focusClass: "focus",
+
+	    /* css class for the open state */
+	    openClass: "open"
 	});
-
-	$.fn.setup_navigation = function(settings) {
-		settings = jQuery.extend({
-			menuHoverClass: 'show-menu',
-		}, settings);
-		
-		// Set tabIndex to -1 so that links can't receive focus until menu is open
-		$(this).find('> li > a').next('ul').find('a').attr('tabIndex',-1);
-		
-		$(this).find('> li > a').hover(function(){
-			$(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
-		});
-		$(this).find('> li > a').focus(function(){
-			$(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
-			$(this).next('ul')
-				.addClass(settings.menuHoverClass)
-				.find('a').attr('tabIndex',0);
-		});
-			
-		// Hide menu if click or focus occurs outside of navigation
-		$(this).find('a').last().keydown(function(e){ 
-			if(e.keyCode == 9) {
-				// If the user tabs out of the navigation hide all menus
-				$('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
-			}
-		});
-		$(document).click(function(){ $('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1); });
-		
-		$(this).click(function(e){
-			e.stopPropagation();
-		});
-	}
  
 }); // end doc ready
