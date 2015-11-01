@@ -42,9 +42,10 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 		// Make theme available for translation.
 		// Translations can be filed in the /languages/ directory.
 		load_theme_textdomain( 'starter-theme', get_template_directory() . '/languages' );
-
-		// Add default posts and comments RSS feed links to head.
-		add_theme_support( 'automatic-feed-links' );
+		
+		// Add theme support for customizable features
+		// -------------------------------------------
+		add_theme_support( 'automatic-feed-links' ); // Add default posts and comments RSS feed links to head.
 		add_theme_support( 'post-thumbnails' ); // Enable support for Post Thumbnails on posts and pages
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'custom-header' );
@@ -89,7 +90,7 @@ function starter_theme_scripts() {
 	
     wp_enqueue_style( 'starter-theme-style', get_stylesheet_uri() ); // theme style.css file
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+	if ( is_singular('post') && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
