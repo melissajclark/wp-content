@@ -2,7 +2,7 @@
 /**
  * The header template
  *
- * Displays all of the <head> section and everything up till <div id="main">
+ * Displays all of the <head> section and everything up till <main id="main">
  *
  * @package Starter_Theme
  */
@@ -20,10 +20,8 @@
 <head>
     <meta charset="<?php bloginfo( "charset" ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="pingback" href="<?php bloginfo( "pingback_url" ); ?>" />
  
-    <?php // Lets other plugins and files tie into our theme's <head>:
-    wp_head(); ?>
+    <?php wp_head(); // Lets other plugins and files tie into our theme's <head>?>
 </head>
  
 <body <?php body_class(); ?>>
