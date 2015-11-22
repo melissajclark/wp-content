@@ -6,5 +6,9 @@
     "gulp-newer": "*",
     "gulp-minify-css": "*",
     "gulp-plumber": "*"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.10.0",
+    "gulp": "^3.9.0"
   }
 }
