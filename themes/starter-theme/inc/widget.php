@@ -51,7 +51,7 @@ class starter_theme_custom_widget extends WP_Widget {
 			$title = $instance[ 'title' ];
 		}
 		else {
-			$title = __( 'New title', 'text_domain' );
+			$title = __( 'New title', 'starter-theme' );
 		}
 		?>
 		<p>
