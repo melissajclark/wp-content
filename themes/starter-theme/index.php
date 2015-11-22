@@ -11,18 +11,14 @@
 
 get_header(); ?>
 
-<div class="container contentWithAside">
-    <div id="primary" role="main">
+<div id="primary" role="main">
 
    <?php if ( have_posts() ) : // display the content _if_ there are posts ?>
 
-        <?php // check if we're on an archive page
-        if ( is_archive() ) :
-            // if so, print the archive title before the loop begins
-            get_template_part( 'inc/archive-header' );
-        endif; ?>
+        <?php if ( is_archive() ) : // check if we're on an archive page ?>
+            <?php get_template_part( 'inc/archive-header' );  ?>
+        <?php endif; ?>
 
-        <?php /* Start the Loop */ ?>
         <?php while ( have_posts() ) : the_post(); ?>
             <?php get_template_part('content'); ?>
         <?php endwhile; ?>
@@ -40,9 +36,8 @@ get_header(); ?>
         </article><!-- #post-0 -->
 
     <?php endif; ?>
-    </div><!-- / #primary -->
+</div><!-- / #primary -->
 
-    <?php get_sidebar(); ?>
-</div><!-- / .container -->   
+<?php get_sidebar(); ?> 
 
 <?php get_footer(); ?>
