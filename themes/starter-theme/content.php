@@ -1,93 +1,61 @@
-<?php 
+<?php
 /**
+ * The template file is used for displaying the main content of pages and posts throughout the website.
  *
- * Article: wraps around all content
- *
- **/ ?>
+ * @package Starter_Theme
+ */
+?>
 
- <?php if ( is_singular('post') ) : ?>
-   
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-<?php else : ?>
+    <header class="entry-header">
+        <?php if ( is_singular() ) :  ?>
+            <?php get_template_part('inc/page-title'); ?>
 
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-<?php endif; ?>
-        
-<?php 
-/**
-*
-* Entry-Header: If statement outputs linked H2s for feed templates (archives, index, etc)
-*             - On singular templates non-linked H2s are used
-*             - Entry-meta - author & date are output on non-static content 
-**/ ?>
-    
-<header class="entry-header">
-
-    <?php if ( is_singular() ) : // no link around title if it is a single post ?>
-        <h1 class="entry-title" itemprop="name"><?php the_title(); ?></h1>
-    <?php else : ?>     
-        <h2 class="entry-title" itemprop="name">
-            <a itemprop="url" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </h2>
-    <?php endif; ?>
-
-    <?php if ( is_singular('post') || is_home() || is_archive() ) : // display entra meta only on post & blog templates ?>
-        <span class="entry-meta">
-            <span class="entry-date" itemprop="datePublished" content="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></span>
-            <span itemprop="author" itemscope itemtype="http://schema.org/Person"><?php the_author_posts_link(); ?></span>  
-
-            <?php if ( has_category() && !has_tag() ) : ?>
-                <span><?php esc_html_e('Category: ', 'starter-theme'); ?><?php the_category(', '); // comma only to remove usual bulleted list of terms ?></span>
-
-            <?php elseif ( has_category() && has_tag() ) : ?>
-                <span><?php esc_html_e('Category: ', 'starter-theme'); ?><?php the_category(', '); // comma only to remove usual bulleted list of terms ?> <?php esc_html_e('Tagged: ', 'starter-theme'); ?><?php the_tags(''); // comma only to remove usual "Tags" before list of terms ?></span>
-
-            <?php elseif ( !has_category() && has_tag() ) : ?>
-                <span><?php esc_html_e('Tagged: ', 'starter-theme'); ?><?php the_tags(''); // comma only to remove usual "Tags" before list of terms ?></span>
+            <?php if ( function_exists('yoast_breadcrumb') ) : ?>
+                <?php // breadcrumbs most be turned on in Yoast's settings ?>
+                <?php yoast_breadcrumb('<p class="breadcrumbs">','</p>'); ?>
             <?php endif; ?>
-        </span><!-- / entry-meta -->   
-    <?php endif; ?>
-</header><!-- .entry-header -->
 
-<?php 
-/**
-*
-* Entry-Content: If statement outputs content or excerpt, or custom fields depending on the template in use
-*
-**/ ?>
+        <?php else : ?>     
+            <h2 class="entry-title" itemprop="name">
+                <a itemprop="url" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            </h2>
+        <?php endif; ?>
 
-<section class="entry-content">
-    <?php if (is_archive() ) : // displays the excerpt if it is an archive, otherwise shows the full content ?>
-        <p itemprop="description"><?php the_excerpt(); ?></p>
+        <?php // display entra meta only on post & blog templates
+            if ( is_singular('post') || is_home() || is_archive() ) :  ?>
+            <?php get_template_part('inc/entry-meta'); ?>
+        <?php endif; ?>
+    </header><!-- .entry-header -->
 
-    <?php else : // for all other templates, show this content ?>
-        <?php the_content(); ?>
-    <?php endif; ?>
+    <section class="entry-content">
+        <?php if ( is_archive() ) : // display the excerpt if it is an archive ?>
 
-    <?php if ( is_page() ) : // include the page-links if it is a page ?>
-        <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
-    <?php endif; ?>
-</section><!-- .entry-content -->
+            <?php the_post_thumbnail('square'); ?>
+            <p itemprop="description"><?php the_excerpt(); ?></p>
 
-<?php 
-/**
-*
-* Footer Entry Meta: If statement displays it on single blog posts or the blog feed (index.php)
-*
-**/ ?>
+        <?php else : // not an archive? output the full content ?>
 
-<?php if ( is_singular() && !is_page() ) : ?>
-    <footer class="entry-meta">
-        <div class="comments-link">
-            <?php comments_popup_link( 
-                 __( 'Leave a comment', 'starter-theme' ), 
-                 __( '1 comment', 'starter-theme' ), 
-                 __( '% comments', 'starter-theme' ) ); 
-            ?>
-        </div>
-    </footer><!-- #entry-meta -->
-<?php endif; // end footer entry-meta conditional ?>
+            <?php the_content(); ?>
+
+        <?php endif; ?>
+
+        <?php if ( is_page() ) : // include the page-links if it is a page ?>
+            <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'starter-theme' ) . '</span>', 'after' => '</div>' ) ); ?>
+        <?php endif; ?>
+    </section><!-- .entry-content -->
+
+    <?php if ( is_singular() && !is_page() ) : ?>
+        <footer class="entry-meta">
+            <div class="comments-link">
+                <?php comments_popup_link( 
+                     __( 'Leave a comment', 'starter-theme' ), 
+                     __( '1 comment', 'starter-theme' ), 
+                     __( '% comments', 'starter-theme' ) ); 
+                ?>
+            </div>
+        </footer><!-- #entry-meta -->
+    <?php endif; // end footer entry-meta conditional ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
