@@ -1,0 +1,20 @@
+/*====================================
+=            # Typography           =
+====================================*/
+
+body, input, textarea {
+	@include normal-font-size;
+	@include body-font;
+	color: $text;
+	word-wrap:break-word;
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+@import "headings";
+@import "lists";
+@import "text-elements";
+
+/*=====  End of Typography  ======*/

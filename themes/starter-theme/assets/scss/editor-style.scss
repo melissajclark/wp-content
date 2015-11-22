@@ -1,9 +1,10 @@
-/*!*
-*
-* Editor Styles for WYSIWYG Editor
-*
-**/
+/*!==========================================================
+=            Editor Styles for WordPress Editor            =
+==========================================================*/
 
 @import "base/variables";
 @import "base/mixins/typographyMixins";
-@import "base/typography";
+@import "typography/typography";
+@import "navigation/links";
+
+/*=====  End of Editor Styles for WordPress Editor  ======*/

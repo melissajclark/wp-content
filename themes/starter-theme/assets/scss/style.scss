@@ -11,11 +11,41 @@ Text Domain: starter-theme
 */
 
 
-// RESET & BASE
-// ------------------
-@import "base/all-base";
+// Import Variables & Mixins first so they can be used throughout the stylesheet.
+
+@import "base/variables";
+@import "base/mixins/all-mixins";
 
 
-// MODULES
-// ------------------
-@import "modules/all-modules";
+/*=========================================
+=            Table of Contents            =
+=========================================*
+	
+	# Normalize
+	# Fonts
+	# WordPress Styles
+	# Typography
+		## Headings
+		## Lists
+		## Text Elements (strong / blockquote / etc)
+	# Layout
+	# Navigation
+		## Links
+		## Menus
+		## Header
+		## Footer
+		## Pagination
+	# Blog
+		## Comments
+
+/*=====  End of Table of Contents  ======*/
+	
+
+	@import "base/normalize";
+	@import "base/fonts/all-fonts";
+	@import "base/wordPressStyles";
+	@import "typography/typography";
+	@import "layout";
+	@import "navigation/navigation";
+	@import "blog/all-blog";
+	

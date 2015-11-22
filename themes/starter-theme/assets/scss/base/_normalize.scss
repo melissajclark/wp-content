@@ -1,9 +1,6 @@
-/**
-*
-* Normalize
-*
-**/
-
+/*=================================
+=            # Normalize         =
+=================================*/
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
 	display: block;
@@ -142,4 +139,8 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 	box-sizing: border-box;
 }
 
-/* / Normalize */
+img {
+	max-width:100%;
+	height:auto;
+}
+/*=====  End of Normalize  ======*/

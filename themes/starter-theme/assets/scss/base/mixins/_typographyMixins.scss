@@ -4,19 +4,42 @@
 // *
 // *
 
-
 // function - converts px to em
 // Source: https://css-tricks.com/snippets/sass/px-to-em-functions/
+
+// Example of PX to EM Usage:
+// h1 {
+//   font-size: em(32);
+// }
+
 $browser-context: 16; // Default
 
 @function em($pixels, $context: $browser-context) {
   @return #{$pixels/$context}em;
 }
 
-// Example of PX to EM Usage:
+// function - converts px to rem
+// Source: http://www.stubbornella.org/content/2013/07/01/easy-peasy-rem-conversion-with-sass/
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return #{$remSize}rem;
+}
+
+// Example of PX to REM Usage:
 // h1 {
-//   font-size: em(32);
+//  @include fontSize(32px);
 // }
+
+@mixin fontSize($size) {
+  font-size: $size; //Fallback in px
+  font-size: calculateRem($size);
+}
+
+@mixin lineHeight($size) {
+  line-height: $size; //Fallback in px
+  line-height: calculateRem($size);
+}
 
 // heading font family
 // ---------------
@@ -41,15 +64,7 @@ font:{
 // body font Sizing
 // ---------------
 @mixin normal-font-size {
- font-size: 1.15rem;
- line-height: 1.8rem;
- word-wrap:break-word;
-}
-
-// body font Sizing for mobile devices
-// ---------------
-@mixin small-font-size {
- font-size: 1.1rem;
- line-height: 1.56rem;
+ @include fontSize(18px);
+ @include lineHeight(28px);
  word-wrap:break-word;
 }

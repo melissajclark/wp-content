@@ -1,9 +1,6 @@
-/**
-*
-* WordPress Generated Styles & Classes
-*
-**/
-
+/*=========================================
+=            # WordPress Styles          =
+=========================================*/
 
 /* Images & Alignment */
 
@@ -151,30 +148,33 @@ img {
   padding-right: 2%;
 }
 
-
-/* Password Protected Posts */
-.post-password-required {
-  .entry-header .comments-link {
-    margin: 1.5em 0 0;
-  }
-  input[type=password] {
-    margin: 0.8125em 0;
-  } 
+/* Text meant only for screen readers. */
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
 }
 
-/* =error404
------------------------------------------------ */
-.error404 {
-  #main #s {
-    width: 75%;
-  }
-}
-
-.page-link {
-  clear: both;
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  color: #21759b;
   display: block;
-  margin: 0 0 1.5em;
-  span {
-    margin-right: 6px;
-  }
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000; /* Above WP toolbar. */
 }
+
+/*=====  End of WordPress Styles  ======*/

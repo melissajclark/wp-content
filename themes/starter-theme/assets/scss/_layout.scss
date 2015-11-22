@@ -1,8 +1,6 @@
-/**
-*
-* Layout
-*
-**/
+/*================================
+=            # Layout            =
+================================*/
 
 body {
 	background: $backgroundColour;
@@ -14,6 +12,8 @@ body {
 	clear: both;
 }
 
+// [TO DO: remove #main from this selector for new projects]
+#main, 
 .container { 
 	max-width:$mainContent;
 	width:$width;
@@ -30,3 +30,5 @@ body {
 	/* Sticky footer */
 	@include sticky-footer(100px, '#page','#main','#colophon');
 }
+
+/*=====  End of Layout  ======*/
