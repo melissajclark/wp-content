@@ -406,7 +406,7 @@ h6 a {
 =            ## Lists            =
 ================================*/
 ul, ol {
-  margin: 0 0 1.5em 2.5em; }
+  margin: 0 0 1.5em 0.25em; }
 
 ul {
   list-style: disc; }
