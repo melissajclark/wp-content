@@ -74,6 +74,21 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 			'footer' => 	__( 'Footer Menu', 'starter-theme' ),
 		) );
 
+		// Add custom image sizes
+		add_image_size(     'square',     	400, 400, false ); // (cropped)
+		add_image_size(     'big-square', 	1000, 1000, false ); // (cropped)
+
+		// add image sizes to back-end for client
+		add_filter('image_size_names_choose', 'my_image_sizes');
+		    function my_image_sizes($sizes) {
+		        $addsizes = array(
+		            'square'      	=> __( 'Square - Small', 'starter-theme'),
+		            'big-square' 	=> __( 'Square - Large', 'starter-theme'),
+		);
+		    $newsizes = array_merge($sizes, $addsizes);
+		    return $newsizes;
+		} // end of image name function
+
 	}
 endif; // starter_theme_setup
 add_action( 'after_setup_theme', 'starter_theme_setup' );
@@ -88,6 +103,7 @@ add_action( 'after_setup_theme', 'starter_theme_setup' );
 
 function starter_theme_scripts() {
 	
+    wp_enqueue_style( 'starter-theme-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic', false ); // theme google fonts
     wp_enqueue_style( 'starter-theme-style', get_stylesheet_uri() ); // theme style.css file
 
 	if ( is_singular('post') && comments_open() && get_option( 'thread_comments' ) ) {
@@ -124,6 +140,19 @@ function starter_theme_scripts() {
     
 add_action('wp_enqueue_scripts', 'starter_theme_scripts');
 
+
+/**
+*
+* Enable Custom Editor styles
+*
+**/
+
+function starter_theme_add_editor_styles() {
+	add_editor_style( 'editor-style.css' );
+}
+add_action( 'admin_init', 'starter_theme_add_editor_styles' );
+
+
 /**
  *
  * Register sidebars and widgetized areas
@@ -140,27 +169,6 @@ function starter_theme_widgets_init() {
     ) );    
 }
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
-
-
-/**
-*
-* Enable Custom Editor styles
-*
-**/
-
-// adds CSS
-function starter_theme_add_editor_styles() {
-	add_editor_style( 'editor-style.css' );
-}
-add_action( 'admin_init', 'starter_theme_add_editor_styles' );
-
-// adds custom fonts
-// [TO DO] - update with correct typography for new projects
-function starter_theme_add_editor_fonts(){
-	$font_url = str_replace(',', '%2C', 'fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600italic,600,300,300italic|Lato:400,400italic,300italic,300,700,700italic');
-	add_editor_style($font_url);
-}
-add_action('after_theme_setup', 'starter_theme_add_editor_fonts');
 
 
 /**
