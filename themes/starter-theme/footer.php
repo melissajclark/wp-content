@@ -24,9 +24,6 @@
 	</nav><!-- siteNavigation -->  
 </footer><!-- #colophon -->
 
-<?php // Load external scripts in the footer ?>
-<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600italic,600,300,300italic|Lato:400,400italic,300italic,300,700,700italic' rel='stylesheet' type='text/css'>
-
 <?php wp_footer(); ?> 
 </body>
 </html>
