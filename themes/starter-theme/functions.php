@@ -169,14 +169,3 @@ function starter_theme_widgets_init() {
     ) );    
 }
 add_action( 'widgets_init', 'starter_theme_widgets_init' );
-
-
-/**
-*
-* Enable ACF Options Page
-*
-**/
-
-if(function_exists('acf_add_options_page')) { 
-	acf_add_options_page('Theme Options');
-}
