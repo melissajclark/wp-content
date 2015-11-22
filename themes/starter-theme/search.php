@@ -11,15 +11,7 @@ get_header(); ?>
     <?php if ( have_posts() ) : ?>
 
         <header class="entry-header">
-            <?php global $wp_query;
-            $total_results = $wp_query->found_posts; ?>
-            <h1 class="entry-title">
-                <?php esc_html_e('Search Results:', 'starter-theme'); ?> 
-                <?php echo $total_results; ?> 
-                <?php esc_html_e('results found for &#8220;', 'starter-theme'); ?>
-                <?php echo get_search_query(); ?>
-                <?php esc_html('&#8221;', 'starter-theme'); ?>
-            </h1>
+            <?php get_template_part('inc/page-title'); ?>
         </header><!-- .entry-header -->
 
         <?php while ( have_posts() ) : the_post(); // start the loop ?>
@@ -43,7 +35,5 @@ get_header(); ?>
     <?php endif; ?>
 </div><!-- / #primary -->
 
-    <?php get_sidebar(); ?>
- 
-   
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

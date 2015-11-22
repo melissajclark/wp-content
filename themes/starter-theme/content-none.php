@@ -8,7 +8,7 @@
 
 <article class="post no-results not-found">
     <header class="entry-header">
-        <h1 class="entry-title"><?php esc_html_e( 'Nothing Found', 'starter-theme' ); ?></h1>
+        <?php get_template_part('inc/page-title'); ?>
     </header><!-- .entry-header -->
 
     <div class="entry-content">
