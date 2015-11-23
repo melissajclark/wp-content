@@ -8,7 +8,7 @@ Version: 1.0
 License: The MIT License (MIT)
 License URI: http://opensource.org/licenses/MIT
 Text Domain: starter-theme
-Tags: responsive, simple
+Tags: fluid-layout, editor-style, featured-images, theme-options, light, responsive-layout, full-width-template
 */
 /*=========================================
 =            Table of Contents            =
@@ -742,4 +742,12 @@ article.comment {
   padding: 5px 10px; }
 
 /*=====  End of Comments  ======*/
+.sticky {
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1; }
+
+.format-standard {
+  word-wrap: break-word; }
+
 /*=====  End of Blog  ======*/
