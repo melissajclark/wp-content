@@ -33,7 +33,7 @@ function starter_theme_social_profiles( $wp_customize ) {
     $wp_customize->add_control(
         'social_profile_instagram',
         array(
-            'label'     => __('Instagram Username'),
+            'label'     => __('Instagram Username', 'starter-theme'),
             'section'   => 'custom_social_profiles',
             'type'      => 'link',
         )
@@ -55,8 +55,8 @@ function starter_theme_social_profiles( $wp_customize ) {
     $wp_customize->add_control(
         'social_profile_linkedin',
         array(
-            'label'         => __('Linkedin Profile'),
-            'description'   => __('Full URL for your LinkedIn profile'),
+            'label'         => __('Linkedin Profile', 'starter-theme'),
+            'description'   => __('Full URL for your LinkedIn profile', 'starter-theme'),
             'section'       => 'custom_social_profiles',
             'type'          => 'link',
         )
@@ -78,8 +78,8 @@ function starter_theme_social_profiles( $wp_customize ) {
     $wp_customize->add_control(
         'social_profile_twitter',
         array(
-            'label'         => __('Twitter Username'),
-            'description'   => __('Username only (no @ symbol)'),
+            'label'         => __('Twitter Username', 'starter-theme'),
+            'description'   => __('Username only (no @ symbol)', 'starter-theme'),
             'section'       => 'custom_social_profiles',
             'type'          => 'link',
         )
