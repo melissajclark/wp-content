@@ -5,33 +5,83 @@
  * @package Starter_Theme
  */
 
-/**
- * Adds the individual sections, settings, and controls to the theme customizer
- */
 function starter_theme_social_profiles( $wp_customize ) {
 	
     $wp_customize->add_section(
         'custom_social_profiles',
         array(
-            'title' 		=> 'Social Profiles',
-            'description' 	=> 'This info will display in the footer, after the Website Name.',
-            'priority' 		=> 100,
+            'title'         => __('Social Links', 'starter-theme'),
+            'capability'    => 'edit_theme_options',
+            'description' 	=> __('Edit your social media profiles here and they will be updated throughout the website.', 'starter-theme'),
+            'priority' 		=> 10,
         )
     );
 
+    /**
+     *
+     * Instagram
+     *
+     */
+
     $wp_customize->add_setting(
-        'social_profile',
+        'social_profile_instagram',
         array(
-            'default' => 'All Rights ',
+            'default' => '',
         )
     );
 
     $wp_customize->add_control(
-        'social_profile',
+        'social_profile_instagram',
         array(
-            'label' => 'Copyright text',
-            'section' => 'custom_social_profiles',
-            'type' => 'text',
+            'label'     => __('Instagram Username'),
+            'section'   => 'custom_social_profiles',
+            'type'      => 'link',
+        )
+    );
+
+    /**
+     *
+     * Linkedin
+     *
+     */
+
+    $wp_customize->add_setting(
+        'social_profile_linkedin',
+        array(
+            'default' => '',
+        )
+    );
+
+    $wp_customize->add_control(
+        'social_profile_linkedin',
+        array(
+            'label'         => __('Linkedin Profile'),
+            'description'   => __('Full URL for your LinkedIn profile'),
+            'section'       => 'custom_social_profiles',
+            'type'          => 'link',
+        )
+    );
+
+    /**
+     *
+     * Twitter
+     *
+     */
+
+    $wp_customize->add_setting(
+        'social_profile_twitter',
+        array(
+            'default' => '',
+        )
+    );
+
+    $wp_customize->add_control(
+        'social_profile_twitter',
+        array(
+            'label'         => __('Twitter Username'),
+            'description'   => __('Username only (no @ symbol)'),
+            'section'       => 'custom_social_profiles',
+            'type'          => 'link',
         )
     );
 }

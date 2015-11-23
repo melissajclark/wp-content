@@ -176,7 +176,4 @@ add_action( 'widgets_init', 'starter_theme_widgets_init' );
  *
  */
 
-get_template_part('inc/customizer/footer', 'info');
 get_template_part('inc/customizer/social', 'profiles');
-
-
