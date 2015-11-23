@@ -176,4 +176,8 @@ add_action( 'widgets_init', 'starter_theme_widgets_init' );
  *
  */
 
+function starter_theme_customize_sanitize( $input ) {
+    return wp_kses_post( force_balance_tags( $input ) );
+}
+
 get_template_part('inc/customizer/social', 'profiles');
