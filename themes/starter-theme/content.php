@@ -9,7 +9,13 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
     <header class="entry-header">
-        <?php if ( is_singular() ) :  ?>
+
+        <?php if ( is_front_page() ) : ?>
+
+            <?php // no title or breadcrumbs if it is the home page ?>
+
+        <?php elseif ( is_singular() ) :  ?>
+
             <?php get_template_part('inc/page-title'); ?>
 
             <?php if ( function_exists('yoast_breadcrumb') ) : ?>
