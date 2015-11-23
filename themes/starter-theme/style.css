@@ -210,10 +210,6 @@ img.alignright {
   .page .hentry {
     border-bottom: none; }
 
-.entry-content,
-.entry-summary {
-  padding: 20px 0 0; }
-
 .entry-content table {
   border-bottom: 1px solid #444;
   margin: 0 0 1.5em;
@@ -222,9 +218,6 @@ img.alignright {
     border-top: 1px solid #444;
     padding: 6px 10px 6px 0; }
 
-.entry-content #s {
-  width: 75%; }
-
 .comment-content table {
   border-bottom: 1px solid #444;
   margin: 0 0 1.5em;
@@ -232,9 +225,6 @@ img.alignright {
   .comment-content table td {
     border-top: 1px solid #444;
     padding: 6px 10px 6px 0; }
-
-.comment-content #s {
-  width: 75%; }
 
 dl.gallery-item {
   margin: 0; }

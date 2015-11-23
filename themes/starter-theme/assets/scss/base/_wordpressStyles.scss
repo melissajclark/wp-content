@@ -47,10 +47,6 @@ img {
   }
 }
 
-.entry-content,
-.entry-summary {
-  padding: 20px 0 0;
-}
 .entry-content {
   table {
     border-bottom: $border;
@@ -60,9 +56,6 @@ img {
       border-top: $border;
       padding: 6px 10px 6px 0;
     }
-  }
-  #s {
-    width: 75%;
   }
 }
 .comment-content {
@@ -75,10 +68,6 @@ img {
       padding: 6px 10px 6px 0;
     }
   }
-  #s {
-    width: 75%;
-  }
-
 }
 
 dl.gallery-item {
