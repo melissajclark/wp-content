@@ -16,7 +16,9 @@ get_header(); ?>
    <?php if ( have_posts() ) : // display the content _if_ there are posts ?>
 
         <?php if ( is_archive() ) : // check if we're on an archive page ?>
-            <?php get_template_part( 'inc/archive-header' );  ?>
+            <header class="entry-header">
+                <?php get_template_part( 'inc/page-title' );  ?>
+            </header>
         <?php endif; ?>
 
         <?php while ( have_posts() ) : the_post(); ?>
