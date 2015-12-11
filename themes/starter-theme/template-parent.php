@@ -11,8 +11,8 @@ get_header(); ?>
 
 <div id="primary" role="main"> 
 
-	<?php // display grid of child Posts ?>
-    <?php $childPosts = new WP_query( // custom query to display events
+	<?php // // custom query to display children of this page  ?>
+    <?php $childPosts = new WP_query( 
             array(
                 'post_type' 		=> 'page',
                 'post_parent'		=>  $post->ID,
@@ -27,7 +27,7 @@ get_header(); ?>
             <?php while ( $childPosts->have_posts() ) : $childPosts->the_post(); ?> 
                 <?php get_template_part('content'); ?>
             <?php endwhile; ?>
-    	</div><!-- .cardLayoutBlock -->
+    	</div><!-- .container -->
 
         <?php wp_reset_postdata(); ?>
     <?php endif; ?>
