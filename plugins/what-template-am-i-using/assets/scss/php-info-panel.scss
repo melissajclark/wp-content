@@ -1,0 +1,75 @@
+@import "variables";
+
+#php-info-panel{
+
+    h1,h2{
+        font: inherit;
+        text-transform: uppercase;
+        font-size: 1em;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    h2{
+        background: $main-blue;
+        color: #FFF;
+        padding: 3px;
+        a,
+        a:hover{
+            color: inherit;
+        }
+    }
+
+    br{
+        display: none;
+    }
+
+    table{
+
+        &:first-of-type{
+            text-align: center;
+            .h{
+                background: transparent;
+            }
+            h1.p{
+                font-size: 1.75em;
+            }
+        }
+
+        margin: 0 0 1em 0;
+        padding: 0;
+        border: 0;
+        border-collapse: collapse;
+
+        width: 100%;
+        box-sizing: border-box;
+
+        font-size: .9em;
+
+        tr.h{
+            background: rgba(0,0,0,.066);
+        }
+
+        td,
+        th{
+            vertical-align: top;
+        }
+
+        td:first-child:nth-last-child(2),
+        td:last-child:nth-child(2){
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .e{
+            font-weight: bold;
+        }
+
+        td:last-child:nth-child(2).v{
+            margin-bottom: .5em;
+        }
+
+    }
+
+}
