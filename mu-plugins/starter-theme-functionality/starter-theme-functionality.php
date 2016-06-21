@@ -57,9 +57,9 @@ add_filter('upload_mimes', 'cc_mime_types');
     **/
     
     // $labels = array(
-    //     "name" => "post-type-name-plural",
+    //     "name" => "post-type-plural",
     //     "singular_name" => "post-type-singular",
-    //     "all_items" => "All post-type-name-plural",
+    //     "all_items" => "All post-type-plural",
     //     "add_new" => "Add New",
     //     "add_new_item" => "Add New post-type-singular",
     //     "edit" => "Edit",
@@ -67,14 +67,14 @@ add_filter('upload_mimes', 'cc_mime_types');
     //     "new_item" => "New post-type-singular",
     //     "view" => "View",
     //     "view_item" => "View post-type-singular",
-    //     "search_items" => "Search post-type-name-plural",
-    //     "not_found" => "No post-type-name-plural Found",
-    //     "not_found_in_trash" => "No post-type-name-plural Found in Trash",
+    //     "search_items" => "Search post-type-plural",
+    //     "not_found" => "No post-type-plural Found",
+    //     "not_found_in_trash" => "No post-type-plural Found in Trash",
     //     );
 
     // $args = array(
     //     "labels" => $labels,
-    //     "description" => "post-type-name-plural",
+    //     "description" => "post-type-plural",
     //     "public" => true,
     //     "show_ui" => true,
     //     "has_archive" => false,
@@ -83,7 +83,7 @@ add_filter('upload_mimes', 'cc_mime_types');
     //     "capability_type" => "post",
     //     "map_meta_cap" => true,
     //     "hierarchical" => true,
-    //     "rewrite" => array( "slug" => "post-type-name-plural", "with_front" => true ),
+    //     "rewrite" => array( "slug" => "post-type-plural", "with_front" => true ),
     //     "query_var" => true,
     //     "menu_position" => 8,               
     //     "supports" => array( "title", "editor", "thumbnail" ),      
