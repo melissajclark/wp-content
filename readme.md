@@ -17,17 +17,11 @@
 Useful plugins that I use while developing a new WordPress project.
 
 1. Admin Post Navigation
+Akismet
 - Codepress Admin Columns
-- Custom Post Types UI
-- Regenerate Thumbnails
-- RICG Responsive Images
 - Theme Check
-- Unsplash Stock Photo Library
-- Velvet Blue Update URLs
-- What the File
-- WordPress Importer
+- What Template Am I Using
 - WordPress SEO
-- WP Accessibility
 
 ### Project Setup
 - Gulp is setup for uglifying JavaScript and compiling SASS
@@ -35,6 +29,4 @@ Useful plugins that I use while developing a new WordPress project.
 - Want to change the name to reflect your project? Do a search and replace in your editor for:
     - `starter-theme`
     - `Starter_Theme`
-
-
-More info coming soon! - <em>May 11, 2015</em>
+    - `Starter Theme`
