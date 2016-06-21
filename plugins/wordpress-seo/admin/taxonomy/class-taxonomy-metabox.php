@@ -41,9 +41,6 @@ class WPSEO_Taxonomy_Metabox {
 	 * Shows the Yoast SEO metabox for the term.
 	 */
 	public function display() {
-		if ( $this->tax_is_public() === false ) {
-			return;
-		}
 
 		$content_sections = $this->get_content_sections();
 
@@ -51,10 +48,16 @@ class WPSEO_Taxonomy_Metabox {
 		if ( file_exists( WPSEO_PATH . 'premium/' ) ) {
 			$product_title .= ' Premium';
 		}
-		/* translators: %1$s expands to Yoast SEO */
-		$metabox_heading = sprintf( __( '%1$s Settings', 'wordpress-seo' ), $product_title );
 
-		printf( '<div id="poststuff" class="postbox"><h3><span>%1$s</span></h3><div id="taxonomy_overall"></div><div class="inside">' , $metabox_heading );
+		printf( '<div id="poststuff" class="postbox wpseo-taxonomy-metabox-postbox"><h2><span>%1$s</span></h2>', $product_title );
+
+		// Add Help Center to the taxonomy metabox see #4701.
+		echo '<div class="inside">';
+		$tab_video_url = 'https://yoa.st/metabox-taxonomy-screencast';
+		include WPSEO_PATH . 'admin/views/partial-settings-tab-video.php';
+
+
+		echo '<div id="taxonomy_overall"></div>';
 		echo '<div class="wpseo-metabox-sidebar"><ul>';
 
 		foreach ( $content_sections as $content_section ) {
@@ -77,8 +80,8 @@ class WPSEO_Taxonomy_Metabox {
 	private function get_content_sections() {
 		$content_sections = array(
 			$this->get_content_meta_section(),
-			$this->get_settings_meta_section(),
 			$this->get_social_meta_section(),
+			$this->get_settings_meta_section(),
 		);
 
 		return $content_sections;
@@ -96,10 +99,9 @@ class WPSEO_Taxonomy_Metabox {
 		$tab = new WPSEO_Metabox_Form_Tab(
 			'content',
 			$content,
-			__( 'Content', 'wordpress-seo' ),
+			__( '', 'wordpress-seo' ),
 			array(
-				'link_class' => 'wpseo_keyword_tab',
-				'link_title' => __( 'Content', 'wordpress-seo' ),
+				'link_class' => 'yoast-seo__remove-tab',
 			)
 		);
 
@@ -108,7 +110,6 @@ class WPSEO_Taxonomy_Metabox {
 			'<span class="yst-traffic-light-container">' . $this->traffic_light_svg() . '</span>',
 			array( $tab ),
 			array(
-				'link_alt'   => __( 'Content', 'wordpress-seo' ),
 				'link_title' => __( 'Content', 'wordpress-seo' ),
 			)
 		);
@@ -126,10 +127,7 @@ class WPSEO_Taxonomy_Metabox {
 		$tab = new WPSEO_Metabox_Form_Tab(
 			'settings',
 			$content,
-			__( 'Settings', 'wordpress-seo' ),
-			array(
-				'link_title' => __( 'Settings', 'wordpress-seo' ),
-			)
+			__( 'Settings', 'wordpress-seo' )
 		);
 
 		return new WPSEO_Metabox_Tab_Section(
@@ -137,7 +135,6 @@ class WPSEO_Taxonomy_Metabox {
 			'<span class="dashicons dashicons-admin-generic"></span>',
 			array( $tab ),
 			array(
-				'link_alt'   => __( 'Settings', 'wordpress-seo' ),
 				'link_title' => __( 'Settings', 'wordpress-seo' ),
 			)
 		);
@@ -161,7 +158,6 @@ class WPSEO_Taxonomy_Metabox {
 				$this->taxonomy_tab_content->html( $facebook_meta_fields ),
 				'<span class="dashicons dashicons-facebook-alt"></span>',
 				array(
-					'link_alt'   => __( 'Facebook / Opengraph metadata', 'wordpress-seo' ),
 					'link_title' => __( 'Facebook / Opengraph metadata', 'wordpress-seo' ),
 				)
 			);
@@ -175,22 +171,7 @@ class WPSEO_Taxonomy_Metabox {
 				$this->taxonomy_tab_content->html( $twitter_meta_fields ),
 				'<span class="dashicons dashicons-twitter"></span>',
 				array(
-					'link_alt'   => __( 'Twitter metadata', 'wordpress-seo' ),
 					'link_title' => __( 'Twitter metadata', 'wordpress-seo' ),
-				)
-			);
-		}
-
-		if ( $options['googleplus'] === true ) {
-			$googleplus_meta_fields = $taxonomy_social_fields->get_by_network( 'googleplus' );
-
-			$tabs[] = new WPSEO_Metabox_Form_Tab(
-				'googleplus',
-				$this->taxonomy_tab_content->html( $googleplus_meta_fields ),
-				'<span class="dashicons dashicons-googleplus"></span>',
-				array(
-					'link_alt'   => __( 'Google+ metadata', 'wordpress-seo' ),
-					'link_title' => __( 'Google+ metadata', 'wordpress-seo' ),
 				)
 			);
 		}
@@ -200,7 +181,6 @@ class WPSEO_Taxonomy_Metabox {
 			'<span class="dashicons dashicons-share"></span>',
 			$tabs,
 			array(
-				'link_alt'   => __( 'Social', 'wordpress-seo' ),
 				'link_title' => __( 'Social', 'wordpress-seo' ),
 			)
 		);
@@ -240,7 +220,7 @@ class WPSEO_Taxonomy_Metabox {
 			</g>
 			<g class="traffic-light-color traffic-light-red">
 				<ellipse fill="#C8C8C8" cx="15" cy="23.5" rx="5.7" ry="5.6"/>
-				<ellipse fill="#E31C15" cx="15" cy="10.9" rx="5.7" ry="5.6"/>
+				<ellipse fill="#DC3232" cx="15" cy="10.9" rx="5.7" ry="5.6"/>
 				<ellipse fill="#C8C8C8" cx="15" cy="36.1" rx="5.7" ry="5.6"/>
 			</g>
 			<g class="traffic-light-color traffic-light-orange">
@@ -274,18 +254,18 @@ SVG;
 	 * Keyword tab for enabling analysis of multiple keywords.
 	 */
 	public function template_keyword_tab() {
-		if ( ! WPSEO_Taxonomy::is_term_edit( $GLOBALS['pagenow'] ) ) {
+		// This template belongs to the term scraper so don't echo it if it isn't enqueued.
+		if ( ! wp_script_is( WPSEO_Admin_Asset_Manager::PREFIX . 'term-scraper' ) ) {
 			return;
 		}
 
 		echo '<script type="text/html" id="tmpl-keyword_tab">
 				<li class="wpseo_keyword_tab<# if ( data.active ) { #> active<# } #>">
 					<a class="wpseo_tablink" href="#wpseo_content" data-keyword="{{data.keyword}}" data-score="{{data.score}}">
-						{{data.prefix}}
-						<span class="wpseo-score-icon {{data.score}}">
-							<span class="screen-reader-text"></span>
-						</span>
-						<em><span class="wpseo_keyword">{{data.placeholder}}</span></em>
+						<span class="wpseo-score-icon {{data.score}}"></span>
+						<span class="wpseo-keyword-tab-prefix">{{data.prefix}}</span>
+						<em class="wpseo-keyword">{{data.placeholder}}</em>
+						<span class="screen-reader-text wpseo-keyword-tab-textual-score">{{data.scoreText}}.</span>
 					</a>
 					<# if ( ! data.hideRemove ) { #>
 						<a href="#" class="remove-keyword"><span>x</span></a>

@@ -233,7 +233,7 @@ class WPSEO_OpenGraph {
 		elseif ( is_category() || is_tax() || is_tag() ) {
 			$title = WPSEO_Taxonomy_Meta::get_meta_without_term( 'opengraph-title' );
 			if ( $title === '' ) {
-				$title = $frontend->get_taxonomy_title( '' );
+				$title = $frontend->title( '' );
 			}
 			else {
 				// Replace Yoast SEO Variables.
@@ -758,7 +758,10 @@ class WPSEO_OpenGraph_Image {
 	 */
 	private $images = array();
 
-	/** @var array $dimensions Holds image dimensions, if determined. */
+	/**
+	 * @TODO This needs to be refactored since we only hold one set of dimensions for multiple images. R.
+	 * @var array $dimensions Holds image dimensions, if determined.
+	 */
 	protected $dimensions = array();
 
 	/**
@@ -829,6 +832,10 @@ class WPSEO_OpenGraph_Image {
 		global $post;
 
 		if ( $this->get_opengraph_image_post() ) {
+			return;
+		}
+
+		if ( $this->get_attachment_page_image( $post->ID ) ) {
 			return;
 		}
 
@@ -903,6 +910,27 @@ class WPSEO_OpenGraph_Image {
 	}
 
 	/**
+	 * If this is an attachment page, call add_image with the attachment and return true
+	 *
+	 * @param int $post_id The post ID.
+	 *
+	 * @return bool
+	 */
+	private function get_attachment_page_image( $post_id ) {
+		if ( get_post_type( $post_id ) === 'attachment' ) {
+			$mime_type = get_post_mime_type( $post_id );
+			switch ( $mime_type ) {
+				case 'image/jpeg':
+				case 'image/png':
+				case 'image/gif':
+					return $this->add_image( wp_get_attachment_url( $post_id ) );
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Filter: 'wpseo_pre_analysis_post_content' - Allow filtering the content before analysis
 	 *
 	 * @api string $post_content The Post content string
@@ -950,8 +978,15 @@ class WPSEO_OpenGraph_Image {
 	 * @return bool
 	 */
 	private function add_image( $img ) {
+
+		$original = trim( $img );
+
 		// Filter: 'wpseo_opengraph_image' - Allow changing the OpenGraph image.
 		$img = trim( apply_filters( 'wpseo_opengraph_image', $img ) );
+
+		if ( $original !== $img ) {
+			$this->dimensions = array();
+		}
 
 		if ( empty( $img ) ) {
 			return false;

@@ -23,6 +23,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 		'title_test'             => 0,
 		// Form fields.
 		'forcerewritetitle'      => false,
+		'content-analysis-active' => true,
 		'separator'              => 'sc-dash',
 		'noodp'                  => false,
 		'usemetakeywords'        => false,
@@ -35,16 +36,16 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 		'metadesc-home-wpseo'    => '', // Text area.
 		'metadesc-author-wpseo'  => '', // Text area.
 		'metadesc-archive-wpseo' => '', // Text area.
-
 		'metakey-home-wpseo'     => '', // Text field.
 		'metakey-author-wpseo'   => '', // Text field.
 
 		'noindex-subpages-wpseo' => false,
 		'noindex-author-wpseo'   => false,
 		'noindex-archive-wpseo'  => true,
+
 		'disable-author'         => false,
 		'disable-date'           => false,
-
+		'disable-post_format'    => false,
 
 		/**
 		 * Uses enrich_defaults to add more along the lines of:
@@ -156,6 +157,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 
 		/**
 		 * Allow altering the array with separator options
+		 *
 		 * @api  array  $separator_options  Array with the separator options
 		 */
 		$filtered_separators = apply_filters( 'wpseo_separator_options', $separators );
@@ -252,7 +254,6 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 	 * @return  array      Validated clean value for the option to be saved to the database
 	 */
 	protected function validate_option( $dirty, $clean, $old ) {
-
 		foreach ( $clean as $key => $value ) {
 			$switch_key = $this->get_switch_key( $key );
 
@@ -348,6 +349,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 				 *		'noydir':
 				 *		'disable-author':
 				 *		'disable-date':
+				 *		'disable-post_format';
 				 *		'noindex-'
 				 *		'showdate-'
 				 *		'showdate-'. $pt->name
@@ -415,10 +417,6 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 				'noindextag'        => 'noindex-post_tag',
 				'noindexpostformat' => 'noindex-post_format',
 				'noindexsubpages'   => 'noindex-subpages',
-				'hidersdlink'       => 'hide-rsdlink',
-				'hidefeedlinks'     => 'hide-feedlinks',
-				'hidewlwmanifest'   => 'hide-wlwmanifest',
-				'hideshortlink'     => 'hide-shortlink',
 			);
 			foreach ( $move as $old => $new ) {
 				if ( isset( $old_option[ $old ] ) && ! isset( $option_value[ $new ] ) ) {
@@ -588,6 +586,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 
 			/**
 			 * Allow altering the array with variable array key patterns
+			 *
 			 * @api  array  $patterns  Array with the variable array key patterns
 			 */
 			$patterns = apply_filters( 'wpseo_option_titles_variable_array_key_patterns', $patterns );

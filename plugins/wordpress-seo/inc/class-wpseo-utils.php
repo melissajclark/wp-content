@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Internals
+ * @package    WPSEO\Internals
  * @since      1.8.0
  */
 
@@ -16,19 +16,8 @@ class WPSEO_Utils {
 	 */
 	public static $has_filters;
 
-	/**
-	 * Holds the options that, when updated, should cause the transient cache to clear
-	 *
-	 * @var array
-	 */
-	private static $cache_clear = array();
-
-	/**
-	 * @var string Sitemap Cache key prefix
-	 */
-	private static $sitemap_cache_key_prefix = 'yst_sm_';
-
-	const SITEMAP_INDEX_TYPE = '1';
+	/** @var array notifications to be shown in the JavaScript console */
+	protected static $console_notifications = array();
 
 	/**
 	 * Check whether the current user is allowed to access the configuration.
@@ -108,6 +97,45 @@ class WPSEO_Utils {
 	}
 
 	/**
+	 * Register a notification to be shown in the JavaScript console
+	 *
+	 * @param string $identifier    Notification identifier.
+	 * @param string $message       Message to be shown.
+	 * @param bool   $one_time_only Only show once (if added multiple times).
+	 */
+	public static function javascript_console_notification( $identifier, $message, $one_time_only = false ) {
+		static $registered_hook;
+
+		if ( is_null( $registered_hook ) ) {
+			add_action( 'admin_footer', array( __CLASS__, 'localize_console_notices' ), 999 );
+			$registered_hook = true;
+		}
+
+		$prefix = 'Yoast SEO: ';
+		if ( substr( $message, 0, strlen( $prefix ) ) !== $prefix ) {
+			$message = $prefix . $message;
+		}
+
+		if ( $one_time_only ) {
+			self::$console_notifications[ $identifier ] = $message;
+		}
+		else {
+			self::$console_notifications[] = $message;
+		}
+	}
+
+	/**
+	 * Localize the console notifications to JavaScript
+	 */
+	public static function localize_console_notices() {
+		if ( empty( self::$console_notifications ) ) {
+			return;
+		}
+
+		wp_localize_script( WPSEO_Admin_Asset_Manager::PREFIX . 'admin-global-script', 'wpseoConsoleNotifications', array_values( self::$console_notifications ) );
+	}
+
+	/**
 	 * Check whether a url is relative
 	 *
 	 * @param string $url URL string to check.
@@ -151,7 +179,8 @@ class WPSEO_Utils {
 	}
 
 	/**
-	 * Strip out the shortcodes with a filthy regex, because people don't properly register their shortcodes.
+	 * First strip out registered and enclosing shortcodes using native WordPress strip_shortcodes function.
+	 * Then strip out the shortcodes with a filthy regex, because people don't properly register their shortcodes.
 	 *
 	 * @static
 	 *
@@ -160,7 +189,7 @@ class WPSEO_Utils {
 	 * @return string $text string without shortcodes
 	 */
 	public static function strip_shortcode( $text ) {
-		return preg_replace( '`\[[^\]]+\]`s', '', $text );
+		return preg_replace( '`\[[^\]]+\]`s', '', strip_shortcodes( $text ) );
 	}
 
 	/**
@@ -456,322 +485,6 @@ class WPSEO_Utils {
 	}
 
 	/**
-	 * Adds a hook that when given option is updated, the XML sitemap transient cache is cleared
-	 *
-	 * @param string $option Option name.
-	 * @param string $type   Sitemap type.
-	 */
-	public static function register_cache_clear_option( $option, $type = '' ) {
-		self::$cache_clear[ $option ] = $type;
-
-		$hook     = 'update_option';
-		$function = array( __CLASS__, 'clear_transient_cache' );
-
-		if ( ! has_action( $hook, $function ) ) {
-			add_action( $hook, $function );
-		}
-	}
-
-	/**
-	 * Clears the transient cache when a given option is updated, if that option has been registered before
-	 *
-	 * @param string $option The option that's being updated.
-	 */
-	public static function clear_transient_cache( $option ) {
-		if ( array_key_exists( $option, self::$cache_clear ) ) {
-			$types = array();
-
-			if ( ! empty( self::$cache_clear[ $option ] ) ) {
-				$types[] = self::$cache_clear[ $option ];
-			}
-
-			// Trigger cache clear.
-			self::clear_sitemap_cache( $types );
-		}
-	}
-
-	/**
-	 * Clear entire XML sitemap cache
-	 *
-	 * @param array $types Set of sitemap types to invalidate cache for.
-	 */
-	public static function clear_sitemap_cache( array $types = array() ) {
-		// Filter out optional empty items.
-		$types = array_filter( $types );
-
-		// Clear all cache.
-		if ( empty( $types ) ) {
-			self::invalidate_sitemap_cache();
-
-			return;
-		}
-
-		// Make sure the index cache always gets invalidated.
-		if ( ! in_array( self::SITEMAP_INDEX_TYPE, $types ) ) {
-			array_unshift( $types, self::SITEMAP_INDEX_TYPE );
-		}
-
-		// Invalidate separate type caches.
-		foreach ( $types as $type ) {
-			self::invalidate_sitemap_cache( $type );
-		}
-	}
-
-	/**
-	 * Invalidate sitemap cache
-	 *
-	 * @param null|string $type The type to get the key for. Null for all cache.
-	 */
-	private static function invalidate_sitemap_cache( $type = null ) {
-		// Global validator gets cleared when not type is provided.
-		$old_validator = null;
-
-		// Get the current type validator.
-		if ( ! is_null( $type ) ) {
-			$old_validator = self::get_sitemap_cache_validator( $type );
-		}
-
-		// Refresh validator.
-		self::new_sitemap_cache_validator( $type );
-
-		if ( ! wp_using_ext_object_cache() ) {
-			// Clean up current cache from the database.
-			self::cleanup_sitemap_database_cache( $type, $old_validator );
-		}
-
-		// External object cache pushes old and unretrieved items out by itself so we don't have to do anything for that.
-	}
-
-	/**
-	 * Cleanup invalidated database cache
-	 *
-	 * @param null|string $type      The type of sitemap to clear cache for.
-	 * @param null|string $validator The validator to clear cache of.
-	 *
-	 * @return void
-	 */
-	private static function cleanup_sitemap_database_cache( $type = null, $validator = null ) {
-		global $wpdb;
-
-		if ( is_null( $type ) ) {
-			// Clear all cache if no type is provided.
-			$like = sprintf( '_transient_%s%%', self::$sitemap_cache_key_prefix );
-		}
-		else {
-			if ( ! is_null( $validator ) ) {
-				// Clear all cache for provided type-validator.
-				$like = sprintf( '_transient_%%_%s', $validator );
-			}
-			else {
-				// Clear type cache for all type keys.
-				$like = sprintf( '_transient_%s%s_%%', self::$sitemap_cache_key_prefix, $type );
-			}
-		}
-
-		/**
-		 * Add slashes to the LIKE "_" single character wildcard.
-		 *
-		 * We can't use `esc_like` here because we need the % in the query.
-		 */
-		$where = sprintf( "option_name LIKE '%s'", addcslashes( $like, '_' ) );
-
-		$query = sprintf( 'DELETE FROM %s WHERE %s', $wpdb->options, $where );
-		$wpdb->query( $query );
-	}
-
-	/**
-	 * Get the sitemap cache key prefix
-	 *
-	 * @return string
-	 */
-	public static function get_sitemap_cache_key_prefix() {
-		return self::$sitemap_cache_key_prefix;
-	}
-
-	/**
-	 * Get the cache key for a certain type and page
-	 *
-	 * Example key format for type "post", page 1: wpseo_sitemap_post_1:akfw3e_23azBa
-	 *
-	 * @param null|string $type The type to get the key for. Null or self::SITEMAP_INDEX_TYPE for index cache.
-	 * @param int         $page The page of cache to get the key for.
-	 *
-	 * @return string The key where the cache is stored on.
-	 */
-	public static function get_sitemap_cache_key( $type = null, $page = 1 ) {
-		// Using SITEMAP_INDEX_TYPE for sitemap index cache.
-		$type = is_null( $type ) ? self::SITEMAP_INDEX_TYPE : $type;
-
-		$global_cache_validator = self::get_sitemap_cache_validator();
-		$type_cache_validator   = self::get_sitemap_cache_validator( $type );
-
-		$prefix = self::$sitemap_cache_key_prefix;
-		$postfix = sprintf( '_%d:%s_%s', $page, $global_cache_validator, $type_cache_validator );
-
-		$type = self::get_safe_sitemap_cache_type( $type, $prefix, $postfix );
-
-		// Build key.
-		$full_key = $prefix . $type . $postfix;
-
-		return $full_key;
-	}
-
-	/**
-	 * If the type is over length make sure we compact it so we don't have any database problems
-	 *
-	 * When there are more 'extremely long' post types, changes are they have variations in either the start or ending.
-	 * Because of this, we cut out the excess in the middle which should result in less chance of collision.
-	 *
-	 * @param string $type The type of sitemap to be used.
-	 * @param string $prefix The part before the type in the cache key. Only the length is used.
-	 * @param string $postfix The part after the type in the cache key. Only the length is used.
-	 *
-	 * @return string The type with a safe length to use
-	 *
-	 * @throws OutOfRangeException When there is less than 15 characters of space for a key that is originally longer.
-	 */
-	private static function get_safe_sitemap_cache_type( $type, $prefix = '', $postfix = '' ) {
-		// Length of key should not be over 53.
-		$max_length = 53;
-		$max_length -= strlen( 'timeout_' );
-		$max_length -= strlen( $prefix );
-		$max_length -= strlen( $postfix );
-
-		if ( strlen( $type ) > $max_length ) {
-
-			if ( $max_length < 15 ) {
-				/**
-				 * If this happens the most likely cause is a 'page' that is too big.
-				 * "Normally" the max_length is 24 + strlen( page ), which is unlikely to go above 10 in the first place.
-				 *
-				 * So this would not happen unintentionally..
-				 * Either by trying to cause a high server load, finding backdoors or misconfiguration.
-				 */
-				throw new OutOfRangeException(
-					__(
-						'Trying to build a safe sitemap cache key, but the postfix and prefix combination leaves too little room to do this. You are probably requesting a page that is way out of the expected range.',
-						'wordpress-seo'
-					)
-				);
-			}
-
-			$half = ( $max_length / 2 );
-
-			$first_part = substr( $type, 0, ( ceil( $half ) - 1 ) );
-			$last_part  = substr( $type, ( 1 - floor( $half ) ) );
-
-			$type = $first_part . '..' . $last_part;
-		}
-
-		return $type;
-	}
-
-	/**
-	 * Get the cache validator for the specified type
-	 *
-	 * @param string|null $type Provide a type for a specific type validator, null for global validator.
-	 *
-	 * @return string Validator to be used to generate the cache key.
-	 */
-	public static function get_sitemap_cache_validator_key( $type = null ) {
-		if ( is_null( $type ) ) {
-			return 'wpseo_sitemap_cache_validator_global';
-		}
-
-		return sprintf( 'wpseo_sitemap_%s_cache_validator', $type );
-	}
-
-	/**
-	 * Get the current cache validator
-	 *
-	 * Without the type the global validator is returned.
-	 *  This can invalidate -all- keys in cache at once
-	 *
-	 * With the type parameter the validator for that specific
-	 *  type can be invalidated
-	 *
-	 * @param string|null $type Provide a type for a specific type validator, null for global validator.
-	 *
-	 * @return null|string The validator for the supplied type.
-	 */
-	private static function get_sitemap_cache_validator( $type = null ) {
-		$key = self::get_sitemap_cache_validator_key( $type );
-
-		$current = get_option( $key, null );
-		if ( ! is_null( $current ) ) {
-			return $current;
-		}
-
-		if ( self::new_sitemap_cache_validator( $type ) ) {
-			return self::get_sitemap_cache_validator( $type );
-		}
-
-		return null;
-	}
-
-	/**
-	 * Refresh the cache validator value
-	 *
-	 * @param string|null $type Provide a type for a specific type validator, null for global validator.
-	 *
-	 * @return bool True if validator key has been saved as option.
-	 */
-	private static function new_sitemap_cache_validator( $type = null ) {
-		$key = self::get_sitemap_cache_validator_key( $type );
-
-		// Generate new validator.
-		$microtime = microtime();
-
-		// Remove space.
-		list( $milliseconds, $seconds ) = explode( ' ', $microtime );
-
-		// Transients are purged every 24h.
-		$seconds      = ( $seconds % DAY_IN_SECONDS );
-		$milliseconds = substr( $milliseconds, 2, 5 );
-
-		// Combine seconds and milliseconds and convert to integer.
-		$validator = intval( $seconds . '' . $milliseconds, 10 );
-
-		// Apply base 61 encoding.
-		$compressed = self::convert_base10_to_base61( $validator );
-
-		return update_option( $key, $compressed );
-	}
-
-	/**
-	 * Encode to base61 format.
-	 *
-	 * This is base64 (numeric + alpha + alpha upper case) without the 0.
-	 *
-	 * @param int $input The number that has to be converted to base 61.
-	 *
-	 * @return string Base 61 converted string.
-	 *
-	 * @throws InvalidArgumentException When the input is not an integer.
-	 */
-	public static function convert_base10_to_base61( $input ) {
-		if ( ! is_int( $input ) ) {
-			throw new InvalidArgumentException( __( 'Expected an integer as input.', 'wordpress-seo' ) );
-		}
-
-		$characters = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$length     = strlen( $characters );
-
-		$index    = ( $input % $length );
-		$output   = $characters[ $index ];
-
-		$position = floor( $input / $length );
-		while ( $position ) {
-			$index    = ( $position % $length );
-			$output   = $characters[ $index ] . $output;
-
-			$position = floor( $position / $length );
-		}
-
-		return $output;
-	}
-
-	/**
 	 * Do simple reliable math calculations without the risk of wrong results
 	 *
 	 * @see   http://floating-point-gui.de/
@@ -783,19 +496,19 @@ class WPSEO_Utils {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param mixed  $number1   Scalar (string/int/float/bool).
-	 * @param string $action    Calculation action to execute. Valid input:
+	 * @param mixed  $number1     Scalar (string/int/float/bool).
+	 * @param string $action      Calculation action to execute. Valid input:
 	 *                            '+' or 'add' or 'addition',
 	 *                            '-' or 'sub' or 'subtract',
 	 *                            '*' or 'mul' or 'multiply',
 	 *                            '/' or 'div' or 'divide',
 	 *                            '%' or 'mod' or 'modulus'
 	 *                            '=' or 'comp' or 'compare'.
-	 * @param mixed  $number2   Scalar (string/int/float/bool).
-	 * @param bool   $round     Whether or not to round the result. Defaults to false.
-	 *                          Will be disregarded for a compare operation.
-	 * @param int    $decimals  Decimals for rounding operation. Defaults to 0.
-	 * @param int    $precision Calculation precision. Defaults to 10.
+	 * @param mixed  $number2     Scalar (string/int/float/bool).
+	 * @param bool   $round       Whether or not to round the result. Defaults to false.
+	 *                            Will be disregarded for a compare operation.
+	 * @param int    $decimals    Decimals for rounding operation. Defaults to 0.
+	 * @param int    $precision   Calculation precision. Defaults to 10.
 	 *
 	 * @return mixed            Calculation Result or false if either or the numbers isn't scalar or
 	 *                          an invalid operation was passed
@@ -904,23 +617,6 @@ class WPSEO_Utils {
 	}
 
 	/**
-	 * Wrapper for the PHP filter input function.
-	 *
-	 * This is used because stupidly enough, the `filter_input` function is not available on all hosts...
-	 *
-	 * @deprecated Passes through to PHP call, no longer used in code.
-	 *
-	 * @param int    $type          Input type constant.
-	 * @param string $variable_name Variable name to get.
-	 * @param int    $filter        Filter to apply.
-	 *
-	 * @return mixed
-	 */
-	public static function filter_input( $type, $variable_name, $filter = FILTER_DEFAULT ) {
-		return filter_input( $type, $variable_name, $filter );
-	}
-
-	/**
 	 * Trim whitespace and NBSP (Non-breaking space) from string
 	 *
 	 * @param string $string String input to trim.
@@ -943,19 +639,16 @@ class WPSEO_Utils {
 	 * @return bool
 	 */
 	public static function is_valid_datetime( $datetime ) {
-		if ( substr( $datetime, 0, 1 ) != '-' ) {
-			try {
-				// Use the DateTime class ( PHP 5.2 > ) to check if the string is a valid datetime.
-				if ( new DateTime( $datetime ) !== false ) {
-					return true;
-				}
-			}
-			catch ( Exception $exc ) {
-				return false;
-			}
+
+		if ( substr( $datetime, 0, 1 ) === '-' ) {
+			return false;
 		}
 
-		return false;
+		try {
+			return new DateTime( $datetime ) !== false;
+		} catch ( Exception $exc ) {
+			return false;
+		}
 	}
 
 	/**
@@ -1042,25 +735,6 @@ class WPSEO_Utils {
 	}
 
 	/**
-	 * Wrapper for encoding the array as a json string. Includes a fallback if wp_json_encode doesn't exists
-	 *
-	 * @param array $array_to_encode The array which will be encoded.
-	 * @param int   $options		 Optional. Array with options which will be passed in to the encoding methods.
-	 * @param int   $depth    		 Optional. Maximum depth to walk through $data. Must be greater than 0. Default 512.
-	 *
-	 * @return false|string
-	 */
-	public static function json_encode( array $array_to_encode, $options = 0, $depth = 512 ) {
-		if ( function_exists( 'wp_json_encode' ) ) {
-			return wp_json_encode( $array_to_encode, $options, $depth );
-		}
-
-		// @codingStandardsIgnoreStart
-		return json_encode( $array_to_encode );
-		// @codingStandardsIgnoreEnd
-	}
-
-	/**
 	 * Check if the current opened page is a Yoast SEO page.
 	 *
 	 * @return bool
@@ -1074,6 +748,28 @@ class WPSEO_Utils {
 		}
 
 		return $is_yoast_seo;
+	}
+
+	/**
+	 * Check if the current opened page belongs to Yoast SEO Free.
+	 *
+	 * @param string $current_page the current page the user is on.
+	 *
+	 * @return bool
+	 */
+	public static function is_yoast_seo_free_page( $current_page ) {
+		$yoast_seo_free_pages = array(
+			'wpseo_dashboard',
+			'wpseo_titles',
+			'wpseo_social',
+			'wpseo_xml',
+			'wpseo_advanced',
+			'wpseo_tools',
+			'wpseo_search_console',
+			'wpseo_licenses',
+		);
+
+		return in_array( $current_page, $yoast_seo_free_pages );
 	}
 
 	/**
@@ -1104,4 +800,122 @@ class WPSEO_Utils {
 		return apply_filters( 'yoast_seo_development_mode', $development_mode );
 	}
 
-} /* End of class WPSEO_Utils */
+	/**
+	 * Retrieve home URL with proper trailing slash.
+	 *
+	 * @param string      $path   Path relative to home URL.
+	 * @param string|null $scheme Scheme to apply.
+	 *
+	 * @return string Home URL with optional path, appropriately slashed if not.
+	 */
+	public static function home_url( $path = '', $scheme = null ) {
+
+		$home_url = home_url( $path, $scheme );
+
+		if ( ! empty( $path ) ) {
+			return $home_url;
+		}
+
+		$home_path = parse_url( $home_url, PHP_URL_PATH );
+
+		if ( '/' === $home_path ) { // Home at site root, already slashed.
+			return $home_url;
+		}
+
+		if ( is_null( $home_path ) ) { // Home at site root, always slash.
+			return trailingslashit( $home_url );
+		}
+
+		if ( is_string( $home_path ) ) { // Home in subdirectory, slash if permalink structure has slash.
+			return user_trailingslashit( $home_url );
+		}
+
+		return $home_url;
+	}
+
+	/**
+	 * Returns a base64 URL for the svg for use in the menu
+	 *
+	 * @param bool $base64 Whether or not to return base64'd output.
+	 *
+	 * @return string
+	 */
+	public static function get_icon_svg( $base64 = true ) {
+		$svg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" style="fill:#82878c" viewBox="0 0 512 512"><g><g><g><g><path d="M203.6,395c6.8-17.4,6.8-36.6,0-54l-79.4-204h70.9l47.7,149.4l74.8-207.6H116.4c-41.8,0-76,34.2-76,76V357c0,41.8,34.2,76,76,76H173C189,424.1,197.6,410.3,203.6,395z"/></g><g><path d="M471.6,154.8c0-41.8-34.2-76-76-76h-3L285.7,365c-9.6,26.7-19.4,49.3-30.3,68h216.2V154.8z"/></g></g><path stroke-width="2.974" stroke-miterlimit="10" d="M338,1.3l-93.3,259.1l-42.1-131.9h-89.1l83.8,215.2c6,15.5,6,32.5,0,48c-7.4,19-19,37.3-53,41.9l-7.2,1v76h8.3c81.7,0,118.9-57.2,149.6-142.9L431.6,1.3H338z M279.4,362c-32.9,92-67.6,128.7-125.7,131.8v-45c37.5-7.5,51.3-31,59.1-51.1c7.5-19.3,7.5-40.7,0-60l-75-192.7h52.8l53.3,166.8l105.9-294h58.1L279.4,362z"/></g></g></svg>';
+
+		if ( $base64 ) {
+			return 'data:image/svg+xml;base64,' . base64_encode( $svg );
+		}
+
+		return $svg;
+	}
+
+	/**
+	 * Wrapper for the PHP filter input function.
+	 *
+	 * This is used because stupidly enough, the `filter_input` function is not available on all hosts...
+	 *
+	 * @deprecated Passes through to PHP call, no longer used in code.
+	 *
+	 * @param int    $type          Input type constant.
+	 * @param string $variable_name Variable name to get.
+	 * @param int    $filter        Filter to apply.
+	 *
+	 * @return mixed
+	 */
+	public static function filter_input( $type, $variable_name, $filter = FILTER_DEFAULT ) {
+		return filter_input( $type, $variable_name, $filter );
+	}
+
+	/**
+	 * Adds a hook that when given option is updated, the XML sitemap transient cache is cleared
+	 *
+	 * @deprecated
+	 * @see WPSEO_Sitemaps_Cache::register_clear_on_option_update()
+	 *
+	 * @param string $option Option name.
+	 * @param string $type   Sitemap type.
+	 */
+	public static function register_cache_clear_option( $option, $type = '' ) {
+		WPSEO_Sitemaps_Cache::register_clear_on_option_update( $option, $type );
+	}
+
+	/**
+	 * Clears the transient cache when a given option is updated, if that option has been registered before
+	 *
+	 * @deprecated
+	 * @see WPSEO_Sitemaps_Cache::clear_on_option_update()
+	 *
+	 * @param string $option The option that's being updated.
+	 */
+	public static function clear_transient_cache( $option ) {
+		WPSEO_Sitemaps_Cache::clear_on_option_update( $option );
+	}
+
+	/**
+	 * Clear entire XML sitemap cache
+	 *
+	 * @deprecated
+	 * @see WPSEO_Sitemaps_Cache::clear()
+	 *
+	 * @param array $types Set of sitemap types to invalidate cache for.
+	 */
+	public static function clear_sitemap_cache( $types = array() ) {
+		WPSEO_Sitemaps_Cache::clear( $types );
+	}
+
+	/**
+	 * Wrapper for encoding the array as a json string. Includes a fallback if wp_json_encode doesn't exist.
+	 *
+	 * @deprecated 3.3 Core versions without wp_json_encode() no longer supported, fallback unnecessary.
+	 *
+	 * @param array $array_to_encode The array which will be encoded.
+	 * @param int   $options         Optional. Array with options which will be passed in to the encoding methods.
+	 * @param int   $depth           Optional. Maximum depth to walk through $data. Must be greater than 0. Default 512.
+	 *
+	 * @return false|string
+	 */
+	public static function json_encode( array $array_to_encode, $options = 0, $depth = 512 ) {
+		return wp_json_encode( $array_to_encode, $options, $depth );
+	}
+}
