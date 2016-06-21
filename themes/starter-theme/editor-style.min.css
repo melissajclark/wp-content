@@ -1,0 +1,19 @@
+/*!==========================================================
+=            Editor Styles for WordPress Editor            =
+==========================================================*/body,input,textarea{font-size:18px;font-size:1.125rem;line-height:28px;line-height:1.75rem;word-wrap:break-word;font-family:"Open Sans",sans-serif;font-style:normal;font-weight:400;color:#222;word-wrap:break-word}
+p{margin-bottom:1.5em}h1,h2,h3,h4,h5,h6{font-family:"Open Sans",sans-serif;font-style:normal;font-weight:400;-webkit-margin-before:0;-webkit-margin-after:0;margin:.5em 0 .5em 0;clear:both}
+h1{font-size:40px;font-size:2.5rem;line-height:50px;line-height:3.125rem}h2{font-size:35px;font-size:2.1875rem;line-height:45px;line-height:2.8125rem}
+h3{font-size:30px;font-size:1.875rem;line-height:40px;line-height:2.5rem}h4{font-size:25px;font-size:1.5625rem;line-height:35px;line-height:2.1875rem}
+h5{font-size:22px;font-size:1.375rem;line-height:32px;line-height:2rem}h6{font-size:19px;font-size:1.1875rem;line-height:29px;line-height:1.8125rem}
+h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{color:purple}ul,ol{margin:0 0 1.5em .25em}ul{list-style:disc}
+ol{list-style-type:decimal}ol ol{list-style:upper-alpha}ol ol ol{list-style:lower-roman}
+ol ol ol{list-style:lower-alpha}ul ul,ol ol,ul ol,ol ul{margin-bottom:0}dl{margin:0 1.5em}
+dd{margin-bottom:1.5em}hr{background-color:#ccc;border:0;height:1px;margin-bottom:1.5em}
+em,i{font-style:italic}blockquote{font-style:italic;font-weight:normal;margin:0 3em}
+blockquote em,blockquote i,blockquote cite{font-style:normal}cite{color:#666;letter-spacing:.05em;padding-left:60px}
+pre{background:#f4f4f4;line-height:1.5;margin-bottom:1.5em;overflow:auto;padding:.75em 1.5em}
+code,kbd{font-family:Monaco,Consolas,"Andale Mono","DejaVu Sans Mono",monospace}
+abbr,acronym,dfn{border-bottom:1px solid #444;cursor:help}address{display:block;margin:0 0 1.5em}
+ins{background:#fff9c0;text-decoration:none}sup,sub{font-size:10px;height:0;line-height:1;position:relative;vertical-align:baseline}
+sup{bottom:1ex}sub{top:.5ex}a{color:purple;text-decoration:none;word-wrap:break-word}
+a:focus,a:active,a:hover{color:#b10808;word-wrap:break-word}

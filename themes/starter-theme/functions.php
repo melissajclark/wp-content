@@ -75,19 +75,19 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 		) );
 
 		// Add custom image sizes
-		add_image_size(     'square',     	400, 400, false ); // (cropped)
-		add_image_size(     'big-square', 	1000, 1000, false ); // (cropped)
+		// add_image_size(     'square',     	400, 400, false ); // (cropped)
+		// add_image_size(     'big-square', 	1000, 1000, false ); // (cropped)
 
 		// add image sizes to back-end for client
-		add_filter('image_size_names_choose', 'my_image_sizes');
-		    function my_image_sizes($sizes) {
-		        $addsizes = array(
-		            'square'      	=> __( 'Square - Small', 'starter-theme'),
-		            'big-square' 	=> __( 'Square - Large', 'starter-theme'),
-		);
-		    $newsizes = array_merge($sizes, $addsizes);
-		    return $newsizes;
-		} // end of image name function
+		// add_filter('image_size_names_choose', 'my_image_sizes');
+		//     function my_image_sizes($sizes) {
+		//         $addsizes = array(
+		//             'square'      	=> __( 'Square - Small', 'starter-theme'),
+		//             'big-square' 	=> __( 'Square - Large', 'starter-theme'),
+		// );
+		//     $newsizes = array_merge($sizes, $addsizes);
+		//     return $newsizes;
+		// } // end of image name function
 
 	}
 endif; // starter_theme_setup

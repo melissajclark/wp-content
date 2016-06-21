@@ -11,8 +11,8 @@
 
 // Project configuration
 var project 		= 'starter-theme', // Project name, used for build zip.
-	url 		= 'starter-theme.dev', // Local Development URL for BrowserSync. Change as-needed.
-	build 		= './starter-theme/', // Files that you want to package into a zip go here
+	url 		= 'http://startertheme.dev', // Local Development URL for BrowserSync. Change as-needed.
+	build 		= './themes/starter-theme', // Files that you want to package into a zip go here
 	buildInclude 	= [
 				// include common file types
 				'**/*.php',
@@ -77,7 +77,7 @@ gulp.task('browser-sync', function() {
 	browserSync.init(files, {
 
 		// Read here http://www.browsersync.io/docs/options/
-		proxy: "starter-theme",
+		proxy: "http://startertheme.dev",
 
 		// port: 8080,
 
@@ -101,7 +101,7 @@ gulp.task('browser-sync', function() {
  * Sass output styles: https://web-design-weekly.com/2014/06/15/different-sass-output-styles/
 */
 gulp.task('styles', function () {
-	return 	    gulp.src('./assets/scss/*.scss')
+	return 	    gulp.src('./themes/starter-theme/assets/scss/*.scss')
 			.pipe(plumber())
 			.pipe(sourcemaps.init())
 			.pipe(sass({
@@ -118,7 +118,7 @@ gulp.task('styles', function () {
 			.pipe(autoprefixer('last 2 version', '> 1%', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
 			.pipe(sourcemaps.write('.'))
 			.pipe(plumber.stop())
-			.pipe(gulp.dest('./'))
+			.pipe(gulp.dest('./themes/starter-theme/'))
 			.pipe(filter('**/*.css')) // Filtering stream to only css files
 			.pipe(cmq()) // Combines Media Queries
 			.pipe(reload({stream:true})) // Inject Styles when style file is created
@@ -126,49 +126,65 @@ gulp.task('styles', function () {
 			.pipe(minifycss({
 				maxLineLen: 80
 			}))
-			.pipe(gulp.dest('./'))
+			.pipe(gulp.dest('./themes/starter-theme/'))
 			.pipe(reload({stream:true})) // Inject Styles when min style file is created
 			.pipe(notify({ message: 'Styles task complete', onLast: true }))
 });
 
 
-/**
- * Scripts: Vendors
- *
- * Look at src/js and concatenate those files, send them to assets/js where we then minimize the concatenated file.
-*/
-gulp.task('vendorsJs', function() {
-	return 	    gulp.src(['./assets/js/plugins/*.js', bower+'**/*.js'])
-			.pipe(concat('plugins.js'))
-			.pipe(gulp.dest('./assets/js'))
-			.pipe(rename( {
-				basename: "vendors",
-				suffix: '.min'
-			}))
-			.pipe(uglify())
-			.pipe(gulp.dest('./assets/js/'))
-			.pipe(notify({ message: 'Vendor scripts task complete', onLast: true }));
-});
+ /**
+  * Task: `vendorJS`.
+  *
+  * Concatenate and uglify vendor JS scripts.
+  *
+  * This task does the following:
+  * 		1. Gets the source folder for JS vendor files
+  * 		2. Concatenates all the files and generates vendors.js
+  * 		3. Renames the JS file with suffix .min.js
+  * 		4. Uglifes/Minifies the JS file and generates vendors.min.js
+  */
+ gulp.task( 'vendorsJs', function() {
+ 	gulp.src( jsVendorSRC )
+ 		.pipe( concat( jsVendorFile + '.js' ) )
+ 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+ 		.pipe( gulp.dest( jsVendorDestination ) )
+ 		.pipe( rename( {
+ 			basename: jsVendorFile,
+ 			suffix: '.min'
+ 		}))
+ 		.pipe( uglify() )
+ 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+ 		.pipe( gulp.dest( jsVendorDestination ) )
+ 		.pipe( notify( { message: 'TASK: "vendorsJs" Completed! 💯', onLast: true } ) );
+ });
 
 
-/**
- * Scripts: Custom
- *
- * Look at src/js and concatenate those files, send them to assets/js where we then minimize the concatenated file.
-*/
+ /**
+  * Task: `customJS`.
+  *
+  * Concatenate and uglify custom JS scripts.
+  *
+  * This task does the following:
+  * 		1. Gets the source folder for JS custom files
+  * 		2. Concatenates all the files and generates custom.js
+  * 		3. Renames the JS file with suffix .min.js
+  * 		4. Uglifes/Minifies the JS file and generates custom.min.js
+  */
+ gulp.task( 'customJS', function() {
+  	gulp.src( jsCustomSRC )
+ 		.pipe( concat( jsCustomFile + '.js' ) )
+ 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+ 		.pipe( gulp.dest( jsCustomDestination ) )
+ 		.pipe( rename( {
+ 			basename: jsCustomFile,
+ 			suffix: '.min'
+ 		}))
+ 		.pipe( uglify() )
+ 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+ 		.pipe( gulp.dest( jsCustomDestination ) )
+ 		.pipe( notify( { message: 'TASK: "customJs" Completed! 💯', onLast: true } ) );
+ });
 
-gulp.task('scriptsJs', function() {
-	return 	    gulp.src('./assets/js/theme/*.js')
-			.pipe(concat('theme.js'))
-			.pipe(gulp.dest('./assets/js'))
-			.pipe(rename( {
-				basename: "theme",
-				suffix: '.min'
-			}))
-			.pipe(uglify())
-			.pipe(gulp.dest('./assets/js/'))
-			.pipe(notify({ message: 'Custom scripts task complete', onLast: true }));
-});
 
 /**
  * Images
@@ -178,11 +194,11 @@ gulp.task('scriptsJs', function() {
 gulp.task('images', function() {
 
 // Add the newer pipe to pass through newer images only
-	return 	gulp.src(['./assets/images/raw/**/*.{png,jpg,gif}'])
-				.pipe(newer('./assets/images/'))
+	return 	gulp.src(['./themes/starter-theme/assets/images/raw/**/*.{png,jpg,gif}'])
+				.pipe(newer('./themes/starter-theme/assets/images/'))
 				.pipe(rimraf({ force: true }))
 				.pipe(imagemin({ optimizationLevel: 7, progressive: true, interlaced: true }))
-				.pipe(gulp.dest('./assets/images/'))
+				.pipe(gulp.dest('./themes/starter-theme/assets/images/'))
 				.pipe( notify( { message: 'Images task complete', onLast: true } ) );
 });
 
@@ -202,13 +218,13 @@ gulp.task('images', function() {
  */
 
  gulp.task('cleanup', function() {
- 	return 	gulp.src(['./assets/bower_components', '**/.sass-cache','**/.DS_Store'], { read: false }) // much faster
+ 	return 	gulp.src(['./themes/starter-theme/assets/bower_components', '**/.sass-cache','**/.DS_Store'], { read: false }) // much faster
  		.pipe(ignore('node_modules/**')) //Example of a directory to ignore
  		.pipe(rimraf({ force: true }))
  		// .pipe(notify({ message: 'Clean task complete', onLast: true }));
  });
  gulp.task('cleanupFinal', function() {
- 	return 	gulp.src(['./assets/bower_components','**/.sass-cache','**/.DS_Store'], { read: false }) // much faster
+ 	return 	gulp.src(['./themes/starter-theme/assets/bower_components','**/.sass-cache','**/.DS_Store'], { read: false }) // much faster
  		.pipe(ignore('node_modules/**')) //Example of a directory to ignore
  		.pipe(rimraf({ force: true }))
  		// .pipe(notify({ message: 'Clean task complete', onLast: true }));
@@ -234,8 +250,8 @@ gulp.task('images', function() {
 * Look at src/images, optimize the images and send them to the appropriate place
 */
 gulp.task('buildImages', function() {
-	return 	gulp.src(['assets/images/**/*', '!assets/images/raw/**'])
- 		.pipe(gulp.dest(build+'assets/images/'))
+	return 	gulp.src(['themes/starter-theme/assets/images/**/*', '!assets/images/raw/**'])
+ 		.pipe(gulp.dest(build+'themes/starter-theme/assets/images/'))
  		.pipe(plugins.notify({ message: 'Images copied to buildTheme folder', onLast: true }));
 });
 
@@ -267,9 +283,9 @@ gulp.task('buildImages', function() {
  });
 
   // Watch Task
- gulp.task('default', ['styles', 'vendorsJs', 'scriptsJs', 'images', 'browser-sync'], function () {
- 	gulp.watch('./assets/images/raw/**/*', ['images']); 
- 	gulp.watch('./assets/scss/**/*.scss', ['styles']);
- 	gulp.watch('./assets/js/**/*.js', ['scriptsJs', browserSync.reload]);
+ gulp.task('default', ['styles', 'scriptsJs', 'images', 'browser-sync'], function () {
+ 	gulp.watch('./themes/starter-theme/assets/images/raw/**/*', ['images']); 
+ 	gulp.watch('./themes/starter-theme/assets/scss/**/*.scss', ['styles']);
+ 	gulp.watch('./themes/starter-theme/assets/js/**/*.js', ['scriptsJs', browserSync.reload]);
 
  });
