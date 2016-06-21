@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CPAC_Column_Post_Excerpt
  *
@@ -11,15 +12,12 @@ class CPAC_Column_Post_Excerpt extends CPAC_Column {
 	 * @since 2.2.1
 	 */
 	public function init() {
-
 		parent::init();
 
-		// Properties
-		$this->properties['type']				= 'column-excerpt';
-		$this->properties['label']				= __( 'Excerpt', 'codepress-admin-columns' );
-		$this->properties['object_property']	= 'post_excerpt';
+		$this->properties['type'] = 'column-excerpt';
+		$this->properties['label'] = __( 'Excerpt', 'codepress-admin-columns' );
+		$this->properties['object_property'] = 'post_excerpt';
 
-		// Options
 		$this->options['excerpt_length'] = 30;
 	}
 
@@ -28,8 +26,12 @@ class CPAC_Column_Post_Excerpt extends CPAC_Column {
 	 * @since 2.0
 	 */
 	public function get_value( $post_id ) {
+		$value = $this->get_post_excerpt( $post_id, $this->get_option( 'excerpt_length' ) );
+		if ( ! has_excerpt( $post_id ) && $value ) {
+			$value = '<span class="cpac-inline-info">' . __( 'Excerpt from content', 'codepress-admin-columns' ) . '</span> ' . $value;
+		}
 
-		return $this->get_post_excerpt( $post_id, $this->options->excerpt_length );
+		return $value;
 	}
 
 	/**
@@ -37,7 +39,6 @@ class CPAC_Column_Post_Excerpt extends CPAC_Column {
 	 * @since 2.0.3
 	 */
 	public function get_raw_value( $post_id ) {
-
 		return get_post_field( 'post_excerpt', $post_id, 'raw' );
 	}
 
@@ -46,7 +47,6 @@ class CPAC_Column_Post_Excerpt extends CPAC_Column {
 	 * @since 2.0
 	 */
 	public function display_settings() {
-
 		$this->display_field_excerpt_length();
 	}
 }

@@ -135,7 +135,8 @@ abstract class CPAC_Storage_Model {
 	 *
 	 * @since 2.5
 	 */
-	protected function get_default_column_widths() {}
+	protected function get_default_column_widths() {
+	}
 
 	/**
 	 * @since 2.5
@@ -173,18 +174,6 @@ abstract class CPAC_Storage_Model {
 			// As a fallback we can use the table headings. this is not reliable, because most 3rd party column will not be loaded at this point.
 			if ( empty( $default_columns ) ) {
 				$default_columns = $this->get_default_column_headings();
-			}
-
-			// Custom columns
-			foreach ( $this->columns_filepath as $classname => $path ) {
-				include_once $path;
-				if ( class_exists( $classname, false ) ) {
-					$column = new $classname( $this->key );
-
-					if ( $column->is_registered() ) {
-						$column_types[ $column->get_type() ] = $column;
-					}
-				}
 			}
 
 			// Default columns
@@ -228,6 +217,18 @@ abstract class CPAC_Storage_Model {
 				}
 			}
 
+			// Custom columns
+			foreach ( $this->columns_filepath as $classname => $path ) {
+				include_once $path;
+				if ( class_exists( $classname, false ) ) {
+					$column = new $classname( $this->key );
+
+					if ( $column->is_registered() ) {
+						$column_types[ $column->get_type() ] = $column;
+					}
+				}
+			}
+
 			$this->column_types = $column_types;
 
 			// @since 2.5
@@ -243,10 +244,9 @@ abstract class CPAC_Storage_Model {
 	 */
 	private function get_default_colummn_types() {
 		$defaults = array();
-		$default_columns = $this->get_default_stored_columns();
 
 		foreach ( $this->get_column_types() as $type => $column ) {
-			if ( $column->is_default() || ( $default_columns && in_array( $type, array_keys( $default_columns ) ) ) ) {
+			if ( $column->is_default() || $column->is_original() ) {
 				$defaults[ $type ] = $column;
 			}
 		}
@@ -508,21 +508,51 @@ abstract class CPAC_Storage_Model {
 	}
 
 	public function set_layout( $layout_id ) {
-		$this->layout = $layout_id;
-		$this->flush_columns(); // forces $this->columns to be repopulated
+		$this->layout = is_scalar( $layout_id ) ? $layout_id : null;
+		$this->flush_columns(); // forces $columns and $stored_columns to be repopulated
 	}
 
-	public function init_layout() {
-		if ( $this->get_layout() ) {
-			return;
-		}
+	public function init_settings_layout() {
 
-		// try user preference..
+		// try admin preference..
 		$layout_id = $this->get_user_layout_preference();
 
 		// ..when not found use the first one
-		if ( ! $this->layout_exists( $layout_id ) ) {
+		if ( false === $layout_id ) {
 			$layout_id = $this->get_single_layout_id();
+		}
+
+		$this->set_layout( $layout_id );
+	}
+
+	public function init_listings_layout() {
+		$layout_id = null;
+
+		// User layouts
+		if ( $layouts_current_user = $this->get_layouts_for_current_user() ) {
+			$layout_preference = $this->get_user_layout_preference();
+
+			$layout_found = false;
+
+			// try user preference..
+			foreach ( $layouts_current_user as $_layout ) {
+				if ( $_layout->id == $layout_preference ) {
+					$layout_id = $_layout->id;
+					$layout_found = true;
+					break;
+				}
+			}
+
+			// when no longer available use the first user layout
+			if ( ! $layout_found ) {
+				$_layouts_current_user = array_values( $layouts_current_user );
+				$layout_id = $_layouts_current_user[0]->id;
+			}
+		}
+
+		// User doesn't have eligible layouts.. but the current (null) layout does exists, then the WP default columns are loaded
+		else if ( $this->get_layout_by_id( $layout_id ) ) {
+			$layout_id = '_wp_default_'; // _wp_default_ does not exists therefor will load WP default
 		}
 
 		$this->set_layout( $layout_id );
@@ -624,6 +654,7 @@ abstract class CPAC_Storage_Model {
 			'roles' => '',
 			'users' => '',
 		);
+
 		return array_merge( $default, $args );
 	}
 
@@ -787,7 +818,7 @@ abstract class CPAC_Storage_Model {
 				}
 
 				// only allow php files, exclude .SVN .DS_STORE and such
-				if ( substr( $leaf->getFilename(), - 4 ) !== '.php' ) {
+				if ( substr( $leaf->getFilename(), -4 ) !== '.php' ) {
 					continue;
 				}
 
@@ -964,7 +995,7 @@ abstract class CPAC_Storage_Model {
 
 		// for the rare case where a screen hasn't been set yet and a
 		// plugin uses a custom version of apply_filters( "manage_{$screen->id}_columns", array() )
-		if ( ! get_current_screen() ) {
+		if ( ! get_current_screen() && ! cac_wp_is_doing_ajax() ) {
 			return $columns;
 		}
 

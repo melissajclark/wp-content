@@ -3,8 +3,8 @@ Contributors: codepress, tschutter, davidmosterd, engelen, dungengronovius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.5
-Tested up to: 4.4.2
-Stable tag: 2.5.3
+Tested up to: 4.5.1
+Stable tag: 2.5.6.2
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -209,6 +209,34 @@ You can find a list of the available actions and filters (and examples on how to
 8. Posts Screen with custom fields.
 
 == Changelog ==
+
+= 2.5.6.2 =
+* [Fixed] Hotfix cleanup.
+
+= 2.5.6.1 =
+* [Fixed] Hotfix. Version 2.5.6 did not display the stored column settings, which has been hotfixed.
+
+= 2.5.6 =
+* [Fixed] Row actions are now only added to the first column when the primary column isn't available
+* [Fixed] The true/false field option for the Custom Field column will display a cross icon when the value is empty or zero
+
+= 2.5.5 =
+* [Improved] Columns with empty values will now display a dash symbol
+* [Fixed] Excerpt column: The label "Excerpt from content" will now only display when the post has content
+
+= 2.5.4.1 =
+* [Fixed] Columns can be marked as original, in case the default has been replaced by an ac-column
+
+= 2.5.4 =
+* [Fixed] Edit columns button will be positioned correctly on the Trash page
+* [Fixed] Obsolete images have been removed
+* [Fixed] Roles names column will display the available translation
+* [Fixed] Content type label (next to store settings) is displayed correctly when translations are loaded
+* [Fixed] After using quick edit the column values will be populated correctly again
+* [Fixed] WPML will correctly display it's "+" icons again. Make sure to add/remove the column.
+* [Improved Messages on the settings screen (when using restore columns) are now displayed directly above the columns
+* [Improved] Excerpt column will now display a label "excerpt from content" when the actual excerpt field is empty
+* [Added] New filter 'cac/get_posts/post_status' has been added to change post_status when using CPAC_Storage_model::get_posts()
 
 = 2.5.3 =
 * [Fixed] Fixes an issue with some 3rd party column not being visible
