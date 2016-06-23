@@ -13,7 +13,7 @@
  * Set the content width
  */
 if ( ! isset( $content_width ) ) :
-	$content_width = 600;
+	$content_width = 1000;
 endif;
 
 
@@ -75,19 +75,17 @@ if ( ! function_exists( 'starter_theme_setup' ) ):
 		) );
 
 		// Add custom image sizes
-		// add_image_size(     'square',     	400, 400, false ); // (cropped)
-		// add_image_size(     'big-square', 	1000, 1000, false ); // (cropped)
+		add_image_size(     'hero',     	1600, 600, false ); // (cropped)
 
 		// add image sizes to back-end for client
-		// add_filter('image_size_names_choose', 'my_image_sizes');
-		//     function my_image_sizes($sizes) {
-		//         $addsizes = array(
-		//             'square'      	=> __( 'Square - Small', 'starter-theme'),
-		//             'big-square' 	=> __( 'Square - Large', 'starter-theme'),
-		// );
-		//     $newsizes = array_merge($sizes, $addsizes);
-		//     return $newsizes;
-		// } // end of image name function
+		add_filter('image_size_names_choose', 'my_image_sizes');
+		    function my_image_sizes($sizes) {
+		        $addsizes = array(
+		            'hero'      	=> __( 'Square - Small', 'starter-theme'),
+		);
+		    $newsizes = array_merge($sizes, $addsizes);
+		    return $newsizes;
+		} 
 
 	}
 endif; // starter_theme_setup
@@ -102,24 +100,12 @@ add_action( 'after_setup_theme', 'starter_theme_setup' );
 
 
 function starter_theme_scripts() {
-	
-    wp_enqueue_style( 'starter-theme-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic', false ); // theme google fonts
-    wp_enqueue_style( 'starter-theme-style', get_stylesheet_uri() ); // theme style.css file
+    wp_register_style('starter-theme-style', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style('starter-theme-style'); // Enqueue it!
 
 	if ( is_singular('post') && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-
-	//Don't use WordPress' local copy of jquery, load our own version from a CDN instead
-	wp_deregister_script('jquery');
-
-	  wp_enqueue_script(
-	  	'jquery',
-	  	"http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",
-	  	false, //dependencies
-	  	null, //version number
-	  	true //load in footer
-	  );
 
 	  wp_enqueue_script(
 	    'plugins', //handle
@@ -152,6 +138,23 @@ function starter_theme_add_editor_styles() {
 }
 add_action( 'admin_init', 'starter_theme_add_editor_styles' );
 
+/**
+ *
+ * Remove text colour buttons in WYSIWYG
+ *
+ */
+function starter_theme_tinymce_buttons($buttons) {
+      //Remove the text color selector
+      $remove = 'forecolor';
+
+      //Find the array key and then unset
+      if ( ( $key = array_search($remove,$buttons) ) !== false )
+		unset($buttons[$key]);
+
+      return $buttons;
+ }
+add_filter('mce_buttons_2','starter_theme_tinymce_buttons');
+
 
 /**
  *
@@ -181,3 +184,11 @@ function starter_theme_customize_sanitize( $input ) {
 }
 
 get_template_part('inc/customizer/social', 'profiles');
+
+/**
+ *
+ * Move Yoast SEO down - below ACF Content
+ *
+ */
+
+add_filter( 'wpseo_metabox_prio', function() { return 'low';});
