@@ -64,7 +64,7 @@ var imagesSRC               = './assets/images/raw/**/*.{png,jpg,gif,svg}'; // S
 var imagesDestination       = './assets/images/'; // Destination folder of optimized images. Must be different from the imagesSRC folder.
 
 // Watch files paths.
-var styleWatchFiles         = './assets/css/**/*.scss'; // Path to all *.scss files inside css folder and inside them.
+var styleWatchFiles         = './assets/scss/**/*.scss'; // Path to all *.scss files inside css folder and inside them.
 var vendorJSWatchFiles      = './assets/js/vendor/*.js'; // Path to all vendor JS files.
 var customJSWatchFiles      = './assets/js/custom/*.js'; // Path to all custom JS files.
 var projectPHPWatchFiles    = './**/*.php'; // Path to all PHP files.
@@ -171,10 +171,10 @@ gulp.task( 'browser-sync', function() {
  		.pipe( sourcemaps.init() )
  		.pipe( sass( {
  			errLogToConsole: true,
- 			outputStyle: 'compact',
+ 			// outputStyle: 'compact',
  			//outputStyle: 'compressed',
  			// outputStyle: 'nested',
- 			// outputStyle: 'expanded',
+ 			outputStyle: 'expanded',
  			precision: 10
  		} ) )
  		.on('error', console.error.bind(console))
