@@ -29,10 +29,16 @@
             </a>
         </h1>
 
-        <nav class="siteNavigation--Main" role="navigation">
+        <nav id="siteNavigation" class="siteNavigation siteNavigation--Main" role="navigation">
             <ul class="siteMenu siteMenu--Main">
-                <?php wp_nav_menu( array( "theme_location" => "primary", "container" => '', 'items_wrap'=> '%3$s' ) ); ?>
+                <?php wp_nav_menu( 
+                    array( "theme_location" => "primary", 
+                            "container"     => '', 
+                            'items_wrap'    => '%3$s' 
+                    ) ); ?>
             </ul><!-- .menu -->
+
+            <button class="siteNavigation--Toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'starter-theme' ); ?></button>
         </nav><!-- siteNavigation -->  
     </header><!--  .container -->
 
