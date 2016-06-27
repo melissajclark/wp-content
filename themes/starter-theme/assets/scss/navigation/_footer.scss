@@ -2,19 +2,5 @@
 =            ## Footer          =
 ================================*/
 
- .siteMenu--Footer {
- 	display:flex;
- 	flex-direction:column;
- 	justify-content:space-between;
- 	align-items:center;
- 	flex-wrap:wrap;
- 	list-style:none;
- 	margin:0;
- 	padding:0;
-
- 	@include breakpoint(tiny){
- 		flex-direction:row;
- 	}
- }
 
 /*=====  End of Footer  ======*/

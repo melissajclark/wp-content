@@ -2,102 +2,165 @@
 =            ## Menus          =
 ===============================*/
 
-/* Credit: http://terrillthompson.com/blog/474 */
+/**
+ *
+ * Default Menu Settings
+ *
+ */
 
-
-.siteMenu {
-    display: flex;
+ .siteMenu {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
     flex-wrap:wrap;
-    justify-content:flex-start;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+    list-style:none;
+    margin:0;
+    padding:0;
+
+        ul {
+            list-style:none;
+            margin:0 0 0 1em;
+            padding:0;
+        }
+
+    @include breakpoint(tiny){
+        flex-direction:row;
+    }
+ }
+
+/**
+ *
+ * Menu Styling
+ *
+ */
 
 .current-menu-item a {
     color:$hoverColour;
 }
 
-// /*
-// * Accessible nav setup
-// * 
-// * http://terrillthompson.com/blog/474
-// * http://terrillthompson.com/tests/menus/accessible-mega-menu/test.html
-// *
-// */
+/**
+ *
+ * Mobile Menu Settings
+ *
+ */
 
-
-// /* mega menu list */
-.siteMenu--Main {
-    position: relative;
-    z-index: 15;
-
-    // /* a top level navigation item in the mega menu */
-    .menu-item {
-        list-style: none;
-        display: inline-block;
-        padding: 0;
-        margin: 0;
+@include breakpoint(preTiny){
+    .siteNavigation {
+        display:flex;
+        flex-wrap:wrap;
+        flex-direction:column;
     }
 
-    // /* first descendant link within a top level navigation item */
-    .menu-item > a {
-        position: relative;
-        display: inline-block;
-        padding: 0.5em 1em;
-        margin: 0 0 -1px 0;
-        border: 1px solid transparent;
+    // move the toggle above the menu
+    .siteNavigation--Toggle {
+        order:-1;
     }
 
-    // focus/open states of first descendant link within a top level navigation item */
-    .menu-item > a:focus,
-    .menu-item > a.open {
-        border: 1px solid $colour4;
+    // hide the menu until it's toggled open
+    .siteNavigation--Main .siteMenu--Main {
+        display:none;
     }
 
-    // /* open state of first descendant link within a top level navigation item */
-    .menu-item > a.open {
-        // /* background-color: #fff; */
-        border-bottom: none;
-        z-index: 1;
+    // show the menu once it's toggled open
+    .siteNavigation--Main.siteNavigation--Toggled .siteMenu--Main {
+        display:flex;
+        flex-direction:column;
+        flex-wrap:wrap;
     }
+}
 
-    // /* sub-navigation panel */
-    .sub-menu {
-        position: absolute;
+/**
+ *
+ * Primary Navigation Settings
+ *
+ * Accessible navigation via Terri Thompson: 
+ * http://terrillthompson.com/blog/474
+ * http://terrillthompson.com/tests/menus/accessible-mega-menu/test.html
+ *
+ */
+
+@include breakpoint(tiny) {
+    .siteNavigation--Toggle {
         display: none;
-        top: 2.6em;
-        margin-top: -1px;
-        padding: 0.5em 1em;
-        border: 1px solid $colour4;
-        background-color: $white;
     }
+    
+    // /* mega menu list */
+    .siteMenu--Main {
+        position: relative;
+        display:flex;
+        z-index: 15;
+        list-style:none;
+        margin:0;
+        padding:0;
+        order:-1;
 
-    // /* sub-navigation panel open state */
-    .sub-menu.open {
-        display: block;
-    }
-
-    // /* list of items within sub-navigation panel */
-    .sub-menu ul {
-        display: inline-block;
-        vertical-align: top;
-        margin: 0 1em 0 0;
-        padding: 0;
-    }
-
-    // /* list item within sub-navigation panel */
-    .sub-menu li {
-        display: block;
-        list-style-type: none;
-        margin: 0;
-        padding: 0; 
-
-        a:focus,
-        a:hover {
-        	border:$border;
+        // /* a top level navigation item in the mega menu */
+        .menu-item {
+            list-style: none;
+            display: inline-block;
+            padding: 0;
+            margin: 0;
         }
-    } 
-} // .siteMenu--Main
+
+        // /* first descendant link within a top level navigation item */
+        .menu-item > a {
+            position: relative;
+            display: inline-block;
+            padding: 0.5em 1em;
+            margin: 0 0 -1px 0;
+            border: 1px solid transparent;
+        }
+
+        // focus/open states of first descendant link within a top level navigation item */
+        .menu-item > a:focus,
+        .menu-item > a.open {
+            border: 1px solid $colour4;
+        }
+
+        // /* open state of first descendant link within a top level navigation item */
+        .menu-item > a.open {
+            // /* background-color: #fff; */
+            border-bottom: none;
+            z-index: 1;
+        }
+
+        // /* sub-navigation panel */
+        .sub-menu {
+            position: absolute;
+            display: none;
+            top: 2.6em;
+            margin-top: -1px;
+            padding: 0.5em 1em;
+            border: 1px solid $colour4;
+            background-color: $white;
+        }
+
+        // /* sub-navigation panel open state */
+        .sub-menu.open {
+            display: block;
+        }
+
+        // /* list of items within sub-navigation panel */
+        .sub-menu ul {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 1em 0 0;
+            padding: 0;
+        }
+
+        // /* list item within sub-navigation panel */
+        .sub-menu li {
+            display: block;
+            list-style-type: none;
+            margin: 0;
+            padding: 0; 
+
+            a:focus,
+            a:hover {
+                border:$border;
+            }
+        } 
+    } // .siteMenu
+} // tiny breakpoint
 
 /*=====  End of Menus  ====== */
