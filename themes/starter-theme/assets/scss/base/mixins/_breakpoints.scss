@@ -11,6 +11,7 @@
   $bp-medium:     "(min-width: 1150px)";
   $bp-little:     "(min-width: 850px)";
   $bp-tiny:       "(min-width: 550px)";
+  $bp-preTiny:    "(max-width: 550px)";
   $bp-mini:       "(min-width: 350px)";
 
   
@@ -31,6 +32,9 @@
   }
   @else if $point == tiny {
     @media #{$bp-tiny}  { @content; }
+  }
+  @else if $point == preTiny {
+    @media #{$bp-preTiny}  { @content; }
   }   
   @else if $point == mini {
     @media #{$bp-mini}  { @content; }
