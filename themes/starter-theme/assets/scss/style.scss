@@ -8,7 +8,7 @@ Version: 1.0
 License: The MIT License (MIT)
 License URI: http://opensource.org/licenses/MIT
 Text Domain: starter-theme
-Tags: fluid-layout, editor-style, featured-images, theme-options, light, responsive-layout, full-width-template
+Tags: editor-style, featured-images, theme-options, full-width-template
 */
 
 
@@ -48,5 +48,5 @@ Tags: fluid-layout, editor-style, featured-images, theme-options, light, respons
 	@import "typography/typography";
 	@import "layout";
 	@import "navigation/navigation";
-	// @import "blog/all-blog";
+	@import "blog/all-blog";
 	
